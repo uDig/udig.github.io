@@ -1,0 +1,163 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Creating a new Map &mdash; uDig 1.3.2 User Guide</title>
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.3.2 User Guide" href="index.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        <a class="uplink" href="index.html">Contents</a>
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="creating-a-new-map">
+<h1>Creating a new Map<a class="headerlink" href="#creating-a-new-map" title="Permalink to this headline">¶</a></h1>
+<p>There are numerous ways to create a new map:</p>
+<div class="section" id="menu">
+<h2>Menu<a class="headerlink" href="#menu" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>New map:</dt>
+<dd><ol class="first last arabic simple">
+<li>Select the <strong>New-&gt;New Map</strong> item under the File Menu</li>
+<li>A new blank map is created.</li>
+</ol>
+</dd>
+</dl>
+<p>New layer (when no map is open):</p>
+<ol class="arabic simple">
+<li>If there are no maps open select <strong>New Layer</strong> from the <strong>File &gt; New</strong> menu</li>
+</ol>
+<blockquote>
+<div><ol class="arabic simple" start="2">
+<li>Completing the wizard will create a new map.</li>
+</ol>
+</div></blockquote>
+</div>
+<div class="section" id="toolbar">
+<h2>Toolbar<a class="headerlink" href="#toolbar" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>New map:</dt>
+<dd><ol class="first last arabic simple">
+<li>Press the arrow beside the new button in the Main toolbar and select New Map</li>
+</ol>
+</dd>
+</dl>
+<p>!http://svn.geotools.org/udig/trunk/plugins/net.refractions.udig.project.ui/icons/etool16/newmap_wiz.gif!2.
+A new blank map will be created</p>
+<dl class="docutils">
+<dt>New layer (when no map is open):</dt>
+<dd><ol class="first last arabic simple">
+<li>If there are no maps open select <strong>New Layer</strong> from the new button in the toolbar</li>
+<li>Completing the wizard will create a new map.</li>
+</ol>
+</dd>
+</dl>
+</div>
+<div class="section" id="drag-and-drop">
+<h2>Drag and Drop<a class="headerlink" href="#drag-and-drop" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>From the filesystem:</dt>
+<dd><ol class="first last arabic simple">
+<li><strong>Drag</strong> a file or URL from the file system or a browser onto an empty <a href="#id1"><span class="problematic" id="id2">`</span></a>Map</li>
+</ol>
+</dd>
+<dt>editor &lt;Map%20editor.html&gt;`_ or empty <a class="reference external" href="Layers%20view.html">Layers view</a>.</dt>
+<dd><ol class="first last arabic simple" start="2">
+<li>A new map containing layers made up from the dragged resource will be created.</li>
+</ol>
+</dd>
+</dl>
+<p>From the <a class="reference external" href="Catalog%20view.html">Catalog view</a> (or other view listing data resources such as <a class="reference external" href="Search%20view.html">Search
+view</a>).</p>
+<p>1. <strong>Drag</strong> a service or resource from the <a class="reference external" href="Catalog%20view.html">Catalog view</a> or the <a class="reference external" href="Search%20view.html">Search
+view</a> onto an empty <a class="reference external" href="Map%20editor.html">Map editor</a> or empty <a class="reference external" href="Layers%20view.html">Layers
+view</a>.</p>
+<blockquote>
+<div>2.A new map containing layers made up from the dragged items will be created.</div></blockquote>
+</div>
+<div class="section" id="catalog">
+<h2>Catalog<a class="headerlink" href="#catalog" title="Permalink to this headline">¶</a></h2>
+<p>1. Right click on a service or resource in the <a class="reference external" href="Catalog%20view.html">Catalog view</a> or the <a class="reference external" href="Search%20view.html">Search
+view</a> and select <strong>Add to New Map</strong></p>
+<blockquote>
+<div><ol class="arabic simple" start="2">
+<li>A new map containing layers made up from the dragged resource will be created.</li>
+</ol>
+</div></blockquote>
+<p><strong>Related tasks</strong></p>
+<p><a class="reference internal" href="Using new to add a Map to a Project.html"><em>Using new to add a Map to a Project</em></a></p>
+<blockquote>
+<div><a href="#id8"><span class="problematic" id="id9">`</span></a>Using the Context menu to add a Map to a</div></blockquote>
+<dl class="docutils">
+<dt>Project &lt;Using%20the%20Context%20menu%20to%20add%20a%20Map%20to%20a%20Project.html&gt;`_</dt>
+<dd><a class="reference internal" href="Using the File menu to add a new Map.html"><em>Using the File menu to add a new Map</em></a></dd>
+</dl>
+<p><strong>Related concepts</strong></p>
+<p><a class="reference internal" href="Map.html"><em>Map</em></a></p>
+<blockquote>
+<div><p><a class="reference internal" href="Projection.html"><em>Projection</em></a></p>
+<p><a class="reference internal" href="Layer.html"><em>Layer</em></a></p>
+<p><a class="reference internal" href="Decorator.html"><em>Decorator</em></a></p>
+</div></blockquote>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        <a class="uplink" href="index.html">Contents</a>
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2012, Refractions Research.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

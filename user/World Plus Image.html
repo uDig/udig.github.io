@@ -1,0 +1,159 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>World Plus Image &mdash; uDig 1.3.2 User Guide</title>
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.3.2 User Guide" href="index.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        <a class="uplink" href="index.html">Contents</a>
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="world-plus-image">
+<h1>World Plus Image<a class="headerlink" href="#world-plus-image" title="Permalink to this headline">¶</a></h1>
+<p>To add a normal image, for example a jpg or a gif, you will need to provide a <strong>world</strong> file, a
+small text file that says where the corners of the image is.</p>
+<p>This page specifically covers the combination of a normal image format with a &#8220;world&#8221; file. A few
+image formats have well known ways of encoding location information in the image &#8220;metadata&#8221; fields.
+As an example a TIFF file with spatial metadata is known as a <a class="reference external" href="GeoTIFF.html">GeoTIFF</a>.</p>
+<div class="section" id="image-files">
+<h2>Image Files<a class="headerlink" href="#image-files" title="Permalink to this headline">¶</a></h2>
+<p>An image file is recognized as being in the &#8220;World plus Image&#8221; format if it is part of a file set
+consisting of the following:</p>
+<p>Example</p>
+<p>Description</p>
+<p>Image File</p>
+<p>filename.jpeg</p>
+<p>Contains the raster data</p>
+<p>World File</p>
+<p>filename.jgw</p>
+<p>contains the &#8220;world file&#8221; information letting us know where to draw the raster on the map</p>
+<p>PRJ File</p>
+<p>filename.prj</p>
+<p>Optional file that defines the coordinates used in the &#8220;world file&#8221; above</p>
+</div>
+<div class="section" id="world-and-projection-files-for-an-image">
+<h2>World and Projection Files for an Image<a class="headerlink" href="#world-and-projection-files-for-an-image" title="Permalink to this headline">¶</a></h2>
+<p>The extension of a world file is the first and last letters of the image extension with w appended
+at the end.</p>
+<p>Format</p>
+<p>Files</p>
+<p>JEPG</p>
+<p>jpeg, jgw with optional prj</p>
+<p>TIFF</p>
+<p>tiff, tfw with optional prj</p>
+<p>The contents of a world file are as follows:</p>
+<p>Line</p>
+<p>Example</p>
+<p>Definition</p>
+<p>1</p>
+<p>0.0359281435</p>
+<p>Horizontal scale for a pixel</p>
+<p>2</p>
+<p>0.0000000000</p>
+<p>Rotation for row, usually zero</p>
+<p>3</p>
+<p>0.0000000000</p>
+<p>Rotation for column, usually zero</p>
+<p>4</p>
+<p>-0.0359281437</p>
+<p>Vertical scale for pixel, usually negative as rasters count down from the upper left corner</p>
+<p>5</p>
+<p>-179.9820349282</p>
+<p>Translation, usually &#8220;easting&#8221; location of the upper left pixel (ie column 0)</p>
+<p>6</p>
+<p>89.9820359281</p>
+<p>Translation, usually &#8220;northing&#8221; location of the upper left pixel (ie row 0)</p>
+<p>The Translation information can be thought of as the location of the upper left pixel, this locaiton
+is provided in the units of the projections being used:</p>
+<ul class="simple">
+<li>For lat/long this location should be in the range -180,180 -90,90</li>
+<li>If your image is not in lat/long you will have to include a <strong>.prj</strong> file, which is a text file
+with the WKT definition of the coordinate system that should be used.</li>
+</ul>
+</div>
+<div class="section" id="jpeg-example">
+<h2>JPEG Example:<a class="headerlink" href="#jpeg-example" title="Permalink to this headline">¶</a></h2>
+<p>If your image is <strong>world.jpg</strong> then you need a <strong>world.jgw</strong> file and optionally a <strong>world.prj</strong>
+file.</p>
+<p>An example world.jgw</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="mf">0.0359281435</span>
+<span class="mf">0.0000000000</span>
+<span class="mf">0.0000000000</span>
+<span class="o">-</span><span class="mf">0.0359281437</span>
+<span class="o">-</span><span class="mf">179.9820349282</span>
+<span class="mf">89.9820359281</span>
+</pre></div>
+</div>
+<p>An example world.prj is:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">GEOGCS</span><span class="p">[</span><span class="s">&quot;GCS_WGS_1984&quot;</span><span class="p">,</span> <span class="n">DATUM</span><span class="p">[</span><span class="s">&quot;WGS_1984&quot;</span><span class="p">,</span> <span class="n">SPHEROID</span><span class="p">[</span><span class="s">&quot;WGS_1984&quot;</span><span class="p">,</span><span class="mi">6378137</span><span class="p">,</span><span class="mf">298.257223563</span><span class="p">]],</span> <span class="n">PRIMEM</span><span class="p">[</span><span class="s">&quot;Greenwich&quot;</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">UNIT</span><span class="p">[</span><span class="s">&quot;Degree&quot;</span><span class="p">,</span><span class="mf">0.017453292519943295</span><span class="p">]]</span>
+</pre></div>
+</div>
+<p><strong>Related reference</strong></p>
+<ul class="simple">
+<li><tt class="xref doc docutils literal"><span class="pre">ESRI</span> <span class="pre">World</span> <span class="pre">Image</span> <span class="pre">format</span></tt></li>
+<li><tt class="xref doc docutils literal"><span class="pre">http://geos.gsi.gov.il/vladi/FEFLOW/help/general/file_format.html#tfw_file</span></tt></li>
+</ul>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        <a class="uplink" href="index.html">Contents</a>
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2012, Refractions Research.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

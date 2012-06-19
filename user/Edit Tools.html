@@ -1,0 +1,147 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Edit Tools &mdash; uDig 1.3.2 User Guide</title>
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.3.2 User Guide" href="index.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        <a class="uplink" href="index.html">Contents</a>
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <p>Edit tools are available in the palette to directly manipulate spatial information. Each map
+provides a session for editing - if you are happy with your changes you can press commit to write
+out your session. If you have made a mistake and need to start again you can revert the current
+session.</p>
+<p>The palette provides the following edit tools for direct manipulation:</p>
+<dl class="docutils">
+<dt>Edit Tools - e</dt>
+<dd><img alt="image0" src="_images/edit_mode.gif" /> Edit Geometry
+<img alt="image1" src="_images/add_vertext_mode.gif" /> Add Vertex
+<img alt="image2" src="_images/remove_vertext_mode.gif" /> Remove Vertext
+<img alt="image3" src="_images/hole_vertex_mode.gif" /> Hole Cutter</dd>
+<dt>Create Tools - c</dt>
+<dd><img alt="image4" src="_images/new_polygon_mode.gif" /> Create Polygon
+<img alt="image5" src="_images/new_line_mode.gif" /> Create Line
+<img alt="image6" src="_images/new_point_mode.gif" /> Create Point
+<img alt="image7" src="_images/difference_feature_mode.gif" /> Fill Area
+<img alt="image8" src="_images/new_circle_mode.gif" /> Create Ellipse
+<img alt="image9" src="_images/new_rectangle_mode.gif" /> Create Rectangle</dd>
+<dt>Feature Tools - f</dt>
+<dd><img alt="image10" src="_images/delete_feature_mode.gif" /> Delete Feature
+<img alt="image11" src="_images/split_feature_mode.gif" /> Split
+<img alt="image12" src="_images/merge_feature_mode.gif" /> Merge</dd>
+</dl>
+<p>You can cycle through tools in the same category by pressing the keyboard short cut repeatedly.</p>
+<p>Your session is managed on the main toolbar using the following commands:</p>
+<dl class="docutils">
+<dt><img alt="image13" src="_images/outgo_synch.gif" /> Commit</dt>
+<dd><img alt="image14" src="_images/incom_synch.gif" /> Revert</dd>
+</dl>
+<div class="section" id="edit-tools">
+<h1>Edit Tools<a class="headerlink" href="#edit-tools" title="Permalink to this headline">¶</a></h1>
+<p>You can cycle through tools in the same category by pressing the keyboard short cut repeatedly.</p>
+</div>
+<div class="section" id="create-tools">
+<h1>Create Tools<a class="headerlink" href="#create-tools" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="create-polygon">
+<h2>Create Polygon<a class="headerlink" href="#create-polygon" title="Permalink to this headline">¶</a></h2>
+<p>Create a polygon as a series of points. You must draw at least three points for the polygon to be
+valid. Polygons are not allowed to self intersect.</p>
+</div>
+<div class="section" id="create-point">
+<h2>Create Point<a class="headerlink" href="#create-point" title="Permalink to this headline">¶</a></h2>
+<p>Create a point.</p>
+</div>
+<div class="section" id="fill-area">
+<h2>Fill Area<a class="headerlink" href="#fill-area" title="Permalink to this headline">¶</a></h2>
+<p>Create a polygon defined by the unused area. Draw a polygon, any area not already taken up by an
+existing polygon will be used.</p>
+</div>
+<div class="section" id="create-ellipse">
+<h2>Create Ellipse<a class="headerlink" href="#create-ellipse" title="Permalink to this headline">¶</a></h2>
+<p>Create an Ellipse by drawing on screen.</p>
+</div>
+<div class="section" id="create-rectangle">
+<h2>Create Rectangle<a class="headerlink" href="#create-rectangle" title="Permalink to this headline">¶</a></h2>
+<p>Create a rectangle by drawing a box on the screen.</p>
+</div>
+</div>
+<div class="section" id="feature-tools">
+<h1>Feature Tools<a class="headerlink" href="#feature-tools" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="edit-commands">
+<h1>Edit Commands<a class="headerlink" href="#edit-commands" title="Permalink to this headline">¶</a></h1>
+<p>Many of these same commands are available in the <a class="reference external" href="Edit%20Menu.html">Edit Menu</a>.</p>
+<div class="section" id="commit">
+<h2>Commit<a class="headerlink" href="#commit" title="Permalink to this headline">¶</a></h2>
+<p>Commit modifications to server, database or file.</p>
+</div>
+<div class="section" id="revert">
+<h2>Revert<a class="headerlink" href="#revert" title="Permalink to this headline">¶</a></h2>
+<p>Throw out modifications; reverting to the current contents of the server, database, or file.</p>
+<p><strong>Related tasks</strong></p>
+<p><a class="reference internal" href="Working with Features.html"><em>Working with Features</em></a></p>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        <a class="uplink" href="index.html">Contents</a>
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2012, Refractions Research.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

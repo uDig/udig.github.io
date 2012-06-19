@@ -1,0 +1,323 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Introduction to the Spatial Toolbox &mdash; uDig 1.3.2 User Guide</title>
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.3.2 User Guide" href="index.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        <a class="uplink" href="index.html">Contents</a>
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="introduction-to-the-spatial-toolbox">
+<h1>Introduction to the Spatial Toolbox<a class="headerlink" href="#introduction-to-the-spatial-toolbox" title="Permalink to this headline">¶</a></h1>
+<p>The Spatial Toolbox View gives the possibility to execute tools from loaded libraries on resources
+visualized in uDig.</p>
+<p><a class="reference external" href="#IntroductiontotheSpatialToolbox-IntroductiontotheSpatialToolbox">Introduction to the Spatial
+Toolbox</a></p>
+<p><tt class="xref doc docutils literal"><span class="pre">Before</span> <span class="pre">you</span> <span class="pre">Start</span></tt></p>
+<ul class="simple">
+<li><a class="reference external" href="#IntroductiontotheSpatialToolbox-DownloadtheSpearfishexampledata">Download the Spearfish example
+data</a></li>
+</ul>
+<p><tt class="xref doc docutils literal"><span class="pre">The</span> <span class="pre">Spatial</span> <span class="pre">toolbox</span> <span class="pre">View</span></tt></p>
+<p><tt class="xref doc docutils literal"><span class="pre">Installing</span> <span class="pre">JGrasstools</span></tt></p>
+<p><tt class="xref doc docutils literal"><span class="pre">Processing</span></tt></p>
+<ul class="simple">
+<li><a class="reference external" href="#IntroductiontotheSpatialToolbox-GeneratingAspectofanElevationModel">Generating Aspect of an Elevation
+Model</a></li>
+</ul>
+<p><tt class="xref doc docutils literal"><span class="pre">Things</span> <span class="pre">to</span> <span class="pre">Try</span></tt></p>
+<p><strong>Related reference</strong></p>
+<p><a class="reference internal" href="Spatial Toolbox View.html"><em>Spatial Toolbox View</em></a></p>
+<p>This is how it looks like when it is enabled:</p>
+<div class="figure align-center">
+<img alt="" src="_images/omsbox.png" />
+</div>
+<div class="section" id="before-you-start">
+<h2>Before you Start<a class="headerlink" href="#before-you-start" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id2">
+<h3>Download the Spearfish example data<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>In the example we will use a raster elevation model of the Spearfish region. You can download it
+<tt class="xref doc docutils literal"><span class="pre">here</span></tt></p>
+<ol class="arabic simple">
+<li>Download the following file (you can right click and choose <strong>Save as</strong> in most browsers)<ul>
+<li><tt class="xref doc docutils literal"><span class="pre">spearfish_elevation.zip</span></tt></li>
+</ul>
+</li>
+<li>Unzip it to your data directory or desktop</li>
+<li>This download contains:<ul>
+<li>elevation.asc</li>
+<li>elevation.prj</li>
+</ul>
+</li>
+<li>Try to drag it into uDig and see if it look like the following:</li>
+</ol>
+<div class="figure align-center">
+<img alt="" src="_images/elevation.png" />
+</div>
+</div>
+</div>
+<div class="section" id="the-spatial-toolbox-view">
+<h2>The Spatial toolbox View<a class="headerlink" href="#the-spatial-toolbox-view" title="Permalink to this headline">¶</a></h2>
+<p>Once your raster is loaded you are ready to start to configure the spatial toolbox. First let&#8217;s open
+it up:</p>
+<dl class="docutils">
+<dt>1 Find it under Window-&gt;Show View-&gt;Other</dt>
+<dd><img alt="image0" src="_images/spatial_toolbox_01.png" />
+2 And then choose the Spatial toolbox:
+<img alt="image1" src="_images/spatial_toolbox_02.png" />
+3 It will probably open up a bit too small, so best thing is to detach it and use it in a separate</dd>
+<dt>window anyways.</dt>
+<dd>4 To do so right click on the view&#8217;s bar:
+<img alt="image2" src="_images/spatial_toolbox_03.png" />
+5 And voila&#8217;!
+<img alt="image3" src="_images/spatial_toolbox_04.png" /></dd>
+</dl>
+</div>
+<div class="section" id="installing-jgrasstools">
+<h2>Installing JGrasstools<a class="headerlink" href="#installing-jgrasstools" title="Permalink to this headline">¶</a></h2>
+<p>The spatial toolbox is able to load and generate graphical user interfaces and link together models
+that are developed as OMS3 services.</p>
+<div class="figure align-center">
+<img alt="" src="images/icons/emoticons/warning.gif" />
+</div>
+<p><strong>OMS3</strong></p>
+<p>Object Modeling Services 3 is a standard used for component development employed by the jgrass
+project. If you are interested in the details please have a look here:</p>
+<ul class="simple">
+<li><tt class="xref doc docutils literal"><span class="pre">OMS3</span> <span class="pre">jgrass</span> <span class="pre">page</span></tt></li>
+</ul>
+<ul class="simple">
+<li><a class="reference external" href="http://www.javaforge.com/project/oms">oms javaforge page</a>.</li>
+</ul>
+<p>To load the modules:</p>
+<ol class="arabic">
+<li><p class="first">Currently one library of spatial tools implemented using OMS3 is the
+<a class="reference external" href="http://www.jgrasstools.org/">jgrasstools</a> library.</p>
+</li>
+<li><p class="first">Therefore it is possible to jump on the jgrass website to get a processing library to use it in
+uDig.</p>
+</li>
+<li><p class="first">At the time of writing the jgrass 0.7.1 library is packaged and available for use</p>
+</li>
+<li><p class="first">To start to have some fun we need to download two jar files:</p>
+<ul class="simple">
+<li>the <a class="reference external" href="http://jgrasstools.googlecode.com/files/jgt-jgrassgears-0.7.2.jar">generic GIS modules
+library</a></li>
+<li>the <a class="reference external" href="http://jgrasstools.googlecode.com/files/jgt-hortonmachine-0.7.2.jar">horton machine</a>
+for hydro-geomophologic analyses</li>
+</ul>
+</li>
+<li><p class="first">You can download these two files anywhere; for today we will be placing them in a &#8220;jgrass&#8221; folder
+in your home directory.</p>
+</li>
+<li><p class="first">Create a &#8220;jgrass&#8221; folder in your home directory</p>
+</li>
+<li><p class="first">Download the above two files and place them in the jgrass folder</p>
+</li>
+<li><dl class="first docutils">
+<dt>Then push the last icon of the toolbar:</dt>
+<dd><p class="first last"><img alt="image4" src="_images/spatial_toolbox_05.png" /></p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Which will open the settings dialog:</dt>
+<dd><p class="first last"><img alt="image5" src="_images/spatial_toolbox_06.png" /></p>
+</dd>
+</dl>
+</li>
+<li><p class="first">The settings dialog allows you to load the libraries by using the + button.</p>
+</li>
+<li><p class="first">Load the two libraries that you downloaded.</p>
+</li>
+<li><dl class="first docutils">
+<dt>It should, apart of the different paths of the files, like like the following:</dt>
+<dd><p class="first last"><img alt="image6" src="_images/spatial_toolbox_07.png" />
+#Once you push the ok button, uDig will search for modules inside the library
+<img alt="image7" src="_images/spatial_toolbox_08.png" /></p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Congratulations; the toolbox should now display the modules that were found</dt>
+<dd><p class="first last"><img alt="image8" src="_images/spatial_toolbox_09.png" /></p>
+</dd>
+</dl>
+</li>
+</ol>
+</div>
+<div class="section" id="processing">
+<h2>Processing<a class="headerlink" href="#processing" title="Permalink to this headline">¶</a></h2>
+<p>The jgrass project provides a host of valuable processes you can try out; for now we will start with
+a simple example.</p>
+<div class="section" id="id3">
+<h3>Generating Aspect of an Elevation Model<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>To try out spatial processing we will simply create a map of aspect using the elevation model you
+already loaded from the sample dataset.</p>
+<ol class="arabic">
+<li><p class="first">Type in the search box the letters: <strong>asp</strong></p>
+</li>
+<li><dl class="first docutils">
+<dt>The &#8220;Aspect&#8221; module should appear in the list:</dt>
+<dd><p class="first last"><img alt="image9" src="_images/spatial_toolbox_10.png" /></p>
+</dd>
+</dl>
+</li>
+<li><p class="first">Please select the Aspect module so we can describe the tabs used to control a service.</p>
+</li>
+<li><dl class="first docutils">
+<dt>inputs tab:</dt>
+<dd><p class="first last"><img alt="image10" src="_images/spatial_toolbox_11.png" /></p>
+</dd>
+</dl>
+<ul>
+<li><dl class="first docutils">
+<dt>outputs tab:</dt>
+<dd><p class="first last"><img alt="image11" src="_images/spatial_toolbox_12.png" /></p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>documentation tab:</dt>
+<dd><p class="first last"><img alt="image12" src="_images/spatial_toolbox_13.png" /></p>
+</dd>
+</dl>
+</li>
+</ul>
+</li>
+<li><p class="first">We will now set up the Aspect service to work with our sample digital elevation model.</p>
+</li>
+<li><p class="first">To define the input raster to process, simply push the input data button.</p>
+<ul>
+<li><p class="first">A raster reader dialog will open.</p>
+</li>
+<li><p class="first">You could browse for the raster, but the simplest thing is to drag the raster map from the
+udig layer view into the textfield and let udig do the rest.</p>
+<blockquote>
+<div><p><img alt="image13" src="_images/spatial_toolbox_14.png" /></p>
+</div></blockquote>
+</li>
+</ul>
+</li>
+<li><p class="first">Output data</p>
+<ul>
+<li><p class="first">In the case of the output data, we can&#8217;t drag an existing map, so we will have to use the
+browse button, which will open in the same folder of the last inserted map.</p>
+</li>
+<li><p class="first">There we simply write <strong>aspect.asc</strong> to create an esri ascii also as output \ (other formats
+supported are tiffs and grass binary rasters)</p>
+<blockquote>
+<div><p><img alt="image14" src="_images/spatial_toolbox_15.png" /></p>
+</div></blockquote>
+</li>
+</ul>
+</li>
+<li><p class="first">Configure</p>
+<ul>
+<li><p class="first">Before we run the module there are a couple of configuration options that are useful to
+control.</p>
+</li>
+<li><dl class="first docutils">
+<dt>The most important is the amount of memory that we permit the module to use:</dt>
+<dd><p class="first last"><img alt="image15" src="_images/spatial_toolbox_16.png" /></p>
+</dd>
+</dl>
+</li>
+</ul>
+</li>
+<li><p class="first">In the above example the local machine has 8 gigabytes of RAM, allowing us to easily allocate
+2000 megabytes for for the work</p>
+</li>
+<li><p class="first">Execute the module</p>
+<ul>
+<li><dl class="first docutils">
+<dt>To execute the module please click the <strong>run</strong> button in the view toolbar</dt>
+<dd><p class="first last"><img alt="image16" src="_images/spatial_toolbox_17.png" /></p>
+</dd>
+</dl>
+</li>
+<li><p class="first">The module will execute opening a console window that gives feedback on what is going on.</p>
+</li>
+</ul>
+</li>
+<li><dl class="first docutils">
+<dt>Once the process is done, the resulting map is loaded in the map window:</dt>
+<dd><p class="first last"><img alt="image17" src="_images/spatial_toolbox_18.png" /></p>
+</dd>
+</dl>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="things-to-try">
+<h2>Things to Try<a class="headerlink" href="#things-to-try" title="Permalink to this headline">¶</a></h2>
+<p>Congratulations on finishing this tutorials; here are a couple of things to try:</p>
+<ul class="simple">
+<li>Review the documentation of some of the other services made available</li>
+<li>Check out the jgrass website for additional information about the project</li>
+</ul>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        <a class="uplink" href="index.html">Contents</a>
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2012, Refractions Research.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>
