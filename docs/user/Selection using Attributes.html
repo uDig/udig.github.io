@@ -2,14 +2,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
     <title>Selection using Attributes &mdash; uDig 1.3.2 User Guide</title>
+    
     <link rel="stylesheet" href="_static/udig.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
@@ -71,25 +74,25 @@
 <col width="76%" />
 </colgroup>
 <tbody valign="top">
-<tr><td>hello</td>
+<tr class="row-odd"><td>hello</td>
 <td>will match any word containing the string <strong>hello</strong></td>
 </tr>
-<tr><td>\Ahello</td>
+<tr class="row-even"><td>\Ahello</td>
 <td>will match any word that starts with <strong>hello</strong></td>
 </tr>
-<tr><td>\Ahello\Z</td>
+<tr class="row-odd"><td>\Ahello\Z</td>
 <td><em>Exactly</em> matches the word <strong>hello</strong></td>
 </tr>
-<tr><td>\Ahello|\Aboo</td>
+<tr class="row-even"><td>\Ahello|\Aboo</td>
 <td>will match strings that start with <strong>hello</strong> or <strong>boo</strong></td>
 </tr>
-<tr><td>\Ahe.*o\Z</td>
+<tr class="row-odd"><td>\Ahe.*o\Z</td>
 <td>will match strings that start with <strong>he</strong> and ends with <strong>o</strong></td>
 </tr>
-<tr><td>[ln]</td>
+<tr class="row-even"><td>[ln]</td>
 <td>will match any string that contains <strong>l</strong> or <strong>n</strong></td>
 </tr>
-<tr><td>\A[ln]</td>
+<tr class="row-odd"><td>\A[ln]</td>
 <td>will match many string that starts with <strong>l</strong> or <strong>n</strong></td>
 </tr>
 </tbody>
@@ -120,7 +123,7 @@
 
     <div class="footer">
         &copy; Copyright 2012, Refractions Research.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
     </div>
   </body>
 </html>
