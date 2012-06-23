@@ -2,17 +2,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
     <title>Draw Geometry Tool &mdash; uDig 1.3.2 User Guide</title>
-    
     <link rel="stylesheet" href="_static/udig.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="_static/print.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
@@ -61,8 +58,7 @@
 <div class="section" id="draw-geometry-tool-cannot-resolve-external-resource-into-attachment">
 <h2>Draw Geometry Tool – Cannot resolve external resource into attachment.<a class="headerlink" href="#draw-geometry-tool-cannot-resolve-external-resource-into-attachment" title="Permalink to this headline">¶</a></h2>
 <p>The Draw Geometry Tool allows lines, polygons and holes to be drawn in a free-hand manner. The tool
-attempts to determine what geometry should be created by inspecting the <a class="reference external" href="Feature%20Type.html">Feature
-Type</a> of the layer. If it is a polygon then polygons will be created;
+attempts to determine what geometry should be created by inspecting the <a class="reference internal" href="Feature Type.html"><em>Feature Type</em></a> of the layer. If it is a polygon then polygons will be created;
 similarly lines are created for line layers. If the layer&#8217;s geometry type is Geometry (ie. can
 contain both lines and polygons) then lines are created unless the draw is finished over the
 starting vertex (the geometry is closed) in which case polygons are created.</p>
@@ -72,27 +68,20 @@ starting vertex (the geometry is closed) in which case polygons are created.</p>
 <dl class="docutils">
 <dt>The tool can create holes in existing polygons as well. In order to do this:</dt>
 <dd><ol class="first last arabic simple">
-<li>Select the geometry you wish to edit (Draw tool will select geometries when in <a href="#id1"><span class="problematic" id="id2">`</span></a>Using Advanced</li>
-</ol>
-</dd>
-<dt>Edit Mode &lt;Using%20Advanced%20Edit%20Mode.html&gt;`_</dt>
-<dd><ol class="first last arabic simple" start="2">
+<li>Select the geometry you wish to edit (Draw tool will select geometries when in <a class="reference internal" href="Using Advanced Edit Mode.html"><em>Using Advanced Edit Mode</em></a></li>
 <li>Draw a hole that is enclosed in the polygon</li>
 </ol>
 </dd>
 </dl>
-<p>As with the <a class="reference external" href="Line%20Creation%20Tool.html">Line Creation Tool</a>, the Draw Geometry Tool can extend
+<p>As with the <a class="reference internal" href="Line Creation Tool.html"><em>Line Creation Tool</em></a>, the Draw Geometry Tool can extend
 existing lines:</p>
 <blockquote>
 <div><ol class="arabic simple">
-<li>Select the geometry you wish to edit (Draw tool will select geometries when in <a href="#id3"><span class="problematic" id="id4">`</span></a>Using Advanced</li>
+<li>Select the geometry you wish to edit (Draw tool will select geometries when in <a class="reference internal" href="Using Advanced Edit Mode.html"><em>Using Advanced Edit Mode</em></a></li>
 </ol>
+<p>2. Draw a line that continues from the end of selected line.
+<strong>Note:</strong> It has to <em>start</em> at the end of the selected line. If a line is ended at an end of the</p>
 </div></blockquote>
-<dl class="docutils">
-<dt>Edit Mode &lt;Using%20Advanced%20Edit%20Mode.html&gt;`_</dt>
-<dd>2. Draw a line that continues from the end of selected line.
-<strong>Note:</strong> It has to <em>start</em> at the end of the selected line. If a line is ended at an end of the</dd>
-</dl>
 <p>selected line a new line will be created rather than extending the selected line.</p>
 <p><strong>Related reference</strong></p>
 <ul class="simple">
@@ -147,7 +136,7 @@ existing lines:</p>
 
     <div class="footer">
         &copy; Copyright 2012, Refractions Research.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
     </div>
   </body>
 </html>

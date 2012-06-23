@@ -68,15 +68,12 @@ control the rendering process.</p>
 <p>In this section we will create a <em>Styled Layer Descriptor</em> (SLD) file with
 the uDig <em class="guilabel">Style Editor</em> in order to generate labels and theme
 by attribute values.</p>
-<ol class="arabic simple">
-<li>Create a new map using <em class="guilabel">File &gt; New &gt; New Map</em></li>
-<li>Select your new map in the <em class="guilabel">Projects</em> view, and right click to choose</li>
-</ol>
-<blockquote>
-<div><p><em class="guilabel">Rename</em>.</p>
+<ul>
+<li><p class="first">Create a new map using <em class="menuselection">File ‣ New ‣ New Map</em></p>
+</li>
+<li><p class="first">Select your new map in the <em class="guilabel">Projects</em> view, and right click to choose <em class="guilabel">Rename</em>.</p>
 <p><img alt="projects_map_rename_jpg" src="../../_images/projects_map_rename.jpg" style="width: 6.219cm; height: 5.42cm;" /></p>
-</div></blockquote>
-<ol class="arabic" start="3">
+</li>
 <li><p class="first">Enter the name <tt class="kbd docutils literal"><span class="pre">Natural</span> <span class="pre">Earth</span></tt> and press <em class="guilabel">OK</em>.</p>
 </li>
 <li><p class="first">In the <em class="guilabel">Layer</em> menu, select <em class="guilabel">Add</em></p>
@@ -84,8 +81,6 @@ by attribute values.</p>
 <li><p class="first">Choose <em class="guilabel">Files</em> from the provided list and press <em class="guilabel">Next</em>.</p>
 <p><img alt="add_data_files_png" src="../../_images/add_data_files.png" style="width: 7.62cm; height: 7.47cm;" /></p>
 </li>
-</ol>
-<ol class="arabic" start="7">
 <li><p class="first">Select the following files from your data directory:</p>
 <ul class="simple">
 <li><em class="guilabel">10m_admin_0_countries.shp</em></li>
@@ -102,8 +97,6 @@ slightly transparent so can see the base raster layer.</li>
 <li>You may wish to zoom out using the toolbar <em class="guilabel">Zoom Extent</em> command</li>
 </ul>
 </li>
-</ol>
-<ol class="arabic" start="10">
 <li><p class="first">Right click on the countries layer and select <em class="guilabel">Change Style</em>
 to open the <em class="guilabel">Style Editor</em>.</p>
 <p><img alt="layers_change_style_png" src="../../_images/layers_change_style.png" style="width: 5.241cm; height: 4.33cm;" /></p>
@@ -122,7 +115,7 @@ to open the <em class="guilabel">Style Editor</em>.</p>
 </li>
 <li><p class="first">You can press the <em class="guilabel">Apply</em> button to see what your map will look like with labels</p>
 </li>
-</ol>
+</ul>
 <div class="section" id="theme">
 <h2>Theme<a class="headerlink" href="#theme" title="Permalink to this headline">¶</a></h2>
 <p>A common use for maps is as a visual display of attribute values. In cartographic
@@ -130,13 +123,15 @@ terms this is known as creating a <em>Thematic</em> map, accomplished by definin
 a <em>theme</em> for a layer.</p>
 <p>The <em class="guilabel">Style Editor</em> is used to theme data by setting up a thematic style
 for a layer based on attribute values.</p>
-<ol class="arabic">
+<ul>
 <li><p class="first">Please switch to the <em class="guilabel">Theme</em> page and select the following:</p>
-<ul class="simple">
+<blockquote>
+<div><ul class="simple">
 <li><em class="guilabel">Attribute</em>: Select the <em class="guilabel">POP_EST</em> attribute.</li>
 <li><em class="guilabel">Normalize</em>: Select the <em class="guilabel">GDP_MD_EST</em> attribute.</li>
 </ul>
 <p><img alt="style_theme_normalize_png" src="../../_images/style_theme_normalize.png" style="width: 10.77cm; height: 6.729cm;" /></p>
+</div></blockquote>
 </li>
 <li><p class="first">Filter the available colour palettes to show a subset of those available:</p>
 <ul class="simple">
@@ -154,26 +149,24 @@ blind people on either an LCD or CRT monitor.</p>
 <li><p class="first">The countries layer is now displayed as theme of population data normalized by gross domestic
 product as a quick measure of population productivity.</p>
 </li>
-</ol>
+</ul>
 </div>
 <div class="section" id="legend">
 <h2>Legend<a class="headerlink" href="#legend" title="Permalink to this headline">¶</a></h2>
 <p>You can use a legend to review the colours and symbology used to illustrate your themaitic map.</p>
-<ol class="arabic">
-<li><p class="first">From the menubar select <em class="guilabel">Layer &gt; Legend</em>.</p>
-<blockquote>
-<div><p><img alt="menubar_legend_png" src="../../_images/menubar_legend.png" style="width: 5.2cm; height: 3.129cm;" /></p>
-</div></blockquote>
+<ul>
+<li><p class="first">From the menubar select <em class="menuselection">Layer ‣ Legend</em>.</p>
+<p><img alt="menubar_legend_png" src="../../_images/menubar_legend.png" style="width: 5.2cm; height: 3.129cm;" /></p>
 </li>
 <li><p class="first">The <em class="guilabel">Legend</em> decorator offers a quick summary of your themed data.</p>
 </li>
-</ol>
+</ul>
 </div>
 <div class="section" id="mylar">
 <h2>Mylar<a class="headerlink" href="#mylar" title="Permalink to this headline">¶</a></h2>
 <p>The map display can become very complicated depending on the level of detail being displayed.</p>
 <p>The Mylar functionality is used to focus on the selected layer.</p>
-<ol class="arabic">
+<ul>
 <li><p class="first">Press the <em class="guilabel">Mylar</em> button in the <em class="guilabel">Layers</em> view toolbar.</p>
 </li>
 <li><p class="first">Select each layer and observe the effect.</p>
@@ -181,12 +174,12 @@ product as a quick measure of population productivity.</p>
 </li>
 <li><p class="first">The Mylar effect is used to focus on the selected layer by fading out everything else.</p>
 </li>
-</ol>
+</ul>
 </div>
 </div>
 <div class="section" id="layout-and-perspectives">
 <h1>Layout and Perspectives<a class="headerlink" href="#layout-and-perspectives" title="Permalink to this headline">¶</a></h1>
-<ol class="arabic">
+<ul>
 <li><p class="first"><em class="guilabel">Map</em> editors can be resized and expanded</p>
 <ul class="simple">
 <li>Double click on the <em class="guilabel">Natural Earth</em> editor tab to maximize the editor display.</li>
@@ -208,18 +201,18 @@ the <em class="guilabel">Map</em> editor tab into position.</p>
 <em class="guilabel">View</em> tab into the desired location.</li>
 <li>You can detach a view by dragging it completely out of the window</li>
 <li>You can right click on the view for more options including a slide out <em class="guilabel">Fast</em> view.</li>
-<li>More views are available using the menubar <em class="guilabel">Window &gt; Show Views</em></li>
+<li>More views are available using the menubar <em class="menuselection">Window ‣ Show Views</em></li>
 </ul>
 </li>
 <li><p class="first">The arrangement of the <em class="guilabel">Workbench</em> editors and views is called a <em class="guilabel">Perspective</em>.</p>
 <ul class="simple">
-<li>Switch between perspectives using the menubar <em class="guilabel">Window &gt; Open Perspective</em></li>
-<li>Use the menubar <em class="guilabel">Window &gt; Reset Perspective</em> to restore any views you accidentally closed
+<li>Switch between perspectives using the menubar <em class="menuselection">Window ‣ Open Perspective</em></li>
+<li>Use the menubar <em class="menuselection">Window ‣ Reset Perspective</em> to restore any views you accidentally closed
 during experimentation.</li>
 </ul>
 <p><img alt="menubar_window_reset_perspective_png" src="../../_images/menubar_window_reset_perspective.png" style="width: 14.891cm; height: 2.949cm;" /></p>
 </li>
-</ol>
+</ul>
 </div>
 
 

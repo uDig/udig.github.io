@@ -63,29 +63,30 @@
   <div class="section" id="information-request">
 <h1>Information Request<a class="headerlink" href="#information-request" title="Permalink to this headline">¶</a></h1>
 <p>In this section, you will learn how to use the <em class="guilabel">Info</em> tool.</p>
-<ol class="arabic simple">
-<li>Open up our first map labeled <em class="guilabel">Cities</em>.</li>
-</ol>
-<blockquote>
-<div><img alt="../../_images/projects_open.png" src="../../_images/projects_open.png" style="width: 4.38cm; height: 3.679cm;" />
-</div></blockquote>
-<div class="sidebar">
-<p class="first sidebar-title">Double Click on Map</p>
+<ul>
+<li><p class="first">Open up our first map labeled <em class="guilabel">Cities</em>.</p>
+<img alt="../../_images/projects_open.png" src="../../_images/projects_open.png" style="width: 4.38cm; height: 3.679cm;" />
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
 <p class="last">You can also double click on the <em class="guilabel">Cities</em> map in the <em class="guilabel">Projects</em> view to open it.</p>
 </div>
-<ol class="arabic simple" start="2">
-<li>Use the <em class="guilabel">Zoom</em> tool to navigate to an interesting detail, such as a green park.</li>
-<li>Change to the <em class="guilabel"><span class="accelerator">I</span>nfo</em> tool in the <em class="guilabel">Map</em> editor <em class="guilabel">palette</em>.</li>
-</ol>
-<ol class="arabic simple" start="4">
-<li>Click on a green park; to request more information from the Web Map Service.</li>
-</ol>
-<blockquote>
-<div><img alt="../../_images/info_request_wms.png" src="../../_images/info_request_wms.png" style="width: 10.77cm; height: 9.49cm;" />
-</div></blockquote>
-<ol class="arabic simple" start="5">
-<li>The <em class="guilabel">Information</em> view is opened, listing details about the <em class="guilabel">Park</em>
-layer at the location specified.<ul>
+</li>
+<li><p class="first">Use the <em class="guilabel">Zoom</em> tool to navigate to an interesting detail, such as a green park.</p>
+</li>
+<li><p class="first">Change to the <em class="guilabel"><span class="accelerator">I</span>nfo</em> tool in the <em class="guilabel">Map</em> editor <em class="guilabel">palette</em>.</p>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">You can use the <tt class="kbd docutils literal"><span class="pre">i</span></tt> keyboard shortcut cycle between available information tools. The tool cursor
+to indicate the current tool so you do not have to look up when working.</p>
+</div>
+</li>
+<li><p class="first">Click on a green park; to request more information from the Web Map Service.</p>
+<img alt="../../_images/info_request_wms.png" src="../../_images/info_request_wms.png" style="width: 10.77cm; height: 9.49cm;" />
+</li>
+<li><dl class="first docutils">
+<dt>The <em class="guilabel">Information</em> view is opened, listing details about the <em class="guilabel">Park</em></dt>
+<dd><p class="first">layer at the location specified.</p>
+<ul class="last simple">
 <li>Not all Web Map Servers support the <em>GetFeatureInfo</em> operation;
 as such information may not be available for all layers.</li>
 <li>The application uses a normal browser to display HTML content</li>
@@ -93,40 +94,45 @@ as such information may not be available for all layers.</li>
 <em class="guilabel">Information</em> view out of the workbench to have
 more reading space.</li>
 </ul>
+</dd>
+</dl>
 </li>
-</ol>
+</ul>
 <div class="section" id="feature-and-raster-values">
 <h2>Feature and Raster Values<a class="headerlink" href="#feature-and-raster-values" title="Permalink to this headline">¶</a></h2>
 <p>You can also use the <em class="guilabel">Information</em> view to quickly review feature and raster values.</p>
-<ol class="arabic">
+<ul>
 <li><p class="first">Open your <em class="guilabel">Natural Earth</em> map, and use the <em class="guilabel">Info</em> tool to click on a country.</p>
-<p>The <em class="guilabel">Information</em> view open to list each layer with information</p>
+<blockquote>
+<div><p>The <em class="guilabel">Information</em> view open to list each layer with information</p>
+</div></blockquote>
 </li>
 <li><p class="first">The left pane of the <em class="guilabel">Information</em> used to pick the details to display.</p>
-<p>Pick the <em class="guilabel">10m admin 0 countries</em> feature listed.</p>
+<blockquote>
+<div><p>Pick the <em class="guilabel">10m admin 0 countries</em> feature listed.</p>
+</div></blockquote>
 </li>
 <li><p class="first">The right pane of the <em class="guilabel">Information</em> view is used to explore the attributes of the country you clicked on.</p>
-<ul class="simple">
+<blockquote>
+<div><ul class="simple">
 <li>You will see the information view flash the country to remind you of the area
 you clicked. This is useful when sorting through several featuers on different
 layers.</li>
 <li>The <em class="guilabel">Information</em> view is only used review values, we will cover
 editing as part of <a class="reference internal" href="../walkthrough2/index.html"><em>uDig Walkthrough 2</em></a></li>
 </ul>
-</li>
-</ol>
-<blockquote>
-<div><img alt="../../_images/info_feature.png" src="../../_images/info_feature.png" style="width: 11cm;" />
 </div></blockquote>
-<ol class="arabic" start="4">
-<li><p class="first">The details displayed based on the content picked in the left pane of the
-<em class="guilabel">Information</em> view.</p>
-<p>Pick the <em class="guilabel">NE1_50M_SR_W</em> raster layer to review the RGB values.</p>
+<img alt="../../_images/info_feature.png" src="../../_images/info_feature.png" style="width: 11cm;" />
 </li>
-</ol>
-<blockquote>
-<div><img alt="../../_images/info_raster.png" src="../../_images/info_raster.png" style="width: 11cm;" />
-</div></blockquote>
+<li><dl class="first docutils">
+<dt>The details displayed based on the content picked in the left pane of the</dt>
+<dd><p class="first"><em class="guilabel">Information</em> view.</p>
+<p class="last">Pick the <em class="guilabel">NE1_50M_SR_W</em> raster layer to review the RGB values.</p>
+</dd>
+</dl>
+<img alt="../../_images/info_raster.png" src="../../_images/info_raster.png" style="width: 11cm;" />
+</li>
+</ul>
 </div>
 </div>
 

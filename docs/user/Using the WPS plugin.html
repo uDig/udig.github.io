@@ -2,17 +2,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
     <title>Using the WPS plugin &mdash; uDig 1.3.2 User Guide</title>
-    
     <link rel="stylesheet" href="_static/udig.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="_static/print.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
@@ -61,82 +58,73 @@
 <p>Once you have uDig up and running with the <strong>WPS plugin</strong>, it is fairly straight forward to use. The
 first step is to load a <strong>WPS</strong> server into the catalog.</p>
 <ul class="simple">
-<li><tt class="xref doc docutils literal"><span class="pre">Loading</span> <span class="pre">a</span> <span class="pre">WPS</span> <span class="pre">server</span> <span class="pre">into</span> <span class="pre">the</span> <span class="pre">Catalog</span></tt></li>
-<li><tt class="xref doc docutils literal"><span class="pre">Executing</span> <span class="pre">a</span> <span class="pre">Process</span></tt></li>
-<li><tt class="xref doc docutils literal"><span class="pre">Other</span> <span class="pre">Useful</span> <span class="pre">Functionality</span></tt></li>
+<li><a class="reference internal" href="#loading-a-wps-server-into-the-catalog">Loading a WPS server into the Catalog</a></li>
+<li><a class="reference internal" href="#executing-a-process">Executing a Process</a></li>
+<li><a class="reference internal" href="#other-useful-functionality">Other Useful Functionality</a></li>
 </ul>
 <div class="section" id="loading-a-wps-server-into-the-catalog">
 <h2>Loading a WPS server into the Catalog<a class="headerlink" href="#loading-a-wps-server-into-the-catalog" title="Permalink to this headline">¶</a></h2>
-<ol class="arabic">
-<li><dl class="first docutils">
-<dt>Select <em>File-&gt;Import</em> to open the <strong>Import Wizard</strong> window</dt>
-<dd><p class="first last"><img alt="image0" src="_images/wps_import1.jpg" /></p>
-</dd>
-</dl>
-</li>
-<li><p class="first">Select <em>Web Processing Service (WPS)</em> as the import source and click <em>Next</em></p>
-</li>
-<li><dl class="first docutils">
-<dt>Enter the <em>GetCapabilities URL</em> for your <strong>WPS</strong> server and click <em>Finish</em></dt>
-<dd><p class="first last"><img alt="image1" src="_images/wps_import2.jpg" /></p>
-</dd>
-</dl>
-</li>
-<li><p class="first">Your <strong>WPS</strong> server will now appear in the <strong>Catalog View</strong>. Expand it to get a list of processes
-it offers</p>
-<blockquote>
-<div><p><img alt="image2" src="_images/wps_catalog1.jpg" /></p>
-</div></blockquote>
-</li>
+<ol class="arabic simple">
+<li>Select <em class="menuselection">File ‣ Import</em> to open the <strong>Import Wizard</strong> window</li>
 </ol>
+<blockquote>
+<div><img alt="image0" src="_images/wps_import1.jpg" /></div></blockquote>
+<ol class="arabic simple">
+<li>Select <em>Web Processing Service (WPS)</em> as the import source and click <em>Next</em></li>
+<li>Enter the <em>GetCapabilities URL</em> for your <strong>WPS</strong> server and click <em>Finish</em></li>
+</ol>
+<blockquote>
+<div><img alt="image1" src="_images/wps_import2.jpg" /></div></blockquote>
+<ol class="arabic simple">
+<li>Your <strong>WPS</strong> server will now appear in the <strong>Catalog View</strong>. Expand it to get a list of processes
+it offers</li>
+</ol>
+<blockquote>
+<div><img alt="image2" src="_images/wps_catalog1.jpg" /></div></blockquote>
 </div>
 <div class="section" id="executing-a-process">
 <h2>Executing a Process<a class="headerlink" href="#executing-a-process" title="Permalink to this headline">¶</a></h2>
-<ol class="arabic">
-<li><p class="first">To execute a process offered by your server, right-mouse-click on the process and select
-<em>Operations-&gt;Execute</em></p>
+<ol class="arabic simple">
+<li>To execute a process offered by your server, right-mouse-click on the process and select
+<em class="menuselection">Operations ‣ Execute</em></li>
+</ol>
 <blockquote>
-<div><p><img alt="image3" src="_images/wps_catalog2.jpg" /></p>
-</div></blockquote>
-</li>
-<li><p class="first">A <strong>WPS - Process</strong> View will open to display the process information and input parameters form
-(details shown in screenshot below)</p>
+<div><img alt="image3" src="_images/wps_catalog2.jpg" /></div></blockquote>
+<ol class="arabic simple">
+<li>A <strong>WPS - Process</strong> View will open to display the process information and input parameters form
+(details shown in screenshot below)</li>
+</ol>
 <blockquote>
-<div><p><img alt="image4" src="_images/wps_processview1.jpg" /></p>
-</div></blockquote>
-</li>
-<li><p class="first">You can enter input parameters by manually typing them into the fields (use <strong>Well Known Text</strong>
+<div><img alt="image4" src="_images/wps_processview1.jpg" /></div></blockquote>
+<ol class="arabic simple">
+<li>You can enter input parameters by manually typing them into the fields (use <strong>Well Known Text</strong>
 format for geometries). You can also <strong>import selected map objects</strong> if they fit the type
-expected for the input paramter:</p>
+expected for the input paramter:</li>
+</ol>
 <blockquote>
-<div><p><img alt="image5" src="_images/wps_processview2.jpg" /></p>
-</div></blockquote>
-</li>
-<li><p class="first">Press <strong>Execute</strong> when you have entered the required input parameters to send your request to the
+<div><img alt="image5" src="_images/wps_processview2.jpg" /></div></blockquote>
+<ol class="arabic simple">
+<li>Press <strong>Execute</strong> when you have entered the required input parameters to send your request to the
 <strong>WPS</strong> server. Feedback will be provided in the <strong>Process Info</strong> console. For processes that
 return map data such as a geometry, a new <strong>Scratch Layer</strong> will be created in uDig to display
 the results. For output that is more textual, it will be displayed in the <strong>Process Info</strong>
-console.</p>
-<blockquote>
-<div><p><img alt="image6" src="_images/wps_processview4.jpg" /></p>
-</div></blockquote>
-</li>
+console.</li>
 </ol>
+<blockquote>
+<div><img alt="image6" src="_images/wps_processview4.jpg" /></div></blockquote>
 </div>
 <div class="section" id="other-useful-functionality">
 <h2>Other Useful Functionality<a class="headerlink" href="#other-useful-functionality" title="Permalink to this headline">¶</a></h2>
-<ul>
-<li><p class="first">Some processes allow for variable number of input parameters. When an input parameter can have a
+<ul class="simple">
+<li>Some processes allow for variable number of input parameters. When an input parameter can have a
 variable number of values, it will be displayed on the form under an expanding category (see
 screenshot below). If you select one of these inputs, the <strong>add</strong> and <strong>remove</strong> buttons can be
 used to add and remove instances of this input to the form. The form will not allow you to add
 more than the maximum number of inputs, nor will it allow you to remove more than the minimum
-number of inputs (as described by the server&#8217;s <strong>describeProcess</strong>).</p>
-<blockquote>
-<div><p><img alt="image7" src="_images/wps_processview3.jpg" /></p>
-</div></blockquote>
-</li>
+number of inputs (as described by the server&#8217;s <strong>describeProcess</strong>).</li>
 </ul>
+<blockquote>
+<div><img alt="image7" src="_images/wps_processview3.jpg" /></div></blockquote>
 </div>
 </div>
 
@@ -152,7 +140,7 @@ number of inputs (as described by the server&#8217;s <strong>describeProcess</st
 
     <div class="footer">
         &copy; Copyright 2012, Refractions Research.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
     </div>
   </body>
 </html>
