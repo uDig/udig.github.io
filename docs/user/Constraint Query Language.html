@@ -24,7 +24,10 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/theme_extras.js"></script>
     <link rel="shortcut icon" href="_static/udig.ico"/>
-    <link rel="top" title="uDig 1.3.2 User Guide" href="index.html" /> 
+    <link rel="top" title="uDig 1.3.2 User Guide" href="index.html" />
+    <link rel="up" title="Geospatial" href="Geospatial.html" />
+    <link rel="next" title="Coordinate Reference System" href="Coordinate Reference System.html" />
+    <link rel="prev" title="Geospatial" href="Geospatial.html" /> 
   </head>
   <body>
       <div class="header">
@@ -46,7 +49,11 @@
       <div class="topnav">
       
         <p>
+        «&#160;&#160;<a href="Geospatial.html">Geospatial</a>
+        &#160;&#160;::&#160;&#160;
         <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="Coordinate Reference System.html">Coordinate Reference System</a>&#160;&#160;»
         </p>
 
       </div>
@@ -149,11 +156,8 @@ used to define the selected Features in a uDig layer.</p>
 <h3>Compound Attributes<a class="headerlink" href="#compound-attributes" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python"><pre>gmd:MD_Metadata.gmd:identificationInfo.gmd:MD_DataIdentification.gmd:abstract LIKE  'abc%'</pre>
 </div>
-</div>
-</div>
-</div>
 <div class="section" id="expressions">
-<h1>Expressions<a class="headerlink" href="#expressions" title="Permalink to this headline">¶</a></h1>
+<h4>Expressions<a class="headerlink" href="#expressions" title="Permalink to this headline">¶</a></h4>
 <p>Expressions are used to extract a value similar in spirit to a SELECT statement in SQL. Unlike SQL
 expressions are strictly untyped; the following produces the same result:</p>
 <ul class="simple">
@@ -164,6 +168,10 @@ expressions are strictly untyped; the following produces the same result:</p>
 <p>In many cases you will see several functions defined with similar names; differing only in how they
 interpret the provided argument expressions. The functions functions that produce a boolean value
 are <strong>very</strong> similar to a filter.</p>
+</div>
+</div>
+<div class="section" id="literals">
+<h3>Literals<a class="headerlink" href="#literals" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python"><div class="highlight"><pre><span class="mi">1</span>
 </pre></div>
 </div>
@@ -175,17 +183,26 @@ are <strong>very</strong> similar to a filter.</p>
 </div>
 <div class="highlight-python"><pre>2006-11-30T01:30:00Z</pre>
 </div>
+</div>
+<div class="section" id="geometry">
+<h3>Geometry<a class="headerlink" href="#geometry" title="Permalink to this headline">¶</a></h3>
 <p>Geometry literals are provided in Well Known Text format:</p>
 <div class="highlight-python"><pre>POINT(1 2)</pre>
 </div>
 <div class="highlight-python"><pre>LINESTRING (15 15, 20 20)</pre>
 </div>
 <p>This is the same format used by <a class="reference internal" href="PostGIS.html"><em>PostGIS</em></a> and other applications.</p>
+</div>
+<div class="section" id="attribute">
+<h3>Attribute<a class="headerlink" href="#attribute" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">NAME</span>
 </pre></div>
 </div>
 <div class="highlight-python"><pre>prefix:name</pre>
 </div>
+</div>
+<div class="section" id="math">
+<h3>Math<a class="headerlink" href="#math" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python"><div class="highlight"><pre><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span>
 </pre></div>
 </div>
@@ -194,6 +211,8 @@ are <strong>very</strong> similar to a filter.</p>
 </div>
 <div class="highlight-python"><div class="highlight"><pre><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="mi">3</span>
 </pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="functions">
 <h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
@@ -349,19 +368,10 @@ applications).</p>
 </pre></div>
 </div>
 <p><strong>Related tasks</strong></p>
-<ul class="simple">
-<li><a class="reference internal" href="Selection using CQL.html"><em>Selection using CQL</em></a></li>
-</ul>
+<p><a class="reference internal" href="Selection using CQL.html"><em>Selection using CQL</em></a></p>
 <p><strong>Related reference</strong></p>
-<ul class="simple">
-<li><a class="reference internal" href="Table view.html"><em>Table view</em></a></li>
-</ul>
-<ul class="simple">
-<li>Reshape Operation</li>
-</ul>
-<ul class="simple">
-<li><tt class="xref doc docutils literal"><span class="pre">OGC</span> <span class="pre">Catalog</span> <span class="pre">Specification</span></tt></li>
-</ul>
+<p><a class="reference internal" href="Table view.html"><em>Table view</em></a></p>
+<p><a class="reference external" href="http://www.opengeospatial.org/standards/cat">OGC Catalog Specification</a></p>
 </div>
 </div>
 </div>
@@ -371,7 +381,11 @@ applications).</p>
       <div class="bottomnav">
       
         <p>
+        «&#160;&#160;<a href="Geospatial.html">Geospatial</a>
+        &#160;&#160;::&#160;&#160;
         <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="Coordinate Reference System.html">Coordinate Reference System</a>&#160;&#160;»
         </p>
 
       </div>

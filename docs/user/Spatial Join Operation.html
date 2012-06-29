@@ -24,7 +24,10 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/theme_extras.js"></script>
     <link rel="shortcut icon" href="_static/udig.ico"/>
-    <link rel="top" title="uDig 1.3.2 User Guide" href="index.html" /> 
+    <link rel="top" title="uDig 1.3.2 User Guide" href="index.html" />
+    <link rel="up" title="Spatial Operations" href="Spatial Operations.html" />
+    <link rel="next" title="Split Operation" href="Split Operation.html" />
+    <link rel="prev" title="Polygon to Line Operation" href="Polygon to Line Operation.html" /> 
   </head>
   <body>
       <div class="header">
@@ -46,7 +49,11 @@
       <div class="topnav">
       
         <p>
+        «&#160;&#160;<a href="Polygon to Line Operation.html">Polygon to Line Operation</a>
+        &#160;&#160;::&#160;&#160;
         <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="Split Operation.html">Split Operation</a>&#160;&#160;»
         </p>
 
       </div>
@@ -57,74 +64,59 @@
 <h1>Spatial Join Operation<a class="headerlink" href="#spatial-join-operation" title="Permalink to this headline">¶</a></h1>
 <p>Creates a new layer containing the features from the second layer that match the indicated spatial
 relation., following this standard:</p>
+<p><em>First Layer</em> <strong>Relation</strong> <em>Second Layer</em></p>
+<p>The colour convention used to represent the different layers are:</p>
 <blockquote>
-<div><em>First Layer</em> <strong>Relation</strong> <em>Second Layer</em>
-The colour convention used to represent the different layers are:
-<img alt="image0" src="_images/legend.png" />
-The different Spatial Join Geom operations are:</div></blockquote>
-<ul class="simple">
-<li><strong>Contains</strong></li>
-</ul>
-<blockquote>
-<div>Features in the <em>Second Layer</em> lie in the interior of features of the <em>First Layer</em> (the inverse of</div></blockquote>
-<dl class="docutils">
-<dt>Within). <em>Example:</em></dt>
-<dd><img alt="image1" src="_images/contains.png" /></dd>
-</dl>
-<ul class="simple">
-<li><strong>Crosses</strong></li>
-</ul>
-<blockquote>
-<div>The Features share some but not all interior points, and the dimension of the intersection is less</div></blockquote>
-<dl class="docutils">
-<dt>than that of at least one of the Features. <em>Example:</em></dt>
-<dd><img alt="image2" src="_images/crosses2.png" /></dd>
-</dl>
-<ul class="simple">
-<li><strong>Disjoint</strong></li>
-</ul>
-<blockquote>
-<div>The Features have no point in common. <em>Example:</em>
-<img alt="image3" src="_images/disjoint.png" /></div></blockquote>
-<ul class="simple">
-<li><strong>Equals</strong></li>
-</ul>
-<blockquote>
-<div>The Features are topologically equal and are overlapped making them match exactly. <em>Example:</em>
-<img alt="image4" src="_images/equals.png" /></div></blockquote>
-<ul class="simple">
-<li><strong>Intersects</strong></li>
-</ul>
-<blockquote>
-<div>The Features have at least one point in common (the inverse of Disjoint). <em>Example:</em>
-<img alt="image5" src="_images/intersects.png" /></div></blockquote>
-<ul class="simple">
-<li><strong>Overlaps</strong></li>
-</ul>
-<blockquote>
-<div>The Features share some but not all points in common, and the intersection has the same dimension</div></blockquote>
-<dl class="docutils">
-<dt>as the Features themselves. <em>Example:</em></dt>
-<dd><img alt="image6" src="_images/overlaps.png" /></dd>
-</dl>
-<ul class="simple">
-<li><strong>Touches</strong></li>
-</ul>
-<blockquote>
-<div>The Features have at least one boundary point in common, but no interior points. <em>Example:</em>
-<img alt="image7" src="_images/touches.png" /></div></blockquote>
-<ul class="simple">
-<li><strong>Within</strong></li>
-</ul>
-<blockquote>
-<div>Features in the <em>First Layer</em> lie in the interior of the Features in the <em>Second Layer</em>. <em>Example:</em>
-<img alt="image8" src="_images/within.png" /></div></blockquote>
+<div><p><img alt="image0" src="_images/legend.png" /></p>
+<p>The different Spatial Join Geom operations are:</p>
+</div></blockquote>
+<div class="section" id="contains">
+<h2>Contains<a class="headerlink" href="#contains" title="Permalink to this headline">¶</a></h2>
+<p>Features in the <em>Second Layer</em> lie in the interior of features of the <em>First Layer</em> (the inverse of
+Within). <em>Example:</em></p>
+<p><img alt="image1" src="_images/contains.png" /></p>
+</div>
+<div class="section" id="crosses">
+<h2>Crosses<a class="headerlink" href="#crosses" title="Permalink to this headline">¶</a></h2>
+<p>The Features share some but not all interior points, and the dimension of the intersection is less
+than that of at least one of the Features. <em>Example:</em></p>
+<p><img alt="image2" src="_images/crosses2.png" /></p>
+</div>
+<div class="section" id="disjoint">
+<h2>Disjoint<a class="headerlink" href="#disjoint" title="Permalink to this headline">¶</a></h2>
+<p>The Features have no point in common. <em>Example:</em></p>
+<p><img alt="image3" src="_images/disjoint.png" /></p>
+</div>
+<div class="section" id="equals">
+<h2>Equals<a class="headerlink" href="#equals" title="Permalink to this headline">¶</a></h2>
+<p>The Features are topologically equal and are overlapped making them match exactly. <em>Example:</em></p>
+<p><img alt="image4" src="_images/equals.png" /></p>
+</div>
+<div class="section" id="intersects">
+<h2>Intersects<a class="headerlink" href="#intersects" title="Permalink to this headline">¶</a></h2>
+<p>The Features have at least one point in common (the inverse of Disjoint). <em>Example:</em></p>
+<p><img alt="image5" src="_images/intersects.png" /></p>
+</div>
+<div class="section" id="overlaps">
+<h2>Overlaps<a class="headerlink" href="#overlaps" title="Permalink to this headline">¶</a></h2>
+<p>The Features share some but not all points in common, and the intersection has the same dimension
+as the Features themselves. <em>Example:</em></p>
+<p><img alt="image6" src="_images/overlaps.png" /></p>
+</div>
+<div class="section" id="touches">
+<h2>Touches<a class="headerlink" href="#touches" title="Permalink to this headline">¶</a></h2>
+<p>The Features have at least one boundary point in common, but no interior points. <em>Example:</em></p>
+<p><img alt="image7" src="_images/touches.png" /></p>
+</div>
+<div class="section" id="within">
+<h2>Within<a class="headerlink" href="#within" title="Permalink to this headline">¶</a></h2>
+<p>Features in the <em>First Layer</em> lie in the interior of the Features in the <em>Second Layer</em>. <em>Example:</em></p>
+<p><img alt="image8" src="_images/within.png" /></p>
+</div>
 <div class="section" id="sample-usage">
 <h2>Sample Usage<a class="headerlink" href="#sample-usage" title="Permalink to this headline">¶</a></h2>
-<dl class="docutils">
-<dt>Go to the <em>Spatial Operations View</em>, and select <em>Join Geom</em> from the <em>Operation</em> drop down.</dt>
-<dd>The <em>Join Geom</em> operation&#8217;s specific input options will show up.</dd>
-</dl>
+<p>Go to the <em>Spatial Operations View</em>, and select <em>Join Geom</em> from the <em>Operation</em> drop down.
+The <em>Join Geom</em> operation&#8217;s specific input options will show up.</p>
 <ol class="arabic simple">
 <li><strong>Select the</strong> <strong>*First Source Layer*</strong><strong>:</strong> On the <em>First Layer</em> drop down, select the first
 <em>Layer</em> you want to Join. By default, the currently selected <em>Layer</em> in the <em>Layers View</em> will be
@@ -147,7 +139,11 @@ tool bar and the operation will begin.</li>
       <div class="bottomnav">
       
         <p>
+        «&#160;&#160;<a href="Polygon to Line Operation.html">Polygon to Line Operation</a>
+        &#160;&#160;::&#160;&#160;
         <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="Split Operation.html">Split Operation</a>&#160;&#160;»
         </p>
 
       </div>

@@ -24,7 +24,10 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/theme_extras.js"></script>
     <link rel="shortcut icon" href="_static/udig.ico"/>
-    <link rel="top" title="uDig 1.3.2 User Guide" href="index.html" /> 
+    <link rel="top" title="uDig 1.3.2 User Guide" href="index.html" />
+    <link rel="up" title="Service" href="Service.html" />
+    <link rel="next" title="Teradata" href="Teradata.html" />
+    <link rel="prev" title="Files" href="Files.html" /> 
   </head>
   <body>
       <div class="header">
@@ -46,7 +49,11 @@
       <div class="topnav">
       
         <p>
+        «&#160;&#160;<a href="Files.html">Files</a>
+        &#160;&#160;::&#160;&#160;
         <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="Teradata.html">Teradata</a>&#160;&#160;»
         </p>
 
       </div>
@@ -62,22 +69,38 @@ spatial database for geographic information systems.</p>
 <div class="section" id="geometry-objects">
 <h2>Geometry Objects<a class="headerlink" href="#geometry-objects" title="Permalink to this headline">¶</a></h2>
 <p>PostGIS supports the range of geometry objects:</p>
-<p>Geometry Object</p>
-<p>WKT Example</p>
-<p>Point</p>
-<p>POINT(0 0)</p>
-<p>LineString</p>
-<p>LINESTRING(0 0,1 1,1 2)</p>
-<p>Polygon</p>
-<p>POLYGON((0 0,4 0,4 4,0 4,0 0),(1 1, 2 1, 2 2, 1 2,1 1))</p>
-<p>MultiPoint</p>
-<p>MULTIPOINT(0 0,1 2)</p>
-<p>MultiLineString</p>
-<p>MULTILINESTRING((0 0,1 1,1 2),(2 3,3 2,5 4))</p>
-<p>MiltiPolygon</p>
-<p>MULTIPOLYGON(((0 0,4 0,4 4,0 4,0 0),(1 1,2 1,2 2,1 2,1 1)), ((-1 -1,-1 -2,-2 -2,-2 -1,-1 -1)))</p>
-<p>GeometryCollection</p>
-<p>GEOMETRYCOLLECTION(POINT(2 3),LINESTRING((2 3,3 4)))</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="82%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><strong>Geometry Object</strong></td>
+<td><strong>WKT Example</strong></td>
+</tr>
+<tr><td>Point</td>
+<td>POINT(0 0)</td>
+</tr>
+<tr><td>LineString</td>
+<td>LINESTRING(0 0,1 1,1 2)</td>
+</tr>
+<tr><td>Polygon</td>
+<td>POLYGON((0 0,4 0,4 4,0 4,0 0),(1 1, 2 1, 2 2, 1 2,1 1))</td>
+</tr>
+<tr><td>MultiPoint</td>
+<td>MULTIPOINT(0 0,1 2)</td>
+</tr>
+<tr><td>MultiLineString</td>
+<td>MULTILINESTRING((0 0,1 1,1 2),(2 3,3 2,5 4))</td>
+</tr>
+<tr><td>MultiPolygon</td>
+<td>MULTIPOLYGON(((0 0,4 0,4 4,0 4,0 0),(1 1,2 1,2 2,1 2,1 1)), ((-1 -1,-1 -2,-2 -2,-2 -1,-1 -1)))</td>
+</tr>
+<tr><td>GeometryCollection</td>
+<td>GEOMETRYCOLLECTION(POINT(2 3),LINESTRING((2 3,3 4)))</td>
+</tr>
+</tbody>
+</table>
 <p>These geometry objects are in accordance with the SFSQL specification mentioned above; the examples
 are given using the &#8220;Well Known Text&#8221; format - the same format used for selections in uDig (see
 <a class="reference internal" href="Constraint Query Language.html"><em>Constraint Query Language</em></a> )</p>
@@ -93,12 +116,10 @@ information about the kind of geometry object and what SRID is expected</li>
 <p>For uDig to recognize your database you will need to have at least one entry in your
 geometry_columns table.</p>
 <p><strong>Related reference</strong></p>
-<ul class="simple">
-<li><a class="reference internal" href="PostGIS page.html"><em>PostGIS page</em></a></li>
-<li><a href="#id1"><span class="problematic" id="id2">`http://postgis.refractions.net/`_</span></a></li>
-<li><a href="#id3"><span class="problematic" id="id4">`http://www.postgresql.com/`_</span></a></li>
-<li><a class="reference external" href="http://www.foss4g2007.org/workshops/W-04/">Introduction to PostGIS</a> (FOSS4G 2007 workshop)</li>
-</ul>
+<p><a class="reference internal" href="PostGIS page.html"><em>PostGIS page</em></a>
+<a class="reference external" href="http://postgis.refractions.net/">http://postgis.refractions.net/</a>
+<a class="reference external" href="http://www.postgresql.com/">http://www.postgresql.com/</a>
+<a class="reference external" href="http://www.foss4g2007.org/workshops/W-04/">Introduction to PostGIS</a> (FOSS4G 2007 workshop)</p>
 </div>
 </div>
 
@@ -107,7 +128,11 @@ geometry_columns table.</p>
       <div class="bottomnav">
       
         <p>
+        «&#160;&#160;<a href="Files.html">Files</a>
+        &#160;&#160;::&#160;&#160;
         <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="Teradata.html">Teradata</a>&#160;&#160;»
         </p>
 
       </div>

@@ -24,7 +24,10 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/theme_extras.js"></script>
     <link rel="shortcut icon" href="_static/udig.ico"/>
-    <link rel="top" title="uDig 1.3.2 User Guide" href="index.html" /> 
+    <link rel="top" title="uDig 1.3.2 User Guide" href="index.html" />
+    <link rel="up" title="Map editor" href="Map editor.html" />
+    <link rel="next" title="Selection Tools" href="Selection Tools.html" />
+    <link rel="prev" title="Information Tools" href="Information Tools.html" /> 
   </head>
   <body>
       <div class="header">
@@ -46,34 +49,36 @@
       <div class="topnav">
       
         <p>
+        «&#160;&#160;<a href="Information Tools.html">Information Tools</a>
+        &#160;&#160;::&#160;&#160;
         <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="Selection Tools.html">Selection Tools</a>&#160;&#160;»
         </p>
 
       </div>
       <div class="content">
         
         
-  <p>The category of navigation tools is used to control what is visible in the <a class="reference internal" href="Map editor.html"><em>Map editor</em></a>.</p>
+  <div class="section" id="navigation-tools">
+<h1>Navigation Tools<a class="headerlink" href="#navigation-tools" title="Permalink to this headline">¶</a></h1>
+<p>The category of navigation tools is used to control what is visible in the <a class="reference internal" href="Map editor.html"><em>Map editor</em></a>.</p>
 <p>Navigation Tools:</p>
 <ul class="simple">
-<li><img alt="image0" src="_images/zoom_mode.gif" /> <a class="reference internal" href="#zoom-tool">Zoom Tool</a></li>
-<li><img alt="image1" src="_images/pan_mode.gif" /> <a class="reference internal" href="#pan-tool">Pan Tool</a></li>
+<li><img alt="image0" src="_images/zoom_mode.gif" /> <a class="reference internal" href="#zoom-tool">Zoom Tool</a> <tt class="kbd docutils literal"><span class="pre">z</span></tt></li>
+<li><img alt="image1" src="_images/pan_mode.gif" /> <a class="reference internal" href="#pan-tool">Pan Tool</a> <tt class="kbd docutils literal"><span class="pre">p</span></tt></li>
 </ul>
 <p>Navigation Commands:</p>
 <ul class="simple">
-<li><tt class="xref doc docutils literal"><span class="pre">Back</span></tt></li>
-<li><tt class="xref doc docutils literal"><span class="pre">Forward</span></tt></li>
-</ul>
-<ul class="simple">
+<li><a class="reference internal" href="#back">Back</a></li>
+<li><a class="reference internal" href="#forward">Forward</a></li>
 <li><img alt="image2" src="_images/refresh_co.gif" /> <a class="reference internal" href="#refresh">Refresh</a></li>
 <li><img alt="image3" src="_images/cancel_all_co.gif" /> <a class="reference internal" href="#stop-drawing">Stop Drawing</a></li>
 <li><img alt="image4" src="_images/zoom_extent_co.gif" /> <a class="reference internal" href="#show-all">Show All</a></li>
-<li><img alt="image5" src="_images/zoom_in_co.gif" /> <a href="#id1"><span class="problematic" id="id2">`Zoom In`_</span></a></li>
-<li><img alt="image6" src="_images/zoom_out_co.gif" /> <a href="#id3"><span class="problematic" id="id4">`Zoom Out`_</span></a></li>
+<li><img alt="image5" src="_images/zoom_in_co.gif" /> <a class="reference internal" href="#zoom-in">Zoom In</a></li>
+<li><img alt="image6" src="_images/zoom_out_co.gif" /> <a class="reference internal" href="#zoom-out">Zoom Out</a></li>
 <li><img alt="image7" src="_images/zoom_select_co.png" /> <a class="reference internal" href="#zoom-to-selection">Zoom to Selection</a></li>
 </ul>
-<div class="section" id="navigation-tools">
-<h1>Navigation Tools<a class="headerlink" href="#navigation-tools" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="zoom-tool">
 <h2>Zoom Tool<a class="headerlink" href="#zoom-tool" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
@@ -97,11 +102,11 @@ display the same.</li>
 <div class="section" id="pan-tool">
 <h2>Pan Tool<a class="headerlink" href="#pan-tool" title="Permalink to this headline">¶</a></h2>
 <p>A drag with the left mouse button down will move the map across the display.</p>
-</div>
-</div>
 <div class="section" id="navigation-commands">
-<h1>Navigation Commands<a class="headerlink" href="#navigation-commands" title="Permalink to this headline">¶</a></h1>
+<h3>Navigation Commands<a class="headerlink" href="#navigation-commands" title="Permalink to this headline">¶</a></h3>
 <p>May of these commands may also be found in the <a class="reference internal" href="Navigation Menu.html"><em>Navigation Menu</em></a>.</p>
+</div>
+</div>
 <div class="section" id="back">
 <h2>Back<a class="headerlink" href="#back" title="Permalink to this headline">¶</a></h2>
 <p>Displays the previous view. The back button is active only after the view has been changed and is
@@ -124,12 +129,12 @@ not saved between sessions.</p>
 <p>Sets the zoom so that all available data is displayed.</p>
 </div>
 <div class="section" id="zoom-in">
-<h2>Zoom-In<a class="headerlink" href="#zoom-in" title="Permalink to this headline">¶</a></h2>
+<h2>Zoom In<a class="headerlink" href="#zoom-in" title="Permalink to this headline">¶</a></h2>
 <p>The Zoom-In button zooms towards the data by a set amount. The center of the zoom is the center of
 the map.</p>
 </div>
 <div class="section" id="zoom-out">
-<h2>Zoom-Out<a class="headerlink" href="#zoom-out" title="Permalink to this headline">¶</a></h2>
+<h2>Zoom Out<a class="headerlink" href="#zoom-out" title="Permalink to this headline">¶</a></h2>
 <p>The Zoom-Out button zooms away from the data by a set amount. The center of the zoom is the center
 of the map.</p>
 </div>
@@ -137,10 +142,8 @@ of the map.</p>
 <h2>Zoom to Selection<a class="headerlink" href="#zoom-to-selection" title="Permalink to this headline">¶</a></h2>
 <p>Zoom to the selected features.</p>
 <p><strong>Related reference</strong></p>
-<ul class="simple">
-<li><a class="reference internal" href="Navigation Menu.html"><em>Navigation Menu</em></a></li>
-<li><a class="reference internal" href="Map Menu.html"><em>Map Menu</em></a></li>
-</ul>
+<p><a class="reference internal" href="Navigation Menu.html"><em>Navigation Menu</em></a></p>
+<p><a class="reference internal" href="Map Menu.html"><em>Map Menu</em></a></p>
 </div>
 </div>
 
@@ -149,7 +152,11 @@ of the map.</p>
       <div class="bottomnav">
       
         <p>
+        «&#160;&#160;<a href="Information Tools.html">Information Tools</a>
+        &#160;&#160;::&#160;&#160;
         <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="Selection Tools.html">Selection Tools</a>&#160;&#160;»
         </p>
 
       </div>

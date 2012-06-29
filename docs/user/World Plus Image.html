@@ -24,7 +24,10 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/theme_extras.js"></script>
     <link rel="shortcut icon" href="_static/udig.ico"/>
-    <link rel="top" title="uDig 1.3.2 User Guide" href="index.html" /> 
+    <link rel="top" title="uDig 1.3.2 User Guide" href="index.html" />
+    <link rel="up" title="File Formats" href="File Formats.html" />
+    <link rel="next" title="Geospatial" href="Geospatial.html" />
+    <link rel="prev" title="Shapefile" href="Shapefile.html" /> 
   </head>
   <body>
       <div class="header">
@@ -46,7 +49,11 @@
       <div class="topnav">
       
         <p>
+        «&#160;&#160;<a href="Shapefile.html">Shapefile</a>
+        &#160;&#160;::&#160;&#160;
         <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="Geospatial.html">Geospatial</a>&#160;&#160;»
         </p>
 
       </div>
@@ -64,50 +71,96 @@ As an example a TIFF file with spatial metadata is known as a <a class="referenc
 <h2>Image Files<a class="headerlink" href="#image-files" title="Permalink to this headline">¶</a></h2>
 <p>An image file is recognized as being in the &#8220;World plus Image&#8221; format if it is part of a file set
 consisting of the following:</p>
-<p>Example</p>
-<p>Description</p>
-<p>Image File</p>
-<p>filename.jpeg</p>
-<p>Contains the raster data</p>
-<p>World File</p>
-<p>filename.jgw</p>
-<p>contains the &#8220;world file&#8221; information letting us know where to draw the raster on the map</p>
-<p>PRJ File</p>
-<p>filename.prj</p>
-<p>Optional file that defines the coordinates used in the &#8220;world file&#8221; above</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="22%" />
+<col width="22%" />
+<col width="57%" />
+</colgroup>
+<tbody valign="top">
+<tr><td>&nbsp;</td>
+<td><strong>Example</strong></td>
+<td><strong>Description</strong></td>
+</tr>
+<tr><td>Image File</td>
+<td>filename.jpeg</td>
+<td>Contains the raster data</td>
+</tr>
+<tr><td>World File</td>
+<td>filename.jgw</td>
+<td>contains the &#8220;world file&#8221; information letting us
+know where to draw the raster on the map</td>
+</tr>
+<tr><td>PRJ File</td>
+<td>filename.prj</td>
+<td>Optional file that defines the coordinates used
+in the &#8220;world file&#8221; above</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="section" id="world-and-projection-files-for-an-image">
 <h2>World and Projection Files for an Image<a class="headerlink" href="#world-and-projection-files-for-an-image" title="Permalink to this headline">¶</a></h2>
 <p>The extension of a world file is the first and last letters of the image extension with w appended
 at the end.</p>
-<p>Format</p>
-<p>Files</p>
-<p>JEPG</p>
-<p>jpeg, jgw with optional prj</p>
-<p>TIFF</p>
-<p>tiff, tfw with optional prj</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="40%" />
+<col width="60%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><strong>Format</strong></td>
+<td><strong>Files</strong></td>
+</tr>
+<tr><td>JEPG</td>
+<td>jpeg, jgw with optional prj</td>
+</tr>
+<tr><td>TIFF</td>
+<td>tiff, tfw with optional prj</td>
+</tr>
+</tbody>
+</table>
 <p>The contents of a world file are as follows:</p>
-<p>Line</p>
-<p>Example</p>
-<p>Definition</p>
-<p>1</p>
-<p>0.0359281435</p>
-<p>Horizontal scale for a pixel</p>
-<p>2</p>
-<p>0.0000000000</p>
-<p>Rotation for row, usually zero</p>
-<p>3</p>
-<p>0.0000000000</p>
-<p>Rotation for column, usually zero</p>
-<p>4</p>
-<p>-0.0359281437</p>
-<p>Vertical scale for pixel, usually negative as rasters count down from the upper left corner</p>
-<p>5</p>
-<p>-179.9820349282</p>
-<p>Translation, usually &#8220;easting&#8221; location of the upper left pixel (ie column 0)</p>
-<p>6</p>
-<p>89.9820359281</p>
-<p>Translation, usually &#8220;northing&#8221; location of the upper left pixel (ie row 0)</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="22%" />
+<col width="22%" />
+<col width="57%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><strong>Line</strong></td>
+<td><strong>Example</strong></td>
+<td><strong>Definition</strong></td>
+</tr>
+<tr><td>1</td>
+<td>0.0359281435</td>
+<td>Horizontal scale for a pixel</td>
+</tr>
+<tr><td>2</td>
+<td>0.0000000000</td>
+<td>Rotation for row, usually zero</td>
+</tr>
+<tr><td>3</td>
+<td>0.0000000000</td>
+<td>Rotation for column, usually zero</td>
+</tr>
+<tr><td>4</td>
+<td>-0.0359281437</td>
+<td>Vertical scale for pixel, usually negative as
+rasters count down from the upper left corner</td>
+</tr>
+<tr><td>5</td>
+<td>-179.9820349282</td>
+<td>Translation, usually &#8220;easting&#8221; location of the
+upper left pixel (ie column 0)</td>
+</tr>
+<tr><td>6</td>
+<td>89.9820359281</td>
+<td>Translation, usually &#8220;northing&#8221; location of the
+upper left pixel (ie row 0)</td>
+</tr>
+</tbody>
+</table>
 <p>The Translation information can be thought of as the location of the upper left pixel, this locaiton
 is provided in the units of the projections being used:</p>
 <ul class="simple">
@@ -130,13 +183,14 @@ file.</p>
 </pre></div>
 </div>
 <p>An example world.prj is:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">GEOGCS</span><span class="p">[</span><span class="s">&quot;GCS_WGS_1984&quot;</span><span class="p">,</span> <span class="n">DATUM</span><span class="p">[</span><span class="s">&quot;WGS_1984&quot;</span><span class="p">,</span> <span class="n">SPHEROID</span><span class="p">[</span><span class="s">&quot;WGS_1984&quot;</span><span class="p">,</span><span class="mi">6378137</span><span class="p">,</span><span class="mf">298.257223563</span><span class="p">]],</span> <span class="n">PRIMEM</span><span class="p">[</span><span class="s">&quot;Greenwich&quot;</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">UNIT</span><span class="p">[</span><span class="s">&quot;Degree&quot;</span><span class="p">,</span><span class="mf">0.017453292519943295</span><span class="p">]]</span>
-</pre></div>
-</div>
+<dl class="docutils">
+<dt>::</dt>
+<dd>GEOGCS[&#8220;GCS_WGS_1984&#8221;, DATUM[&#8220;WGS_1984&#8221;, SPHEROID[&#8220;WGS_1984&#8221;,6378137,298.257223563]], PRIMEM[&#8220;Greenwich&#8221;,0], UNIT[&#8220;Degree&#8221;,0.017453292519943295]]</dd>
+</dl>
 <p><strong>Related reference</strong></p>
 <ul class="simple">
 <li><a class="reference external" href="http://www.kralidis.ca/gis/worldfile.htm">ESRI World Image format</a></li>
-<li><a href="#id1"><span class="problematic" id="id2">`http://geos.gsi.gov.il/vladi/FEFLOW/help/general/file\_format.html#tfw\_file`_</span></a></li>
+<li><a class="reference external" href="http://geos.gsi.gov.il/vladi/FEFLOW/help/general/file_format.html#tfw_file">http://geos.gsi.gov.il/vladi/FEFLOW/help/general/file_format.html#tfw_file</a></li>
 </ul>
 </div>
 </div>
@@ -146,7 +200,11 @@ file.</p>
       <div class="bottomnav">
       
         <p>
+        «&#160;&#160;<a href="Shapefile.html">Shapefile</a>
+        &#160;&#160;::&#160;&#160;
         <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="Geospatial.html">Geospatial</a>&#160;&#160;»
         </p>
 
       </div>

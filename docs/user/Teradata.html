@@ -24,7 +24,10 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/theme_extras.js"></script>
     <link rel="shortcut icon" href="_static/udig.ico"/>
-    <link rel="top" title="uDig 1.3.2 User Guide" href="index.html" /> 
+    <link rel="top" title="uDig 1.3.2 User Guide" href="index.html" />
+    <link rel="up" title="Service" href="Service.html" />
+    <link rel="next" title="Tileset" href="Tileset.html" />
+    <link rel="prev" title="PostGIS" href="PostGIS.html" /> 
   </head>
   <body>
       <div class="header">
@@ -46,7 +49,11 @@
       <div class="topnav">
       
         <p>
+        «&#160;&#160;<a href="PostGIS.html">PostGIS</a>
+        &#160;&#160;::&#160;&#160;
         <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="Tileset.html">Tileset</a>&#160;&#160;»
         </p>
 
       </div>
@@ -75,7 +82,7 @@ performance issues with large data sets and a potential application freeze when 
 There is a patch to address these issues, which can be installed in the following way:</p>
 <ul class="simple">
 <li>Follow the instructions to <a class="reference internal" href="Finding new plugins.html"><em>install a new plugin</em></a>.</li>
-<li>When asked for the site location (step 5) enter <a href="#id1"><span class="problematic" id="id2">`http://udig.refractions.net/files/update-teradata/`_</span></a></li>
+<li>When asked for the site location (step 5) enter <a class="reference external" href="http://udig.refractions.net/files/update-teradata/">http://udig.refractions.net/files/update-teradata/</a></li>
 <li>After completing the wizard, restart uDig.</li>
 </ul>
 <p>This patch will be incorporated into all future releases of uDig.</p>
@@ -90,11 +97,11 @@ editing, and deleting.</p>
 <li>a unique primary index</li>
 <li>an identity (sequential) column</li>
 </ul>
-<div class="figure align-center">
-<img alt="" src="images/icons/emoticons/warning.gif" />
-</div>
-<p>It is not recommended to solely use an identity column, as spatial index triggers are not supported
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">It is not recommended to solely use an identity column, as spatial index triggers are not supported
 when referencing an identity column. See the section on Spatial Indexes for more details.</p>
+</div>
 </div>
 <div class="section" id="query-banding">
 <h2>Query Banding<a class="headerlink" href="#query-banding" title="Permalink to this headline">¶</a></h2>
@@ -119,12 +126,12 @@ Mode .&nbsp; See the <a class="reference internal" href="Teradata page.html"><em
 </div>
 <p>So for a layer called &#8220;STATES&#8221; with a geometry column called &#8220;GEOM&#8221;, the index table should be
 called <strong>STATES_GEOM_idx</strong>.</p>
-<div class="figure align-center">
-<img alt="" src="images/icons/emoticons/forbidden.gif" />
-</div>
-<p>Make sure to match the case of all tables and columns. If the geometry column is called &#8220;GEOM&#8221;
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Make sure to match the case of all tables and columns. If the geometry column is called &#8220;GEOM&#8221;
 (upper case) and the index created is called STATES_geom_idx (lower case), the index will not be
 properly linked to the table.</p>
+</div>
 <p>This index table should contain two columns:</p>
 <ul class="simple">
 <li>A column that maps to the primary key of the spatial data table</li>
@@ -143,51 +150,73 @@ spatially-related tables, in the SYSSPATIAL database.</p>
 <p>Tessellation is the name of Teradata&#8217;s spatial index. In order to activate tessellation for a given
 layer, an entry (row) needs to be placed in the <tt class="docutils literal"><span class="pre">SYSSPATIAL.tessellation</span></tt> table. This table should
 have the following schema:</p>
-<p>Table name</p>
-<p>Type</p>
-<p>Description</p>
-<p>F_TABLE_SCHEMA</p>
-<p>varchar</p>
-<p>Name of the spatial database/schema containing the table</p>
-<p>F_TABLE_NAME</p>
-<p>varchar</p>
-<p>Name of the spatial table</p>
-<p>F_GEOMETRY_COLUMN</p>
-<p>varchar</p>
-<p>Column that contains the spatial data</p>
-<p>U_XMIN</p>
-<p>float</p>
-<p>Minimum X value for the tessellation universe</p>
-<p>U_YMIN</p>
-<p>float</p>
-<p>Minimum Y value for the tessellation universe</p>
-<p>U_XMAX</p>
-<p>float</p>
-<p>Maximum X value for the tessellation universe</p>
-<p>U_YMAX</p>
-<p>float</p>
-<p>Maximum Y value for the tessellation universe</p>
-<p>G_NX</p>
-<p>integer</p>
-<p>Number of X grids</p>
-<p>G_NY</p>
-<p>integer</p>
-<p>Number of Y grids</p>
-<p>LEVELS</p>
-<p>integer</p>
-<p>Number of levels in the grid</p>
-<p>SCALE</p>
-<p>float</p>
-<p>Scale value for the grid</p>
-<p>SHIFT</p>
-<p>float</p>
-<p>Shift value for the grid</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="29%" />
+<col width="13%" />
+<col width="59%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><strong>Table name</strong></td>
+<td><strong>Type</strong></td>
+<td><strong>Description</strong></td>
+</tr>
+<tr><td><strong>F_TABLE_SCHEMA</strong></td>
+<td>varchar</td>
+<td>Name of the spatial database/schema
+containing the table</td>
+</tr>
+<tr><td><strong>F_TABLE_NAME</strong></td>
+<td>varchar</td>
+<td>Name of the spatial table</td>
+</tr>
+<tr><td><strong>F_GEOMETRY_COLUMN</strong></td>
+<td>varchar</td>
+<td>Column that contains the spatial data</td>
+</tr>
+<tr><td><strong>U_XMIN</strong></td>
+<td>float</td>
+<td>Minimum X value for the tessellation universe</td>
+</tr>
+<tr><td><strong>U_YMIN</strong></td>
+<td>float</td>
+<td>Minimum Y value for the tessellation universe</td>
+</tr>
+<tr><td><strong>U_XMAX</strong></td>
+<td>float</td>
+<td>Maximum X value for the tessellation universe</td>
+</tr>
+<tr><td><strong>U_YMAX</strong></td>
+<td>float</td>
+<td>Maximum Y value for the tessellation universe</td>
+</tr>
+<tr><td><strong>G_NX</strong></td>
+<td>integer</td>
+<td>Number of X grids</td>
+</tr>
+<tr><td><strong>G_NY</strong></td>
+<td>integer</td>
+<td>Number of Y grids</td>
+</tr>
+<tr><td><strong>LEVELS</strong></td>
+<td>integer</td>
+<td>Number of levels in the grid</td>
+</tr>
+<tr><td><strong>SCALE</strong></td>
+<td>float</td>
+<td>Scale value for the grid</td>
+</tr>
+<tr><td><strong>SHIFT</strong></td>
+<td>float</td>
+<td>Shift value for the grid</td>
+</tr>
+</tbody>
+</table>
 <p>For more information about Tessellation, please see the Teradata documentation.</p>
-<div class="figure align-center">
-<img alt="" src="images/icons/emoticons/forbidden.gif" />
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The tessellation table values are case sensitive and so must match the case of the tables and columns.</p>
 </div>
-<p>The tessellation table values are case sensitive and so must match the case of the tables and
-columns.</p>
 </div>
 <div class="section" id="installing-the-teradata-extension">
 <h2>Installing the Teradata extension<a class="headerlink" href="#installing-the-teradata-extension" title="Permalink to this headline">¶</a></h2>
@@ -195,10 +224,10 @@ columns.</p>
 downloaded prior to use.</p>
 <p>To get the Teradata drivers, please visit:
 <a class="reference external" href="http://downloads.teradata.com/download/connectivity/jdbc-driver">http://downloads.teradata.com/download/connectivity/jdbc-driver</a></p>
-<div class="figure align-center">
-<img alt="" src="images/icons/emoticons/warning.gif" />
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You will need to log in to Teradata&#8217;s site in order to download this artifact.</p>
 </div>
-<p>You will need to log in to Teradata&#8217;s site in order to download this artifact.</p>
 <p>Extract the contents of the archive to any convenient directory. There should be two files in this
 archive:</p>
 <ul class="simple">
@@ -227,7 +256,11 @@ on to the <a class="reference internal" href="Teradata page.html"><em>Teradata c
       <div class="bottomnav">
       
         <p>
+        «&#160;&#160;<a href="PostGIS.html">PostGIS</a>
+        &#160;&#160;::&#160;&#160;
         <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="Tileset.html">Tileset</a>&#160;&#160;»
         </p>
 
       </div>

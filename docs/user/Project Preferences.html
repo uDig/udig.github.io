@@ -24,7 +24,10 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/theme_extras.js"></script>
     <link rel="shortcut icon" href="_static/udig.ico"/>
-    <link rel="top" title="uDig 1.3.2 User Guide" href="index.html" /> 
+    <link rel="top" title="uDig 1.3.2 User Guide" href="index.html" />
+    <link rel="up" title="Preferences" href="Preferences.html" />
+    <link rel="next" title="Rendering Preferences" href="Rendering Preferences.html" />
+    <link rel="prev" title="Help Preferences" href="Help Preferences.html" /> 
   </head>
   <body>
       <div class="header">
@@ -46,7 +49,11 @@
       <div class="topnav">
       
         <p>
+        «&#160;&#160;<a href="Help Preferences.html">Help Preferences</a>
+        &#160;&#160;::&#160;&#160;
         <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="Rendering Preferences.html">Rendering Preferences</a>&#160;&#160;»
         </p>
 
       </div>
@@ -57,22 +64,55 @@
 <h1>Project Preferences<a class="headerlink" href="#project-preferences" title="Permalink to this headline">¶</a></h1>
 <p>Project preferences and its children provides options for modifying the defaults and behavior of
 creating projects and the elements that can be contained by projects.</p>
-<p><strong>Related reference</strong></p>
-<div class="section" id="children">
-<h2>Children<a class="headerlink" href="#children" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><a class="reference internal" href="Layer Preferences.html"><em>Layer Preferences</em></a></li>
-<li><a class="reference internal" href="Map Preferences.html"><em>Map Preferences</em></a></li>
-<li><a class="reference internal" href="Printing Preferences.html"><em>Printing Preferences</em></a></li>
-</ul>
+<div class="section" id="layer-preferences">
+<span id="preferences-page-project-layer"></span><h2>Layer Preferences<a class="headerlink" href="#layer-preferences" title="Permalink to this headline">¶</a></h2>
+<p>Currently there are no layer level preferences that can be set. Future versions will provide options
+that can be set for layers.</p>
+<div class="figure align-center">
+<img alt="" src="_images/layerpreferences.png" />
 </div>
-<div class="section" id="peers">
-<h2>Peers<a class="headerlink" href="#peers" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><a class="reference internal" href="Catalog Preferences.html"><em>Catalog Preferences</em></a></li>
-<li><a class="reference internal" href="Rendering Preferences.html"><em>Rendering Preferences</em></a></li>
-<li><a class="reference internal" href="Tool Preferences.html"><em>Tool Preferences</em></a></li>
-</ul>
+</div>
+<div class="section" id="map-preferences">
+<span id="preferences-page-project-map"></span><h2>Map Preferences<a class="headerlink" href="#map-preferences" title="Permalink to this headline">¶</a></h2>
+<p>Map Preference page is used to supply system wide defaults for the Map Editor.</p>
+<div class="figure align-center">
+<img alt="" src="_images/mappreferences.png" />
+</div>
+<div class="section" id="remove-temporary-layers-on-exit">
+<h3>Remove Temporary Layers on exit<a class="headerlink" href="#remove-temporary-layers-on-exit" title="Permalink to this headline">¶</a></h3>
+<p>When checked this option will remove temporary layers from the map. If it is not checked the layer
+will stay in the map, but all data is lost since the layer is temporary. This option can be useful
+if the FeatureType is complex and recreating the FeatureType can be time consuming.</p>
+<p>Default is checked</p>
+</div>
+<div class="section" id="epsg-code-of-default-crs">
+<h3>EPSG code of default CRS<a class="headerlink" href="#epsg-code-of-default-crs" title="Permalink to this headline">¶</a></h3>
+<p>Declares what the default CRS is, a value of -1 is used to indicate that the value should be
+determiend from the data.</p>
+<p>You may wish to change this setting when working with a large number of shapefiles that make use of
+the same projection.</p>
+<p>The default value is -1.</p>
+</div>
+<div class="section" id="default-map-background-color">
+<h3>Default map background color<a class="headerlink" href="#default-map-background-color" title="Permalink to this headline">¶</a></h3>
+<p>The color of the map&#8217;s background.</p>
+<p>Default is white.</p>
+</div>
+<div class="section" id="selection-color">
+<h3>Selection Color<a class="headerlink" href="#selection-color" title="Permalink to this headline">¶</a></h3>
+<p>The color that selected feature will be drawn in.</p>
+<p>Default is dark yellow.</p>
+</div>
+</div>
+<div class="section" id="printing-preferences">
+<h2>Printing Preferences<a class="headerlink" href="#printing-preferences" title="Permalink to this headline">¶</a></h2>
+<div class="figure align-center">
+<img alt="" src="_images/printingpreferences.png" />
+</div>
+<div class="section" id="available-preferences">
+<h3>Available Preferences<a class="headerlink" href="#available-preferences" title="Permalink to this headline">¶</a></h3>
+<p>Default Template - Declares what page template should be used by default.</p>
+</div>
 </div>
 </div>
 
@@ -81,7 +121,11 @@ creating projects and the elements that can be contained by projects.</p>
       <div class="bottomnav">
       
         <p>
+        «&#160;&#160;<a href="Help Preferences.html">Help Preferences</a>
+        &#160;&#160;::&#160;&#160;
         <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="Rendering Preferences.html">Rendering Preferences</a>&#160;&#160;»
         </p>
 
       </div>
