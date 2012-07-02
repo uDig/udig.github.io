@@ -62,24 +62,21 @@
         
   <div class="section" id="arc-tool">
 <h1>Arc Tool<a class="headerlink" href="#arc-tool" title="Permalink to this headline">¶</a></h1>
-<p><img alt="image0" src="_images/arc_tool.gif" /> Creates a linestring approximating an arc given three control points (initial point, axis,
+<p><img alt="arc_tool_icon" src="_images/arc_tool.gif" /> Creates a linestring approximating an arc given three control points (initial point, axis,
 and end point).</p>
 <p>The <em>Arc Tool</em> allows to create a Feature whose Geometry is a linear approximation of an arc of
 circumference, by specifying three points which define two consecutive arc chords.</p>
 <div class="section" id="behaviour">
 <h2>Behaviour<a class="headerlink" href="#behaviour" title="Permalink to this headline">¶</a></h2>
-<blockquote>
-<div>The <em>Arc Tool</em> is a Feature <em>creation</em> tool and operates over the currently selected Layer, thus</div></blockquote>
-<p>the currently selected Layer must allow LineString geometries, whether its feature types specifies
-them to be LineString or MultiLineString.</p>
-<blockquote>
-<div>When the <em>Arc Tool</em> proceeds to create the new Feature, it does not commits it, allowing the user</div></blockquote>
-<p>to undo the operation, set the Feature attribute values or commit the changes as usual in uDig.</p>
+<p>The <em>Arc Tool</em> is a Feature <em>creation</em> tool and operates over the currently selected Layer, thus
+the currently selected Layer must allow LineString geometries, whether its feature types specifies
+them to be LineString or MultiLineString.
+When the <em>Arc Tool</em> proceeds to create the new Feature, it does not commits it, allowing the user
+to undo the operation, set the Feature attribute values or commit the changes as usual in uDig.</p>
 <div class="section" id="visual-consistency">
 <h3>Visual consistency<a class="headerlink" href="#visual-consistency" title="Permalink to this headline">¶</a></h3>
-<blockquote>
-<div>In order to preserve visual consistency, and thus be consistent with what the user is doing, the</div></blockquote>
-<p>geometry created by the <em>Arc Tool</em> will be first created in the <strong>Map&#8217;s CRS</strong>, and then projected to
+<p>In order to preserve visual consistency, and thus be consistent with what the user is doing, the
+geometry created by the <em>Arc Tool</em> will be first created in the <strong>Map&#8217;s CRS</strong>, and then projected to
 the backend CRS for storage. This allows the user to create the arc in the desired CRS by setting
 the Map CRS to a meaningful one for his purposes. A side effect will be, that if the data and Map
 CRS differ, the geometry will be an arc of circumference in the Map CRS but probably not in the data
@@ -88,27 +85,27 @@ CRS.</p>
 </div>
 <div class="section" id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
-<blockquote>
-<div>As shown in <em>Figure 1</em>, to start using the <em>Arc Tool</em> you have to first select it from the drop</div></blockquote>
-<dl class="docutils">
-<dt>down menu in the uDig&#8217;s editting tools Toolbar.</dt>
-<dd><img alt="image1" src="_images/arc_1.png" />
-<strong>Figure 1 select</strong> <strong>*Arc Tool*</strong>
-Once the tool is selected, you need to specify three points that defines the arc. For any of the</dd>
-</dl>
-<p>three points you can use the <strong>snap</strong> area, if activated, in order to snap to a vertex from another
-Feature.</p>
-<blockquote>
-<div><em>Figure 2</em> shows the feedback shown when only two points have been specified. You&#8217;ll see the</div></blockquote>
-<dl class="docutils">
-<dt>resulting arc at any moment until the third point is specified.</dt>
-<dd><img alt="image2" src="_images/arc_2.png" />
-<strong>Figure 2 specify control points</strong>
-With a single click, specify the third point and the Feature with an arc geometry will be created</dd>
-<dt>as shown in <em>Figure 3</em>. The resulting geometry will be a LineString approximation of the actual arc.</dt>
-<dd><img alt="image3" src="_images/arc_3.png" />
-<strong>Figure 3 arc created after specifying third point</strong></dd>
-</dl>
+<p>As shown in <em>Figure 1</em>, to start using the <em>Arc Tool</em> you have to first select it from the drop
+down menu in the uDig&#8217;s editting tools Toolbar.</p>
+<div class="figure">
+<img alt="_images/arc_1.png" src="_images/arc_1.png" />
+<p class="caption"><strong>Figure 1 select</strong> <strong>*Arc Tool*</strong></p>
+</div>
+<p>Once the tool is selected, you need to specify three points that defines the arc. For any of the
+three points you can use the <strong>snap</strong> area, if activated, in order to snap to a vertex from another
+Feature.
+<em>Figure 2</em> shows the feedback shown when only two points have been specified. You&#8217;ll see the
+resulting arc at any moment until the third point is specified.</p>
+<div class="figure">
+<img alt="_images/arc_2.png" src="_images/arc_2.png" />
+<p class="caption"><strong>Figure 2 specify control points</strong></p>
+</div>
+<p>With a single click, specify the third point and the Feature with an arc geometry will be created
+as shown in <em>Figure 3</em>. The resulting geometry will be a LineString approximation of the actual arc.</p>
+<div class="figure">
+<img alt="_images/arc_3.png" src="_images/arc_3.png" />
+<p class="caption"><strong>Figure 3 arc created after specifying third point</strong></p>
+</div>
 </div>
 </div>
 

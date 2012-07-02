@@ -71,58 +71,46 @@ previously used source layer.</p>
 <h2>Sample Usage<a class="headerlink" href="#sample-usage" title="Permalink to this headline">¶</a></h2>
 <p>On this example we are going to do a fill operation with the polygon layer edificios.shp and the
 lineString layer carre1.shp and the resultant features will be added to the edificios.shp layer.</p>
-<p><img alt="image0" src="download/thumbnails/8388987/fill-before.png" /></p>
-<blockquote>
-<div><strong>Figure 1. Before operation.</strong></div></blockquote>
-<dl class="docutils">
-<dt>Go to the <em>Spatial Operations</em> View, and select <em>Fill</em> from the <em>Operations list</em> .</dt>
-<dd>The <em>Fill Operation</em>&#8216;s specific input options will show up.</dd>
-</dl>
+<div class="figure">
+<img alt="_images/fill-before.png" src="_images/fill-before.png" />
+<p class="caption"><strong>Figure 1. Before operation.</strong></p>
+</div>
+<p>Go to the <em>Spatial Operations</em> View, and select <em>Fill</em> from the <em>Operations list</em>.
+The <em>Fill Operation</em>&#8216;s specific input options will show up.</p>
 <p>Now is time to indicate the operation&#8217;s inputs, as shown in <em>Figure 2</em>:</p>
 <ul>
-<li><dl class="first docutils">
-<dt><strong>Select the</strong> <strong>*Source*</strong></dt>
-<dd><p class="first last">Select the desired Polygon or MultiPolygon layer to use as border.</p>
-</dd>
-</dl>
+<li><p class="first"><strong>Select the Source</strong>
+Select the desired Polygon or MultiPolygon layer to use as border.</p>
 </li>
-<li><dl class="first docutils">
-<dt><strong>Select the</strong> <strong>*Using*</strong></dt>
-<dd><p class="first last">Select the LineString or MultiLineString layer that will fill the new created polygon.</p>
-</dd>
-</dl>
+<li><p class="first"><strong>Select the Using</strong>
+Select the LineString or MultiLineString layer that will fill the new created polygon.</p>
 </li>
-<li><dl class="first docutils">
-<dt><strong>Select the</strong> <strong>*Result*</strong></dt>
-<dd><p class="first last">At the <em>Result Layer</em> drop down, a tentative Layer name will be proposed for the layer the</p>
-</dd>
-</dl>
-<p>operation will create. You can change the name or select an existing Layer where to store the
+<li><p class="first"><strong>Select the Result</strong>
+At the <em>Result Layer</em> drop down, a tentative Layer name will be proposed for the layer the
+operation will create. You can change the name or select an existing Layer where to store the
 results. This combo will only load existent Polygon or MultiPolygon layer.</p>
+<div class="figure">
+<img alt="_images/fill-ui.png" src="_images/fill-ui.png" />
+<p class="caption"><strong>Figure 2. Define input and target layers.</strong></p>
+</div>
 </li>
-</ul>
-<p><img alt="image1" src="download/thumbnails/8388987/fill-ui.png" /></p>
-<blockquote>
-<div><strong>Figure 2. Define input and target layers.</strong></div></blockquote>
-<ul>
-<li><dl class="first docutils">
-<dt><strong>Perform the operation</strong></dt>
-<dd><p class="first last">Once the input and target layers are defined, press the <em>Perform</em> button at the <a href="#id1"><span class="problematic" id="id2">*</span></a>Spatial</p>
-</dd>
-</dl>
-<p>Operations* View tool bar. The operation will begin processing and its progress will be shown up
+<li><p class="first"><strong>Perform the operation</strong>
+Once the input and target layers are defined, press the <em>Perform</em> button at the <em>Spatial
+Operations</em> View tool bar. The operation will begin processing and its progress will be shown up
 on a progress dialog, as shown in <em>Figure 3</em>. The operation may take a while to complete,
 depending on the amount and complexity of the input geometries.</p>
+<div class="figure">
+<img alt="_images/fill-progress.png" src="_images/fill-progress.png" />
+<p class="caption"><strong>Figure 3. Progress dialog.</strong></p>
+</div>
 </li>
 </ul>
-<p><img alt="image2" src="download/thumbnails/8388987/fill-progress.png" /></p>
-<blockquote>
-<div><strong>Figure 3. Progress dialog.</strong></div></blockquote>
 <p>Shows the newly created Layer (Fill_1) added to the map, with the Features resulting of applying
 the Fill operation between the <em>Source layer</em> and the <em>Second layer</em>.</p>
-<p><img alt="image3" src="download/thumbnails/8388987/fill-after.png" /></p>
-<blockquote>
-<div><strong>Figure 4. Result Layer.</strong></div></blockquote>
+<div class="figure">
+<img alt="_images/fill-after.png" src="_images/fill-after.png" />
+<p class="caption"><strong>Figure 4. Result Layer.</strong></p>
+</div>
 </div>
 </div>
 

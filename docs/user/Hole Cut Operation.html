@@ -72,58 +72,46 @@ previously used source layer.</p>
 <h2>Sample Usage<a class="headerlink" href="#sample-usage" title="Permalink to this headline">¶</a></h2>
 <p>On this example we are going to do a fill operation with the polygon layer edificios.shp and the
 lineString layer carre1.shp.</p>
-<p><img alt="image0" src="download/thumbnails/8388994/hole-before.png" /></p>
-<blockquote>
-<div><strong>Figure 1. Before operation.</strong></div></blockquote>
+<div class="figure">
+<img alt="_images/hole-before.png" src="_images/hole-before.png" />
+<p class="caption"><strong>Figure 1. Before operation.</strong></p>
+</div>
 <dl class="docutils">
 <dt>Go to the <em>Spatial Operations</em> View, and select <em>Hole</em> from the <em>Operations list</em> .</dt>
 <dd>The <em>Hole Operation</em>&#8216;s specific input options will show up.</dd>
 </dl>
 <p>Now it&#8217;s time to indicate the operation&#8217;s inputs, as shown in <em>Figure 2</em>:</p>
-<ul>
-<li><dl class="first docutils">
-<dt><strong>Select the</strong> <strong>*Source*</strong></dt>
-<dd><p class="first last">Select the desired Polygon or MultiPolygon layer to use.</p>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt><strong>Select the</strong> <strong>*Using*</strong></dt>
-<dd><p class="first last">Select the LineString or MultiLineString layer that will make holes in.</p>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt><strong>Select the</strong> <strong>*Result*</strong></dt>
-<dd><p class="first last">At the <em>Result Layer</em> drop down, a tentative Layer name will be proposed for the layer created</p>
-</dd>
-</dl>
-<p>by the operation. You can change the name or select an existing Layer where to store the results.
-This combo will only load existent Polygon or MultiPolygon layer.</p>
-</li>
+<ul class="simple">
+<li><strong>Select the Source</strong>
+Select the desired Polygon or MultiPolygon layer to use.</li>
+<li><strong>Select the Using</strong>
+Select the LineString or MultiLineString layer that will make holes in.</li>
+<li><strong>Select the Result</strong>
+At the <em>Result Layer</em> drop down, a tentative Layer name will be proposed for the layer created
+by the operation. You can change the name or select an existing Layer where to store the results.
+This combo will only load existent Polygon or MultiPolygon layer.</li>
 </ul>
-<p><img alt="image1" src="download/thumbnails/8388994/hole-ui.png" /></p>
-<blockquote>
-<div><strong>Figure 2. Define input and target layers.</strong></div></blockquote>
-<ul>
-<li><dl class="first docutils">
-<dt><strong>Perform the operation</strong></dt>
-<dd><p class="first last">Once the input and target layers are defined, press the <em>Perform</em> button at the <a href="#id1"><span class="problematic" id="id2">*</span></a>Spatial</p>
-</dd>
-</dl>
-<p>Operations* View tool bar. The operation will begin processing and its progress will be shown up
+<div class="figure">
+<img alt="_images/hole-ui.png" src="_images/hole-ui.png" />
+<p class="caption"><strong>Figure 2. Define input and target layers.</strong></p>
+</div>
+<ul class="simple">
+<li><strong>Perform the operation</strong>
+Once the input and target layers are defined, press the <em>Perform</em> button at the <em>Spatial
+Operations</em> View tool bar. The operation will begin processing and its progress will be shown up
 on a progress dialog, as shown in <em>Figure 3</em>. The operation may take a while to complete,
-depending on the amount and complexity of the input geometries.</p>
-</li>
+depending on the amount and complexity of the input geometries.</li>
 </ul>
-<p><img alt="image2" src="download/thumbnails/8388994/hole-progress.png" /></p>
-<blockquote>
-<div><strong>Figure 3. Progress dialog.</strong></div></blockquote>
+<div class="figure">
+<img alt="_images/hole-progress.png" src="_images/hole-progress.png" />
+<p class="caption"><strong>Figure 3. Progress dialog.</strong></p>
+</div>
 <p>Shows the newly created Layer (Hole_1) added to the map, with the Features resulting of applying
 the Hole operation between the <em>Hole layer</em> and the <em>Using layer</em>.</p>
-<p><img alt="image3" src="download/thumbnails/8388994/hole-after.png" /></p>
-<blockquote>
-<div><strong>Figure 4. Result Layer.</strong></div></blockquote>
+<div class="figure">
+<img alt="_images/hole-after.png" src="_images/hole-after.png" />
+<p class="caption"><strong>Figure 4. Result Layer.</strong></p>
+</div>
 </div>
 </div>
 
