@@ -1,0 +1,344 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JFace Actions &mdash; uDig 1.3.2 Developers Guide</title>
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.3.2 Developers Guide" href="index.html" />
+    <link rel="up" title="Working with Eclipse RCP" href="working_with_eclipse_rcp.html" />
+    <link rel="next" title="Jface Field Decorations" href="jface_field_decorations.html" />
+    <link rel="prev" title="ImageRegistry and Images" href="imageregistry_and_images.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="imageregistry_and_images.html">ImageRegistry and Images</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="jface_field_decorations.html">Jface Field Decorations</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="jface-actions">
+<h1>JFace Actions<a class="headerlink" href="#jface-actions" title="Permalink to this headline">¶</a></h1>
+<p>The default wizard provided by eclipse will let you add to the top-level toolbar or menu system
+using the concept of Actions and ActionSets.</p>
+<div class="section" id="action">
+<h2>Action<a class="headerlink" href="#action" title="Permalink to this headline">¶</a></h2>
+<p>You can use action directly - this is an acceptable approach if you are going to use the action
+within your plugin.</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">newAction</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Action</span><span class="o">(</span><span class="s">&quot;New...&quot;</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">registerDatasource</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">};</span>
+<span class="n">newAction</span><span class="o">.</span><span class="na">setImageDescriptor</span><span class="o">(</span><span class="n">getImageDescriptor</span><span class="o">(</span><span class="s">&quot;new.gif&quot;</span><span class="o">));</span>
+</pre></div>
+</div>
+<p>Example use with a toolbar:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">IToolBarManager</span> <span class="n">mgr</span> <span class="o">=</span> <span class="n">getViewSite</span><span class="o">().</span><span class="na">getActionBars</span><span class="o">().</span><span class="na">getToolBarManager</span><span class="o">();</span>
+<span class="n">mgr</span><span class="o">.</span><span class="na">add</span><span class="o">(</span> <span class="n">newAction</span> <span class="o">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="actionset">
+<h2>ActionSet<a class="headerlink" href="#actionset" title="Permalink to this headline">¶</a></h2>
+<p>You can contributing actions via action sets. An action set is a mechanism that allows a plug-in to
+contribute menus, menu items, and toolbar items to the main menu bar and toolbar of the Workbench
+window. It is important to understand what action sets are meant to be used for. An action set
+should contribute common actions which are not specific to any particular view or editor. The class defined
+in the plugin ActionSets extension point must implement <strong>org.eclipse.ui.IWorkbenchWindowActionDelegate</strong>
+interface if the pulldown attribute is false, or <strong>org.eclipse.ui.IWorkbenchWindowPulldownDelegate</strong>
+interface if the pulldown attribute is true. This delegate class can control the enabled/disabled state
+of the action when the selection changes, but only once the plug-in is loaded. Until then, the
+enabled/disabled state of the action is controlled by other XML attributes like enablesFor and selection.</p>
+</div>
+<div class="section" id="workbench-and-actions">
+<h2>Workbench and Actions<a class="headerlink" href="#workbench-and-actions" title="Permalink to this headline">¶</a></h2>
+<p>Uses IWorkbenchWindowActionDelegate ...</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">EditStyleAction</span> <span class="kd">implements</span> <span class="n">IWorkbenchWindowActionDelegate</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kd">final</span> <span class="kd">static</span> <span class="n">String</span> <span class="n">ID</span> <span class="o">=</span> <span class="s">&quot;net.refractions.udig.style.openStyleEditorAction&quot;</span><span class="o">;</span> <span class="c1">//$NON-NLS-1$</span>
+
+    <span class="kd">private</span> <span class="n">Layer</span> <span class="n">selectedLayer</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">dispose</span><span class="o">()</span> <span class="o">{</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">(</span> <span class="n">IWorkbenchWindow</span> <span class="n">window</span> <span class="o">)</span> <span class="o">{</span>
+
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span> <span class="n">IAction</span> <span class="n">action</span> <span class="o">)</span> <span class="o">{</span>
+        <span class="n">Display</span><span class="o">.</span><span class="na">getDefault</span><span class="o">().</span><span class="na">asyncExec</span><span class="o">(</span><span class="k">new</span> <span class="n">Runnable</span><span class="o">(){</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+                <span class="n">StyleView</span> <span class="n">styleView</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+                <span class="k">try</span> <span class="o">{</span>
+                    <span class="n">IWorkbenchPage</span> <span class="n">page</span>  <span class="o">=</span> <span class="n">PlatformUI</span><span class="o">.</span><span class="na">getWorkbench</span><span class="o">().</span><span class="na">getActiveWorkbenchWindow</span><span class="o">().</span><span class="na">getActivePage</span><span class="o">();</span>
+                    <span class="n">page</span><span class="o">.</span><span class="na">showView</span><span class="o">(</span> <span class="n">StyleView</span><span class="o">.</span><span class="na">VIEW_ID</span> <span class="o">);</span>
+
+                    <span class="n">styleView</span> <span class="o">=</span> <span class="o">(</span><span class="n">StyleView</span><span class="o">)</span>
+                    <span class="k">if</span> <span class="o">(</span><span class="n">selectedLayer</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">);</span>
+                        <span class="n">styleView</span><span class="o">.</span><span class="na">setSelectedLayer</span><span class="o">(</span><span class="n">selectedLayer</span><span class="o">);</span>
+                <span class="o">}</span>
+                <span class="k">catch</span> <span class="o">(</span><span class="n">PartInitException</span> <span class="n">e2</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">e2</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">});</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">selectionChanged</span><span class="o">(</span> <span class="n">IAction</span> <span class="n">action</span><span class="o">,</span> <span class="n">ISelection</span> <span class="n">selection</span> <span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">selection</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">()</span> <span class="o">||</span> <span class="o">!(</span><span class="n">selection</span> <span class="k">instanceof</span> <span class="n">IStructuredSelection</span><span class="o">))</span>
+            <span class="k">return</span><span class="o">;</span>
+
+        <span class="n">StructuredSelection</span> <span class="n">sselection</span> <span class="o">=</span> <span class="o">(</span><span class="n">StructuredSelection</span><span class="o">)</span><span class="n">selection</span><span class="o">;</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">sselection</span><span class="o">.</span><span class="na">getFirstElement</span><span class="o">()</span> <span class="k">instanceof</span> <span class="n">Layer</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">selectedLayer</span> <span class="o">=</span> <span class="o">(</span><span class="n">Layer</span><span class="o">)</span><span class="n">sselection</span><span class="o">.</span><span class="na">getFirstElement</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="view-and-actions">
+<h2>View and Actions<a class="headerlink" href="#view-and-actions" title="Permalink to this headline">¶</a></h2>
+<p>Uses IViewActionDelegate ...
+The interface IViewActionDelegate allows the action delegate, during initialization, to target
+itself with the view instance it should work with.
+The action delegate must implement the method setActiveEditor(IAction action, IEditorPart
+targetEditor).
+Action enablement is declared in XML because plug-ins are loaded lazily. Until an action is
+actually invoked by the user, the plug-in is not loaded and the Workbench uses the enablement logic
+declared in XML. Once a plug-in is loaded, the delegate class is notified of selection changes and
+can update the enabled/disabled state of the action. Refer to the
+org.eclipse.ui.IActionDelegate.selectionChanged(IAction action, ISelection selection) method
+documentation for more details.</p>
+</div>
+<div class="section" id="view-context-menu">
+<h2>View Context Menu<a class="headerlink" href="#view-context-menu" title="Permalink to this headline">¶</a></h2>
+<p>The class defined for the action must implement org.eclipse.ui.IViewActionDelegate interface if
+contributing to a view&#8217;s context menu.</p>
+<p>EnablesFor attribute control the enabled/disabled state of the action based on the current
+selection. Its value is the selection count condition which must be met to enable the action. If not
+the action is disabled. If attribute is skipped default is enable for any number of items selected.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Formats</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>!</td>
+<td>0 items selected</td>
+</tr>
+<tr><td>?</td>
+<td>0 or 1 items selected</td>
+</tr>
+<tr><td>+</td>
+<td>1 or more items selected</td>
+</tr>
+<tr><td>multiple, 2+</td>
+<td>2 or more items selected</td>
+</tr>
+<tr><td>n</td>
+<td>a precise number of items selected (e.g. 4)</td>
+</tr>
+<tr><td>-</td>
+<td>any number of items selected</td>
+</tr>
+</tbody>
+</table>
+<p>Here is an example used in udig with the zoom to layer action in the Layers View.
+Create an object contribution to ILayer class and add the zoom to layer action to your plugin.</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;objectContribution</span>
+          <span class="na">adaptable=</span><span class="s">&quot;false&quot;</span>
+          <span class="na">objectClass=</span><span class="s">&quot;net.refractions.udig.project.ILayer&quot;</span>
+          <span class="na">id=</span><span class="s">&quot;net.refractions.udig.project.ui.LayerContribution&quot;</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;action</span>
+        <span class="na">label=</span><span class="s">&quot;%zoomToLayer.label&quot;</span>
+        <span class="na">icon=</span><span class="s">&quot;icons/elcl16/zoom_layer_co.gif&quot;</span>
+        <span class="na">tooltip=</span><span class="s">&quot;%zoomToLayer.tooltip&quot;</span>
+        <span class="na">class=</span><span class="s">&quot;net.refractions.udig.project.ui.internal.actions.ZoomToLayer&quot;</span>
+        <span class="na">style=</span><span class="s">&quot;push&quot;</span>
+        <span class="na">id=</span><span class="s">&quot;net.refractions.udig.project.ui.zoomTo&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/objectContribution&gt;</span>
+</pre></div>
+</div>
+<p>Then create the ZoomToLayer class that implements IViewActionDelegate</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ZoomToLayer</span> <span class="kd">extends</span> <span class="n">ActionDelegate</span> <span class="kd">implements</span> <span class="n">IViewActionDelegate</span> <span class="o">{</span>
+
+    <span class="n">IStructuredSelection</span> <span class="n">selection</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">selectionChanged</span><span class="o">(</span> <span class="n">IAction</span> <span class="n">action</span><span class="o">,</span> <span class="n">ISelection</span> <span class="n">selection</span> <span class="o">)</span> <span class="o">{</span>
+       <span class="k">try</span><span class="o">{</span>
+          <span class="k">this</span><span class="o">.</span><span class="na">selection</span><span class="o">=(</span><span class="n">IStructuredSelection</span><span class="o">)</span> <span class="n">selection</span><span class="o">;</span>
+       <span class="o">}</span><span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+          <span class="c1">//do nothing</span>
+       <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">runWithEvent</span><span class="o">(</span> <span class="n">IAction</span> <span class="n">action</span><span class="o">,</span> <span class="n">Event</span> <span class="n">event</span> <span class="o">)</span> <span class="o">{</span>
+       <span class="k">try</span> <span class="o">{</span>
+          <span class="n">PlatformUI</span><span class="o">.</span><span class="na">getWorkbench</span><span class="o">().</span><span class="na">getActiveWorkbenchWindow</span><span class="o">().</span><span class="na">run</span><span class="o">(</span><span class="kc">false</span><span class="o">,</span> <span class="kc">true</span><span class="o">,</span>
+                 <span class="k">new</span> <span class="nf">IRunnableWithProgress</span><span class="o">()</span> <span class="o">{</span>
+
+                    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="n">IProgressMonitor</span> <span class="n">monitor</span><span class="o">)</span> <span class="o">{</span>
+                       <span class="n">Envelope</span> <span class="n">bounds</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Envelope</span><span class="o">();</span>
+                       <span class="n">bounds</span><span class="o">.</span><span class="na">setToNull</span><span class="o">();</span>
+                       <span class="n">Map</span> <span class="n">map</span><span class="o">=((</span><span class="n">Layer</span><span class="o">)</span><span class="n">selection</span><span class="o">.</span><span class="na">getFirstElement</span><span class="o">()).</span><span class="na">getContextModel</span><span class="o">().</span><span class="na">getMap</span><span class="o">();</span>
+                       <span class="k">for</span><span class="o">(</span> <span class="n">Iterator</span> <span class="n">iter</span> <span class="o">=</span> <span class="o">(</span><span class="n">selection</span><span class="o">).</span><span class="na">iterator</span><span class="o">();</span> <span class="n">iter</span><span class="o">.</span><span class="na">hasNext</span><span class="o">();</span> <span class="o">)</span> <span class="o">{</span>
+                          <span class="n">Layer</span> <span class="n">layer</span> <span class="o">=</span> <span class="o">(</span><span class="n">Layer</span><span class="o">)</span> <span class="n">iter</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+                          <span class="k">if</span><span class="o">(</span> <span class="n">layer</span><span class="o">.</span><span class="na">getContextModel</span><span class="o">().</span><span class="na">getMap</span><span class="o">()!=</span><span class="n">map</span> <span class="o">)</span>
+                             <span class="k">return</span><span class="o">;</span>
+
+                          <span class="n">Envelope</span> <span class="n">bbox</span><span class="o">=</span><span class="kc">null</span><span class="o">;</span>
+                          <span class="k">try</span> <span class="o">{</span>
+                             <span class="n">bbox</span> <span class="o">=</span> <span class="n">layer</span><span class="o">.</span><span class="na">getBounds</span><span class="o">(</span><span class="n">monitor</span><span class="o">,</span> <span class="n">map</span><span class="o">.</span><span class="na">getViewportModel</span><span class="o">().</span><span class="na">getCRS</span><span class="o">());</span>
+                          <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                          <span class="o">}</span>
+
+                          <span class="k">if</span><span class="o">(</span> <span class="n">bbox</span><span class="o">==</span><span class="kc">null</span><span class="o">)</span>
+                             <span class="k">continue</span><span class="o">;</span>
+
+                          <span class="k">if</span><span class="o">(</span> <span class="n">bounds</span><span class="o">.</span><span class="na">isNull</span><span class="o">()</span> <span class="o">)</span>
+                             <span class="n">bounds</span><span class="o">.</span><span class="na">init</span><span class="o">(</span><span class="n">bbox</span><span class="o">);</span>
+                          <span class="k">else</span>
+                             <span class="n">bounds</span><span class="o">.</span><span class="na">expandToInclude</span><span class="o">(</span> <span class="n">bbox</span> <span class="o">);</span>
+
+                          <span class="k">if</span><span class="o">(</span> <span class="o">!</span><span class="n">bounds</span><span class="o">.</span><span class="na">isNull</span><span class="o">()</span> <span class="o">)</span> <span class="o">{</span>
+                             <span class="n">map</span><span class="o">.</span><span class="na">sendCommandASync</span><span class="o">(</span>
+                                 <span class="n">NavigationCommandFactory</span><span class="o">.</span><span class="na">getInstance</span><span class="o">().</span><span class="na">createSetViewportBBoxCommand</span><span class="o">(</span><span class="n">bounds</span><span class="o">));</span>
+                          <span class="o">}</span>
+                       <span class="o">}</span>
+                   <span class="o">}</span>
+               <span class="o">});</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">CorePlugin</span><span class="o">.</span><span class="na">log</span><span class="o">(</span><span class="n">ProjectUIPlugin</span><span class="o">.</span><span class="na">getDefault</span><span class="o">(),</span> <span class="n">e</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="editor-and-actions">
+<h2>Editor and Actions<a class="headerlink" href="#editor-and-actions" title="Permalink to this headline">¶</a></h2>
+<p>Uses IEditorActionDelegate ...
+must implement org.eclipse.ui.IEditorActionDelegate interface if contributing to an editor&#8217;s
+context menu.
+The interface IEditorActionDelegate allows the action delegate to retarget itself to the active
+editor.
+The action delegate must implement the method setActiveEditor(IAction action, IEditorPart
+targetEditor).</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">CommitAction</span> <span class="kd">implements</span> <span class="n">IEditorActionDelegate</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="n">MapEditor</span> <span class="n">editor</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setActiveEditor</span><span class="o">(</span> <span class="n">IAction</span> <span class="n">action</span><span class="o">,</span> <span class="n">IEditorPart</span> <span class="n">targetEditor</span> <span class="o">)</span> <span class="o">{</span>
+        <span class="n">editor</span><span class="o">=(</span><span class="n">MapEditor</span><span class="o">)</span> <span class="n">targetEditor</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span> <span class="n">IAction</span> <span class="n">action</span> <span class="o">)</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="n">editor</span><span class="o">.</span><span class="na">getMap</span><span class="o">().</span><span class="na">getEditManagerInternal</span><span class="o">().</span><span class="na">commitTransaction</span><span class="o">();</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="c1">// Shouldn&#39;t happen but...</span>
+            <span class="n">ProjectUIPlugin</span><span class="o">.</span><span class="na">getDefault</span><span class="o">().</span><span class="na">getLog</span><span class="o">().</span><span class="na">log</span><span class="o">(</span><span class="k">new</span> <span class="n">Status</span><span class="o">(</span><span class="n">IStatus</span><span class="o">.</span><span class="na">ERROR</span><span class="o">,</span>
+                    <span class="s">&quot;net.refractions.udig.project&quot;</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="s">&quot;Error commiting transaction&quot;</span><span class="o">,</span><span class="n">e</span><span class="o">));</span> <span class="c1">//$NON-NLS-1$ //$NON-NLS-2$</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">selectionChanged</span><span class="o">(</span> <span class="n">IAction</span> <span class="n">action</span><span class="o">,</span> <span class="n">ISelection</span> <span class="n">selection</span> <span class="o">)</span> <span class="o">{</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="object-and-actions">
+<h2>Object and Actions<a class="headerlink" href="#object-and-actions" title="Permalink to this headline">¶</a></h2>
+<p>Uses IObjectActionDelegate ...
+For object contributions, the class attribute of the action element is the name of a Java class
+that implements the org.eclipse.ui.IObjectActionDelegate interface. The interface
+IObjectActionDelegate allows the action delegate to retarget itself to the active part.
+The action delegate must implement the method</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">setActivePart</span><span class="o">(</span><span class="n">IAction</span> <span class="n">action</span><span class="o">,</span> <span class="n">IWorkbenchPart</span> <span class="n">targetPart</span><span class="o">)</span>
+</pre></div>
+</div>
+<p>Q: Where are the Actions?</p>
+<p>Proxy Pattern and Actions: In the quest for lazy loading of plug-ins the RCP makes use of the proxy
+pattern to delay the loading of Actions. For most instances a particular extention point will create
+a proxy based on configuration information; and it will be this proxy that turns around and
+creates/calls your class.</p>
+</div>
+<div class="section" id="related-reference">
+<h2>Related reference<a class="headerlink" href="#related-reference" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="http://www.eclipse.org/articles/viewArticle/ViewArticle2.html">Creating an Eclipse View</a></li>
+<li><a class="reference external" href="http://www.eclipse.org/articles/Article-action-contribution/Contributing%20Actions%20to%20the%20Eclipse%20Workbench.html">Contributing Actions to the Eclipse workbench</a></li>
+</ul>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="imageregistry_and_images.html">ImageRegistry and Images</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="jface_field_decorations.html">Jface Field Decorations</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2012, Refractions Research.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

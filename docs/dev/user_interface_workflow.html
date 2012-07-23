@@ -1,0 +1,180 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>User Interface Workflow &mdash; uDig 1.3.2 Developers Guide</title>
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.3.2 Developers Guide" href="index.html" />
+    <link rel="up" title="Reference" href="reference.html" />
+    <link rel="prev" title="Icons" href="icons.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="icons.html">Icons</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="user-interface-workflow">
+<h1>User Interface Workflow<a class="headerlink" href="#user-interface-workflow" title="Permalink to this headline">¶</a></h1>
+<p>Eclips RCP gives us two user interface workflows (for managing the workbench and managing editors in
+the workbench). This covers a lot of ground (from navigation and bookmarks to an undo system).</p>
+<p>In adition uDig contributes several workflows for content we manage. Where possible we have
+maintained compatibility with the Eclipse User Interface Guidelines.</p>
+<div class="section" id="workbench-workflow">
+<h2>Workbench Workflow<a class="headerlink" href="#workbench-workflow" title="Permalink to this headline">¶</a></h2>
+<p>The main workbench window follows an open / exit workflow.</p>
+<p>You can create multiple workbench windows, closing the last window will exit the application.</p>
+<p>When you exit the application you will be prompted to &#8220;save&#8221;:</p>
+<ul class="simple">
+<li>any modified maps</li>
+<li>any temporary results</li>
+</ul>
+</div>
+<div class="section" id="map-workflow">
+<h2>Map Workflow<a class="headerlink" href="#map-workflow" title="Permalink to this headline">¶</a></h2>
+<p>As an actual RCP &#8220;Editor&#8221; our Maps follow a open / save / close / close all work flow.</p>
+<p>We make use of navigation tools to control what is visible in the Map. Navigation forward and back
+buttons allow the user to sift through previous locations.</p>
+<p>Locations can be bookmarked for future reference.</p>
+<div class="section" id="close">
+<h3>Close<a class="headerlink" href="#close" title="Permalink to this headline">¶</a></h3>
+<p>Close will prompt the user for action if there is any:</p>
+<ul class="simple">
+<li>unsaved changes to the Map</li>
+<li>transactions with external services</li>
+</ul>
+</div>
+<div class="section" id="layers">
+<h3>Layers<a class="headerlink" href="#layers" title="Permalink to this headline">¶</a></h3>
+<p>Maps are defined as a series of layers:</p>
+<ul class="simple">
+<li>New Layer - looks wrong?</li>
+<li>Add Layer</li>
+<li>Delete Layer</li>
+</ul>
+<p>A Layer is defined as a reference to a GeoResource and a Style. Any change to Map structure
+(including Layer style) is tracked as an edit and can be managed with the Undo / Redo history.</p>
+</div>
+<div class="section" id="save-and-saveall">
+<h3>Save (and SaveAll)<a class="headerlink" href="#save-and-saveall" title="Permalink to this headline">¶</a></h3>
+<p>Save is used to store the current state of the Map (ie layer information a and viewport).</p>
+<p>Since we are a client application the Map also be involved in:</p>
+<ul class="simple">
+<li>transactions with external services</li>
+<li>creation of temporary (ie scratch) content</li>
+</ul>
+</div>
+</div>
+<div class="section" id="service-workflow">
+<h2>Service Workflow<a class="headerlink" href="#service-workflow" title="Permalink to this headline">¶</a></h2>
+<p>Services are used to access geospatial content; while managing services is a perfectly reasonable
+activity it is not the point of a GIS application.</p>
+<p>You can <strong>Import</strong> additional services into the uDig application, and also <strong>Remove</strong> services that
+are not in use.</p>
+<div class="section" id="export">
+<h3>Export<a class="headerlink" href="#export" title="Permalink to this headline">¶</a></h3>
+<p>You can use export to take information known to uDig and export it to an existing Service. In the
+case of file formats you can create a new File to hold the content.</p>
+</div>
+<div class="section" id="scratch-workflow">
+<h3>Scratch Workflow<a class="headerlink" href="#scratch-workflow" title="Permalink to this headline">¶</a></h3>
+<p>The concept of a &#8220;Scratch pad&#8221; is used to handle temporary results; there are two ways in which a
+temporary result would be created:</p>
+<ul class="simple">
+<li>explicitly using Layer &gt; Create</li>
+<li>explicitly using a Editing Tool</li>
+</ul>
+<p>A scratch layer lasts for the duration of the uDig application; the user is prompted to to save a
+scratch layer:</p>
+<ul class="simple">
+<li>when they close a map that displays the scratch layer</li>
+<li>when they exit the application</li>
+</ul>
+<p>When saved (similar to export) a scratch layer will be replaced with the newly created georesoruce.</p>
+<p>The Scratchpad service is avaialble to any plugin developer wishing to work with temporary results.</p>
+</div>
+</div>
+<div class="section" id="edit-workflow">
+<h2>Edit Workflow<a class="headerlink" href="#edit-workflow" title="Permalink to this headline">¶</a></h2>
+<p>Edit tools and various feature editors allow for interaction with external services. External
+services are handled within a transaction using a commit / rollback workflow.</p>
+<p>Any number of changes may be made (using any view or edit tool), the changes are not sent to the
+server until commit is called.</p>
+</div>
+<div class="section" id="task-workflow">
+<h2>Task Workflow<a class="headerlink" href="#task-workflow" title="Permalink to this headline">¶</a></h2>
+<p>The Task workflow is a traditional user focused workflow; the list of tasks represents work that
+needs to be done; each task can carry with it enough context information to help the user address
+the task.</p>
+<p>Here is an example of its use with the validation operation:</p>
+<ol class="arabic simple">
+<li>Validation Operation generates a series of Issues</li>
+<li>User preses &#8220;Fix&#8221; on an Issue</li>
+<li>The feature in question is brought up on screen</li>
+</ol>
+<p>In a workgroup environment the Task list should be stored on a shared database; or intergrated with
+an existing workflow system. The Task workflow is available to any uDig plugin developer.</p>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="icons.html">Icons</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2012, Refractions Research.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

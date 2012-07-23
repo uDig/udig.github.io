@@ -1,0 +1,133 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Working with GIS Application &mdash; uDig 1.3.2 Developers Guide</title>
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.3.2 Developers Guide" href="index.html" />
+    <link rel="next" title="GIS Application" href="gis_application.html" />
+    <link rel="prev" title="Workbench Services" href="workbench_services.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="workbench_services.html">Workbench Services</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="gis_application.html">GIS Application</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="working-with-gis-application">
+<h1>Working with GIS Application<a class="headerlink" href="#working-with-gis-application" title="Permalink to this headline">¶</a></h1>
+<p>Using Maps, Layers and pages to visualize your spatial data</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="gis_application.html">GIS Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="project_map_and_layer.html">Project Map and Layer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mapinterceptor_and_layerinterceptor.html">MapInterceptor and LayerInterceptor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commands.html">Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="simple_commands.html">Simple Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="navcommand.html">Navcommand</a></li>
+<li class="toctree-l1"><a class="reference internal" href="draw_command.html">Draw Command</a></li>
+<li class="toctree-l1"><a class="reference internal" href="edit_commands.html">Edit Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="composite_commands.html">Composite Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="style.html">Style</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html">Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html#tool-extension-point-and-api">Tool Extension Point and API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html#background-tool-extension">Background Tool Extension</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html#action-tool-extension">Action Tool Extension</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html#modal-tool-extension">Modal Tool Extension</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html#preference-page-and-tool-options">Preference Page and Tool Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html#tool-categories-extension">Tool Categories Extension</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html#selection-providers">Selection Providers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html#actionset-convention-for-tool-category">ActionSet convention for Tool Category</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html#tool-cursor-extension">Tool Cursor Extension</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html#toolmanager">ToolManager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html#toolcontext">ToolContext</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html#tool-implementation">Tool Implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html#tool-lifecycle">Tool Lifecycle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html#tool-activation">Tool Activation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html#tool-enablement">Tool Enablement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html#tool-lifecycle-listeners">Tool Lifecycle Listeners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html#tool-cursor-implementation">Tool Cursor Implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html#using-default-system-cursors">Using Default System Cursors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html#finding-a-cursor-at-runtime">Finding a Cursor at Runtime</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html#compatibility">Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="edit_tools.html">Edit Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="edit_tools.html#edit-tool-framework">Edit Tool Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="edit_tools.html#tool-lifecycle">Tool Lifecycle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="edit_tools.html#tool-functionality">Tool Functionality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="edit_tools.html#event-handling">Event Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="edit_tools.html#archived-edit-tool-docs">Archived Edit Tool Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="operation_examples.html">Operation Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="renderers.html">Renderers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="render_creation.html">Render Creation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interceptors.html">Interceptors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adding_new_format.html">Adding New Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="map_decorator.html">Map Decorator</a></li>
+</ul>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="workbench_services.html">Workbench Services</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="gis_application.html">GIS Application</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2012, Refractions Research.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

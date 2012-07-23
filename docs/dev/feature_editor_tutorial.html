@@ -1,0 +1,206 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Feature Editor Tutorial &mdash; uDig 1.3.2 Developers Guide</title>
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.3.2 Developers Guide" href="index.html" />
+    <link rel="up" title="GIS Application Tutorials" href="gis_application_tutorials.html" />
+    <link rel="next" title="Disk to Screen Tutorials" href="disk_to_screen_tutorials.html" />
+    <link rel="prev" title="Map Decorator Tutorial" href="map_decorator_tutorial.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="map_decorator_tutorial.html">Map Decorator Tutorial</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="disk_to_screen_tutorials.html">Disk to Screen Tutorials</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="feature-editor-tutorial">
+<h1>Feature Editor Tutorial<a class="headerlink" href="#feature-editor-tutorial" title="Permalink to this headline">¶</a></h1>
+<p>Description of tutorial focused on goal.</p>
+<div class="figure align-center">
+<img alt="" src="_images/FeatureEditTutorial.png" />
+</div>
+<p>This workbook is part of our commercial training materials.</p>
+<ul class="simple">
+<li>See the main <a class="reference external" href="http://udig.refractions.net/users/">uDig website</a> for details on training and
+support</li>
+<li>Commercial Training materials are available to Academic students on request</li>
+</ul>
+<p>Source code:</p>
+<ul class="simple">
+<li>Available in your uDig SDK (import the <a class="reference internal" href="code_examples.html"><em>source code</em></a> from the plugins
+view)</li>
+<li>plugin:
+<a class="reference external" href="https://github.com/uDig/udig-platform/tree/master/tutorials/net.refractions.udig.tutorials.featureeditor">net.refractions.udig.tutorials.featureeditor</a>
+(github)</li>
+</ul>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>When creating your own application, a common challenge is making a specific user interface for
+editing your data. Out of the box uDig provides several generic feature editors (the Table view and
+the Default Feature editor).</p>
+<p>In this work book we will make our own Feature Editor. Our editor will only function on the
+countries.shp file provided as part of the sample data set.</p>
+<p>Eclipse RCP concepts covered in this workbook:</p>
+<ul class="simple">
+<li>Creating a user interface using SWT widgets</li>
+<li>Implementing a View</li>
+<li>Implementing a Dialog</li>
+</ul>
+<p>One thing to pay attention to is the use of Commands. Commands are created to interact with the uDig
+application from a user interface. Commands dispatched to the GISPlatform are executed with write
+access to the data model (of Maps, Layers and blackboards).</p>
+<p>The Feature Editor we construct in this tutorial will issue several edit commands modifying a
+feature that has been loaded onto the &#8220;Edit Blackboard&#8221; - this is the same feature being used by the
+edit tools.</p>
+<div class="figure align-center">
+<img alt="" src="_images/FeatureEditor.jpg" />
+</div>
+</div>
+<div class="section" id="what-to-do-next">
+<h2>What to Do Next<a class="headerlink" href="#what-to-do-next" title="Permalink to this headline">¶</a></h2>
+<p>Okay, I am sure you can think of lots of things to try:</p>
+<div class="section" id="eclipse-windowbuilder">
+<h3>Eclipse WindowBuilder<a class="headerlink" href="#eclipse-windowbuilder" title="Permalink to this headline">¶</a></h3>
+<p>Eclipse now provides an out of the box WindowBuilder; can you quickly draw up an alternate form of
+this FeatureEditor?</p>
+</div>
+<div class="section" id="miglayout">
+<h3>MIGLayout<a class="headerlink" href="#miglayout" title="Permalink to this headline">¶</a></h3>
+<p>The MIG Layout manager is a very nice trade-off between readability and risk of run time errors. For
+more information on the layout manager visit: <a class="reference external" href="http://www.miglayout.com/">http://www.miglayout.com/</a></p>
+<p>In particular the website documentation to get you started and a couple of JavaWebStart demo
+applications.</p>
+</div>
+<div class="section" id="formlayout">
+<h3>FormLayout<a class="headerlink" href="#formlayout" title="Permalink to this headline">¶</a></h3>
+<p>Can you redo the layout of this view using the Eclipse FormLayout? This layout manager makes the
+opposite trade off - you have real Java data structures to fill in for your layout data.</p>
+<p>Here is a small example to get you started.</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">parent</span><span class="o">.</span><span class="na">setLayout</span><span class="o">(</span><span class="k">new</span> <span class="n">GridLayout</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="kc">false</span><span class="o">));</span>
+    <span class="c1">// SWT Widgets</span>
+ <span class="n">Label</span> <span class="n">label</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Label</span><span class="o">(</span><span class="n">parent</span><span class="o">,</span> <span class="n">SWT</span><span class="o">.</span><span class="na">SHADOW_IN</span><span class="o">);</span>
+    <span class="n">label</span><span class="o">.</span><span class="na">setLayoutData</span><span class="o">(</span><span class="k">new</span> <span class="n">GridData</span><span class="o">(</span><span class="n">SWT</span><span class="o">.</span><span class="na">NONE</span><span class="o">,</span> <span class="n">SWT</span><span class="o">.</span><span class="na">FILL</span><span class="o">));</span>
+    <span class="n">label</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="s">&quot;Country:&quot;</span><span class="o">);</span>
+<span class="n">MiGLayout</span> <span class="n">has</span> <span class="n">now</span> <span class="n">added</span> <span class="n">the</span> <span class="n">use</span> <span class="n">of</span> <span class="n">java</span> <span class="n">beans</span> <span class="n">as</span> <span class="n">a</span> <span class="n">type</span> <span class="n">safe</span> <span class="n">options</span><span class="o">.</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Text</span><span class="o">(</span><span class="n">parent</span><span class="o">,</span> <span class="n">SWT</span><span class="o">.</span><span class="na">SHADOW_IN</span> <span class="o">|</span> <span class="n">SWT</span><span class="o">.</span><span class="na">BORDER</span><span class="o">);</span>
+        <span class="n">CC</span> <span class="n">cc</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CC</span><span class="o">();</span>
+        <span class="n">cc</span><span class="o">.</span><span class="na">spanX</span><span class="o">(</span><span class="mi">3</span><span class="o">);</span>
+        <span class="n">cc</span><span class="o">.</span><span class="na">growX</span><span class="o">();</span>
+        <span class="n">cc</span><span class="o">.</span><span class="na">wrap</span><span class="o">();</span>
+        <span class="n">name</span><span class="o">.</span><span class="na">setLayoutData</span><span class="o">(</span> <span class="n">cc</span> <span class="o">);</span>
+        <span class="n">name</span><span class="o">.</span><span class="na">addKeyListener</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+</pre></div>
+</div>
+<p>You can use this technique to make custom forms for your own data using the full facilities of SWT
+and Jface (say stars for restaurant reviews).</p>
+</div>
+<div class="section" id="new-to-swt">
+<h3>New to SWT<a class="headerlink" href="#new-to-swt" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>If this is your first time using SWT try experimenting with the different Layouts:</dt>
+<dd>GridLayout, TableLayout, and FormLayout.</dd>
+</dl>
+</div>
+<div class="section" id="view-map-summary">
+<h3>View Map Summary<a class="headerlink" href="#view-map-summary" title="Permalink to this headline">¶</a></h3>
+<p>Advanced: You can make many Views - try making one that provides a summary of the Map. You should be
+able to list the number of layers, and listen to events to notice when layers are added and removed.</p>
+<p>(Hint: Look at EMF Notifier for very low level events beyond what the listeners provide)</p>
+</div>
+</div>
+<div class="section" id="tips-tricks-and-suggestions">
+<h2>Tips, Tricks and Suggestions<a class="headerlink" href="#tips-tricks-and-suggestions" title="Permalink to this headline">¶</a></h2>
+<p>The following tips have been provided by the udig-devel list; please stop by and introduce yourself.</p>
+<div class="section" id="is-there-a-form-builder">
+<h3>Is there a form builder?<a class="headerlink" href="#is-there-a-form-builder" title="Permalink to this headline">¶</a></h3>
+<p>Eclipse includes WindowBuilder which you can use to visually layout your form.</p>
+<ul class="simple">
+<li><a class="reference external" href="http://www.eclipse.org/windowbuilder/">http://www.eclipse.org/windowbuilder/</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="commercial-training-materials">
+<h2>Commercial Training Materials<a class="headerlink" href="#commercial-training-materials" title="Permalink to this headline">¶</a></h2>
+<p>Please contact any of the organisations listed on the main <a class="reference external" href="http://udig.refractions.net/users/">uDig support
+page</a> for details on uDig training.</p>
+<p>The workbooks and slides for the training course are available here:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://svn.refractions.net/udig_training/trunk">http://svn.refractions.net/udig_training/trunk</a></li>
+</ul>
+<p>This is a private svn repository that is open to those who have taken the training course.</p>
+<div class="section" id="academic-access">
+<h3>Academic Access<a class="headerlink" href="#academic-access" title="Permalink to this headline">¶</a></h3>
+<p>The course materials can be made available to those working at academic institutions - we ask for an
+email from your Professor.</p>
+<p>Please ask your professor to email <a class="reference external" href="mailto:admin&#37;&#52;&#48;refractions&#46;net">admin<span>&#64;</span>refractions<span>&#46;</span>net</a> with the request.</p>
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="map_decorator_tutorial.html">Map Decorator Tutorial</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="disk_to_screen_tutorials.html">Disk to Screen Tutorials</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2012, Refractions Research.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

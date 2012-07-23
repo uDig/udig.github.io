@@ -1,0 +1,204 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Map Decorator &mdash; uDig 1.3.2 Developers Guide</title>
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.3.2 Developers Guide" href="index.html" />
+    <link rel="up" title="Working with GIS Application" href="working_with_gis_application.html" />
+    <link rel="next" title="FAQ" href="faq.html" />
+    <link rel="prev" title="Adding New Format" href="adding_new_format.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="adding_new_format.html">Adding New Format</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="faq.html">FAQ</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="map-decorator">
+<h1>Map Decorator<a class="headerlink" href="#map-decorator" title="Permalink to this headline">¶</a></h1>
+<p>Map decorations are implemented as <strong>MapGraphic</strong> classes that draw onto the map without the need to
+access data. Examples are the scale bar or legend where what is drawn is completely dictated by
+current Map and ViewportModel.</p>
+<p>References:</p>
+<ul class="simple">
+<li><a class="reference internal" href="map_decorator_tutorial.html"><em>Map Decorator Tutorial</em></a></li>
+</ul>
+<div class="section" id="finding-and-using-a-map-decorator">
+<h2>Finding and Using a Map Decorator<a class="headerlink" href="#finding-and-using-a-map-decorator" title="Permalink to this headline">¶</a></h2>
+<p>All the implementations of MapGraphic are gathered into a single IService; with a IGeoResource
+representing each implementation.</p>
+<p>As such you can look them up using catalog; we have placed the identifier as a static constant -
+however it is best to use a string as that way you do not need to depend on the specific
+implementation used.</p>
+<p>To use <strong>GridMapGraphic</strong> we can look up its definition:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;mapGraphic</span>
+            <span class="na">class=</span><span class="s">&quot;net.refractions.udig.mapgraphic.grid.GridMapGraphic&quot;</span>
+            <span class="na">icon=</span><span class="s">&quot;icons/obj16/grid_obj.gif&quot;</span>
+            <span class="na">id=</span><span class="s">&quot;grid&quot;</span>
+            <span class="na">name=</span><span class="s">&quot;%mapgraphic.grid.name&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p>So we can create the correct ID to look that up:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">ID</span> <span class="n">grid_id</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ID</span><span class="o">(</span> <span class="n">MapGraphicService</span><span class="o">.</span><span class="na">SERVICE_ID</span><span class="o">,</span> <span class="s">&quot;grid&quot;</span> <span class="o">);</span>
+</pre></div>
+</div>
+<p>Or if you don&#8217;t want to add the dependency:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">IRepository</span> <span class="n">local</span> <span class="o">=</span> <span class="n">CatalogPlugin</span><span class="o">.</span><span class="na">getDefault</span><span class="o">().</span><span class="na">getLocal</span><span class="o">();</span>
+
+<span class="kd">final</span> <span class="n">ID</span> <span class="n">GRID_ID</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ID</span><span class="o">(</span> <span class="s">&quot;mapgraphic:///localhost/mapgraphic#grid&quot;</span><span class="o">,</span> <span class="kc">null</span> <span class="o">);</span>
+<span class="n">IGeoResource</span> <span class="n">gridResource</span> <span class="o">=</span> <span class="n">local</span><span class="o">.</span><span class="na">getById</span><span class="o">(</span><span class="n">IGeoResource</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">GRID_ID</span><span class="o">,</span> <span class="k">new</span> <span class="n">NullProgressMonitor</span><span class="o">()</span> <span class="o">);</span>
+<span class="c1">// You can then use this with the AddLayersCommand</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="implementing-map-graphic">
+<h2>Implementing Map Graphic<a class="headerlink" href="#implementing-map-graphic" title="Permalink to this headline">¶</a></h2>
+<p>The interface for MapGraphic is straight forward:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">MapGraphic</span> <span class="o">{</span>
+    <span class="cm">/** extension point id **/</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">XPID</span> <span class="o">=</span> <span class="s">&quot;net.refractions.udig.mapgraphic.mapgraphic&quot;</span><span class="o">;</span> <span class="c1">//$NON-NLS-1$</span>
+    <span class="cm">/**</span>
+<span class="cm">     * Draws the graphic.  Check the clip area of the {@link ViewportGraphics} object to determine what</span>
+<span class="cm">     * area needs to be refreshed.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param context The drawing context.</span>
+<span class="cm">     */</span>
+    <span class="kt">void</span> <span class="nf">draw</span><span class="o">(</span><span class="n">MapGraphicContext</span> <span class="n">context</span><span class="o">);</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>As you can see you are responsible for implementing a single draw method; the MapGraphicsContext
+provides access to the screen, access to the Layer (holding any style settings you require) and the
+Map and MapViewport.</p>
+<p>Here is a simple example from the <a class="reference internal" href="map_decorator_tutorial.html"><em>Map Decorator Tutorial</em></a> tutorial using screen coordinates:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kt">void</span> <span class="nf">draw</span><span class="o">(</span> <span class="n">MapGraphicContext</span> <span class="n">context</span> <span class="o">)</span> <span class="o">{</span>
+    <span class="c1">//initialize the graphics handle</span>
+     <span class="n">ViewportGraphics</span> <span class="n">g</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="na">getGraphics</span><span class="o">();</span>
+     <span class="n">g</span><span class="o">.</span><span class="na">setColor</span><span class="o">(</span><span class="n">Color</span><span class="o">.</span><span class="na">RED</span><span class="o">);</span>
+     <span class="n">g</span><span class="o">.</span><span class="na">setStroke</span><span class="o">(</span><span class="n">ViewportGraphics</span><span class="o">.</span><span class="na">LINE_SOLID</span><span class="o">,</span> <span class="mi">2</span><span class="o">);</span>
+
+     <span class="c1">//get the map blackboard</span>
+     <span class="n">IMap</span> <span class="n">map</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="na">getLayer</span><span class="o">().</span><span class="na">getMap</span><span class="o">();</span>
+     <span class="n">IBlackboard</span> <span class="n">blackboard</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="na">getLayer</span><span class="o">().</span><span class="na">getMap</span><span class="o">().</span><span class="na">getBlackboard</span><span class="o">();</span>
+
+     <span class="n">List</span><span class="o">&lt;</span><span class="n">Coordinate</span><span class="o">&gt;</span> <span class="n">coordinates</span> <span class="o">=</span> <span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Coordinate</span><span class="o">&gt;)</span> <span class="n">blackboard</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&quot;locations&quot;</span><span class="o">);</span>
+
+     <span class="k">if</span> <span class="o">(</span><span class="n">coordinates</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+         <span class="k">return</span><span class="o">;</span> <span class="c1">//no coordinates to draw</span>
+     <span class="o">}</span>
+
+     <span class="c1">//for each coordnate, create a circle and draw</span>
+     <span class="k">for</span> <span class="o">(</span><span class="n">Coordinate</span> <span class="n">coordinate</span> <span class="o">:</span> <span class="n">coordinates</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Ellipse2D</span> <span class="n">e</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Ellipse2D</span><span class="o">.</span><span class="na">Double</span><span class="o">(</span>
+                <span class="n">coordinate</span><span class="o">.</span><span class="na">x</span><span class="o">-</span><span class="mi">4</span><span class="o">,</span>
+                <span class="n">coordinate</span><span class="o">.</span><span class="na">y</span><span class="o">-</span><span class="mi">4</span><span class="o">,</span>
+                <span class="mi">10</span><span class="o">,</span><span class="mi">10</span><span class="o">);</span>
+        <span class="n">g</span><span class="o">.</span><span class="na">draw</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+     <span class="o">}</span>
+</pre></div>
+</div>
+<p>If you are working in real world locations (such as WGS84) you will need to convert those locations
+to screen coordinates:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kt">void</span> <span class="nf">draw</span><span class="o">(</span><span class="n">MapGraphicContext</span> <span class="n">context</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// initialize the graphics handle</span>
+        <span class="n">ViewportGraphics</span> <span class="n">g</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="na">getGraphics</span><span class="o">();</span>
+        <span class="n">g</span><span class="o">.</span><span class="na">setColor</span><span class="o">(</span><span class="n">Color</span><span class="o">.</span><span class="na">RED</span><span class="o">);</span>
+        <span class="n">g</span><span class="o">.</span><span class="na">setStroke</span><span class="o">(</span><span class="n">ViewportGraphics</span><span class="o">.</span><span class="na">LINE_SOLID</span><span class="o">,</span> <span class="mi">2</span><span class="o">);</span>
+
+        <span class="c1">// get the map blackboard</span>
+        <span class="n">IMap</span> <span class="n">map</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="na">getLayer</span><span class="o">().</span><span class="na">getMap</span><span class="o">();</span>
+        <span class="n">IBlackboard</span> <span class="n">blackboard</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="na">getLayer</span><span class="o">().</span><span class="na">getMap</span><span class="o">().</span><span class="na">getBlackboard</span><span class="o">();</span>
+
+        <span class="n">List</span><span class="o">&lt;</span><span class="n">Coordinate</span><span class="o">&gt;</span> <span class="n">coordinates</span> <span class="o">=</span> <span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Coordinate</span><span class="o">&gt;)</span> <span class="n">blackboard</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&quot;locations&quot;</span><span class="o">);</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">coordinates</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span><span class="o">;</span> <span class="c1">// no coordinates to draw</span>
+        <span class="o">}</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="n">MathTransform</span> <span class="n">dataToWorldTransform</span> <span class="o">=</span> <span class="n">CRS</span><span class="o">.</span><span class="na">findMathTransform</span><span class="o">(</span><span class="n">DefaultGeographicCRS</span><span class="o">.</span><span class="na">WGS84</span><span class="o">,</span> <span class="n">context</span><span class="o">.</span><span class="na">getCRS</span><span class="o">()</span> <span class="o">);</span>
+
+            <span class="c1">// for each location, create a circle and draw</span>
+            <span class="k">for</span> <span class="o">(</span><span class="n">Coordinate</span> <span class="n">location</span> <span class="o">:</span> <span class="n">coordinates</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">Coordinate</span> <span class="n">world</span> <span class="o">=</span> <span class="n">JTS</span><span class="o">.</span><span class="na">transform</span><span class="o">(</span><span class="n">location</span><span class="o">,</span>  <span class="kc">null</span><span class="o">,</span> <span class="n">dataToWorldTransform</span><span class="o">);</span>
+                <span class="n">Point</span> <span class="n">pixel</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="na">worldToPixel</span><span class="o">(</span><span class="n">world</span><span class="o">);</span>
+                <span class="n">Ellipse2D</span> <span class="n">e</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Ellipse2D</span><span class="o">.</span><span class="na">Double</span><span class="o">(</span><span class="n">pixel</span><span class="o">.</span><span class="na">x</span> <span class="o">-</span> <span class="mi">4</span><span class="o">,</span> <span class="n">pixel</span><span class="o">.</span><span class="na">y</span> <span class="o">-</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">10</span><span class="o">,</span> <span class="mi">10</span><span class="o">);</span>
+                <span class="n">g</span><span class="o">.</span><span class="na">draw</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="k">catch</span> <span class="o">(</span><span class="n">FactoryException</span> <span class="n">unableToTransform</span><span class="o">){</span>
+            <span class="n">context</span><span class="o">.</span><span class="na">getLayer</span><span class="o">().</span><span class="na">setStatusMessage</span><span class="o">(</span><span class="n">unableToTransform</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">TransformException</span> <span class="n">outOfBounds</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">context</span><span class="o">.</span><span class="na">getLayer</span><span class="o">().</span><span class="na">setStatusMessage</span><span class="o">(</span><span class="n">outOfBounds</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="adding_new_format.html">Adding New Format</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="faq.html">FAQ</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2012, Refractions Research.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

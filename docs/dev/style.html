@@ -1,0 +1,309 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Style &mdash; uDig 1.3.2 Developers Guide</title>
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.3.2 Developers Guide" href="index.html" />
+    <link rel="up" title="Working with GIS Application" href="working_with_gis_application.html" />
+    <link rel="next" title="Tools" href="tools.html" />
+    <link rel="prev" title="Composite Commands" href="composite_commands.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="composite_commands.html">Composite Commands</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="tools.html">Tools</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="style">
+<h1>Style<a class="headerlink" href="#style" title="Permalink to this headline">¶</a></h1>
+<p>uDig can provide maps symbolized by implementing styles. A style describes how to paint points,
+lines, polygons and raster data sets by providing a set of painting rules.</p>
+<p>Related Reference:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://docs.geotools.org/latest/userguide/library/render/index.html">GeoTools User Guide: Renderer</a></li>
+<li><a class="reference external" href="http://www.opengis.org/docs/02-070.pdf">Styled Layer Descriptor Reference Document</a></li>
+</ul>
+<div class="section" id="udig-style-framework">
+<h2>uDig Style Framework<a class="headerlink" href="#udig-style-framework" title="Permalink to this headline">¶</a></h2>
+<p>The style api has three major extension points (defined by the <strong>net.refractions.udig.project</strong>
+plug-in):</p>
+<ul class="simple">
+<li><strong>StyleBlackboard</strong>: a persisted blackboard of all the user supplied rendering settings for a
+layer</li>
+<li><strong>StyleContent</strong>: this is used to hold any object you wish on the style blackboard. Methods exist
+to load / save your object, and create a default object.<ul>
+<li>For the <strong>org.geotools.styling.Style</strong> object (representing an SLD file) the value is managed
+by the class <strong>SLDContent</strong>.</li>
+</ul>
+</li>
+<li><strong>StyleConfigurator</strong>: This the the user interface responsible for editing a style on the style
+blackboard.</li>
+</ul>
+<p>The uDig application will use the entire style blackboard, as well as all known Renderers when
+choosing how to draw what is on the screen. RenderMetricsFactory and RenderingMetrics are both used
+to inspect the style blackboard. The renderer that is able to understand the most styles on the
+blackboard is chosen to draw what is on the screen.</p>
+</div>
+<div class="section" id="stylecontent-objects-and-the-styleblackboard">
+<h2>StyleContent, Objects and the StyleBlackboard<a class="headerlink" href="#stylecontent-objects-and-the-styleblackboard" title="Permalink to this headline">¶</a></h2>
+<p>Here is how the StyleBlackboard is used for collaboration:</p>
+<ul class="simple">
+<li>StyleContent describes how Objects are stored on the StyleBlackboard, it is also able to create a
+default style for a given GeoResource.</li>
+<li>Objects are stored on the blackboard by an ID.</li>
+<li>Renderers can look up a Style by ID and make use of it when drawing.</li>
+<li>StyleConfigurators allow the user interface to modify the objects on the style blackboard.</li>
+</ul>
+<p>Since different renders can use completely different style objects, the coupling between the render
+and the style needs to kept low. In order to achieve this, we decided to create the notion of a
+style blackboard which is associated with a layer. This way the render and configurator can
+collaborate without talking to each other.</p>
+<p>The Renderer and the StyleConfigurator look for particular style objects on the blackboard in order
+to do their part. The StyleContent is responsible for creating, and persiting these style object.</p>
+<p>Each Layer has a StyleBlackboard. StyleConfigurators should not write to this blackboard directly.
+Each style configurator is supplied with a copy of the actual layer blackboard. Each time a style
+object is changed, it must be replaced onto the blackboard for persistence to occure.</p>
+</div>
+<div class="section" id="stylecontent">
+<h2>StyleContent<a class="headerlink" href="#stylecontent" title="Permalink to this headline">¶</a></h2>
+<p>The style content extension-point is used to teach the system about a new kind of style information
+you would like to store on the blackboard.</p>
+<p>The StyleContent interface is responsible for:</p>
+<ul class="simple">
+<li>The ID used to hold the value on the blackboard</li>
+<li>Persistence</li>
+<li>Creation of a good default value based on a GeoResource</li>
+</ul>
+<p>By having an extension-point here we are able to store objects on the style blackboard that can not
+normally be serialized; or choose the format in which the object is serialized.</p>
+<p>For an example of the production of a StyleContent please review the
+net.refractions.udig.tutorials.style.color tutorial.</p>
+</div>
+<div class="section" id="styleconfigurator">
+<h2>StyleConfigurator<a class="headerlink" href="#styleconfigurator" title="Permalink to this headline">¶</a></h2>
+<p>The StyleConfigurator is a user interface; that should store no state of its own (since it could be
+close at any time). All state should be stored in the style objects on the style blackboard. When a
+user interface widget changes state, the style object should be written to immediately to reflect
+the change.</p>
+<p>When the StyleConfigurator becomes active, the user interface widgets should be initialized from the
+values of style objects on the blackboard. This should be performed every time refresh() is called.</p>
+<p>Whenever style objects are read from the blackboard, the example below is pretending to talk to a
+&#8220;point.style&#8221; key that is used to store a Point object.</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="kt">void</span> <span class="nf">apply</span><span class="o">()</span> <span class="o">{</span>
+      <span class="n">StyleBlackboard</span> <span class="n">styleBlackboard</span> <span class="o">=</span> <span class="n">getStyleBlackboard</span><span class="o">();</span>
+      <span class="n">Point</span> <span class="n">point</span> <span class="o">=</span> <span class="n">styleBlackboard</span><span class="o">.</span><span class="na">lookup</span><span class="o">(</span><span class="s">&quot;point.style&quot;</span><span class="o">);</span>
+      <span class="k">if</span> <span class="o">(</span><span class="n">style</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+          <span class="n">style</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Point</span><span class="o">();</span>
+          <span class="n">styleBlackboard</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;point.style&quot;</span><span class="o">,</span> <span class="n">point</span><span class="o">);</span>
+      <span class="o">}</span>
+
+      <span class="n">point</span><span class="o">.</span><span class="na">setX</span><span class="o">(...)</span> <span class="c1">//set to some value from ui</span>
+      <span class="n">point</span><span class="o">.</span><span class="na">setY</span><span class="o">(...)</span> <span class="c1">//set to some value from ui</span>
+  <span class="o">}</span>
+  <span class="kt">void</span> <span class="nf">init</span><span class="o">()</span> <span class="o">{</span>
+      <span class="n">StyleBlackboard</span> <span class="n">styleBlackboard</span> <span class="o">=</span> <span class="n">getStyleBlackboard</span><span class="o">();</span>
+      <span class="n">Point</span> <span class="n">point</span><span class="o">=</span> <span class="n">styleBlackboard</span><span class="o">.</span><span class="na">lookup</span><span class="o">(</span><span class="s">&quot;point.style&quot;</span><span class="o">);</span>
+      <span class="k">if</span> <span class="o">(</span><span class="n">point</span><span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+          <span class="c1">//set some ui widget to value of style.getX();</span>
+          <span class="c1">//set some ui widget to value of style.getY();</span>
+      <span class="o">}</span>
+  <span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="built-in-styles">
+<h2>Built-in Styles<a class="headerlink" href="#built-in-styles" title="Permalink to this headline">¶</a></h2>
+<p>The uDig application provides several built-in StyleContent implementations. These are described in
+this section; but in a few cases you will need to go off and read formal documentation provided by a
+standards body.</p>
+</div>
+<div class="section" id="projectblackboardconstants-layer-data-query">
+<h2>ProjectBlackboardConstants.LAYER_DATA_QUERY<a class="headerlink" href="#projectblackboardconstants-layer-data-query" title="Permalink to this headline">¶</a></h2>
+<p>This is an entry on the style blackboard that can be used to hold an OGC Filter or WFS Query. This
+is used to turn your layer into a simple &#8220;view&#8221; of the complete content provided by the GeoResource.</p>
+<p>To quickly create a filter you can use the CQL utility class:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">Filter</span> <span class="n">filter</span> <span class="o">=</span> <span class="n">CQL</span><span class="o">.</span><span class="na">toFilter</span><span class="o">(</span><span class="s">&quot;attName &gt;= 5&quot;</span><span class="o">);</span>
+
+<span class="n">layer</span><span class="o">.</span><span class="na">getStyleBlackboard</span><span class="o">().</span><span class="na">put</span><span class="o">(</span><span class="n">ProjectBlackboardConstants</span><span class="o">.</span><span class="na">LAYER__DATA_QUERY</span><span class="o">,</span> <span class="n">filter</span><span class="o">);</span>
+</pre></div>
+</div>
+<p>Or a FilterFactory:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">FilterFactory</span> <span class="n">ff</span> <span class="o">=</span> <span class="n">CommonFactoryFinder</span><span class="o">.</span><span class="na">getFilterFactory</span><span class="o">(</span> <span class="kc">null</span> <span class="o">);</span>
+<span class="n">Filter</span> <span class="n">filter</span> <span class="o">=</span> <span class="n">ff</span><span class="o">.</span><span class="na">propertyLessThan</span><span class="o">(</span> <span class="n">ff</span><span class="o">.</span><span class="na">property</span><span class="o">(</span> <span class="s">&quot;AGE&quot;</span><span class="o">),</span> <span class="n">ff</span><span class="o">.</span><span class="na">literal</span><span class="o">(</span> <span class="mi">12</span> <span class="o">)</span> <span class="o">);</span>
+
+<span class="n">layer</span><span class="o">.</span><span class="na">getStyleBlackboard</span><span class="o">().</span><span class="na">put</span><span class="o">(</span><span class="n">ProjectBlackboardConstants</span><span class="o">.</span><span class="na">LAYER__DATA_QUERY</span><span class="o">,</span> <span class="n">filter</span><span class="o">);</span>
+</pre></div>
+</div>
+<p>References:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://docs.geotools.org/latest/userguide/">GeoTools User Guide</a></li>
+<li><a class="reference external" href="http://www.opengeospatial.org/standards/filter">http://www.opengeospatial.org/standards/filter</a></li>
+</ul>
+</div>
+<div class="section" id="sldcontent">
+<h2>SLDContent<a class="headerlink" href="#sldcontent" title="Permalink to this headline">¶</a></h2>
+<p>The SLDContent entry is used to store a &#8220;Style Layer Descriptor&#8221; document on the style blackboard.
+The OGC Style Layer Descriptor specification defines a style that can be used to portray Features
+and GridCoverages.</p>
+<p>The <strong>net.refractions.udig.style.sld</strong> plug-in captures everything we know about these SLD files:</p>
+<ul class="simple">
+<li>org.geotools.styling.Style - is the data structure we use to represent an SLD file</li>
+<li>SLDContent - is the class used to hold this data structure on the style blackboard</li>
+<li>StyleEditor - this is a special dialog that can be used to edit an SLD file</li>
+<li>StyleEditorPage - this is a page in the style dialog; you can define additional pages</li>
+</ul>
+<p>The class <strong>SLDContent</strong> is used to store an <strong>org.geotools.styling.Style</strong> object (representing a
+SLD file). If you would like to interact with this object you can request it from the style
+blackboard using the key SLDContent.ID.</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">Style</span> <span class="n">sld</span> <span class="o">=</span> <span class="o">(</span><span class="n">Style</span><span class="o">)</span> <span class="o">=</span> <span class="n">layer</span><span class="o">.</span><span class="na">getStyleBlackboard</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="n">SLDContent</span><span class="o">.</span><span class="na">ID</span><span class="o">);</span>
+</pre></div>
+</div>
+<p>References:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://docs.geotools.org/latest/userguide/">GeoTools User Guide</a></li>
+<li><a class="reference external" href="http://www.opengeospatial.org/standards/sld">http://www.opengeospatial.org/standards/sld</a></li>
+</ul>
+</div>
+<div class="section" id="default-style">
+<h2>Default Style<a class="headerlink" href="#default-style" title="Permalink to this headline">¶</a></h2>
+<p>SLDContent will ask your GeoResource for a default style; you have several ways of supplying a
+default:</p>
+<ul class="simple">
+<li>For a Shapefile you can include an *.sld file; ShpGeoResourceImpl already knows how to check for
+this file and will provide it to SLDContent – using resolve( Style, null )</li>
+<li>If you are making your own GeoResource you can make sure canResolve( Style.class) returns true</li>
+<li>If you are adding a default style to an existing GeoResource (like ArcSDE) you will need to use
+an IResolveAdapaterFactory to teach the existing class about your default style</li>
+</ul>
+<p>To ask SLDContent for a default style yourself:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">SLDContent</span> <span class="n">sldContent</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SLDContent</span><span class="o">(</span><span class="n">SLDContent</span><span class="o">.</span><span class="na">ID</span><span class="o">);</span>
+<span class="n">Style</span> <span class="n">sld</span> <span class="o">=</span> <span class="o">(</span><span class="n">Style</span><span class="o">)</span> <span class="n">SLDContent</span><span class="o">.</span><span class="na">createDefaultStyle</span><span class="o">(</span> <span class="n">resource</span><span class="o">,</span> <span class="n">Color</span><span class="o">.</span><span class="na">BLACK</span><span class="o">,</span> <span class="k">new</span> <span class="n">NullProgressMonitor</span><span class="o">()</span> <span class="o">);</span>
+</pre></div>
+</div>
+<p>The <strong>CreateLayerCommand</strong> normally takes care of this step for you when you are creating</p>
+</div>
+<div class="section" id="geotools-style-class">
+<h2>GeoTools Style Class<a class="headerlink" href="#geotools-style-class" title="Permalink to this headline">¶</a></h2>
+<p>The GeoTools Style object represents the contents of an SLD file. You can create a Style using a
+StyleBuilder</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">StyleFactory</span> <span class="n">styleFactory</span> <span class="o">=</span> <span class="n">StyleFactory</span><span class="o">.</span><span class="na">createStyleFactory</span><span class="o">();</span>
+<span class="n">Style</span> <span class="n">style</span> <span class="o">=</span> <span class="n">styleFactory</span><span class="o">.</span><span class="na">getDefaultStyle</span><span class="o">();</span>
+
+<span class="n">FeatureTypeStyle</span> <span class="n">fts</span> <span class="o">=</span> <span class="n">styleFactory</span><span class="o">.</span><span class="na">createFeatureTypeStyle</span><span class="o">();</span>
+<span class="n">fts</span><span class="o">.</span><span class="na">setFeatureTypeName</span><span class="o">(</span><span class="s">&quot;feature-type-1&quot;</span><span class="o">);</span>
+<span class="n">style</span><span class="o">.</span><span class="na">addFeatureTypeStyle</span><span class="o">(</span><span class="n">fts</span><span class="o">);</span>
+</pre></div>
+</div>
+<p>Overview of Style classes mentioned above:</p>
+<ul class="simple">
+<li>FeatureTypeStyle: A FeatureTypeStyle declares a part of a style that is specifically geared
+toward a FeatureType. Features will be rendered according a FeatureTypeStyle only if their
+FeatureType name matches what is recorded in the FeatureTypeStyle or a descendant.<ul>
+<li>Rule: A Rule contains filters that will decide whether features will be displayed or not,
+specifically:<ul>
+<li>a minimum and maximum map scale, if set and the current scale is outside the specified
+range, the rule won&#8217;t apply and thus its symbolizers won&#8217;t be used;</li>
+<li>a Filter that is applied to the features, only the features matching the filter will be
+painted according to the Rule symbolizers;
+as an alternative, the rule can have an &#8220;else filter&#8221;. This special kind of filter catches
+all of the features that still haven&#8217;t been symbolized by previous rules with a regular
+filter.<ul>
+<li>SymbolizersL A Symbolizer describes how to represent a feature on the screen based on
+the feature contents (geometry and attributes). Each rule can have one or more
+Symbolizer attached to it.<ul>
+<li>Text Symbolizer</li>
+<li>Line Symbolizer</li>
+<li>Polygon Symbolizer</li>
+<li>Point Symbolizer</li>
+<li>Raster Symbolizer</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="slds-utility-class">
+<h2>SLDs utility class<a class="headerlink" href="#slds-utility-class" title="Permalink to this headline">¶</a></h2>
+<p>Since a Style is composed of a complex set of objects, a StyleBuilder object is provided for you to
+conveniently build simple styles without the need to build all of the style elements by hand. For
+example, you can create a PolygonSymbolizer and then create a Style out of it with a single method
+call: the builder will generate a default FeatureTypeStyle and the Rule for you.</p>
+<p>Using SLDs utility class to query an SLD:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">Style</span> <span class="n">sld</span> <span class="o">=</span> <span class="o">(</span><span class="n">Style</span><span class="o">)</span> <span class="o">=</span> <span class="n">layer</span><span class="o">.</span><span class="na">getStyleBlackboard</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="n">SLDContent</span><span class="o">.</span><span class="na">ID</span><span class="o">);</span>
+<span class="n">FeatureTypeStyle</span> <span class="n">style</span> <span class="o">=</span> <span class="n">SLDs</span><span class="o">.</span><span class="na">getFeatureTypeStyle</span><span class="o">(</span> <span class="n">sld</span> <span class="o">);</span>
+<span class="kt">double</span> <span class="n">minScale</span> <span class="o">=</span> <span class="n">SLDs</span><span class="o">.</span><span class="na">minScale</span><span class="o">(</span> <span class="n">style</span> <span class="o">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="composite_commands.html">Composite Commands</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="tools.html">Tools</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2012, Refractions Research.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

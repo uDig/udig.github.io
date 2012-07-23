@@ -1,0 +1,264 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Interceptors &mdash; uDig 1.3.2 Developers Guide</title>
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.3.2 Developers Guide" href="index.html" />
+    <link rel="up" title="Working with GIS Application" href="working_with_gis_application.html" />
+    <link rel="next" title="Adding New Format" href="adding_new_format.html" />
+    <link rel="prev" title="Render Creation" href="render_creation.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="render_creation.html">Render Creation</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="adding_new_format.html">Adding New Format</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="interceptors">
+<h1>Interceptors<a class="headerlink" href="#interceptors" title="Permalink to this headline">¶</a></h1>
+<p>Interceptors are a really interesting way to &#8220;hook into&#8221; the operation of the running uDig
+application.</p>
+<p>Related:</p>
+<ul class="simple">
+<li><a class="reference internal" href="service_and_georesource_interceptors.html"><em>Service and GeoResource Interceptors</em></a></li>
+</ul>
+<div class="section" id="layer-interceptors">
+<h2>Layer Interceptors<a class="headerlink" href="#layer-interceptors" title="Permalink to this headline">¶</a></h2>
+<p>Layer interceptors are used to process a layer during one of the following lifecycle activities:</p>
+<ul class="simple">
+<li>layerCreated: Called when a layer is created; good for configuring the layer
+blackboard/styleblackboard for your application.</li>
+<li>layerAdded: Called when a layer is added to the map; can be used to hook up any additional
+listeners or logic; or simply adjust where in the layer list the layer appears; or perform a
+security check and hide sensitive information</li>
+<li>layerRemoved: Called when the layer is being removed; can clean up any additional listeners or
+logic associated with the layer</li>
+</ul>
+<p>Examples of layer interceptor in udig:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">LayerInterceptor</span>
+<span class="o">-</span> <span class="n">InitMapBoundsInterceptor</span>
+<span class="o">-</span> <span class="n">InitMapCRS</span>
+<span class="o">-</span> <span class="n">SetLayerNameInterceptor</span>
+<span class="o">-</span> <span class="n">SetStyleInterceptor</span>
+</pre></div>
+</div>
+<div class="section" id="example-rasterlayerinterceptor">
+<h3>Example RasterLayerInterceptor<a class="headerlink" href="#example-rasterlayerinterceptor" title="Permalink to this headline">¶</a></h3>
+<p>Thanks to Jim for the following of taking a new raster layer and makes it drop down the layer list
+until it reaches the first raster layer. It is an example taken from a custom application where
+users did not want rasters covering up their point, line and polygon layers.</p>
+<p>To hook up the interceptor:</p>
+<div class="highlight-python"><pre>&lt;extension
+      id="net.refractions.udig.tutorials.examples.layerInterceptor"
+      point="net.refractions.udig.project.layerInterceptor"&gt;
+   &lt;layerAdded
+         class="net.refractions.udig.tutorials.RasterToBottomOfZOrder"
+         id="net.refractions.udig.tutorials.examples.interceptors.rasterToBottomOfZOrder"&gt;
+   &lt;/layerAdded&gt;
+&lt;/extension&gt;</pre>
+</div>
+<p>Here is the Java code:</p>
+<div class="highlight-python"><pre>public class RasterToBottomOfZOrder implements LayerInterceptor {
+    @Override
+    public void run( Layer layer ) {
+        GridCoverage resource = null;
+        try {
+            resource = layer.getResource(GridCoverage.class, new NullProgressMonitor());
+        } catch (IOException e) {
+            // couldn't get the layer as a GridCoverage, thats fine.
+            return;
+        }
+        if(resource == null) {
+            // it's not a raster, put it just above the highest raster
+            IMap map = ApplicationGIS.getActiveMap();
+
+            int highestRaster = -1;
+
+            List&lt;ILayer&gt; layers = map.getMapLayers();
+            for(ILayer l: layers) {
+                try {
+                    resource = l.getResource(GridCoverage.class, new NullProgressMonitor());
+                } catch (IOException e) {
+                    // couldn't get the layer as a GridCoverage, thats fine.
+                    resource = null;
+                }
+                if(resource != null) {
+                    if(l.getZorder() &gt; highestRaster) {
+                        highestRaster = l.getZorder();
+                    }
+                }
+            }
+            if(highestRaster &gt; 0) {
+                layer.setZorder(highestRaster);
+            }
+        } else {
+            // new raster, put it down the bottom
+            layer.setZorder(0);
+        }
+    }
+
+}</pre>
+</div>
+</div>
+</div>
+<div class="section" id="map-interceptors">
+<h2>Map Interceptors<a class="headerlink" href="#map-interceptors" title="Permalink to this headline">¶</a></h2>
+<p>To give you a taste of the kinds of activities that are performed with MapInterceptors here are some
+of the map interceptors used in uDig 1.2.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">MapInterceptor</span>
+<span class="o">-</span> <span class="n">DisposeBlackboardOnCloseInterceptor</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="resource-interceptors">
+<h2>Resource Interceptors<a class="headerlink" href="#resource-interceptors" title="Permalink to this headline">¶</a></h2>
+<p>Resource interceptors are where the rubber really hits the road; this is used when a layer is
+resolving to a particular data access class such as FeatureStore.</p>
+<p>This interceptor is powerful; as an example it is used to wrap any and all requests for a
+FeatureStore with a &#8220;UDIGFeatureStore&#8221; for which the setTransaction method can only be called once.</p>
+<div class="highlight-python"><pre>public class WrapFeatureStore
+        implements IResourceInterceptor&lt;FeatureStore&lt;SimpleFeatureType, SimpleFeature&gt;&gt; {
+
+    @SuppressWarnings("unchecked")
+    public FeatureStore&lt;SimpleFeatureType, SimpleFeature&gt; run( ILayer layer,
+            FeatureStore&lt;SimpleFeatureType, SimpleFeature&gt; resource,
+            Class&lt; ? super FeatureStore&lt;SimpleFeatureType, SimpleFeature&gt;&gt; requestedType ) {
+        if (!(resource instanceof UDIGFeatureStore)) {
+            if (requestedType.isAssignableFrom(FeatureStore.class)){
+                return new UDIGFeatureStore(resource, layer);
+            }
+            else {
+                return resource;
+            }
+        }
+        return resource;
+    }
+}</pre>
+</div>
+<p>The xml to hook this up is:</p>
+<div class="highlight-python"><pre>&lt;interceptor
+  class="net.refractions.udig.project.internal.interceptor.WrapFeatureStore"
+  id="net.refractions.udig.project.wrap.featurestore"
+  order="PRE"
+  target="org.geotools.data.FeatureStore"/&gt;</pre>
+</div>
+<p>The other information that can be specified with the resource interceptor extension point is a
+caching strategy. Many resources (such as FeatureSource) can be created multiple times. By using a
+caching strategy we reserve one instance for use with our layer - very handy when we want to attach
+listeners to it and notice when the content changes.</p>
+<p>Here is an example of how uDig caches one instance of each resource for each layer:</p>
+<div class="highlight-python"><pre>public class ResourceCacheInterceptor implements IResourceCachingInterceptor {
+    private Map&lt;Class, Object&gt; resources = new HashMap&lt;Class, Object&gt;();
+
+    public &lt;T&gt; boolean isCached( ILayer layer, IGeoResource resource, Class&lt;T&gt; requestedType ) {
+        return resources.containsKey(requestedType);
+    }
+
+    public &lt;T&gt; T get( ILayer layer, Class&lt;T&gt; requestedType ) {
+        return (T) resources.get(requestedType);
+    }
+
+    public &lt;T&gt; void put( ILayer layer, T resource, Class&lt;T&gt; requestedType ) {
+        if (resource != null) {
+            registerClasses(resource.getClass(), resource);
+        }
+    }
+
+    private &lt;T&gt; void registerClasses( Class&lt;T&gt; clazz, Object obj ) {
+        if (obj instanceof Style || obj instanceof GridCoverage) {
+            return;
+        }
+        if (clazz.getSuperclass() != null &amp;&amp; clazz.getSuperclass() != Object.class) {
+            registerClasses(clazz.getSuperclass(), obj);
+        }
+        for( int i = 0; i &lt; clazz.getInterfaces().length; i++ ) {
+            registerClasses(clazz.getInterfaces()[i], obj);
+        }
+        resources.put(clazz, obj);
+    }
+}</pre>
+</div>
+<p>Although the above example uses an internal map; you may also find it useful to use the map
+blackboard to cache objects.</p>
+</div>
+<div class="section" id="feature-interceptors">
+<h2>Feature Interceptors<a class="headerlink" href="#feature-interceptors" title="Permalink to this headline">¶</a></h2>
+<p>Feature interceptors are used to &#8220;pre process&#8221; features before they are added to a FeatureStore.</p>
+<p>Examples:</p>
+<ul class="simple">
+<li>They can be used passively to create an audit log tracking the creation of features; please note
+that the FeatureID is not actually set until the the user presses the commit button.</li>
+<li>They can be used dynamically to modify the feature with sensible default values (rather then
+those that come out of the box).</li>
+</ul>
+<p>This extension point may be extended in the future to cover the removal of features, or the actual
+commit of features to a DataStore.</p>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="render_creation.html">Render Creation</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="adding_new_format.html">Adding New Format</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2012, Refractions Research.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

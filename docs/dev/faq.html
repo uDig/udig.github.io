@@ -1,0 +1,707 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>FAQ &mdash; uDig 1.3.2 Developers Guide</title>
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.3.2 Developers Guide" href="index.html" />
+    <link rel="next" title="Reference" href="reference.html" />
+    <link rel="prev" title="Map Decorator" href="map_decorator.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="map_decorator.html">Map Decorator</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="reference.html">Reference</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="faq">
+<h1>FAQ<a class="headerlink" href="#faq" title="Permalink to this headline">¶</a></h1>
+<p>Frequently asked questions on uDig Development.</p>
+<div class="section" id="community-questions">
+<h2>Community Questions<a class="headerlink" href="#community-questions" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="getting-started">
+<h3>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h3>
+<p>Q: Where to start with eclipse RCP development*</p>
+<p>Few links for starting with eclipse RCP are provided below:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://www.eclipse.org/rcp/">http://www.eclipse.org/rcp/</a></li>
+<li><a class="reference external" href="http://www.eclipse.org/community/rcp.html">http://www.eclipse.org/community/rcp.html</a></li>
+<li>Our own <a class="reference internal" href="getting_started.html"><em>Getting Started</em></a> section has a<a class="reference internal" href="welcome_new_eclipse_rcp_developers.html"><em>Welcome New Eclipse RCP Developers</em></a> page</li>
+</ul>
+<p>You should also check out the Eclipse RCP forums (<strong>eclipse.platform.rcp</strong> on news.eclipse.org).</p>
+<p>Q: Where to Start with uDig development*</p>
+<blockquote>
+<div><p>I am new in uDig framework and in GIS programming in particular.
+However, i want to make uDig work with a health database, in mysql.
+attached please find my plugin specification.</p>
+<p>basically I want to add a function which connect to a database,
+search an entry on the database, seach the same entry on shape file,
+then highlith the image on the map.</p>
+<p>This is in real life application. Please help me how to go about.</p>
+</div></blockquote>
+<p>Sounds like fun!</p>
+<p>Well we are happy to help with facilities over here, with have a github community repository.
+Please sign up to the developers email list and work your way through the initial quickstart and
+plug-in tutorial.</p>
+<p>Steps:</p>
+<ol class="arabic simple">
+<li>Sign up: <a class="reference external" href="http://lists.refractions.net/mailman/listinfo/udig-devel">http://lists.refractions.net/mailman/listinfo/udig-devel</a></li>
+<li>Install: <a class="reference internal" href="SDKQuickstart/SDKQuickstart.html"><em>SDK Quickstart</em></a> for simple plugins (or <a class="reference external" href="http://udig.refractions.net/confluence//display/ADMIN/Home">Home</a> for core development)</li>
+<li>Follow: <a class="reference internal" href="tool_plugin_tutorial.html"><em>Tool Plugin Tutorial</em></a></li>
+</ol>
+<p>From there on out you can start to get our own uDig/Eclipse RCP docs and pick up some Eclipse books
+(for help in making a user interface and so on), and I assume you are familiar with the MySQL/JDBC
+part of things?</p>
+<ol class="arabic simple">
+<li>Read: <a class="reference internal" href="index.html"><em>Home</em></a></li>
+<li>Read: <a class="reference internal" href="reading_list.html"><em>Reading List</em></a></li>
+</ol>
+<p>Our docs are on as an needed basis, so as you have questions we will due our best to make a page of
+docs to answer email, and help people later. So you you are already on the right track, ask
+questions!</p>
+<ol class="arabic simple">
+<li>Email: <a class="reference external" href="mailto:udig-devel&#37;&#52;&#48;lists&#46;refractions&#46;net">udig-devel<span>&#64;</span>lists<span>&#46;</span>refractions<span>&#46;</span>net</a></li>
+</ol>
+<p>Q: How to Make a View</p>
+<blockquote>
+<div><p>I have managed to develop a plug-in and is linking with a uDig very well. Is it possible to make
+a &#8216;view&#8217; to apear like a form, with textboxes and buttons.</p>
+<p>I need to create form which will allow users to enter/select values. For example, i put a link
+on the view and when a user doubleclick it a form is poping up.</p>
+<p>currently my form opens outside eclipse!</p>
+</div></blockquote>
+<p>Please follow any Eclipse book; or tutorial on the web for instructions on how to make a view.</p>
+<p>Here is the one I used when learning:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://www.eclipse.org/articles/viewArticle/ViewArticle2.html">Creating an Eclipse View</a></li>
+</ul>
+<p>In general we are using the Eclipse RCP platform; any instructions or tutorials you find on the
+subject will serve you well when working on uDig. While we have taken some notes on tips and tricks
+we have found; your best resource is often the Eclipse Help menu (because it is up to date and
+matches the version of eclipse you are working with).</p>
+<p>Q: Which branch to choose</p>
+<p>Please join us in working on the uDig <strong>master</strong> branch for access to the latest developments, bug
+fixes and GeoTools libraries.</p>
+<p>The <strong>1.2.x</strong> branch is considered stable with no additional releases planned. The project is
+open if your team needs to make a release of 1.2.x we would be happy to assist any volunteers.</p>
+</div>
+</div>
+<div class="section" id="developer-questions">
+<h2>Developer Questions<a class="headerlink" href="#developer-questions" title="Permalink to this headline">¶</a></h2>
+<p>Q: Where can I find uDig API javadocs</p>
+<ul class="simple">
+<li>The <a class="reference internal" href="reference.html"><em>Reference</em></a> section has a <a class="reference internal" href="javadocs.html"><em>Javadocs</em></a></li>
+<li><a class="reference external" href="http://udig.refractions.net/docs/api-udig">http://udig.refractions.net/docs/api-udig</a></li>
+</ul>
+<p>Q: Where can I find uDig extension Point Documentation</p>
+<dl class="docutils">
+<dt>Extension point documentation is included as part of the SDK (or source code checkout)</dt>
+<dd>for direct access during development.</dd>
+</dl>
+<p>To access click on the <strong>show extension point</strong> links in the Eclipse MANIFEST.MF and plugin.xml
+editors.</p>
+</div>
+<div class="section" id="development-questions">
+<h2>Development Questions<a class="headerlink" href="#development-questions" title="Permalink to this headline">¶</a></h2>
+<p>Q: How can I avoid startup dialogs when developing</p>
+<ol class="arabic simple">
+<li>Before launching uDig from your eclipse workspace, modify the run configuration</li>
+<li>On the <strong>Arguments</strong> tab, add &#8220;-DUDIG_DEVELOPING&#8221; to your VM arguments.</li>
+<li>Now when you clear your workspace and launch uDig, you won&#8217;t have to close the tips dialog nor
+navigate from the intro screen to the workbench.</li>
+</ol>
+<p>Q: How to copy an existing Plugin</p>
+<ol class="arabic simple">
+<li>File &gt; Import</li>
+<li>Select <strong>Plugin Development</strong> and <strong>Plugins and Fragments</strong> wizard, and press <strong>Next</strong></li>
+<li>On the right you can see EVERYTHING in the uDig SDK</li>
+<li>Select a plugin that is similar to what you want to do:
+net.refractions.udig.catalog.world.image</li>
+<li>Press <strong>Add</strong></li>
+<li>Press <strong>Finish</strong> to the plugin(s) into your workspace</li>
+</ol>
+<p>From here you can hack away:</p>
+<ul class="simple">
+<li>If you keep the plugin with the same name it will be used <strong>INSTEAD</strong> of the uDIG SDK entry</li>
+<li>Or you can rename the plugin and use it as a good starting point for your own work</li>
+</ul>
+</div>
+<div class="section" id="eclipse-rcp-questions">
+<h2>Eclipse RCP Questions<a class="headerlink" href="#eclipse-rcp-questions" title="Permalink to this headline">¶</a></h2>
+<p>Q: How can I display my views by default</p>
+<p>The views initially displayed are provided by a perspective:</p>
+<ul class="simple">
+<li>Extend the current Map Perspective (that is an extension point); or</li>
+<li>Create your own perspective</li>
+</ul>
+<p>An example of extending a perspective is in the net.refractions.udig.feature.editor/plugin.xml file.</p>
+<p>If you define a new perspective and you want it to be loaded by default you have to create a fragment
+for net.refractions.udig.ui and in the fragment override the UDIGWorkbenchAdvisor class to return
+your perspective ID in the getInitialWindowPerspectiveId method.</p>
+<p>Examples:</p>
+<ul class="simple">
+<li><a class="reference internal" href="creating_new_perspective_example.html"><em>Creating new Perspective Example</em></a></li>
+<li><a class="reference internal" href="extending_an_existing_perspective_example.html"><em>Extending An Existing Perspective Example</em></a></li>
+</ul>
+<p>Q: How do I configure keyboard shortcuts</p>
+<p>You need to create a schema, which assigns keyboard bindings to commands. This allows a key press to
+invoke the same command that would otherwise be issued in response to an Action (such as a menu item or
+toolbar button being pressed).</p>
+<p>The actual functionally invoked by a Command can be determined dynamically using a command handler.
+This is how the same keyboard short cuts (such as Control-C or Delete) can be performed differently
+depending on the view the user is working in.</p>
+<p>Examples: <a class="reference internal" href="keyboard_shortcut_example.html"><em>Keyboard Shortcut Example</em></a></p>
+<p>Q: How do I get an SWT layout to display properly</p>
+<p>The size of a control sometimes defaults to zero width and height – this drives us all mad.</p>
+<p>The solution lies in the parent composite (rather than the control).</p>
+<p>If the composite is using a layout manager to control the size of the controls you can call the
+layout() method:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">Composite</span> <span class="n">parent</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Composite</span><span class="o">(</span><span class="n">grandParent</span><span class="o">,</span> <span class="n">SWT</span><span class="o">.</span><span class="na">NONE</span><span class="o">);</span>
+<span class="o">...</span>
+<span class="o">(</span><span class="n">create</span> <span class="n">controls</span><span class="o">)</span>
+<span class="o">...</span>
+<span class="n">parent</span><span class="o">.</span><span class="na">layout</span><span class="o">();</span>
+</pre></div>
+</div>
+<p>You should also review the layout manager configuration associated with each control.</p>
+<p>If the composite is not using a layout manager you will need to do things by hand:</p>
+<ul class="simple">
+<li>Resize the composite programatically with parent.setSize(...)</li>
+</ul>
+<p>Q: How should I use a Progress Monitor</p>
+<p>A few tips on using Progress Monitors:</p>
+<p>Always start the progress monitor and do at least 1 bit of work. For example:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">monitor</span><span class="o">.</span><span class="na">beginTask</span><span class="o">(</span><span class="s">&quot;Working&quot;</span><span class="o">,</span> <span class="mi">4</span><span class="o">);</span>
+<span class="n">monitor</span><span class="o">.</span><span class="na">work</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+</pre></div>
+</div>
+<p>Always finish started job.</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="k">try</span><span class="o">{</span>
+  <span class="n">monitor</span><span class="o">.</span><span class="na">beginTask</span><span class="o">(</span><span class="s">&quot;Working&quot;</span><span class="o">,</span> <span class="mi">4</span><span class="o">);</span>
+  <span class="n">monitor</span><span class="o">.</span><span class="na">work</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+  <span class="c1">// some work</span>
+<span class="o">}</span><span class="k">finally</span><span class="o">{</span>
+  <span class="n">monitor</span><span class="o">.</span><span class="na">done</span><span class="o">();</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>Make use of SubProgressMonitor if sending the monitor to another method:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="k">try</span><span class="o">{</span>
+  <span class="n">monitor</span><span class="o">.</span><span class="na">beginTask</span><span class="o">(</span><span class="s">&quot;Working&quot;</span><span class="o">,</span> <span class="mi">8</span><span class="o">);</span>
+  <span class="n">monitor</span><span class="o">.</span><span class="na">work</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+
+  <span class="n">SubProgressMonitor</span> <span class="n">sub</span><span class="o">=</span><span class="k">new</span> <span class="n">SubProgressMonitor</span><span class="o">(</span><span class="n">monitor</span><span class="o">,</span> <span class="mi">3</span><span class="o">);</span>
+  <span class="n">doSomeWork</span><span class="o">(</span><span class="n">sub</span><span class="o">);</span>
+  <span class="n">sub</span><span class="o">.</span><span class="na">done</span><span class="o">();</span>  <span class="c1">// don&#39;t forget to make sure the sub monitor is done</span>
+
+  <span class="n">sub</span><span class="o">=</span><span class="k">new</span> <span class="n">SubProgressMonitor</span><span class="o">(</span><span class="n">monitor</span><span class="o">,</span> <span class="mi">3</span><span class="o">);</span>
+  <span class="n">doSomeMoreWork</span><span class="o">(</span><span class="n">sub</span><span class="o">);</span>
+  <span class="n">sub</span><span class="o">.</span><span class="na">done</span><span class="o">();</span>  <span class="c1">// don&#39;t forget to make sure the sub monitor is done (callee might not use it)</span>
+
+<span class="o">}</span><span class="k">finally</span><span class="o">{</span>
+  <span class="n">monitor</span><span class="o">.</span><span class="na">done</span><span class="o">();</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>Q: How to wait in the display thread</p>
+<p>All interactions with the user (or widgets) is funnelled through a single display thread. As such
+you should not take a trip out to disk or do any serious computation from the display thread or the
+application will appear to be frozen and unresponsive.</p>
+<p>So how can you perform these tasks - and then update the user interface in response?</p>
+<ul>
+<li><p class="first">Recommended: Start a background Job; and when it finishes start a Runnable to update the user
+interface</p>
+</li>
+<li><p class="first">Alternative: Use the display&#8217;s read and dispatch method to run other jobs that are waiting for
+the display thread.
+Only when there are no more jobs waiting(readAndDispatch returns false when no more jobs are
+waiting) then let the thread sleep.</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="k">while</span><span class="o">(</span> <span class="n">condition</span> <span class="o">)</span> <span class="o">{</span>
+    <span class="c1">//run a display event continue if there is more work todo.</span>
+    <span class="k">if</span> <span class="o">(</span> <span class="n">display</span><span class="o">.</span><span class="na">readAndDispatch</span><span class="o">()</span> <span class="o">){</span>
+        <span class="k">continue</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="c1">//no more work to do in display thread, wait on request if request has not</span>
+    <span class="c1">//finished</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">condition</span><span class="o">)</span>
+        <span class="k">break</span> <span class="o">;</span>
+
+    <span class="n">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">300</span><span class="o">);</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>Q: My plugins export but don&#8217;t work in uDig</p>
+<p>My plugins export but don&#8217;t work in uDig. What is going on?</p>
+<p>The common suspects are:</p>
+<ul class="simple">
+<li>The plugin depends on another plugin that is not part of the uDig your plugin is installed in. If
+a plugin depends on a missing plugin then that plugin will be deactivated</li>
+<li>Make sure that all the required resources are checked off in th build.properties editor. The
+build is the important one for running and exporting</li>
+<li>If you made a plugin that contains code as well as other jars then on the runtime tab of the
+Manifest.MF editor you must make sure that the all the extra jars <strong>and</strong> a . are in the
+Classpath list. (The period is intensional as it indicates the code of this plugin).<ul>
+<li>This last point is important only if the build.properties Runtime Information maps . to your
+source directory. If the mapping is to a jar then make sure that jar is in the classpath of
+the manifest.</li>
+</ul>
+</li>
+<li>The exported plugin and the current udig build were compiled with different jdk. -debug
+-consoleLog as program arguments help to keep track of such errors.</li>
+</ul>
+</div>
+<div class="section" id="gis-application-questions">
+<h2>GIS Application Questions<a class="headerlink" href="#gis-application-questions" title="Permalink to this headline">¶</a></h2>
+<p>Q: How can I find what maps and projects are currently available</p>
+<p>The <strong>ApplicationGIS</strong> class provides access to all the projects currently registered with
+the uDig instance.</p>
+<p><strong>ApplicationGIS.getProjects()</strong> will return all the projects currently registered with the system.</p>
+<p>Given a project all the contained elements can be searched via the <strong>getElements()</strong> method. If a
+single type of elements is desired such as maps the <strong>getElements( Class&lt;T&gt; )</strong> method can be used.</p>
+<p>To access the first Map in the first project:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">ApplicationGIS</span><span class="o">.</span><span class="na">openMap</span><span class="o">(</span><span class="n">ApplicationGIS</span><span class="o">.</span><span class="na">getProjects</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="na">getElements</span><span class="o">(</span><span class="n">IMap</span><span class="o">.</span><span class="na">class</span><span class="o">).</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">));</span>
+</pre></div>
+</div>
+<p>Q: How can I programmatically commit changes</p>
+<p>There is a Commit Command that can be sent to the map to commit:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">MapCommand</span> <span class="n">commitCommand</span><span class="o">=</span><span class="n">EditCommandFactory</span><span class="o">.</span><span class="na">getInstance</span><span class="o">().</span><span class="na">createCommitCommand</span><span class="o">();</span>
+<span class="n">map</span><span class="o">.</span><span class="na">sendCommandSync</span><span class="o">(</span><span class="n">commitCommand</span><span class="o">);</span>
+</pre></div>
+</div>
+<p>Q: How can I set up a custom splash screen</p>
+<p>Follow the <a class="reference internal" href="custom_application_tutorial.html"><em>Custom Application Tutorial</em></a> for branding and
+splash screen information.</p>
+<p>Alternative: Make a fragment which overrides the provided intro/root.xml or the introContent.xml
+in the net.refractions.udig.ui plugin.</p>
+<p>Q: How do I add a layer programmatically</p>
+<p>The <strong>ApplicationGIS</strong> class has a utility method for you:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">ApplicationGIS</span><span class="o">.</span><span class="na">addLayersToMap</span><span class="o">(</span><span class="n">map</span><span class="o">,</span> <span class="n">layers</span><span class="o">,</span> <span class="n">startposition</span><span class="o">,</span> <span class="n">project</span><span class="o">);</span>
+</pre></div>
+</div>
+<p>You can also send the command directly yourself:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">IMap</span> <span class="n">map</span><span class="o">;</span>
+<span class="n">map</span><span class="o">.</span><span class="na">sendCommandASync</span><span class="o">(</span><span class="k">new</span> <span class="n">AddLayerCommand</span><span class="o">(</span><span class="n">layer</span><span class="o">)</span> <span class="o">);</span>
+</pre></div>
+</div>
+<p>Q: How do I add default key bindings to my IWorkbenchPart</p>
+<p>Simply add this line to the createPartControl() method of your workbench part.</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">ApplicationGIS</span><span class="o">.</span><span class="na">getToolManager</span><span class="o">().</span><span class="na">registerActionsWithPart</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>This will allow your view to forward common keybindings to the MapEditor so the user can</dt>
+<dd>change controls and pan around the Map using the keyboard.</dd>
+</dl>
+<p>Q: How do I create a map programmatically</p>
+<p>There is a command to create a map, which you can send to the project:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">CreateMapCommand</span> <span class="n">command</span><span class="o">=</span><span class="k">new</span> <span class="n">CreateMapCommand</span><span class="o">(</span><span class="s">&quot;MapName&quot;</span><span class="o">,</span> <span class="n">listofGeoResources</span><span class="o">,</span> <span class="n">project</span><span class="o">);</span>
+<span class="n">project</span><span class="o">.</span><span class="na">sendSync</span><span class="o">(</span><span class="n">command</span><span class="o">);</span>
+<span class="n">IMap</span> <span class="n">map</span><span class="o">=</span><span class="n">command</span><span class="o">.</span><span class="na">getCreatedMap</span><span class="o">();</span>
+</pre></div>
+</div>
+<p>Q: How do I make a new type of layer</p>
+<p>A layer in uDig is (very generally) a set of IGeoResources which are handles for the same dataset.</p>
+<p>Example: A WFS and a WMS may be backed onto the same dataset, so the Layer should have access to a
+WFSGeoResource and a WMSGeoResource</p>
+<dl class="docutils">
+<dt>To define a new <strong>type</strong> of layer one must create a new IGeoResource (and IService since IServices</dt>
+<dd>contain the IGeoResources).</dd>
+</dl>
+<p>Example: A Web Terrain layer would require a Web Terrain IService and IGeoResource.</p>
+<dl class="docutils">
+<dt>Once a new layer type is created it does not automatically get rendered unless one of its</dt>
+<dd>IGeoResources resolves to a DataStore, GridCoverage or a WebMapServer. If one of the IGeoResources
+does resolve to one of those objects then you are done and the layer will render. If not then
+a new Renderer must be developed.</dd>
+</dl>
+<p>For more information:</p>
+<ul class="simple">
+<li><a class="reference internal" href="catalog.html"><em>Catalog</em></a></li>
+<li><a class="reference internal" href="renderers.html"><em>Renderers</em></a></li>
+</ul>
+<p>Q: How is udig rendering different from geotools rendering</p>
+<dl class="docutils">
+<dt>Our rendering challenge is a little bit different then the one that the geotools Streaming Renderer</dt>
+<dd>focuses on.</dd>
+<dt>Often in a OGC Open Web Services workflow there is more then one way to do it. Both a Web Feature</dt>
+<dd>Server and a Web Map Server may provide the same information, or indeed be able to provide a
+picture for a layer in a map. To make matters interesting a Web Map Server may be able to draw
+more then one layer at the same time. Our api is trying to walk the line between capturing this
+complexity, and hiding it.</dd>
+<dt>When we have figured out which workflow is going to be used for a layer we end up with</dt>
+<dd>the concept of a Renderer.</dd>
+<dt>Each Layer, or a set of Layers, get a Renderer. Each Renderer produced a raster. Renderers are</dt>
+<dd>aranged into a stack, and enough event notification is used to so that everyone can play in
+their own thread.</dd>
+</dl>
+<p>Q: How the do Features and DataStores fit into the picture</p>
+<dl class="docutils">
+<dt>At the uDig level there are IServices and IGeoResources. These are generic handles to something</dt>
+<dd>&#8220;real.&#8221;</dd>
+</dl>
+<p>Example: An IService can be a handle to a WMS or a Datastore. An IGeoResource can be a handle to a
+&#8220;FeatureSource&#8221; or &#8220;GridCoverage&#8221;.</p>
+<p>A <strong>Layer</strong> references an IGeoResource... Actually, since two IGeoResources can refer to the same
+data (for example a WMS Layer and a WFS FeatureCollection backed onto the same data) a layer can
+reference one or more IGeoResources <strong>BUT</strong> only 1 data. A layer has functionality allowing
+inspection of the georesources and also map specific information that is unrelated to the
+IGeoResource, for example a map name and a style.</p>
+<p><strong>Renderer</strong> is responsible for drawing a layer. There are many different types of renderers. Some
+renderers can render Vector data, others can render GridCoverages or make WMS requests. The
+BasicFeatureRenderer, for example, only works for Layers that has an IGeoResource that is a handle
+for a FeatureSource.</p>
+<p>That is all at the uDig level. uDig uses the Geotools library extensively so most of the current
+IServices and IGeoResources are handles for Geotools objects. Geotools has DataStores and
+FeatureSources for Vector data. A DataStore is a peer of IService. An example of a Datastore is a
+PostGIS database. FeatureSources can be obtained from DataStores and are a peer of IGeoResource.
+FeatureSources can be used to obtain features of a particular feature type from a DataStore.
+FeatureSources are read-only. If the Datastore is read-write you can do an instance check on the
+FeatureSource to see if it is a FeatureStore. FeatureStores provide methods for
+adding/removing/modifying features.</p>
+<p>The next obvious question is: If I am in uDig how do I get a FeatureSource? Here are some common
+scenarios that occur in uDig.</p>
+<p>FeatureSource access from a layer:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">layer</span><span class="o">.</span><span class="na">getResource</span><span class="o">(</span> <span class="n">FeatureSource</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">monitor</span> <span class="o">);</span>
+</pre></div>
+</div>
+<p>This is a blocking call you can do a non-blocking check to see if the layer has a FeatureSource by:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">layer</span><span class="o">.</span><span class="na">hasResource</span><span class="o">(</span> <span class="n">FeatureSource</span><span class="o">.</span><span class="na">class</span> <span class="o">);</span>
+</pre></div>
+</div>
+<p>FeatureSource access from an IGeoResource:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="k">if</span><span class="o">(</span> <span class="n">resource</span><span class="o">.</span><span class="na">canResolve</span><span class="o">(</span> <span class="n">FeatureSource</span><span class="o">.</span><span class="na">class</span> <span class="o">)</span> <span class="o">)</span>
+    <span class="k">return</span> <span class="n">resource</span><span class="o">.</span><span class="na">resolve</span><span class="o">(</span> <span class="n">FeatureSource</span><span class="o">.</span><span class="na">class</span> <span class="o">);</span>
+</pre></div>
+</div>
+<p>If it is possible, always obtain a FeatureSource from a layer. This is because uDig&#8217;s EditManager
+manages transactions for the user (and developer). FeatureSources by default use auto commit
+transactions where the FeatureSource obtained from a layer uses a transaction.</p>
+<p>Q: How to get geometries from layer</p>
+<p>To get geometries from a layer you need to ask for a FeatureSource object from the layer:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">FeatureSource</span> <span class="n">source</span><span class="o">=</span><span class="n">layer</span><span class="o">.</span><span class="na">getResource</span><span class="o">(</span> <span class="n">FeatureSource</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">progressMonitor</span><span class="o">);</span>
+</pre></div>
+</div>
+<p>Once you have a feature source you can get all the features from the source by:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">FeatureCollection</span> <span class="n">collection</span><span class="o">=</span><span class="n">source</span><span class="o">.</span><span class="na">getFeatures</span><span class="o">();</span>
+</pre></div>
+</div>
+<p>Q: How to tell when something changes</p>
+<p>The uDig &#8220;application model&#8221; is maintained with EMF (the eclipse modeling framework). As such it is
+very easy to morph uDig to meet your needs.</p>
+<ul>
+<li><p class="first">Adaptor: Generic EMF notifications are provided through use of an &#8220;Adaptor&#8221;</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">layer</span><span class="o">.</span><span class="na">eAdapters</span><span class="o">().</span><span class="na">add</span><span class="o">(</span> <span class="k">new</span> <span class="n">AdapterImpl</span><span class="o">(){</span>
+   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">notifyChanged</span><span class="o">(</span> <span class="n">Notificaiton</span> <span class="n">msg</span> <span class="o">)</span> <span class="o">{</span>
+       <span class="k">if</span><span class="o">(</span> <span class="n">msg</span><span class="o">.</span><span class="na">getNotifier</span><span class="o">()</span> <span class="n">instnaceof</span> <span class="n">Layer</span> <span class="o">){</span>
+           <span class="n">Layer</span> <span class="n">layer</span> <span class="o">=</span> <span class="o">(</span><span class="n">Layer</span><span class="o">)</span> <span class="n">msg</span><span class="o">.</span><span class="na">getNotifier</span><span class="o">();</span>
+           <span class="k">switch</span><span class="o">(</span> <span class="n">msg</span><span class="o">.</span><span class="na">getFeatureID</span><span class="o">(</span><span class="n">Layer</span><span class="o">.</span><span class="na">class</span><span class="o">)</span> <span class="o">)</span> <span class="o">{</span>
+           <span class="k">case</span> <span class="n">ProjectPackage</span><span class="o">.</span><span class="na">LAYER__NAME</span><span class="o">:</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span> <span class="n">layer</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span><span class="s">&quot; renamed&quot;</span><span class="o">);</span>
+                <span class="k">break</span><span class="o">;</span>
+           <span class="k">case</span> <span class="n">ProjectPackage</span><span class="o">.</span><span class="na">LAYER__GEO_RESOURCES</span><span class="o">:</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span> <span class="s">&quot;We have new data!&quot;</span><span class="o">);</span>
+                <span class="n">FeatureType</span> <span class="n">schema</span> <span class="o">=</span> <span class="n">layer</span><span class="o">.</span><span class="na">getSchema</span><span class="o">();</span>
+                <span class="k">if</span><span class="o">(</span> <span class="n">schema</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">){</span>
+                     <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span> <span class="s">&quot;changed to &quot;</span><span class="o">+</span><span class="n">schema</span><span class="o">.</span><span class="na">getTypeName</span><span class="o">()</span> <span class="o">);</span>
+                <span class="o">}</span>
+                <span class="k">break</span><span class="o">;</span>
+           <span class="o">}</span>
+       <span class="o">}</span>
+   <span class="o">}</span>
+<span class="o">});</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Listener: the project sets add/remove listener methods as they are requested on the udig-devel
+email list:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">layer</span><span class="o">.</span><span class="na">addListener</span><span class="o">(</span> <span class="k">new</span> <span class="n">ILayerListener</span><span class="o">(){</span>
+   <span class="kd">public</span> <span class="nf">refresh</span><span class="o">(</span> <span class="n">LayerEvent</span> <span class="n">event</span> <span class="o">){</span>
+       <span class="k">if</span><span class="o">(</span> <span class="n">event</span><span class="o">.</span><span class="na">getType</span><span class="o">()</span> <span class="o">==</span> <span class="n">LayerEvent</span><span class="o">.</span><span class="na">EventType</span><span class="o">.</span><span class="na">STYLE</span> <span class="o">){</span>
+           <span class="n">ILayer</span> <span class="n">layer</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="na">getSource</span><span class="o">();</span>
+           <span class="n">IStyleBlackboard</span> <span class="n">style</span> <span class="o">=</span> <span class="o">(</span><span class="n">IStyleBlackboard</span> <span class="o">)</span> <span class="n">event</span><span class="o">.</span><span class="na">getNewValue</span><span class="o">();</span>
+
+           <span class="c1">// layer has changed style</span>
+       <span class="o">}</span>
+   <span class="o">}</span>
+<span class="o">});</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>An adapter is a traditional pater when you want to use one data model and &#8220;morph&#8221; it to fit another
+interface. One of the side effects of this is you need to pay attention to the origional data, and
+pass any changes along.</p>
+<p>You can see lots of examples of this idea in Java code. People setting up custom JTreeModels to
+visualize an internal data structure etc...</p>
+<p>Since this need happens <strong>all</strong> the time the EMF crew decided design for it in mind. It is a much
+more difficult, and interesting, problem them simply listening for changes (Indeed it is a superset
+of change notification - basically change notification with interface change). The benifit is that
+you can &#8220;force&#8221; EMF models (and thus uDig) into about anything.</p>
+<p>So the above example is &#8220;an adapter&#8221;, and we are only paying attention to the changes.</p>
+<p>Example: Here is how you can watch the &#8220;Viewport Model&#8221; (ie. Zoom, Pan, CRS):</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">map</span><span class="o">.</span><span class="na">getViewportModel</span><span class="o">().</span><span class="na">addViewportModelListener</span><span class="o">(</span><span class="k">new</span> <span class="n">IViewportModelListener</span><span class="o">()){</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">changed</span><span class="o">(</span><span class="n">ViewportModel</span> <span class="n">event</span><span class="o">){</span>
+    <span class="k">if</span><span class="o">(</span> <span class="n">event</span><span class="o">.</span><span class="na">getType</span><span class="o">()==</span><span class="n">EventType</span><span class="o">.</span><span class="na">CRS</span> <span class="o">}</span>
+      <span class="c1">// crs has changed do something</span>
+    <span class="k">else</span> <span class="nf">if</span><span class="o">(</span> <span class="n">event</span><span class="o">.</span><span class="na">getType</span><span class="o">()==</span><span class="n">EventType</span><span class="o">.</span><span class="na">BOUNDS</span> <span class="o">){</span>
+      <span class="c1">// bounds have changed do something else</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>Example: Layer(s) added/removed</p>
+<ul>
+<li><p class="first">IMapCompositionListener* tells you when layers were added to the map, were deleted from the map
+or when the layer list order has changed. For more information take a look at
+<strong>MapCompositionEvent.EventType</strong>:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">ApplicationGIS</span><span class="o">.</span><span class="na">getActiveMap</span><span class="o">().</span><span class="na">addMapCompositionListener</span><span class="o">(</span><span class="k">new</span> <span class="n">IMapCompositionListener</span><span class="o">(){</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">changed</span><span class="o">(</span> <span class="n">MapCompositionEvent</span> <span class="n">event</span> <span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">event</span><span class="o">.</span><span class="na">getType</span><span class="o">()</span> <span class="o">==</span> <span class="n">EventType</span><span class="o">.</span><span class="na">ADDED</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Layer added&quot;</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">event</span><span class="o">.</span><span class="na">getType</span><span class="o">()</span> <span class="o">==</span> <span class="n">EventType</span><span class="o">.</span><span class="na">REMOVED</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Layer removed&quot;</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="c1">//..</span>
+    <span class="o">}</span>
+<span class="o">});</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>Example: Map opens/created/closes If you have to do something when a map opens, was created or is
+about to close, use the extension point <em>net.refractions.udig.project.mapInterceptor</em> in your
+<strong>plugin.xml</strong>:</p>
+<div class="highlight-xml"><div class="highlight"><pre>[..]
+  <span class="nt">&lt;extension</span>
+        <span class="na">point=</span><span class="s">&quot;net.refractions.udig.project.mapInterceptor&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;mapOpening</span>
+              <span class="na">class=</span><span class="s">&quot;net.refractions.udig.yourplugin.OpenMapListener&quot;</span>
+              <span class="na">id=</span><span class="s">&quot;net.refractions.udig.yourplugin.mapOpens&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;/mapOpening&gt;</span>
+  <span class="nt">&lt;/extension&gt;</span>
+[..]
+</pre></div>
+</div>
+<p>And create a new class:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">net.refractions.udig.project.interceptor.MapInterceptor</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">net.refractions.udig.project.internal.Map</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">OpenMapListener</span> <span class="kd">implements</span> <span class="n">MapInterceptor</span><span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="n">Map</span> <span class="n">map</span><span class="o">){</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;map opens: &quot;</span> <span class="o">+</span> <span class="n">map</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>Example: MapEditor and other ViewParts get activated/opened/closed. If you just want to track
+changes of the MapEditor, take a look at <strong>LayersView.MapEditorListener</strong>.</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">getSite</span><span class="o">().</span><span class="na">getWorkbenchWindow</span><span class="o">().</span><span class="na">getPartService</span><span class="o">().</span><span class="na">addPartListener</span><span class="o">(</span><span class="k">new</span>  <span class="n">IPartListener</span><span class="o">()</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">partActivated</span><span class="o">(</span><span class="n">IWorkbenchPart</span> <span class="n">part</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;partActivated: &quot;</span> <span class="o">+</span> <span class="n">part</span><span class="o">.</span><span class="na">getTitle</span><span class="o">());</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">partBroughtToTop</span><span class="o">(</span><span class="n">IWorkbenchPart</span> <span class="n">part</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;partBroughtToTop: &quot;</span> <span class="o">+</span> <span class="n">part</span><span class="o">.</span><span class="na">getTitle</span><span class="o">());</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">partClosed</span><span class="o">(</span><span class="n">IWorkbenchPart</span> <span class="n">part</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;partClosed: &quot;</span> <span class="o">+</span> <span class="n">part</span><span class="o">.</span><span class="na">getTitle</span><span class="o">());</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">partDeactivated</span><span class="o">(</span><span class="n">IWorkbenchPart</span> <span class="n">part</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;partDeactivated: &quot;</span> <span class="o">+</span> <span class="n">part</span><span class="o">.</span><span class="na">getTitle</span><span class="o">());</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">partOpened</span><span class="o">(</span><span class="n">IWorkbenchPart</span> <span class="n">part</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;partOpened: &quot;</span> <span class="o">+</span> <span class="n">part</span><span class="o">.</span><span class="na">getTitle</span><span class="o">());</span>
+    <span class="o">}</span>
+<span class="o">});</span>
+</pre></div>
+</div>
+<p>Q: Providing Visual Feedback from a View</p>
+<p>You will need to know which Map is being worked on; either by:</p>
+<ul class="simple">
+<li>looking up the current active part and asking it to &#8220;adapt&#8221; to a Map.</li>
+<li>having a workbench listener and watching the editors change; and remembering the Map from the
+last MapEditor used.</li>
+</ul>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">IMap</span> <span class="n">map</span><span class="o">;</span>
+
+<span class="n">IMap</span> <span class="nf">getMap</span><span class="o">(){</span>
+    <span class="k">return</span> <span class="n">map</span><span class="o">;</span>
+    <span class="c1">// you will need to figure this out by listening to the workbench IPartListener</span>
+    <span class="c1">// see LayerView for an example</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<ul>
+<li><p class="first">Creating and Executing a DrawShapeCommand: This technique is good for providing quick visual
+feedback <strong>on the screen</strong>; the draw command stays on the screen until you set it to be invalid.
+An example of this being used is to &#8220;flash&#8221; a feature when it is selected in the view. Most of
+the examples you see for using a DrawShapeCommand will be for using a ToolContext when a tool
+wants to provide visual feedback. A Context object is just a helper class - when you are working
+on a View you will need to do the work yourself.</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">DrawShapeCommand</span> <span class="n">command</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DrawShapeCommand</span><span class="o">(</span><span class="n">shape</span><span class="o">,</span> <span class="n">paint</span><span class="o">,</span> <span class="n">lineStyle</span><span class="o">,</span> <span class="n">lineWidth</span><span class="o">);</span>
+</pre></div>
+</div>
+<p>Here is the kind of work a tool context normally does for you:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">command</span><span class="o">.</span><span class="na">setMap</span><span class="o">(</span> <span class="n">map</span> <span class="o">);</span>
+<span class="n">ViewportPane</span> <span class="n">viewportPane</span> <span class="o">=</span> <span class="n">map</span><span class="o">.</span><span class="na">getRenderManager</span><span class="o">().</span><span class="na">getMapDisplay</span><span class="o">();</span>
+<span class="n">viewportPane</span><span class="o">.</span><span class="na">addDrawCommand</span><span class="o">(</span><span class="n">command</span><span class="o">);</span>
+<span class="n">Rectangle</span> <span class="n">validArea</span><span class="o">;</span>
+<span class="k">try</span><span class="o">{</span>
+    <span class="n">validArea</span> <span class="o">=</span> <span class="n">command</span><span class="o">.</span><span class="na">getValidArea</span><span class="o">();</span>
+<span class="o">}</span><span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">validArea</span><span class="o">=</span><span class="kc">null</span><span class="o">;</span>
+<span class="o">}</span>
+<span class="k">if</span><span class="o">(</span> <span class="n">validArea</span><span class="o">!=</span><span class="kc">null</span> <span class="o">)</span>
+    <span class="n">viewportPane</span><span class="o">.</span><span class="na">repaint</span><span class="o">(</span><span class="n">validArea</span><span class="o">.</span><span class="na">x</span><span class="o">,</span> <span class="n">validArea</span><span class="o">.</span><span class="na">y</span><span class="o">,</span> <span class="n">validArea</span><span class="o">.</span><span class="na">width</span><span class="o">,</span> <span class="n">validArea</span><span class="o">.</span><span class="na">height</span><span class="o">);</span>
+<span class="k">else</span>
+    <span class="n">viewportPane</span><span class="o">.</span><span class="na">repaint</span><span class="o">();</span>
+</pre></div>
+</div>
+<p>A review of how draw commands work - they stay on the map until they are invalid. So at some
+point &#8220;later&#8221; you can take the command off the screen by:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">command</span><span class="o">.</span><span class="na">setValid</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>If you want to issue a single command to schedule a series of shapes to be drawn look at the
+animation code example...it takes care using a timer to handle the the &#8220;later&#8221;.</p>
+<ul class="simple">
+<li>Implement a MapGraphic displaying data from a Blackboard</li>
+</ul>
+<p>My last idea was to create public class TripMapGraphic implements MapGraphic {} , retrieving a
+List&lt;Coordinate&gt; from backboard, and drawing them.</p>
+<p>This is a <strong>great</strong> way to provide visual feedback <strong>on the map</strong>. An example would be a
+TripMapGraphic that shows a route generated from the geotools graph module.</p>
+<p>You can add a MapGraphic to the Map at any point by sending an &#8220;Add Layer&#8221; command to the Map. An
+example is the edit tool snapping functionality adding the Graph map graphic when &#8220;snapping to
+grid&#8221;.</p>
+<p>This second way is good if you want to &#8220;mark up&#8221; the map for a specific purpose; say highlighting
+some roads on the screen in response to finding a route; using a MapGraphic will let your user pan
+and zoom around and still see your highlight.</p>
+<p>The training course example coordinate map graphic and coordinate tool cover this kind of case. This
+example makes use of screen coordiantes; you will need to use the viewport world 2 screen and screen
+2 world transformations to record the coordinates &#8220;on the map&#8221;.</p>
+<p>Here is an example of storing points on the layer blackboard in lat/lon:</p>
+<div class="highlight-java"><pre>IBlackboard blackboard = map.getBlackboard();
+List&lt;Coordinate&gt; points =  (List&lt;Coordinate&gt;) blackboard.get("route);
+
+if (points == null) {
+    points = new ArrayList&lt;Coordinate&gt;();
+    blackboard.put(BLACKBOARD_KEY,points);
+}
+points.add( new Coordinate(lat,lon) ); // ie DefaultGeographicCRS.WGS84</pre>
+</div>
+<p>You can draw these onto the screen in your mapgraphic render method</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kt">void</span> <span class="nf">draw</span><span class="o">(</span> <span class="n">MapGraphicContext</span> <span class="n">context</span> <span class="o">)</span> <span class="o">{</span>
+
+    <span class="c1">//initialize the graphics handle</span>
+     <span class="n">ViewportGraphics</span> <span class="n">g</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="na">getGraphics</span><span class="o">();</span>
+     <span class="n">g</span><span class="o">.</span><span class="na">setColor</span><span class="o">(</span><span class="n">Color</span><span class="o">.</span><span class="na">BLACK</span><span class="o">);</span>
+     <span class="n">g</span><span class="o">.</span><span class="na">setStroke</span><span class="o">(</span><span class="n">ViewportGraphics</span><span class="o">.</span><span class="na">LINE_SOLID</span><span class="o">,</span> <span class="mi">1</span><span class="o">);</span>
+
+     <span class="c1">//get the map blackboard</span>
+     <span class="n">IMap</span> <span class="n">map</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="na">getLayer</span><span class="o">().</span><span class="na">getMap</span><span class="o">();</span>
+     <span class="n">IBlackboard</span> <span class="n">blackboard</span> <span class="o">=</span> <span class="n">map</span><span class="o">.</span><span class="na">getBlackboard</span><span class="o">();</span>
+
+     <span class="n">List</span><span class="o">&lt;</span><span class="n">Coordinate</span><span class="o">&gt;</span> <span class="n">coordinates</span> <span class="o">=</span> <span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Coordinate</span><span class="o">&gt;)</span> <span class="n">blackboard</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&quot;route&quot;</span><span class="o">);</span>
+
+     <span class="k">if</span> <span class="o">(</span><span class="n">coordinates</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+         <span class="k">return</span><span class="o">;</span> <span class="c1">//no coordinates to draw</span>
+     <span class="o">}</span>
+
+    <span class="n">MathTransform</span> <span class="n">data2world</span> <span class="o">=</span> <span class="n">CRS</span><span class="o">.</span><span class="na">findMathTransform</span><span class="o">(</span> <span class="n">DefaultGeographicCRS</span><span class="o">.</span><span class="na">WGS84</span><span class="o">,</span> <span class="n">context</span><span class="o">.</span><span class="na">getCRS</span><span class="o">()</span> <span class="o">);</span>
+
+     <span class="k">for</span> <span class="o">(</span><span class="n">Coordinate</span> <span class="n">coordinate</span> <span class="o">:</span> <span class="n">coordinates</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Ellipse2D</span> <span class="n">e</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Ellipse2D</span><span class="o">.</span><span class="na">Double</span><span class="o">(</span>
+                <span class="n">coordinate</span><span class="o">.</span><span class="na">x</span><span class="o">-</span><span class="mi">4</span><span class="o">,</span>
+                <span class="n">coordinate</span><span class="o">.</span><span class="na">y</span><span class="o">-</span><span class="mi">4</span><span class="o">,</span>
+                <span class="mi">10</span><span class="o">,</span><span class="mi">10</span><span class="o">);</span>
+        <span class="n">g</span><span class="o">.</span><span class="na">draw</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="n">Coordinate</span> <span class="n">worldCoord</span> <span class="o">=</span> <span class="n">JTS</span><span class="o">.</span><span class="na">transform</span><span class="o">(</span><span class="n">coordinate</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="n">data2world</span> <span class="o">);</span>
+            <span class="n">Point</span> <span class="n">point</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="na">worldToPixel</span><span class="o">(</span><span class="n">worldCoord</span><span class="o">);</span>
+            <span class="n">g</span><span class="o">.</span><span class="na">drawOval</span><span class="o">(</span> <span class="n">point</span><span class="o">.</span><span class="na">x</span><span class="o">-</span><span class="mi">1</span><span class="o">,</span> <span class="n">point</span><span class="o">.</span><span class="na">y</span><span class="o">-</span><span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">3</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">TransformException</span> <span class="n">e1</span><span class="o">)</span> <span class="o">{</span>
+        <span class="o">}</span>
+     <span class="o">}</span>
+ <span class="o">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="map_decorator.html">Map Decorator</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="reference.html">Reference</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2012, Refractions Research.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

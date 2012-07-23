@@ -1,0 +1,182 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>CSVService Tutorial &mdash; uDig 1.3.2 Developers Guide</title>
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.3.2 Developers Guide" href="index.html" />
+    <link rel="up" title="Disk to Screen Tutorials" href="disk_to_screen_tutorials.html" />
+    <link rel="next" title="Testing Tutorial" href="testing_tutorial.html" />
+    <link rel="prev" title="Disk to Screen Tutorials" href="disk_to_screen_tutorials.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="disk_to_screen_tutorials.html">Disk to Screen Tutorials</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="testing_tutorial.html">Testing Tutorial</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="csvservice-tutorial">
+<h1>CSVService Tutorial<a class="headerlink" href="#csvservice-tutorial" title="Permalink to this headline">¶</a></h1>
+<p>Step one of our disk to screen tour is access to data.</p>
+<div class="figure align-center">
+<img alt="" src="_images/CSVServiceTutorial.png" />
+</div>
+<p>This workbook is part of our commercial training materials.</p>
+<ul class="simple">
+<li>See the main <a class="reference external" href="http://udig.refractions.net/users/">uDig website</a> for details on training and
+support</li>
+<li>Commercial Training materials are available to Academic students on request</li>
+</ul>
+<p>Source code:</p>
+<ul>
+<li><p class="first">Available in your uDig SDK (import the <a class="reference external" href="Code%20Examples.html">source code</a> from the plugins
+view)</p>
+</li>
+<li><p class="first">plugin:</p>
+<ul>
+<li><dl class="first docutils">
+<dt><a class="reference external" href="https://github.com/uDig/udig-platform/tree/master/tutorials/com.csvreader">com.csvreader</a></dt>
+<dd><p class="first last">(github)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><a class="reference external" href="https://github.com/uDig/udig-platform/tree/master/tutorials/net.refractions.udig.tutorials.catalog.csv">net.refractions.udig.tutorials.catalog.csv</a></dt>
+<dd><p class="first last">(github)</p>
+</dd>
+</dl>
+</li>
+</ul>
+</li>
+</ul>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>This workbook covers the creation of a custom service for the catalog. Our service is going to parse
+a comma separated value file; using a third-party java library that we are going to bundle up into a
+separate plug-in.</p>
+<p>After completing this workbook you will:</p>
+<ul class="simple">
+<li>Understand how the uDig Catalog interacts with external services.</li>
+<li>Bundle up a third-party jar as an eclipse plug-in</li>
+<li>Implement a new uDig catalog service.</li>
+</ul>
+<p>This workbook is going to cover several advanced topics in Eclipse RCP Development. In particular we
+will cover the relationship between plug-in dependencies and how the Platform stitches everything
+together with some very strict Classpath restrictions.</p>
+<div class="figure align-center">
+<img alt="" src="_images/CSVService.png" />
+</div>
+</div>
+<div class="section" id="what-to-do-next">
+<h2>What to Do Next<a class="headerlink" href="#what-to-do-next" title="Permalink to this headline">¶</a></h2>
+<p>Here are some additional challenges for you to try:</p>
+<div class="section" id="icon">
+<h3>Icon<a class="headerlink" href="#icon" title="Permalink to this headline">¶</a></h3>
+<p>The CSV file does not look very pretty in the catalog; can you give it a better title? How about an
+Icon?</p>
+<p>Hint use your plug-in activator to manage IconDescriptors.</p>
+</div>
+<div class="section" id="generate-csv-file">
+<h3>Generate CSV File<a class="headerlink" href="#generate-csv-file" title="Permalink to this headline">¶</a></h3>
+<p>The Java CSV project includes a CSVWriter; can you make an Operation that generates a new CSV file
+given any point data?</p>
+<p>Hint: Remember to re-project into WGS84</p>
+</div>
+<div class="section" id="url">
+<h3>URL<a class="headerlink" href="#url" title="Permalink to this headline">¶</a></h3>
+<p>Advanced: There is a specific mime type for CSV files; can you use this information to allow our
+service to work with a CSV file on a web server?</p>
+</div>
+<div class="section" id="break-it">
+<h3>Break it<a class="headerlink" href="#break-it" title="Permalink to this headline">¶</a></h3>
+<p>What happens when you try and add this data to a Map?</p>
+<p>Hint: Try zooming to the extents of the layer.</p>
+</div>
+</div>
+<div class="section" id="tips-tricks-and-suggestions">
+<h2>Tips, Tricks and Suggestions<a class="headerlink" href="#tips-tricks-and-suggestions" title="Permalink to this headline">¶</a></h2>
+<p>The following tips have been provided by the udig-devel list; please stop by and introduce yourself.</p>
+<div class="section" id="commercial-training-materials">
+<h3>Commercial Training Materials<a class="headerlink" href="#commercial-training-materials" title="Permalink to this headline">¶</a></h3>
+<p>Please contact any of the organisations listed on the main <a class="reference external" href="http://udig.refractions.net/users/">uDig support
+page</a> for details on uDig training.</p>
+<p>The workbooks and slides for the training course are available here:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://svn.refractions.net/udig_training/trunk">http://svn.refractions.net/udig_training/trunk</a></li>
+</ul>
+<p>This is a private svn repository that is open to those who have taken the training course.</p>
+</div>
+<div class="section" id="academic-access">
+<h3>Academic Access<a class="headerlink" href="#academic-access" title="Permalink to this headline">¶</a></h3>
+<p>The course materials can be made available to those working at academic institutions - we ask for an
+email from your Professor.</p>
+<p>Please ask your professor to email <a class="reference external" href="mailto:admin&#37;&#52;&#48;refractions&#46;net">admin<span>&#64;</span>refractions<span>&#46;</span>net</a> with the request.</p>
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="disk_to_screen_tutorials.html">Disk to Screen Tutorials</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="testing_tutorial.html">Testing Tutorial</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2012, Refractions Research.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

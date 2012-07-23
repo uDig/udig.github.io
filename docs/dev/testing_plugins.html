@@ -1,0 +1,297 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Testing Plugins &mdash; uDig 1.3.2 Developers Guide</title>
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.3.2 Developers Guide" href="index.html" />
+    <link rel="up" title="Working with Eclipse RCP" href="working_with_eclipse_rcp.html" />
+    <link rel="next" title="Bundle a JAR up as a Plugin" href="bundle_a_jar_up_as_a_plugin.html" />
+    <link rel="prev" title="Creating and Using Extension Points" href="creating_and_using_extension_points.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="creating_and_using_extension_points.html">Creating and Using Extension Points</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="bundle_a_jar_up_as_a_plugin.html">Bundle a JAR up as a Plugin</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="testing-plugins">
+<h1>Testing Plugins<a class="headerlink" href="#testing-plugins" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="writing-test-plugins">
+<h2>Writing Test Plugins<a class="headerlink" href="#writing-test-plugins" title="Permalink to this headline">¶</a></h2>
+<p>Writing a test plugin is no different from writing a regular plugin. After creating your test
+plugin, simply creating test cases the usual junit way by extended org.junit.TestCase.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The junit library is bundled as the <strong>org.junit</strong> plugin. Your test plugin
+must depend on it.</p>
+</div>
+<p>Optional: Unless it is necessary, we recommend placing junit tests for a particular plugin, in a
+separate plugin all together. The only downside to doing so is the loss of the ability to use
+<strong>package</strong> visiblity.</p>
+<div class="section" id="udig-support-classes">
+<h3>uDig Support Classes<a class="headerlink" href="#udig-support-classes" title="Permalink to this headline">¶</a></h3>
+<p>There are a few classes to assist writing uDig tests.</p>
+<p>In <strong>net.refractions.udig.ui.tests</strong>:</p>
+<ul class="simple">
+<li><strong>UDIGTestUtil</strong> - Provides methods for:<ul>
+<li>Creating Features</li>
+<li>Creating GeoResources</li>
+<li>Creating Services</li>
+<li>Waiting for UI events to complete</li>
+</ul>
+</li>
+</ul>
+<p>In <strong>net.refractions.udig.project.tests</strong>:</p>
+<ul class="simple">
+<li><strong>MapTests</strong> - Provides methods for creating maps</li>
+<li><strong>AbstractProjectTest</strong> - Super class for test cases. Attempts to clean up after running by
+clearing the project registry, maps, and projects</li>
+</ul>
+<p>In <strong>net.refractions.udig.project.ui.tests</strong>:</p>
+<ul class="simple">
+<li><strong>AbstractProjectUITest</strong> - Extends <strong>AbstractProjectTest</strong> and tries to close mapeditors in
+addition to what <strong>AbstractProjectTest</strong> does..</li>
+</ul>
+</div>
+<div class="section" id="naming-conventions">
+<h3>Naming Conventions<a class="headerlink" href="#naming-conventions" title="Permalink to this headline">¶</a></h3>
+<p>The naming convention for plugins is [namespace].[major subsystem].[minor subsystem]. Examples
+include:</p>
+<div class="highlight-python"><pre>the feature.xml file
+
+net.refractions.udig.catalog
+net.refractions.udig.catalog.wfs
+
+net.refractions.udig.project
+net.refractoins.udig.project.ui</pre>
+</div>
+<p>the feature.xml file</p>
+<p>The naming convention for test plugins is [namespace].[major subsystem].<strong>tests</strong>.[minor
+subsystem]. Examples include:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">net</span><span class="o">.</span><span class="n">refractions</span><span class="o">.</span><span class="n">udig</span><span class="o">.</span><span class="n">catalog</span><span class="o">.</span><span class="n">tests</span>
+<span class="n">net</span><span class="o">.</span><span class="n">refractions</span><span class="o">.</span><span class="n">udig</span><span class="o">.</span><span class="n">catalog</span><span class="o">.</span><span class="n">tests</span><span class="o">.</span><span class="n">wfs</span>
+
+<span class="n">net</span><span class="o">.</span><span class="n">refractions</span><span class="o">.</span><span class="n">udig</span><span class="o">.</span><span class="n">project</span><span class="o">.</span><span class="n">tests</span>
+<span class="n">net</span><span class="o">.</span><span class="n">refractoins</span><span class="o">.</span><span class="n">udig</span><span class="o">.</span><span class="n">project</span><span class="o">.</span><span class="n">tests</span><span class="o">.</span><span class="n">ui</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="running-tests-in-the-ide">
+<h3>Running Tests in the IDE<a class="headerlink" href="#running-tests-in-the-ide" title="Permalink to this headline">¶</a></h3>
+<p>After creating a test case in your new test plugin, right click on the class while in the <strong>Java</strong>
+perspective, and the context menu should contain a menu item entitled
+<em class="menuselection">Run As ‣ JUnit Plug-in Test</em>. This will start an eclipse runtime environment and
+run your test class.</p>
+<img alt="_images/runide.png" src="_images/runide.png" />
+</div>
+<div class="section" id="running-automated-tests">
+<h3>Running Automated Tests<a class="headerlink" href="#running-automated-tests" title="Permalink to this headline">¶</a></h3>
+<p>In order to have your test plugin run with the rest of the automated test plugins, the following
+steps must be taken:</p>
+<ol class="arabic simple">
+<li>Create a test suite</li>
+<li>Create a <strong>test.xml</strong> from the template</li>
+<li>Add your test plugin to the net.refractions.udig.test feature</li>
+<li>Add your test plugin to the automated test set</li>
+</ol>
+</div>
+<div class="section" id="creating-a-test-suite">
+<h3>Creating a Test Suite<a class="headerlink" href="#creating-a-test-suite" title="Permalink to this headline">¶</a></h3>
+<p>A test suite is a java class which extends <strong>junit.framework.TestSuite</strong>. Each test class you write
+must be added to the test suite. The following is an example of a test suite which contains three
+test classes.</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">CatalogUITestSuite</span> <span class="kd">extends</span> <span class="n">TestSuite</span> <span class="o">{</span>
+
+    <span class="cm">/** Returns the suite. This is required to use the JUnit Launcher. */</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">Test</span> <span class="nf">suite</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">CatalogUITestSuite</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nf">CatalogUITestSuite</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">addTest</span><span class="o">(</span><span class="k">new</span> <span class="n">TestSuite</span><span class="o">(</span><span class="n">HeadlessWizardDialogTest</span><span class="o">.</span><span class="na">class</span><span class="o">));</span>
+        <span class="n">addTest</span><span class="o">(</span><span class="k">new</span> <span class="n">TestSuite</span><span class="o">(</span><span class="n">BasicDataPipelineTest</span><span class="o">.</span><span class="na">class</span><span class="o">));</span>
+        <span class="n">addTest</span><span class="o">(</span><span class="k">new</span> <span class="n">TestSuite</span><span class="o">(</span><span class="n">BasicDataPipelineDialogTest</span><span class="o">.</span><span class="na">class</span><span class="o">));</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p><strong>The test suite must provide an implementation of a method with the following
+signature, which returns an instnace of the suite</strong></p>
+<div class="last highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">static</span> <span class="n">Test</span> <span class="nf">suite</span><span class="o">();</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="creating-the-test-xml-script">
+<h3>Creating the test.xml Script.<a class="headerlink" href="#creating-the-test-xml-script" title="Permalink to this headline">¶</a></h3>
+<p>The test.xml file is an ant build script which runs your unit tests. The following is a template
+<a class="reference external" href="download/attachments/5719/test.xml">test.xml</a> of such a script. Located near the top of the file
+are three properties which must be modified to reflect your particular test plugin. The properties
+include:</p>
+<ol class="arabic simple">
+<li><strong>plugin-name</strong> - This is name of your <strong>test</strong> plugin. For simplicity, keep it the same as the
+id of your plugin.</li>
+<li><strong>testClass</strong> - This is the fully qualified class name of your test suite.</li>
+<li><strong>testTarget</strong> - This is the name of ant target which will be used to run your tests.</li>
+</ol>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">It must be unique among all other test plugins.</p>
+</div>
+</div>
+<div class="section" id="adding-the-plugin-to-the-net-refractions-udig-test-feature">
+<h3>Adding the Plugin to the net.refractions.udig.test Feature<a class="headerlink" href="#adding-the-plugin-to-the-net-refractions-udig-test-feature" title="Permalink to this headline">¶</a></h3>
+<p>The easiest way to add a plugin to a particular feature is using the eclipse feature editor.</p>
+<ol class="arabic">
+<li><p class="first">Navigate to the net.refractions.udig.test feature while in the Java Perspective</p>
+<img alt="_images/nav.png" src="_images/nav.png" />
+</li>
+<li><p class="first">Open the feature.xml file with the eclipse editor and select the <strong>Plug-ins</strong> tab</p>
+<img alt="_images/edit.png" src="_images/edit.png" />
+</li>
+<li><p class="first">Click the <strong>Add</strong> button and select the test plugin from the pop-up dialog.</p>
+<img alt="_images/select.png" src="_images/select.png" />
+</li>
+<li><p class="first">Click <strong>OK</strong> and save the feature.xml file</p>
+</li>
+</ol>
+</div>
+<div class="section" id="adding-the-plugin-to-the-automated-test-set">
+<h3>Adding the Plugin to the Automated Test Set<a class="headerlink" href="#adding-the-plugin-to-the-automated-test-set" title="Permalink to this headline">¶</a></h3>
+<p>To add the plugin to the automated test set, you must check out
+<a class="reference external" href="http://svn.geotools.org/udig/trunk/scripts/test/">http://svn.geotools.org/udig/trunk/scripts</a>.
+This directory contains two files that must be modified.</p>
+<ol class="arabic simple">
+<li><strong>test.properties</strong></li>
+<li><strong>test.xml</strong> (<em>different from the one above</em>)</li>
+</ol>
+<div class="section" id="test-properties">
+<h4>test.properties<a class="headerlink" href="#test-properties" title="Permalink to this headline">¶</a></h4>
+<p>This file contains a list of properties which map a test plugin <strong>name</strong> to an id,version tuple and
+looks as follows:</p>
+<div class="highlight-python"><pre>org.eclipse.test=org.eclipse.test_3.1.0
+net.refractions.udig.catalog.tests=net.refractions.udig.catalog.tests_1.0.0
+net.refractions.udig.catalog.tests.wfs=net.refractions.udig.catalog.tests.wfs_1.0.0
+net.refractions.udig.project.tests=net.refractions.udig.project.tests_1.0.0
+net.refractions.udig.project.tests.ui=net.refractions.udig.project.tests.ui_1.0.0</pre>
+</div>
+<p>The name of the property MUST match the plugin-name declared in the test.xml file.</p>
+<p>To add the <strong>catalog.tests.ui</strong> plugin, we would add the following property:</p>
+<div class="highlight-python"><pre>net.refractions.udig.catalog.tests.ui=net.refractions.udig.catalog.tests.ui_1.0.0</pre>
+</div>
+</div>
+<div class="section" id="id1">
+<h4>test.xml<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+<p>This file is the root ant test script. It runs tests by delegating to the test.xml script created
+above. In order to have to the root script call your test.xml script, you must modify the target
+named <strong>all</strong> and add a call to your target. The <strong>all</strong> target is located near the bottom of the
+script and looks like the following:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;target</span> <span class="na">name=</span><span class="s">&quot;all&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;antcall</span> <span class="na">target=</span><span class="s">&quot;catalog&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;antcall</span> <span class="na">target=</span><span class="s">&quot;catalog.wfs&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;antcall</span> <span class="na">target=</span><span class="s">&quot;project&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;antcall</span> <span class="na">target=</span><span class="s">&quot;project.ui&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/target&gt;</span>
+</pre></div>
+</div>
+<p>To add the catalog.tests.ui plugin, we add the following line:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;antcall</span> <span class="na">target=</span><span class="s">&quot;catalog.ui&quot;</span> <span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p>The final step is to add a target which matches the name above.</p>
+<p>This name MUST match the plugin-name property declared in the test.xml file created above}</p>
+<p>The following is an example of a target:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;target</span> <span class="na">name=</span><span class="s">&quot;catalog.ui&quot;</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;antcall</span> <span class="na">target=</span><span class="s">&quot;runtests&quot;</span><span class="nt">&gt;</span>
+     <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;testPlugin&quot;</span> <span class="na">value=</span><span class="s">&quot;${net.refractions.udig.catalog.tests.ui}&quot;</span><span class="nt">/&gt;</span>
+     <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;report&quot;</span> <span class="na">value=</span><span class="s">&quot;net.refractions.udig.catalog.tests.ui&quot;</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;/antcall&gt;</span>
+<span class="nt">&lt;/target&gt;</span>
+</pre></div>
+</div>
+<p>The target can be added anywhere in the file.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last"><strong>The testPlugin attribute must match the name of the property added to teh test.properties file.</strong></p>
+</div>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last"><strong>The report attribute is the name that the test report will be published as</strong></p>
+</div>
+<p>Note that the plugin required to run automated tests is &#8220;eclipse-test-framework-3.1.zip&#8221;, available
+here:</p>
+<p><a class="reference external" href="http://download.eclipse.org/eclipse/downloads/drops/R-3.1-200506271435/index.php">http://download.eclipse.org/eclipse/downloads/drops/R-3.1-200506271435/index.php</a></p>
+</div>
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="creating_and_using_extension_points.html">Creating and Using Extension Points</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="bundle_a_jar_up_as_a_plugin.html">Bundle a JAR up as a Plugin</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2012, Refractions Research.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

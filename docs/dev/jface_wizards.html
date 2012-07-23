@@ -1,0 +1,128 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JFace Wizards &mdash; uDig 1.3.2 Developers Guide</title>
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.3.2 Developers Guide" href="index.html" />
+    <link rel="up" title="Working with Eclipse RCP" href="working_with_eclipse_rcp.html" />
+    <link rel="next" title="Plugin Help" href="plugin_help.html" />
+    <link rel="prev" title="Jface Field Decorations" href="jface_field_decorations.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="jface_field_decorations.html">Jface Field Decorations</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="plugin_help.html">Plugin Help</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="jface-wizards">
+<h1>JFace Wizards<a class="headerlink" href="#jface-wizards" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="contributing-to-the-importwizard">
+<h2>Contributing to the ImportWizard<a class="headerlink" href="#contributing-to-the-importwizard" title="Permalink to this headline">¶</a></h2>
+<p>Add a ImportWizard extension in the plugin.xml of your plugin.</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;extension</span>
+         <span class="na">point=</span><span class="s">&quot;org.eclipse.ui.importWizards&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;wizard</span>
+            <span class="na">class=</span><span class="s">&quot;net.refractions.udig.catalog.internal.ui.CatalogImportWizard&quot;</span>
+            <span class="na">icon=</span><span class="s">&quot;icons/obj16/repository_obj.gif&quot;</span>
+            <span class="na">id=</span><span class="s">&quot;net.refractions.udig.catalog.ui.dataImportWizard&quot;</span>
+            <span class="na">name=</span><span class="s">&quot;%dataImportWizard.name&quot;</span><span class="nt">&gt;</span>
+         <span class="nt">&lt;description&gt;</span>Import from a data source.<span class="nt">&lt;/description&gt;</span>
+      <span class="nt">&lt;/wizard&gt;</span>
+   <span class="nt">&lt;/extension&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="contributing-to-the-datawizard">
+<h2>Contributing to the dataWizard<a class="headerlink" href="#contributing-to-the-datawizard" title="Permalink to this headline">¶</a></h2>
+<p>Add a dataWizard extension in the plugin.xml of your plugin.</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;extension</span>
+       <span class="na">point=</span><span class="s">&quot;net.refractions.udig.catalog.ui.dataWizards&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;wizard</span>
+          <span class="na">banner=</span><span class="s">&quot;icons/wizban/postgis_wiz.gif&quot;</span>
+          <span class="na">class=</span><span class="s">&quot;net.refractions.udig.catalog.internal.postgis.ui.MifWizardPage&quot;</span>
+          <span class="na">description=</span><span class="s">&quot;%wizard.description&quot;</span>
+          <span class="na">icon=</span><span class="s">&quot;icons/etool16/postgis_wiz.gif&quot;</span>
+          <span class="na">id=</span><span class="s">&quot;net.refractions.udig.catalog.ui.mif&quot;</span>
+          <span class="na">name=</span><span class="s">&quot;%wizard.name&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;/wizard&gt;</span>
+ <span class="nt">&lt;/extension&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="related-reference">
+<h2>Related reference<a class="headerlink" href="#related-reference" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="http://www.eclipse.org/articles/Article-JFace%20Wizards/wizardArticle.html">Creating JFace Wizards</a></li>
+<li><a class="reference external" href="http://dev.eclipse.org/help20/content/help:/org.eclipse.platform.doc.isv/guide/swt.htm">Eclipse Platform Plug-in Developer Guide: Standard Widget Toolkit (SWT)</a></li>
+<li><a class="reference external" href="http://dev.eclipse.org/help20/content/help:/org.eclipse.platform.doc.isv/guide/jface.htm">Eclipse Platform Plug-in Developer Guide: JFace UI Framework</a></li>
+<li><a class="reference external" href="http://www.eclipse.org/articles/Understanding%20Layouts/Understanding%20Layouts.htm">Article: Understanding Layouts in SWT (Revised for 2.0)</a></li>
+</ul>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="jface_field_decorations.html">Jface Field Decorations</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="plugin_help.html">Plugin Help</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2012, Refractions Research.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,306 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Issues Framework Design &mdash; uDig 1.3.2 Developers Guide</title>
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.3.2 Developers Guide" href="index.html" />
+    <link rel="up" title="Key Components" href="key_components.html" />
+    <link rel="next" title="Shutdown Tasks" href="shutdown_tasks.html" />
+    <link rel="prev" title="Drag And Drop Design" href="drag_and_drop_design.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="drag_and_drop_design.html">Drag And Drop Design</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="shutdown_tasks.html">Shutdown Tasks</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="issues-framework-design">
+<h1>Issues Framework Design<a class="headerlink" href="#issues-framework-design" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="issues-framework">
+<h2>Issues Framework<a class="headerlink" href="#issues-framework" title="Permalink to this headline">¶</a></h2>
+<p>The issues framework consists of a view that displays all the issues/tasks that has been identified
+by uDig and its plugins that need to be resolved in some manner. It is a generic framework that
+allows uDig extenders to define custom issues, methods for resolving issues and even the storage
+mechanism for the issues.</p>
+</div>
+<div class="section" id="basic-design">
+<h2>Basic Design<a class="headerlink" href="#basic-design" title="Permalink to this headline">¶</a></h2>
+<p>The basic framework consists of a IIssuesManager that provides broad control over a single contained
+IIssuesList. An IIssuesList is basically an eventified List&lt;IIssue&gt; that has a couple additional
+methods. For example a method for obtaining all issues of the provided GroupID. IIssuesLists raise
+events when IIssues are added/removed/saved. A sub-interface of IIssuesList is the IRemoveIssuesList
+it has the additional methods save(IIssue) and refresh().</p>
+<p>An IIssue is a generic issue that represents an issue or task. It provides accessor methods that
+allow information about the issue to be obtained as well as a fix method so the issue can be
+<em>fixed</em>. IIssues are defined by extension points and what the fix method does is dependent on the
+implementation. AbstractIssue reduces the overhead of implementing new IIssues implementations.
+AbstractFixableIssue and FixableIssue also help in quickly and easily developing new IIssue
+implementations.</p>
+</div>
+<div class="section" id="existing-implementations">
+<h2>Existing implementations<a class="headerlink" href="#existing-implementations" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="iissues-implementations">
+<h3>IIssues implementations:<a class="headerlink" href="#iissues-implementations" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>FeatureIssue - An issue that indicates that a feature needs to be inspected. Description should
+provide more details as to what the issue is with the feature. The fix method opens the map and
+zooms to the issue with the problem. The FeatureEditor is also opened with the feature selected.</li>
+<li>FixableIssue - An issue that uses the net.refractions.udig.issues.issueFixer extension point to
+determine how to fix the issue. An accompanying IFixer</li>
+</ul>
+</div>
+<div class="section" id="iissueslist-implementations">
+<h3>IIssuesList implementations:<a class="headerlink" href="#iissueslist-implementations" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">IssuesList - An in-memory implementation of the IIssuesList interface.</p>
+</li>
+<li><p class="first">PostGISIssuesList - An IRemoteIssuesList that stores its issues as features in a PostGIS
+database. The PostGISIssuesList is implemented using the StrategizedIssuesList and the
+AbstractDatastoreStrategy. It is the reference implementation using those support classes and can
+be used to determine how to develop a custom IRemoteIssuesList. The table that the issues list
+uses is quite flexible but it must at minimum have:</p>
+</li>
+<li><p class="first">a Polygon or MultiPolygon or Geometry geometry column</p>
+</li>
+<li><p class="first">8 text columns</p>
+</li>
+<li><dl class="first docutils">
+<dt>at least 2 of the text columns should have an unlimited length</dt>
+<dd><p class="first last">Ideally the table should have the following columns (case is unimportant):</p>
+</dd>
+</dl>
+</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="30%" />
+<col width="20%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Column</th>
+<th class="head">Type</th>
+<th class="head">Comments</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>ID</td>
+<td>text</td>
+<td>should be able to contain at least 20 characters</td>
+</tr>
+<tr><td>resolution</td>
+<td>text</td>
+<td>can be limited to 8 characters</td>
+</tr>
+<tr><td>priority</td>
+<td>text</td>
+<td>can be limited to 8 characters</td>
+</tr>
+<tr><td>description</td>
+<td>text</td>
+<td>should be able to contain at least 100 characters</td>
+</tr>
+<tr><td>groupID</td>
+<td>text</td>
+<td>should be able to contain at least 20 characters</td>
+</tr>
+<tr><td>memento</td>
+<td>text</td>
+<td>should be unlimited or very large</td>
+</tr>
+<tr><td>viewmemento</td>
+<td>text</td>
+<td>should be unlimited or very large</td>
+</tr>
+<tr><td>extensionid</td>
+<td>text</td>
+<td>should be able to contain at least 20 characters</td>
+</tr>
+<tr><td>bounds</td>
+<td>polygon</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The PostgisDatastoreStrategy is a strategy for the StrategizedIssuesList so more implementations
+will be forthcoming in the future. If you desire an implementation that backs onto another datastore
+look at the classes:
+* net.refractions.udig.issues.StrategizedIssuesList
+* net.refractions.udig.issues.internal.datastore.PostgisDatastoreStrategy
+* net.refractions.udig.issues.internal.datastore.AbstractDatastoreStrategy</p>
+</div>
+</div>
+</div>
+<div class="section" id="extension-points">
+<h2>Extension points<a class="headerlink" href="#extension-points" title="Permalink to this headline">¶</a></h2>
+<p>For developers who want to create custom issues or issue lists the following extension points will
+be of interest to you:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="40%" />
+<col width="60%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Extension point ID</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>net.refractions.udig.issues.issue</td>
+<td>Allows new issue types to be declared. The getExtensionID should return the id of your extension</td>
+</tr>
+<tr><td>net.refractions.udig.issues.issuesList</td>
+<td>Declares a new issues list implementation</td>
+</tr>
+<tr><td>net.refractions.udig.issues.issueFixer</td>
+<td>Declares a fixer for subclasses of AbstractFixableIssue</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="support-classes">
+<h2>Support Classes<a class="headerlink" href="#support-classes" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="strategizedissueslist">
+<h3>StrategizedIssuesList<a class="headerlink" href="#strategizedissueslist" title="Permalink to this headline">¶</a></h3>
+<p>The StrategizedIssuesList is an implementation of the IRemoteIssuesList interface that delegates the
+reading and writing of features to an IListStrategy object. The StrategizedIssuesList handles all of
+the &#8220;tricky&#8221; logic for caching of features organizing them into groups, etc... The IListStrategy is
+a very simple interface designed to reduce the overhead of implementing IRemoteIssuesLists.</p>
+</div>
+<div class="section" id="abstractdatastorestrategy">
+<h3>AbstractDatastoreStrategy<a class="headerlink" href="#abstractdatastorestrategy" title="Permalink to this headline">¶</a></h3>
+<p>The AbstractDatastoreStrategy is an implementation of the IListStrategy interface converts features
+from a FeatureStore (the instance is determined by the implementation of the abstract
+getFeatureStore() method) into issues for use by the StrategizedIssuesList</p>
+</div>
+<div class="section" id="issuefixer">
+<h3>IssueFixer<a class="headerlink" href="#issuefixer" title="Permalink to this headline">¶</a></h3>
+<p>IssuesFixer is a framework described below that is used by the FixableIssue class to allow the
+workflow or method of fixing an issue to be declared as extension of the
+net.refractions.issues.issueFixer extension point. See the next section for more details.</p>
+</div>
+</div>
+<div class="section" id="id1">
+<h2>IssueFixer<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="extension-attributes">
+<h3>extension attributes<a class="headerlink" href="#extension-attributes" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><strong>id</strong>: extension identifier</li>
+<li><strong>class</strong>: the fixer class which implements net.refractions.udig.core.IFixer and provides the
+mechanism for resolving issues</li>
+<li><strong>targetClass</strong>: the IIssue class this fixer expects to see (a subclass of AbstractFixableIssue).
+If you have a specific IIssue implementation implementation, chances are your issue fixer will be
+specific to that implementation.</li>
+<li><strong>requiredKey</strong>: (multiple instances) requires that the saveMemento contain this attribute for
+fixer to be a potential candidate.</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The use of targetClass and requiredKey is recommended but not required; using them reduces the
+number of fixer classes which need to be instantiated (in order for the IFixer.canFix method to be
+called) each time an issue is &#8220;fixed&#8221;, resulting in lower overhead.</p>
+</div>
+</div>
+<div class="section" id="methods">
+<h3>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h3>
+<p>The first parameter taken by each method (generic object) is expected to be an AbstractFixableIssue
+and should be cast as such.</p>
+<p><strong>canFix(Object, IMemento)</strong>: by looking at an AbstractFixableIssue (IIssue) and its IMemento, this
+method determines if the issue is suitable for (can be fixed by) the fixer.</p>
+<p><strong>fix(Object, IMemento)</strong>: starts the issue resolution process. This method is responsible for
+calling the complete method in some way, directly or indirectly by initializing other classes which
+may do so either automatically or through some sort of workflow.</p>
+<p><strong>complete(Object)</strong>: called by fix method, or one of the classes it sets up to guide the user
+through the issue resolution process.</p>
+</div>
+<div class="section" id="abstractfixableissue-imemento-composition">
+<h3>AbstractFixableIssue IMemento composition<a class="headerlink" href="#abstractfixableissue-imemento-composition" title="Permalink to this headline">¶</a></h3>
+<p>The memento of an IIssue (not to be confused with its viewMemento – which is entirely a UI
+persistence construct), contains the following <em>tiered</em> elements of interest unique to an
+AbstractFixableIssue:</p>
+<ul class="simple">
+<li><strong>saveMemento</strong>: persists the issue<ul>
+<li>other elements unique to this issue class</li>
+<li><strong>fixerMemento</strong>: persists data relevant only to the fixer (this may include the state of a
+partially resolved issue)</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="fixableissue-vs-abstractfixableissue">
+<h3>FixableIssue vs AbstractFixableIssue<a class="headerlink" href="#fixableissue-vs-abstractfixableissue" title="Permalink to this headline">¶</a></h3>
+<p>FixableIssue is a simple implementation of AbstractFixableIssue which serves as a good example of
+how to override the init and save methods. It may be overridden, and subclasses should take care to
+override the getExtensionID method and return their own defining extension&#8217;s ID.</p>
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="drag_and_drop_design.html">Drag And Drop Design</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="shutdown_tasks.html">Shutdown Tasks</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2012, Refractions Research.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

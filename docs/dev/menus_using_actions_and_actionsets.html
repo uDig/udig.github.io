@@ -1,0 +1,307 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Menus using Actions and ActionSets &mdash; uDig 1.3.2 Developers Guide</title>
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.3.2 Developers Guide" href="index.html" />
+    <link rel="up" title="Working with Eclipse RCP" href="working_with_eclipse_rcp.html" />
+    <link rel="next" title="Menus using Commands and Handlers" href="menus_using_commands_and_handlers.html" />
+    <link rel="prev" title="Using UDIGApplication" href="using_udigapplication.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="using_udigapplication.html">Using UDIGApplication</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="menus_using_commands_and_handlers.html">Menus using Commands and Handlers</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="menus-using-actions-and-actionsets">
+<h1>Menus using Actions and ActionSets<a class="headerlink" href="#menus-using-actions-and-actionsets" title="Permalink to this headline">¶</a></h1>
+<p>Contribution additional functionality into Eclipse RCP applications is traditionally done with
+Actions. This functionality is now deprecated; new code should look into use commands and handlers.</p>
+<p>Related Information</p>
+<ul class="simple">
+<li><a class="reference external" href="http://help.eclipse.org/help33/topic/org.eclipse.platform.doc.isv/guide/workbench_basicext.htm">Basic workbench extention points using actions</a></li>
+<li><a class="reference internal" href="menus_using_commands_and_handlers.html"><em>Menus using Commands and Handlers</em></a></li>
+<li><a class="reference internal" href="menus_using_operations_and_tools.html"><em>Menus using Operations and Tools</em></a></li>
+</ul>
+<div class="section" id="menu-path-constants">
+<h2>Menu Path Constants<a class="headerlink" href="#menu-path-constants" title="Permalink to this headline">¶</a></h2>
+<p>The class UDIGActionBarAdvisor is used to define the menu paths on this page in the usual manner;
+submitting a series of contributions to a &#8220;MenuManager&#8221; relative to series of known <strong>constant</strong>
+locations.</p>
+<p>These locations are defined as Constants in the following files:</p>
+<ul class="simple">
+<li>IWorkbenchActionConstants: well known locations for RCP applications</li>
+<li>Constants: well known locations for uDig applications</li>
+</ul>
+</div>
+<div class="section" id="use-of-iaction">
+<h2>Use of IAction<a class="headerlink" href="#use-of-iaction" title="Permalink to this headline">¶</a></h2>
+<p>There are many examples of the use IAction, the related extention points are deprecated:</p>
+<ul class="simple">
+<li>org.eclipse.ui.ActionsSets</li>
+<li>org.eclipse.ui.EditorActions</li>
+<li>org.eclipse.ui.popupMenus</li>
+<li>org.eclipse.ui.viewActions</li>
+</ul>
+<p>When possible please make use of <strong>org.eclipse.ui.menu</strong>.</p>
+</div>
+<div class="section" id="default-rcp-menus-paths">
+<h2>Default RCP Menus Paths<a class="headerlink" href="#default-rcp-menus-paths" title="Permalink to this headline">¶</a></h2>
+<p>For the uDig application (net.refractions.udig.ui) these reference points are contributed directly
+by the UDIGActionBarAdvisor. Most of these are from IWorkbenchActionConstants and can be expected in
+any RCP application.</p>
+<p>Standard menus expected for any RCP application:</p>
+<ul class="simple">
+<li>file</li>
+<li>edit</li>
+<li>additions (group)- ie. IWorkbenchActionConstants.MB_ADDITIONS</li>
+<li>window</li>
+<li>help</li>
+</ul>
+<p>File menu:</p>
+<ul class="simple">
+<li>file/fileStart</li>
+<li>file/new.ext</li>
+<li>file/new</li>
+<li>file/close.ext</li>
+<li>file/close</li>
+<li>file/save.ext</li>
+<li>file/save</li>
+<li>file/additions</li>
+<li>file/print.ext</li>
+<li>file/import.ext</li>
+<li>file/import</li>
+<li>file/export</li>
+<li>file/mru</li>
+<li>file/fileEnd</li>
+<li>file/quit</li>
+</ul>
+<p>Edit menu:</p>
+<ul class="simple">
+<li>edit/editStart</li>
+<li>edit/undo</li>
+<li>edit/redo</li>
+<li>edit/undo.ext</li>
+<li>edit/cut</li>
+<li>edit/copy</li>
+<li>edit/paste</li>
+<li>edit/cut.ext</li>
+<li>edit/delete</li>
+<li>edit/selectAll</li>
+<li>edit/bookmark</li>
+<li>edit/editEnd</li>
+</ul>
+<p>When creating your own RCP application please ensure the above menu paths are available (other uDig
+modules expect to be able to use them). This should be pretty easy as they are all based on the
+usual IWorkbenchActionConstants.</p>
+<p>Examples menu paths:</p>
+<ul class="simple">
+<li>menu:org.eclipse.ui.main.menu?after=additions</li>
+<li>menu:org.eclipse.ui.main.menu?after=file/new</li>
+<li>toolbar:org.eclipse.ui.main.toolbar?after=additions</li>
+</ul>
+<p>Example for any popup (must use visibleWhen):</p>
+<ul class="simple">
+<li>popup:org.eclipse.ui.popup.any?after=additions</li>
+</ul>
+</div>
+<div class="section" id="adding-an-iaction-using-an-actionbaradvisor">
+<h2>Adding an IAction using an ActionBarAdvisor<a class="headerlink" href="#adding-an-iaction-using-an-actionbaradvisor" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">IMenuManager</span> <span class="n">fileMenu</span> <span class="o">=</span> <span class="n">menuBar</span><span class="o">.</span><span class="na">findMenuUsingPath</span><span class="o">(</span><span class="n">IWorkbenchActionConstants</span><span class="o">.</span><span class="na">M_FILE</span><span class="o">);</span>
+
+<span class="n">IAction</span> <span class="n">exit</span> <span class="o">=</span> <span class="n">ActionFactory</span><span class="o">.</span><span class="na">QUIT</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">window</span><span class="o">);</span>
+<span class="n">fileMenu</span><span class="o">.</span><span class="na">insertAfter</span><span class="o">(</span><span class="n">Constants</span><span class="o">.</span><span class="na">FILE_END</span><span class="o">,</span> <span class="n">exit</span><span class="o">);</span>
+</pre></div>
+</div>
+<p>You would be doing this sort of thing if you are rolling your own ActionBarAdvisor as part of a new
+RCP Application. As of Eclipse 3.3 you should be able to use the <strong>org.eclipse.ui.menu</strong> extension
+point and avoid this step.</p>
+</div>
+<div class="section" id="adding-an-iaction-using-an-actionset">
+<h2>Adding an IAction using an ActionSet<a class="headerlink" href="#adding-an-iaction-using-an-actionset" title="Permalink to this headline">¶</a></h2>
+<p>You can also define ActionSets that map from an IAction to a menu path.</p>
+<div class="highlight-python"><pre>&lt;!-- pending --&gt;</pre>
+</div>
+<p>This is the preferred way since the resulting ActionSet can be toggle on and off when switching
+perspectives.</p>
+</div>
+<div class="section" id="geospatial-platform-menu-paths">
+<h2>Geospatial Platform Menu Paths<a class="headerlink" href="#geospatial-platform-menu-paths" title="Permalink to this headline">¶</a></h2>
+<p>These paths are contributed by the <strong>org.eclipse.ui.menu</strong> extension point as part of
+<strong>net.refractions.udig.catalog.ui</strong>.</p>
+<p>Data menu:</p>
+<ul class="simple">
+<li>data/dataStart</li>
+<li></li>
+<li>data/additions</li>
+<li>data/dataEnd</li>
+</ul>
+<p>Catalog view:</p>
+<ul class="simple">
+<li>menu:net.refractions.udig.catalog.ui.CatalogView?after=additions</li>
+<li>popup:net.refractions.udig.catalog.ui.CatalogView?after=additions</li>
+</ul>
+<p>Search view:</p>
+<ul class="simple">
+<li>menu:net.refractions.udig.catalog.ui.Search?after=additions</li>
+<li>popup:net.refractions.udig.catalog.ui.Search?after=additions</li>
+</ul>
+</div>
+<div class="section" id="available-nouns">
+<h2>Available Nouns<a class="headerlink" href="#available-nouns" title="Permalink to this headline">¶</a></h2>
+<p>When using a contribution to any context menu:</p>
+<ul class="simple">
+<li>popup:org.eclipse.ui.popup.any?after=additions</li>
+</ul>
+</div>
+<div class="section" id="geospatial-application-menu-paths">
+<h2>Geospatial Application Menu Paths<a class="headerlink" href="#geospatial-application-menu-paths" title="Permalink to this headline">¶</a></h2>
+<p>Navigation menu:</p>
+<ul class="simple">
+<li>navigate/navStart</li>
+<li>...</li>
+<li>navigation/additions</li>
+<li>navigation/navEnd</li>
+</ul>
+<p>Layer menu:</p>
+<ul class="simple">
+<li>layer/layerStart</li>
+<li>...</li>
+<li>layer/additions</li>
+<li>layer/LayerEnd</li>
+</ul>
+<p>Map menu:</p>
+<ul class="simple">
+<li>map/mapStart</li>
+<li>...</li>
+<li>map/additions</li>
+<li>map/mapEnd</li>
+</ul>
+</div>
+<div class="section" id="action-set-group-marker-examples">
+<h2>Action Set Group Marker Examples<a class="headerlink" href="#action-set-group-marker-examples" title="Permalink to this headline">¶</a></h2>
+<p>To add the a &#8220;Data&#8221; menu to the top-level menu bar:</p>
+<ol class="arabic">
+<li><p class="first">create org.eclipse.ui.ActionSets &#8211;&gt; actionset &#8211;&gt; menu</p>
+</li>
+<li><p class="first">put &#8220;additions&#8221; for the path</p>
+<p>Additions is located between Analysis and Window in the menubar</p>
+</li>
+</ol>
+<p>To add the a &#8220;Data&#8221; menu to an existing menu:</p>
+<ol class="arabic simple">
+<li>Find out the path to the group marker (see the end of this page for examples)</li>
+<li>create org.eclipse.ui.ActionSets &#8211;&gt; actionset &#8211;&gt; menu</li>
+<li>put the path to your group marker: layer/additions</li>
+</ol>
+<p>Additions comes from the <strong>UDIGWorkbenchAdvisor</strong>, or similar class provided by your Custom
+application.</p>
+<p>Here is an example from UDIGWorkbenchAdvisor:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">private</span> <span class="kt">void</span> <span class="nf">fillMenuBar</span><span class="o">(</span> <span class="n">IWorkbenchWindow</span> <span class="n">window</span><span class="o">,</span> <span class="n">IActionBarConfigurer</span> <span class="n">configurer</span> <span class="o">)</span> <span class="o">{</span>
+        <span class="n">IMenuManager</span> <span class="n">menuBar</span> <span class="o">=</span> <span class="n">configurer</span><span class="o">.</span><span class="na">getMenuManager</span><span class="o">();</span>
+        <span class="n">menuBar</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">createFileMenu</span><span class="o">(</span><span class="n">window</span><span class="o">));</span>
+        <span class="n">menuBar</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">createEditMenu</span><span class="o">(</span><span class="n">window</span><span class="o">));</span>
+        <span class="n">menuBar</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">createNavigationMenu</span><span class="o">(</span><span class="n">window</span><span class="o">));</span>
+        <span class="n">menuBar</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">createLayerMenu</span><span class="o">());</span>
+        <span class="n">menuBar</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">createToolMenu</span><span class="o">());</span>
+        <span class="n">menuBar</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">UiPlugin</span><span class="o">.</span><span class="na">getDefault</span><span class="o">().</span><span class="na">getOperationMenuFactory</span><span class="o">().</span><span class="na">getMenu</span><span class="o">(</span><span class="n">window</span><span class="o">));</span>
+        <span class="n">menuBar</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">GroupMarker</span><span class="o">(</span><span class="n">IWorkbenchActionConstants</span><span class="o">.</span><span class="na">MB_ADDITIONS</span><span class="o">));</span>
+        <span class="n">menuBar</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">createWindowMenu</span><span class="o">(</span><span class="n">window</span><span class="o">));</span>
+        <span class="n">menuBar</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">createHelpMenu</span><span class="o">(</span><span class="n">window</span><span class="o">));</span>
+    <span class="o">}</span>
+</pre></div>
+</div>
+<p>You can see that IWorkbenchActionConstants.MB_ADDITIONS is placed between the Tool menu and the
+Window menu.</p>
+<p>The same strategy can be used to find out where the group markers are in other menus:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">private</span> <span class="n">MenuManager</span> <span class="nf">createLayerMenu</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">MenuManager</span> <span class="n">menu</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MenuManager</span><span class="o">(</span><span class="n">Policy</span><span class="o">.</span><span class="na">bind</span><span class="o">(</span><span class="s">&quot;UDIGWorkbenchAdvisor.layerMenu&quot;</span><span class="o">),</span> <span class="s">&quot;layer&quot;</span><span class="o">);</span>
+        <span class="n">menu</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">GroupMarker</span><span class="o">(</span><span class="s">&quot;add.ext&quot;</span><span class="o">));</span> <span class="c1">//$NON-NLS-1$</span>
+        <span class="n">menu</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Separator</span><span class="o">());</span>
+        <span class="n">menu</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">GroupMarker</span><span class="o">(</span><span class="s">&quot;edit.ext&quot;</span><span class="o">));</span> <span class="c1">//$NON-NLS-1$</span>
+
+        <span class="n">menu</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Separator</span><span class="o">());</span>
+        <span class="n">menu</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">GroupMarker</span><span class="o">(</span><span class="n">IWorkbenchActionConstants</span><span class="o">.</span><span class="na">MB_ADDITIONS</span><span class="o">));</span>
+
+        <span class="k">return</span> <span class="n">menu</span><span class="o">;</span>
+    <span class="o">}</span>
+</pre></div>
+</div>
+<p>So for the Layer menu there are three group markers:</p>
+<ul class="simple">
+<li>add.ext</li>
+<li>edit.ext</li>
+<li>additions</li>
+</ul>
+<p>By convention, &#8220;additions&#8221; is created in the correct spot (before Window and Help for the menu bar,
+or before <strong>Exit</strong> in the file menu, or at the end of the menu most everywhere else.</p>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="using_udigapplication.html">Using UDIGApplication</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="menus_using_commands_and_handlers.html">Menus using Commands and Handlers</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2012, Refractions Research.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,152 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Plugin Structure &mdash; uDig 1.3.2 Developers Guide</title>
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.3.2 Developers Guide" href="index.html" />
+    <link rel="up" title="Working with Eclipse RCP" href="working_with_eclipse_rcp.html" />
+    <link rel="next" title="Plugin Setup" href="plugin_setup.html" />
+    <link rel="prev" title="Common Plugin Files" href="common_plugin_files.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="common_plugin_files.html">Common Plugin Files</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="plugin_setup.html">Plugin Setup</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="plugin-structure">
+<h1>Plugin Structure<a class="headerlink" href="#plugin-structure" title="Permalink to this headline">¶</a></h1>
+<p>A Plugin is defined by the following strucutre .. for a complete list of the usual suspects start
+with the <a class="reference internal" href="common_plugin_files.html"><em>Common Plugin Files</em></a>.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="29%" />
+<col width="8%" />
+<col width="63%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><strong>src/</strong></td>
+<td>git</td>
+<td>source files</td>
+</tr>
+<tr><td><strong>bin/</strong></td>
+<td>&nbsp;</td>
+<td>generated class files</td>
+</tr>
+<tr><td><strong>doc/</strong></td>
+<td>&nbsp;</td>
+<td>generated schema documentation</td>
+</tr>
+<tr><td><strong>html/</strong></td>
+<td>git</td>
+<td>online help</td>
+</tr>
+<tr><td><strong>/icons/</strong></td>
+<td>git</td>
+<td>icons aranged into categories</td>
+</tr>
+<tr><td>plugin.xml</td>
+<td>git</td>
+<td>plugin manifest file</td>
+</tr>
+<tr><td>plugin.properties</td>
+<td>git</td>
+<td>plugin manifest internationalization</td>
+</tr>
+<tr><td>build.xml</td>
+<td>git</td>
+<td>generated ant export script</td>
+</tr>
+<tr><td>build.properties</td>
+<td>git</td>
+<td>describes src, and export contents</td>
+</tr>
+<tr><td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td>.classpath</td>
+<td>&nbsp;</td>
+<td>generated plug-in classpath information</td>
+</tr>
+<tr><td>.project</td>
+<td>&nbsp;</td>
+<td>plug-in project file</td>
+</tr>
+</tbody>
+</table>
+<p>Your first build</p>
+<p>Plugins have strict naming conventions for their packages - please consult the <a class="reference internal" href="api_rules_of_engagement.html"><em>API rules of engagement</em></a>
+for more information.</p>
+<div class="section" id="related-concepts">
+<h2>Related concepts<a class="headerlink" href="#related-concepts" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://udig.refractions.net/confluence//display/UDIG/Repository+Structure">Repository Structure</a></p>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="common_plugin_files.html">Common Plugin Files</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="plugin_setup.html">Plugin Setup</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2012, Refractions Research.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

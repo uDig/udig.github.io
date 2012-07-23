@@ -1,0 +1,130 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Guide to MigLayout &mdash; uDig 1.3.2 Developers Guide</title>
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.3.2 Developers Guide" href="index.html" />
+    <link rel="up" title="Reference" href="reference.html" />
+    <link rel="next" title="IAdaptable" href="iadaptable.html" />
+    <link rel="prev" title="Guide To EMF" href="guide_to_emf.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="guide_to_emf.html">Guide To EMF</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="iadaptable.html">IAdaptable</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="guide-to-miglayout">
+<h1>Guide to MigLayout<a class="headerlink" href="#guide-to-miglayout" title="Permalink to this headline">¶</a></h1>
+<p>MigLayout has been added as a core dependency for uDig; giving us a consistent layout manager that
+is a little bit shorter on ceremony then the traditional SWT FormLayout. It is also aware of
+platform differences and can sort out the correct &#8220;Gap&#8221; between fields and the correct button order
+in order to fit in with other windows, linux, mac osx applications.</p>
+<p>Related:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://www.miglayout.com/">http://www.miglayout.com/</a></li>
+<li><a class="reference external" href="http://www.migcalendar.com/miglayout/swingdemoapp.jnlp">http://www.migcalendar.com/miglayout/swingdemoapp.jnlp</a> (Webstart demo; double click on
+the tab under each example to see the source code)</li>
+<li><a class="reference external" href="http://www.medicalgenomics.org/miglayout_sample">http://www.medicalgenomics.org/miglayout_sample</a> (The shortest clearest example to copy)</li>
+<li><a class="reference external" href="http://www.devx.com/Java/Article/38017/1954">MigLayout: Easing the Pain of Swing/SWT Layout Management</a></li>
+</ul>
+<div class="section" id="draw-a-diagram">
+<h2>Draw a Diagram<a class="headerlink" href="#draw-a-diagram" title="Permalink to this headline">¶</a></h2>
+<p>Always start with a plan, on paper or a whiteboard, or your will drive yourself batty!</p>
+<img alt="_images/plan.jpg" src="_images/plan.jpg" />
+<p>Draw a grid onto your plan; or arrows or whatever else you need to sort out what the layout settings
+will be.</p>
+<img alt="_images/plan_grid-1.jpg" src="_images/plan_grid-1.jpg" />
+<p>And then turn it into code.</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">shell</span><span class="o">.</span><span class="na">setLayout</span><span class="o">(</span> <span class="k">new</span> <span class="n">MigLayout</span><span class="o">(</span><span class="s">&quot;&quot;</span><span class="o">,</span><span class="s">&quot;[right]10[left,grow][min!][min!]&quot;</span><span class="o">,</span><span class="s">&quot;30&quot;</span><span class="o">));</span>
+
+<span class="n">Label</span> <span class="n">label</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Label</span><span class="o">(</span><span class="n">shell</span><span class="o">,</span> <span class="n">SWT</span><span class="o">.</span><span class="na">SHADOW_IN</span><span class="o">);</span>
+<span class="n">label</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="s">&quot;Country:&quot;</span><span class="o">);</span>
+
+<span class="n">name</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Text</span><span class="o">(</span><span class="n">shell</span><span class="o">,</span> <span class="n">SWT</span><span class="o">.</span><span class="na">SHADOW_IN</span> <span class="o">|</span> <span class="n">SWT</span><span class="o">.</span><span class="na">BORDER</span><span class="o">);</span>
+<span class="n">name</span><span class="o">.</span><span class="na">setLayoutData</span><span class="o">(</span><span class="s">&quot;span 3, growx, wrap&quot;</span><span class="o">);</span>
+<span class="n">name</span><span class="o">.</span><span class="na">addKeyListener</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>Suggestions for the above example:</p>
+<ol class="arabic simple">
+<li>10 represents 10 pixels (or &#8220;10px&#8221;) is not a very good idea as display resolutions are starting
+to change between computers.<ul>
+<li>Consider &#8220;10lp&#8221; (for 10 logical pixels) works better and will adjust for the current
+resolution</li>
+<li>Consider &#8220;related&#8221; to indicate the two are related; the actual gap here will depend on
+windows,linux, osx</li>
+<li>Other gaps to consider: &#8220;unrelated&#8221;, and &#8220;paragraph&#8221;</li>
+</ul>
+</li>
+</ol>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="guide_to_emf.html">Guide To EMF</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="iadaptable.html">IAdaptable</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2012, Refractions Research.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,206 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Platform Architecture &mdash; uDig 1.3.2 Developers Guide</title>
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.3.2 Developers Guide" href="index.html" />
+    <link rel="up" title="Programmer Guide" href="programmer_guide.html" />
+    <link rel="next" title="Key Components" href="key_components.html" />
+    <link rel="prev" title="Why a Platform" href="why_a_platform.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="why_a_platform.html">Why a Platform</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="key_components.html">Key Components</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="platform-architecture">
+<h1>Platform Architecture<a class="headerlink" href="#platform-architecture" title="Permalink to this headline">¶</a></h1>
+<p>The UDIG GISPlatform is built around the concept of plug-ins to the base Eclipse Rich Client
+Platform. In addition uDig makes use of the several support libraries and a couple extensions to the
+Java Runtime Environment.</p>
+<p>References:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://help.eclipse.org/juno/topic/org.eclipse.platform.doc.isv/guide/arch.htm">Eclipse Architecture</a></li>
+<li><a class="reference external" href="http://docs.geotools.org/latest/userguide/welcome/architecture.html">GeoTools Architecture</a></li>
+</ul>
+<p>It is useful to consider the UDIG application as a series of Tiers each with different
+responsibilities and capabilities.</p>
+<div class="figure align-center">
+<img alt="" src="_images/udig_extending.png" />
+</div>
+<p>If you are new to Eclipse RCP development it is helpful to go through the tutorials included with
+Eclipse prior to working with uDig.</p>
+<div class="section" id="gis-application">
+<h2>GIS Application<a class="headerlink" href="#gis-application" title="Permalink to this headline">¶</a></h2>
+<p>Project services opperates as a UDIG application providing Maps and Printing under user control. The
+GIS Application layer also provides Rendering and Tool services allow control of display and screen
+interaction.</p>
+<p><strong>New Tool</strong></p>
+<p>For some quick experience implementing a new tool:</p>
+<ul class="simple">
+<li>please extend the SimpleTool class. For more details please review the Distance Tool tutorial.</li>
+</ul>
+<p><strong>New Application</strong></p>
+<p>For more information on extending the GIS Application for your own use please review:</p>
+<ul class="simple">
+<li>the custom application tutorial for a uDig like application</li>
+<li>the source code for the rcp tutorial if you are interested in adding uDig visualization to an
+existing application</li>
+</ul>
+<p><strong>New Renderer</strong></p>
+<p>To visualize your own custom data format you will need to implement a custom RenderMetricsFactory.
+This will allow uDig to render a layer created around your data format.</p>
+<p>For more information please review the source code for the CSVRenderer tutorial.</p>
+</div>
+<div class="section" id="gis-platform">
+<h2>GIS Platform<a class="headerlink" href="#gis-platform" title="Permalink to this headline">¶</a></h2>
+<p>Catalog Services provide a common API for data access and may serve as foundation for different GIS
+applications.</p>
+<p><strong>New Data Format</strong></p>
+<p>To add support for a data format (of any description) you will need to add a new ServiceExtension.
+This will allow uDig to hold onto the information you wish in the catalog and make it available to
+other parts of the application.</p>
+<p>For more information please review the source code for the CSVService tutorial.</p>
+</div>
+<div class="section" id="eclipse-rich-client-platform">
+<h2>Eclipse Rich Client Platform<a class="headerlink" href="#eclipse-rich-client-platform" title="Permalink to this headline">¶</a></h2>
+<p>We make use of the plug-ins contained in the Eclipse Rich Client platform. These plug-ins provide
+the base implementation of a workbench window, the runtime platform that is used to wire up the
+application and so on.</p>
+<ul class="simple">
+<li>runtime - contains the Platform and Application extension points</li>
+<li>ui - support for the workbench window, workbench selection and menus</li>
+<li>standard widget toolkit (swt) - direct implementation of user interface widgets</li>
+<li>jface - ease the use of tree and table widgets by introducing adapters between your domain
+objects and the raw swt widgets</li>
+</ul>
+<p>In addition we make use of:</p>
+<ul class="simple">
+<li>Help - to provide online help</li>
+<li>Install - access to the update manager</li>
+<li>Eclipse Modeling Framework (EMF) - used to implement the uDig data model of Maps, Layers and
+ViewportModel</li>
+<li>Graphical Editing Framework (GEF) - used to create a quick visual editor work Page layout</li>
+</ul>
+</div>
+<div class="section" id="support-libraries">
+<h2>Support Libraries<a class="headerlink" href="#support-libraries" title="Permalink to this headline">¶</a></h2>
+<p>The support libraries used by uDig are:</p>
+<ul class="simple">
+<li>JTS Topology Suite - provides an implementation of the Simple Feature for SQL definition of
+Geometry (ie Point, Line and Polygon)</li>
+<li>GeoAPI - provides common java interfaces for geospatial concepts based on OGC standards</li>
+<li>GeoTools - a grab back of geospatial know-how, including an implementation of the interfaces
+defined by GeoAPI</li>
+</ul>
+<p>These libraries provide useful abstractions (such as Geometry and Feature) and data connectivity.
+These libraries are all gathered into a single plug-in (net.refractions.udig.libs plugin) so they
+may share a classloader.</p>
+<p>Currently the GeoTools library makes use of a plug-in system called &#8220;factory spi&#8221; that depends on
+plugins being available in the same classloader as the core library. This is a limitation we would
+like to see lifted in the future.</p>
+<p><strong>New GridCoverage</strong> (Geospatial Raster Format)</p>
+<p>To add support for a new GridCoverage format (ie geospatial raster) you will need to write a new
+plug-in for GeoTools that implements the GridCovreageReader interface. If you implement this
+interface you will be able to leverage the existing uDig image rendering system.</p>
+<p>For more information please review the GeoTools user guide, source code and test cases.</p>
+<p><strong>New DataStore</strong> (Geospatial Vector Format)</p>
+<p>To add support for a new Vector format you will need to implement a new GeoTools plugin that
+implements the DataAccess (for rich content) or DataStore (for simple content) interface. If you
+implement either of these interfaces you will be able to make use of the existing uDig rendering
+system and Style Layer Descriptor support.</p>
+<p>For more information please review the GeoTools user guide, source code and test cases.</p>
+</div>
+</div>
+<div class="section" id="java-runtime-environment">
+<h1>Java Runtime Environment<a class="headerlink" href="#java-runtime-environment" title="Permalink to this headline">¶</a></h1>
+<p>The uDig application makes use of JRE version 5.0 at this time (although some platforms are making
+use of Java 6 we are limiting adoption until Java 6 is available on all platforms).</p>
+<p>We also make use of two important extensions to the default JRE install:</p>
+<ul class="simple">
+<li>Java Advanced Imaging - performs image processing tasks; defined as a series of operations on raw
+raster formats</li>
+<li>Java Image IO - provides raw raster format implementations (Java includes PNG, JPEG etc out of
+the box)</li>
+<li>ImageIO-EXT - additional geospatial raster formats such as GeoTIFF and MRSID</li>
+</ul>
+<p><strong>New Image Format</strong></p>
+<p>To add support for a new Image Format please consider extending the Java Image IO project. You will
+find some GeoTools Alumni have started an ImageIO-EXT project in order to teach ImageIO about common
+geospatial formats. The ImageIO-EXT project has made use of GDAL SWIG bindings in order to leverage
+C++ support for some of the more exotic formats.</p>
+<p>For more information please visit the ImageIO-EXT website.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="key_components.html">Key Components</a></li>
+</ul>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="why_a_platform.html">Why a Platform</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="key_components.html">Key Components</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2012, Refractions Research.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

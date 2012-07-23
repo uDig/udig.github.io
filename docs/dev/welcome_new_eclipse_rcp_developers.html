@@ -1,0 +1,311 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Welcome New Eclipse RCP Developers &mdash; uDig 1.3.2 Developers Guide</title>
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.3.2 Developers Guide" href="index.html" />
+    <link rel="up" title="Getting Started" href="getting_started.html" />
+    <link rel="next" title="Programmer Guide" href="programmer_guide.html" />
+    <link rel="prev" title="FeatureSourceOp Example" href="featuresourceop_example.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="featuresourceop_example.html">FeatureSourceOp Example</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="programmer_guide.html">Programmer Guide</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="welcome-new-eclipse-rcp-developers">
+<h1>Welcome New Eclipse RCP Developers<a class="headerlink" href="#welcome-new-eclipse-rcp-developers" title="Permalink to this headline">¶</a></h1>
+<p>If uDig is your first Eclipse RCP project you are in for a bit of a learning wall.</p>
+<p>Working with the uDig project will bring together three aspects:</p>
+<ul class="simple">
+<li>The Java Programming Language</li>
+<li>Eclipse Rich Client Platform Development</li>
+<li>The Geospatial Domain</li>
+</ul>
+<p>Please understand that it will take some time to become familiar with each of these areas; be kind
+to yourself and budget time accordingly. If your team is weak in one or more areas you should
+strongly considering purchasing books and budging time for learning (or a training course).</p>
+<div class="section" id="training-course">
+<h2>Training Course<a class="headerlink" href="#training-course" title="Permalink to this headline">¶</a></h2>
+<p>The best advice is (of course) contact a Project Steering Committee member for our week long
+training course:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://udig.refractions.net/users/">http://udig.refractions.net/users/</a></li>
+</ul>
+<p>If you are working for an academic institution please have your professor contact us; we can make
+our training materials available to you.</p>
+</div>
+<div class="section" id="udig-tutorials">
+<h2>uDig Tutorials<a class="headerlink" href="#udig-tutorials" title="Permalink to this headline">¶</a></h2>
+<p>Other than that please jump on in; the udig-devel email list is a good place to ask questions.
+Please go through the &#8220;getting started&#8221; tutorials in the developers guide and ask lots of questions
+on the email list and IRC.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">As you go through the tutorials please understand it is not enough <strong>just</strong> to get them
+to run - you will need to do all the &#8220;Things to Try&#8221; questions at the end in order to understand how
+to turn on tracing, or distribute your custom application to your customers.</p>
+</div>
+</div>
+<div class="section" id="udig-documentation">
+<h2>uDig Documentation<a class="headerlink" href="#udig-documentation" title="Permalink to this headline">¶</a></h2>
+<p>The Developers Guide is structured in the same manner as the Eclipse Documentation:</p>
+<ul>
+<li><p class="first"><a class="reference internal" href="index.html"><em>Index</em></a></p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference internal" href="udig_guidelines.html"><em>uDig Guidelines</em></a></li>
+<li><a class="reference internal" href="eclipse_house_rules.html"><em>Eclipse House Rules</em></a> (from Contributing to Eclipse Principles, Patterns and Plug-ins)</li>
+<li><a class="reference internal" href="user_interface_guidelines.html"><em>User Interface Guidelines</em></a></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<p>The Developers Guide is not complete; or always up to date. The document is contains our notes as we
+built the application and were learning the Eclipse RCP environment.</p>
+<p>The developers guide does not cover as much scope as much information as our commercial training
+materials. In many places you will need to learn by using the debugger to step through functionality
+you are interested in.</p>
+<p>The extension point documentation and javadoc information can also be of assistance.</p>
+</div>
+<div class="section" id="eclipse-rich-client-platform">
+<h2>Eclipse Rich Client Platform<a class="headerlink" href="#eclipse-rich-client-platform" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="rcp-documentation-in-the-help-menu">
+<h3>RCP Documentation in the Help Menu<a class="headerlink" href="#rcp-documentation-in-the-help-menu" title="Permalink to this headline">¶</a></h3>
+<p>A really good source of information (that is always current) is included right in Eclipse:</p>
+<ul class="simple">
+<li>Start up eclipse and select <em class="menuselection">Help ‣ Help Contents</em> from the menu bar. Choose
+<strong>Platform Plug-in Developers Guide</strong></li>
+<li>Also available <a class="reference external" href="http://www.eclipse.org/documentation/">online</a>:<ul>
+<li>Eclipse 3.4 Ganymede:
+<a class="reference external" href="http://help.eclipse.org/ganymede/index.jsp">http://help.eclipse.org/ganymede/index.jsp</a></li>
+<li>Eclipse 3.3 Europa:
+<a class="reference external" href="http://help.eclipse.org/help33/index.jsp">http://help.eclipse.org/help33/index.jsp</a></li>
+</ul>
+</li>
+<li>Remember wizards and cheat sheets included in your copy of Eclipse are always up to date!</li>
+</ul>
+</div>
+<div class="section" id="rcp-tutorials">
+<h3>RCP Tutorials<a class="headerlink" href="#rcp-tutorials" title="Permalink to this headline">¶</a></h3>
+<p>Tutorials:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://www.eclipse.org/articles/Article-RCP-1/tutorial1.html">Rich Client Tutorial Part 1</a></li>
+<li><a class="reference external" href="http://www.eclipse.org/articles/Article-RCP-2/tutorial2.html">Rich Client Tutorial Part 2</a></li>
+<li><a class="reference external" href="http://www.eclipse.org/articles/Article-RCP-3/tutorial3.html">Rich Client Tutorial Part 3</a></li>
+<li><a class="reference external" href="http://www.eclipse.org/articles/viewArticle/ViewArticle2.html">Creating an Eclipse View</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="reference-material-and-reading-list">
+<h2>Reference Material and Reading List<a class="headerlink" href="#reference-material-and-reading-list" title="Permalink to this headline">¶</a></h2>
+<p>After going through the Eclipse RCP Tutorials you may want some background information on all the
+moving parts.</p>
+<p>Some useful links that really helped us out:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://www.eclipse.org/articles/Article-Plug-in-architecture/plugin_architecture.html">Notes on the Eclipse Plug-in Architecture</a> contains the original lolly-pop diagrams used to show eclipse extension points</li>
+</ul>
+<p>Books:</p>
+<ul class="simple">
+<li>Eclipse Rich Client Platform : Design, Coding, and Packaging Java (TM) Applications</li>
+<li>Contributing to Eclipse Principles, Patterns and Plug-ins</li>
+<li>Building Commercial Quaility Plug-ins</li>
+</ul>
+<p>For more information about these books please check out the <a class="reference internal" href="reading_list.html"><em>Reading List</em></a>
+from the developers guide.</p>
+</div>
+<div class="section" id="how-it-fits-together">
+<h2>How it fits together<a class="headerlink" href="#how-it-fits-together" title="Permalink to this headline">¶</a></h2>
+<p>The following notes come from email discussion on the udig-devel list; we will add to this if you
+have any additional questions. The concepts here were introduced in the above tutorials.</p>
+<div class="section" id="how-plugins-work">
+<h3>How plugins work<a class="headerlink" href="#how-plugins-work" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Eclipse stuff is grouped into plugs for reuse; the plugin definition
+has a lot of safety/sanity checks included; with the idea that they
+don&#8217;t want to run or include a plugin that won&#8217;t work. So they have
+each plugin list what it needs to run; and then the plugin system
+checks all this stuff out; and only if it is good does the plugin get
+loaded - most of this information is in the MANIFEST.MF file (usually
+used to describe a jar in normal java apps).</li>
+</ul>
+<p>The name of this plugin system is &#8220;OSGi&#8221; - Eclipse 2 used to have its
+own but they threw it out and adopted OSGi (and that is the whole
+reason for the Eclipse 3.x series). OSGi started out for like cell
+phones and stuff so it is very good and loading and unloading stuff an
+preventing memory leaks etc... since rebooting a phone is annoying if
+you are expecting a phone call. Indeed OSGi is being used to manage
+server stuff now as well.</p>
+<ul class="simple">
+<li>Once the plugin gets loaded the &#8220;Platform&#8221; reads the &#8220;plugin.xml&#8221;
+file and &#8220;wires&#8221; the code into the resulting application. As a
+developer you can ask the Platform a question (such as what map tools
+are defined) and then do something with the answer - such as as make a
+toolbar for users to select the current map tool. The eclipse map
+editor does this as a toolbar; if you are embeding your own map may
+wish to go through the list and do something else (like a drop down
+combo box?).</li>
+</ul>
+<p>It is important that the wiring of the application is not magic;
+programmers are responsible for asking the Platform questions and
+doing something with the result.</p>
+<p>As an example the menus are done by the &#8220;org.eclipse.ui&#8221; plugin going
+though all the menus defined by all the plugin.xml files and producing
+something at the end of the day. In a similar fashion &#8220;org.eclipse.ui&#8221;
+goes through and finds all the &#8220;views&#8221; that a user could add to the
+screen.</p>
+</div>
+<div class="section" id="how-features-work">
+<h3>How features work<a class="headerlink" href="#how-features-work" title="Permalink to this headline">¶</a></h3>
+<p>Above we saw how plugins can be run resulting in an eclipse
+application. For very small projects you may want to do just that ...
+get a pile of plugins together and hit &#8220;run&#8221;.
+When projects get a bit larger it is useful to gather a group of
+plugins together to make this a bit easier to manage.</p>
+<p>The idea is that a feature gathers up plugins that together make one
+concept or capability available to the user.
+As a human visible concept features are the subject of update sites,
+or can be reviewed in the help menu if the user wants to know what is
+installed.</p>
+</div>
+<div class="section" id="how-products-work">
+<h3>How products work<a class="headerlink" href="#how-products-work" title="Permalink to this headline">¶</a></h3>
+<p>Products are just that; something packaged up and ready to go! You can
+actually export them as a stand alone application. You have a couple
+of options when defining a product; you can do so using plugins. Or
+for larger projects that you expect to last a while or get updated you
+should define it using features.</p>
+<p>Consider a product as an Eclipse rcp app that is ready to go; you can
+define it as a set of plugins (good for small projects) or using
+features.</p>
+</div>
+<div class="section" id="plugins-vs-features-fight">
+<h3>Plugins vs Features fight<a class="headerlink" href="#plugins-vs-features-fight" title="Permalink to this headline">¶</a></h3>
+<p>So this is where we get into the thick of it.</p>
+<ul class="simple">
+<li>plugins are going to do their best to run; but will refuse to run if
+not everything they need is available</li>
+<li>features can be used to gather up plugins into groups for distribution</li>
+</ul>
+<p>And who is responsible for making sure that the features actually
+gather plugins into groups that can run?
+You!</p>
+</div>
+<div class="section" id="what-about-update-site">
+<h3>What about update site<a class="headerlink" href="#what-about-update-site" title="Permalink to this headline">¶</a></h3>
+<p>You can use an update site to publish features for download; since
+features are a group of plugins this is primary the way to distribute
+additional functionality to applications that are in the field. You
+can also of course use it to distribute updates or patches to existing
+features.</p>
+</div>
+<div class="section" id="what-did-we-miss">
+<h3>What did we miss<a class="headerlink" href="#what-did-we-miss" title="Permalink to this headline">¶</a></h3>
+<p>The following concepts are not used that often:</p>
+<ul class="simple">
+<li>Fragments are like half a plugin; they are used to patch an existing
+plugin. At a technical level this is done by mixing the plugin.xml
+from both the original plugin and the fragment together.</li>
+</ul>
+<p>We used to have a fragment for each language supported by uDig.</p>
+<ul class="simple">
+<li>Removing stuff; you can also get a bit fancy and ask the platform to
+ignore parts of the plugin.xml document (this can be used to strip
+menus or views out of another plugin if you consider them off topic
+for the task at hand). Why doesn&#8217;t skip the classes? Well because you
+may have subclassed them for your own work .. so the normal Java code
+reuse still needs to be respected.</li>
+<li>Classloader hell - the OSGi plugin system is mean - it loads plugins
+into different class loaders and only lets you work with code that you
+have explicitly told it you depend on!</li>
+<li>Execution Environment - OSGi has started talking about the target
+environment and giving it a name (so you can tell the difference
+between Java 5 and Java 6). This is mostly used so a plugin can say
+it requires Java 6 (so OSGi won&#8217;t accidentally load it when running on
+an older mac where only Java 5 is available).</li>
+</ul>
+</div>
+</div>
+<div class="section" id="how-to-fix-it">
+<h2>How to fix it?<a class="headerlink" href="#how-to-fix-it" title="Permalink to this headline">¶</a></h2>
+<p>If you go to run and the application won&#8217;t start; open up your run
+configuration and &#8220;validate plugins&#8221; - it will list any plugins that
+could not run.
+You will need to see why they could not run (ie what they are missing)
+and make sure to add anything missing to your application.</p>
+<p>If you are running as plugins there is a button to add anything
+missing in one easy step.</p>
+<p>If you are running as features you will need to sort through what is
+missing and decide what feature to include it in. You may also be able
+to reuse one of the features already defined as part of the eclipse
+platform.</p>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="featuresourceop_example.html">FeatureSourceOp Example</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="programmer_guide.html">Programmer Guide</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2012, Refractions Research.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

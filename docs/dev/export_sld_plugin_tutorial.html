@@ -1,0 +1,389 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Export Sld Plugin Tutorial &mdash; uDig 1.3.2 Developers Guide</title>
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.3.2 Developers Guide" href="index.html" />
+    <link rel="up" title="Examples" href="examples.html" />
+    <link rel="next" title="View Extension Point Example" href="view_extension_point_example.html" />
+    <link rel="prev" title="Edit Tool Example" href="edit_tool_example.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="edit_tool_example.html">Edit Tool Example</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="view_extension_point_example.html">View Extension Point Example</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="export-sld-plugin-tutorial">
+<h1>Export Sld Plugin Tutorial<a class="headerlink" href="#export-sld-plugin-tutorial" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="export-sld-operation-plugin-tutorial">
+<h2>Export SLD Operation Plugin Tutorial<a class="headerlink" href="#export-sld-operation-plugin-tutorial" title="Permalink to this headline">¶</a></h2>
+<p>After completing this tutorial, you will have gained the skills to:</p>
+<ul class="simple">
+<li>Create a new Plugin</li>
+<li>Define a new Extension</li>
+<li>Implement a new Operation Extension</li>
+</ul>
+<div class="section" id="create-a-new-plugin">
+<h3>Create a New Plugin<a class="headerlink" href="#create-a-new-plugin" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">Open the Plug-in Development perspective (click on <img alt="image0" src="_images/0Prespective.gif" />)</p>
+</li>
+<li><p class="first">From the File menu, select <em class="menuselection">New ‣ Project</em>. Select Plug-in Project from the dialog, and then
+click the Next button.</p>
+<div class="figure">
+<img alt="" src="_images/1NewProject.png" />
+<p class="caption"><em>Figure 1 - New Plug-in Project</em></p>
+</div>
+</li>
+<li><p class="first">Create a name for the plug-in by entering <strong>net.refractions.udig.sld.export</strong> in the <strong>Project
+Name</strong> text field and click the <strong>Next</strong> button.</p>
+<div class="figure">
+<img alt="" src="_images/2NewPluginProject.png" />
+<p class="caption"><em>Figure 2 - Naming the New Plug-in</em></p>
+</div>
+</li>
+<li><p class="first">Accept the default values used to generate the plug-in and click the Finish button.</p>
+<div class="figure">
+<img alt="" src="_images/3NewPluginContent.png" />
+<p class="caption"><em>Figure 3 - New Plug-in Details</em></p>
+</div>
+<p>At this point the feature editor plug-in is created. Configuring the plug-in is the focus of the
+next section.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="configuring-your-new-plug-in">
+<h3>Configuring Your New Plug-in<a class="headerlink" href="#configuring-your-new-plug-in" title="Permalink to this headline">¶</a></h3>
+<p>In this section you will configure the feature editor plug-in. Specifically, you will specify
+dependencies on other plug-ins in order to create a new feature editor.</p>
+<ol class="arabic">
+<li><p class="first">Open the Plug-in Development perspective.</p>
+</li>
+<li><p class="first">In the Package Explorer navigate to the plug-in created in the previous section. Open the plug-in
+manifest by navigating to the META-INF/MANIFEST.MF file under the root of the feature editor
+plug-in. Double click on the file to open the plug-in manifest editor.</p>
+<div class="figure">
+<img alt="" src="_images/4PluginManifest.png" />
+<p class="caption"><em>Figure 4 - Plug-in Manifest Editor</em></p>
+</div>
+</li>
+<li><p class="first">Open the plug-in dependencies by clicking on the Dependencies tab located at the bottom of the
+editor area.</p>
+</li>
+<li><p class="first">Click the <strong>Add</strong> button in the Required plugins column and add the following plugin:</p>
+</li>
+</ol>
+<ul>
+<li><p class="first"><strong>net.refractions.udig.project</strong></p>
+</li>
+<li><p class="first"><strong>net.refractions.udig.project.ui</strong></p>
+</li>
+<li><p class="first"><strong>net.refractions.udig.style.sld</strong></p>
+</li>
+<li><p class="first"><strong>net.refractions.udig.udig.ui</strong></p>
+<div class="figure">
+<img alt="" src="_images/5AddDependencies.png" />
+<p class="caption"><em>Figure 5 - Add New Plugin Dependencies</em></p>
+</div>
+</li>
+</ul>
+<ol class="arabic">
+<li><p class="first">At this point it is critical that you <img alt="image6" src="_images/save.gif" /> <strong>Save</strong> your work as the dependencies need to
+propagate into the project.</p>
+<div class="figure">
+<img alt="" src="_images/6PluginDependencies.png" />
+<p class="caption"><em>Figure 6 - Plug-in Dependencies</em></p>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="import-resources-into-project">
+<h3>Import Resources Into Project<a class="headerlink" href="#import-resources-into-project" title="Permalink to this headline">¶</a></h3>
+<p>In this section we are going to set up an icon directory and import the pictures we will use for our
+export SLD operation.</p>
+<ol class="arabic">
+<li><p class="first">Download <a class="reference internal" href=""><em>Export SLD Plugin Tutorial</em></a> and
+<a class="reference internal" href=""><em>Export SLD Plugin Tutorial</em></a> to your desktop (Right click and <strong>Save Link As...</strong>)</p>
+</li>
+<li><p class="first">Select your plug-in project, <strong>net.refractions.udig.tutorials.distancetool</strong>, in the <strong>Package
+Explorer</strong>.</p>
+</li>
+<li><p class="first">Select <em class="menuselection">File ‣ New ‣ Folder</em> from the Menubar.</p>
+</li>
+<li><p class="first">Enter <strong>icons/etool16</strong> as the folder name.</p>
+</li>
+<li><p class="first">Click the Finish button.</p>
+</li>
+<li><p class="first">Select <strong>icons</strong> directory.</p>
+</li>
+<li><p class="first">Select <em class="menuselection">File ‣ New ‣ Folder</em> from the Menubar.</p>
+</li>
+<li><p class="first">Enter <strong>pointers</strong> as the folder name.</p>
+</li>
+<li><p class="first">Click the Finish button.</p>
+<p><img alt="image8" src="_images/7NewFolder.png" /></p>
+</li>
+<li><p class="first">Right click on etool16 and select <strong>Import</strong>.</p>
+</li>
+<li><p class="first">Select File System.</p>
+<p><img alt="image9" src="_images/8Import.png" /></p>
+</li>
+<li><p class="first">Click on browse and choose Desktop from the list (this will populate the directory field).</p>
+</li>
+<li><p class="first">Select the <strong>measure_mode.gif</strong> file and press Finish.</p>
+<p><img alt="image10" src="_images/9ImportToolIcon.png" /></p>
+</li>
+<li><p class="first">Import the <strong>measure_source.gif</strong> file into the <strong>pointers</strong> directory following the same steps.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="define-a-new-extension">
+<h3>Define a New Extension<a class="headerlink" href="#define-a-new-extension" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">Open the extensions page by clicking on the <strong>Extensions</strong> tab</p>
+</li>
+<li><p class="first">Click the <strong>Add</strong> button</p>
+</li>
+<li><p class="first">Select the <strong>net.refractions.udig.ui.operation</strong> extension point from the list.</p>
+<p><img alt="image11" src="_images/10Extention.png" /></p>
+</li>
+<li><p class="first">Click the <strong>Finish</strong> button.</p>
+</li>
+<li><p class="first">Enter the following Extention Details:</p>
+<ul class="simple">
+<li>ID: <em>net.refractions.udig.sld.export</em></li>
+<li>Name: <em>SLD Export to File</em></li>
+</ul>
+<p><img alt="image12" src="_images/11NewExtention.png" /></p>
+</li>
+</ol>
+</div>
+<div class="section" id="create-a-new-operation">
+<h3>Create a New Operation<a class="headerlink" href="#create-a-new-operation" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">Right click on newly added extension, <strong>net.refractions.udig.ui.operation</strong>, and select
+<em class="menuselection">New ‣ Operation</em></p>
+</li>
+<li><p class="first">Replace the default data in the id field with
+<strong>net.refractions.udig.style.sld.export.ExportSLD</strong>.</p>
+</li>
+<li><p class="first">Enter <strong>net.refractions.udig.sld.export.ExportSLD</strong> into the class field.</p>
+</li>
+<li><p class="first">Enter <strong>icons/etool16/</strong> into the icon field.  (Or press the Browse button and locate the icon)</p>
+</li>
+<li><p class="first">Enter <strong>Export SLD</strong> into the name field.</p>
+</li>
+<li><p class="first">Enter <strong>net.refractions.udig.project.ui.exportOps</strong> into the categoryId field.</p>
+<p><img alt="image13" src="_images/12ExtentionDetails.png" /></p>
+</li>
+</ol>
+</div>
+<div class="section" id="implementing-a-export-operation">
+<h3>Implementing a export operation<a class="headerlink" href="#implementing-a-export-operation" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">Select net.refractions.udig.style.sld.export.ExportSLD (operation) in the Extensions editor.</p>
+</li>
+<li><p class="first">It is a child of the net.refractions.udig.style.sld.export.</p>
+</li>
+<li><p class="first">Click the class hotlink.</p>
+</li>
+<li><p class="first">A dialog is brought up describing the class to be created, Check Generate comments and Inherited
+abstract methods.</p>
+<p><img alt="image14" src="_images/15NewClassWizard.png" /></p>
+</li>
+<li><p class="first">Press <strong>Finish</strong>, if not available ensure that all the information is in agreement with the
+picture above.</p>
+<p>Add the following code to your created class</p>
+</li>
+</ol>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ExportSLD</span> <span class="kd">implements</span> <span class="n">IOp</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">QueryAndSave</span> <span class="kd">implements</span> <span class="n">Runnable</span> <span class="o">{</span>
+
+        <span class="kd">private</span> <span class="n">String</span> <span class="n">out</span><span class="o">;</span>
+        <span class="kd">private</span> <span class="n">Layer</span> <span class="n">layer</span><span class="o">;</span>
+        <span class="kd">private</span> <span class="n">IProgressMonitor</span> <span class="n">monitor</span><span class="o">;</span>
+        <span class="kd">private</span> <span class="n">Display</span> <span class="n">display</span><span class="o">;</span>
+
+        <span class="kd">public</span> <span class="nf">QueryAndSave</span><span class="o">(</span> <span class="n">Layer</span> <span class="n">layer</span><span class="o">,</span> <span class="n">String</span> <span class="n">out</span><span class="o">,</span> <span class="n">Display</span> <span class="n">display</span><span class="o">,</span> <span class="n">IProgressMonitor</span> <span class="n">monitor</span> <span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">layer</span><span class="o">=</span><span class="n">layer</span><span class="o">;</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">out</span><span class="o">=</span><span class="n">out</span><span class="o">;</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">display</span><span class="o">=</span><span class="n">display</span><span class="o">;</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">monitor</span><span class="o">=</span><span class="n">monitor</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="n">File</span> <span class="n">file</span><span class="o">;</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">do</span><span class="o">{</span>
+                <span class="k">if</span> <span class="o">(!</span><span class="n">getFile</span><span class="o">())</span>
+                    <span class="k">return</span><span class="o">;</span>
+                <span class="kt">boolean</span> <span class="n">write</span><span class="o">=</span><span class="kc">true</span><span class="o">;</span>
+                <span class="k">if</span><span class="o">(</span> <span class="n">file</span><span class="o">.</span><span class="na">exists</span><span class="o">()</span> <span class="o">){</span>
+                <span class="n">write</span><span class="o">=</span><span class="n">MessageDialog</span><span class="o">.</span><span class="na">openConfirm</span><span class="o">(</span><span class="n">display</span><span class="o">.</span><span class="na">getActiveShell</span><span class="o">(),</span> <span class="n">Messages</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">&quot;ExportSLD.saveAs&quot;</span><span class="o">),</span>  <span class="c1">//$NON-NLS-1$</span>
+                            <span class="n">file</span><span class="o">.</span><span class="na">getAbsolutePath</span><span class="o">()+</span><span class="n">Messages</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">&quot;ExportSLD.exists&quot;</span><span class="o">)</span> <span class="o">+</span> <span class="c1">//$NON-NLS-1$</span>
+                                    <span class="n">Messages</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">&quot;ExportSLD.replace&quot;</span><span class="o">));</span> <span class="c1">//$NON-NLS-1$</span>
+                <span class="o">}</span>
+
+                <span class="k">if</span><span class="o">(</span> <span class="n">write</span> <span class="o">){</span>
+                <span class="k">try</span> <span class="o">{</span>
+                    <span class="n">FileWriter</span> <span class="n">writer</span><span class="o">=</span><span class="k">new</span> <span class="n">FileWriter</span><span class="o">(</span><span class="n">file</span><span class="o">,</span> <span class="kc">false</span><span class="o">);</span>
+                    <span class="n">writer</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">out</span><span class="o">);</span>
+                    <span class="n">writer</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">file</span><span class="o">=</span><span class="kc">null</span><span class="o">;</span>
+                    <span class="n">MessageDialog</span><span class="o">.</span><span class="na">openError</span><span class="o">(</span><span class="n">display</span><span class="o">.</span><span class="na">getActiveShell</span><span class="o">(),</span> <span class="n">Messages</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">&quot;ExportSLD.saveAs&quot;</span><span class="o">),</span><span class="c1">//$NON-NLS-1$</span>
+                            <span class="n">Messages</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">&quot;ExportSLD.modifyError&quot;</span><span class="o">));</span> <span class="c1">//$NON-NLS-1$</span>
+                <span class="o">}</span>
+                <span class="o">}</span><span class="k">else</span><span class="o">{</span>
+                    <span class="n">file</span><span class="o">=</span><span class="kc">null</span><span class="o">;</span>
+                <span class="o">}</span>
+            <span class="o">}</span><span class="k">while</span><span class="o">(</span> <span class="n">file</span><span class="o">==</span><span class="kc">null</span> <span class="o">);</span>
+        <span class="o">}</span>
+
+        <span class="kd">private</span> <span class="kt">boolean</span> <span class="nf">getFile</span><span class="o">()</span> <span class="o">{</span>
+            <span class="n">FileDialog</span> <span class="n">fileDialog</span><span class="o">=</span><span class="k">new</span> <span class="n">FileDialog</span><span class="o">(</span><span class="n">display</span><span class="o">.</span><span class="na">getActiveShell</span><span class="o">(),</span><span class="n">SWT</span><span class="o">.</span><span class="na">SAVE</span><span class="o">);</span>
+            <span class="n">fileDialog</span><span class="o">.</span><span class="na">setFilterExtensions</span><span class="o">(</span><span class="k">new</span> <span class="n">String</span><span class="o">[]{</span><span class="s">&quot;*.sld&quot;</span><span class="o">});</span> <span class="c1">//$NON-NLS-1$</span>
+            <span class="n">fileDialog</span><span class="o">.</span><span class="na">setFilterNames</span><span class="o">(</span><span class="k">new</span> <span class="n">String</span><span class="o">[]{</span><span class="n">Messages</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">&quot;ExportSLD.SLD&quot;</span><span class="o">)});</span> <span class="c1">//$NON-NLS-1$</span>
+            <span class="n">String</span> <span class="n">name</span><span class="o">=</span><span class="n">layer</span><span class="o">.</span><span class="na">getName</span><span class="o">();</span>
+            <span class="k">if</span><span class="o">(</span> <span class="n">name</span><span class="o">==</span><span class="kc">null</span> <span class="o">){</span>
+                <span class="k">try</span> <span class="o">{</span>
+                    <span class="n">name</span><span class="o">=</span><span class="n">layer</span><span class="o">.</span><span class="na">getGeoResource</span><span class="o">().</span><span class="na">getInfo</span><span class="o">(</span><span class="n">monitor</span><span class="o">).</span><span class="na">getTitle</span><span class="o">();</span>
+                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">ExportPlugin</span><span class="o">.</span><span class="na">log</span><span class="o">(</span><span class="s">&quot;error getting name from layer&#39;s georesource&quot;</span><span class="o">,</span> <span class="n">e</span><span class="o">);</span> <span class="c1">//$NON-NLS-1$</span>
+                <span class="o">}</span>
+                <span class="k">if</span><span class="o">(</span> <span class="n">name</span><span class="o">==</span><span class="kc">null</span> <span class="o">){</span>
+                    <span class="k">try</span> <span class="o">{</span>
+                        <span class="n">name</span><span class="o">=</span><span class="n">layer</span><span class="o">.</span><span class="na">getGeoResource</span><span class="o">().</span><span class="na">getInfo</span><span class="o">(</span><span class="n">monitor</span><span class="o">).</span><span class="na">getName</span><span class="o">();</span>
+                    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                        <span class="n">ExportPlugin</span><span class="o">.</span><span class="na">log</span><span class="o">(</span><span class="s">&quot;error getting name from layer&#39;s georesource&quot;</span><span class="o">,</span> <span class="n">e</span><span class="o">);</span> <span class="c1">//$NON-NLS-1$</span>
+                    <span class="o">}</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+             <span class="k">if</span><span class="o">(</span> <span class="n">name</span><span class="o">!=</span><span class="kc">null</span><span class="o">)</span>
+                 <span class="n">fileDialog</span><span class="o">.</span><span class="na">setFileName</span><span class="o">(</span><span class="n">name</span><span class="o">+</span><span class="s">&quot;.sld&quot;</span><span class="o">);</span> <span class="c1">//$NON-NLS-1$</span>
+            <span class="n">String</span> <span class="n">path</span><span class="o">=</span><span class="n">fileDialog</span><span class="o">.</span><span class="na">open</span><span class="o">();</span>
+            <span class="k">if</span><span class="o">(</span> <span class="n">path</span><span class="o">==</span><span class="kc">null</span><span class="o">)</span>
+                <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+            <span class="n">file</span><span class="o">=</span><span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="n">path</span><span class="o">);</span>
+            <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">op</span><span class="o">(</span> <span class="n">Display</span> <span class="n">display</span><span class="o">,</span> <span class="n">Object</span> <span class="n">target</span><span class="o">,</span> <span class="n">IProgressMonitor</span> <span class="n">monitor</span> <span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+        <span class="n">Layer</span> <span class="n">layer</span><span class="o">=(</span><span class="n">Layer</span><span class="o">)</span> <span class="n">target</span><span class="o">;</span>
+        <span class="n">Style</span> <span class="n">style</span><span class="o">=(</span><span class="n">Style</span><span class="o">)</span> <span class="n">layer</span><span class="o">.</span><span class="na">getStyleBlackboard</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="n">SLDContent</span><span class="o">.</span><span class="na">ID</span><span class="o">);</span>
+
+        <span class="c1">// serialize out the style objects</span>
+        <span class="n">SLDTransformer</span> <span class="n">sldWriter</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SLDTransformer</span><span class="o">();</span>
+        <span class="n">String</span> <span class="n">out</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="o">;</span> <span class="c1">//$NON-NLS-1$</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="n">sldWriter</span><span class="o">.</span><span class="na">transform</span><span class="o">(</span><span class="n">style</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">TransformerException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">ExportPlugin</span><span class="o">.</span><span class="na">log</span><span class="o">(</span><span class="kc">null</span><span class="o">,</span> <span class="n">e</span><span class="o">);</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">ExportPlugin</span><span class="o">.</span><span class="na">log</span><span class="o">(</span><span class="kc">null</span><span class="o">,</span> <span class="n">e</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="n">display</span><span class="o">.</span><span class="na">asyncExec</span><span class="o">(</span><span class="k">new</span> <span class="n">QueryAndSave</span><span class="o">(</span><span class="n">layer</span><span class="o">,</span> <span class="n">out</span><span class="o">,</span> <span class="n">display</span><span class="o">,</span> <span class="n">monitor</span><span class="o">));</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li>Click the <strong>OK</strong> button.</li>
+<li>And then <strong>save</strong> the file. This should refresh the project and clear up any error markers
+left behind.</li>
+</ol>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p><strong>Optional</strong></p>
+<p>You may check your work against the completed plugin code available here:</p>
+<ol class="arabic">
+<li><p class="first">Download <a class="reference download internal" href="_downloads/net.refractions.udig.sld.export_1.0.0.jar"><tt class="xref download docutils literal"><span class="pre">net.refractions.udig.sld.export_1.0.0.jar</span></tt></a></p>
+</li>
+<li><p class="first">Save in your udig plugins directory.</p>
+</li>
+<li><p class="first">Right clicking on any layer will now let you export a SLD file
+<a class="reference download internal" href="_downloads/net.refractions.udig.sld.export_1.0.0.jar"><tt class="xref download docutils literal"><span class="pre">net.refractions.udig.sld.export_1.0.0.jar</span></tt></a>
+archive file.</p>
+<p>This file is suitable for use with GeoServer.</p>
+</li>
+</ol>
+<p class="last">Source code Avaiable here: <a class="reference external" href="http://svn.geotools.org/udig/trunk/community/jesse/net.refractions.udig.sld.export/">http://svn.geotools.org/udig/trunk/community/jesse/net.refractions.udig.sld.export/</a></p>
+</div>
+</div>
+<div class="section" id="testing-the-plug-in">
+<h3>Testing The Plug-in<a class="headerlink" href="#testing-the-plug-in" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>From the Project menu select <strong>Run</strong> and choose the configuration you set-up in the previous
+tutorial (see <a class="reference internal" href="SDKQuickstart/SDKQuickstart.html"><em>SDK Quickstart</em></a>).</li>
+</ol>
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="edit_tool_example.html">Edit Tool Example</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="view_extension_point_example.html">View Extension Point Example</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2012, Refractions Research.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,158 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Eclipse House Rules &mdash; uDig 1.3.2 Developers Guide</title>
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.3.2 Developers Guide" href="index.html" />
+    <link rel="up" title="Guidelines and Rules" href="guidelines_and_rules.html" />
+    <link rel="next" title="User Interface Guidelines" href="user_interface_guidelines.html" />
+    <link rel="prev" title="uDig Guidelines" href="udig_guidelines.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="udig_guidelines.html">uDig Guidelines</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="user_interface_guidelines.html">User Interface Guidelines</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="eclipse-house-rules">
+<h1>Eclipse House Rules<a class="headerlink" href="#eclipse-house-rules" title="Permalink to this headline">¶</a></h1>
+<p>Finally we have gather the <strong>Eclipse House Rules</strong> into one location. These are actual rules that
+must be followed by any Eclipse plug-in.</p>
+<p>The Eclipse Hourse rules, are rather hard to track down (although they are referred to often). The
+best source is the &#8220;Contributing to Eclipse&#8221; book mentioned on the project reading list.</p>
+<div class="section" id="extender-rules">
+<h2>Extender Rules<a class="headerlink" href="#extender-rules" title="Permalink to this headline">¶</a></h2>
+<p>These are rules that you <strong>must</strong> follow when implementing any extension point.</p>
+<p><strong>Contribution Rule</strong></p>
+<p>Everything is a contribution</p>
+<p><strong>Conformance Rule</strong></p>
+<p>Contributions must conform to expected interfaces</p>
+<p><strong>Sharing Rule</strong></p>
+<p>Add, don&#8217;t replace</p>
+<p><strong>Monkey See Monkey Do Rule</strong></p>
+<p>Always start by copying the structure of a similar plug-in</p>
+<p><strong>Relevance Rule</strong></p>
+<p>Contribute only when you can successfully operate</p>
+<p><strong>Integration Rule</strong></p>
+<p>Integrate, don&#8217;t separate</p>
+<p><strong>Responsibility Rule</strong></p>
+<p>Clearly identify your plug-in as the source of problems</p>
+<p><strong>Program To API Contract Rule</strong></p>
+<p>Check and program to the Eclipse API contract</p>
+<p><strong>Other Rule</strong></p>
+<p>Make all contributions available, but put those that don&#8217;t typically apply to the current
+perspective in an Other... dialog</p>
+<p><strong>Adapt to IResource Rule</strong></p>
+<p>Whenever possible, define an IResource adapter for your domain objects</p>
+<p><strong>Strata Rule</strong></p>
+<p>Separate language-neutral functionality from language-specific functionality and separate core
+functionality from UI functionality</p>
+<p><strong>User Continuity Rule</strong></p>
+<p>Preserve the user interface state across sessions</p>
+</div>
+<div class="section" id="enabler-rules">
+<h2>Enabler Rules<a class="headerlink" href="#enabler-rules" title="Permalink to this headline">¶</a></h2>
+<p>These are rules that <strong>must</strong> be followed when providing an extension point for others developers to
+implement.</p>
+<p><strong>Invitation Rule</strong></p>
+<p>Whenever possible, let others contribute to your contributions</p>
+<p><strong>Lazy Loading Rule</strong></p>
+<p>Contributions are only loaded when they are needed</p>
+<p><strong>Safe Platform Rule</strong></p>
+<p>As the provider of an extension point, you must protect yourself against misbehavior on the part of
+extenders</p>
+<p><strong>Fair Play Rule</strong></p>
+<p>All clients play by the same rules, even me</p>
+<p><strong>Explicit Extension</strong></p>
+<p>Declare explicitly where a platform can be extended</p>
+<p><strong>Diversity Rule</strong></p>
+<p>Extension points accept multiple extensions</p>
+<p><strong>Good Fences</strong></p>
+<p>When passing control outside your code, protect yourself</p>
+<p><strong>User Arbitration Rule</strong></p>
+<dl class="docutils">
+<dt>When there are multiple applicable contributions, let the user decide</dt>
+<dd>which one to use</dd>
+</dl>
+<p><strong>Explicit API Rule</strong></p>
+<p>separate the API from internals</p>
+<p><strong>Stability Rule</strong></p>
+<p>Once you invite someone to contribute, don?t change the rules</p>
+<p><strong>Defensive API Rule</strong></p>
+<p>Reveal only the API in which you are confident, but be prepared to reveal more API as clients ask
+for it</p>
+</div>
+<div class="section" id="publisher">
+<h2>Publisher<a class="headerlink" href="#publisher" title="Permalink to this headline">¶</a></h2>
+<p>When you decide to publish your plugin (say as a community module) .</p>
+<p><strong>License Rule</strong></p>
+<p>Always supply a license with every contribution</p>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="udig_guidelines.html">uDig Guidelines</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="user_interface_guidelines.html">User Interface Guidelines</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2012, Refractions Research.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

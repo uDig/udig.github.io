@@ -1,0 +1,164 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Coding Conventions &mdash; uDig 1.3.2 Developers Guide</title>
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.3.2 Developers Guide" href="index.html" />
+    <link rel="up" title="Guidelines and Rules" href="guidelines_and_rules.html" />
+    <link rel="next" title="Working with Eclipse RCP" href="working_with_eclipse_rcp.html" />
+    <link rel="prev" title="Naming Conventions" href="naming_conventions.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="naming_conventions.html">Naming Conventions</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="working_with_eclipse_rcp.html">Working with Eclipse RCP</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="coding-conventions">
+<h1>Coding Conventions<a class="headerlink" href="#coding-conventions" title="Permalink to this headline">¶</a></h1>
+<p>As a strict policy we do our best to <strong>use the tools</strong> to capture our coding conventions; as such we
+make use of FindBugz, Code Templates and Code Formatters for all the small stuff.</p>
+<p>This page covers what is left.</p>
+<div class="section" id="converting-a-url-to-a-file">
+<h2>Converting a URL to a File<a class="headerlink" href="#converting-a-url-to-a-file" title="Permalink to this headline">¶</a></h2>
+<p>When you need to convert a java.net.URL object to a java.io.File object, you must take care that you
+do not ignore the &#8216;authority&#8217; property on the URL object. This contains information about the server
+that the file is located on. On Windows systems, this includes the drive or network share, such as
+&#8220;E:&#8221; or &#8220;fooServer&#8221;.</p>
+<p>The rule is simple: If URL.getAuthority isn&#8217;t null or empty, then the File should be constructed
+like so:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">URL</span> <span class="n">url</span> <span class="o">=</span> <span class="o">...</span>
+<span class="n">File</span> <span class="n">f</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">&quot;//&quot;</span> <span class="o">+</span> <span class="n">url</span><span class="o">.</span><span class="na">getAuthority</span><span class="o">()</span> <span class="o">+</span> <span class="n">url</span><span class="o">.</span><span class="na">getPath</span><span class="o">());</span>
+</pre></div>
+</div>
+<p>It is very important that you always check the authority when converting to a File!</p>
+<p>There is a utility method in URLUtils that will do this for you:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">File</span> <span class="n">f</span> <span class="o">=</span> <span class="n">URLUtils</span><span class="o">.</span><span class="na">urlToFile</span><span class="o">(</span><span class="n">url</span><span class="o">);</span>
+</pre></div>
+</div>
+<p>Use it!</p>
+</div>
+<div class="section" id="example-checklist-for-an-import-wizard">
+<h2>Example Checklist for an Import Wizard<a class="headerlink" href="#example-checklist-for-an-import-wizard" title="Permalink to this headline">¶</a></h2>
+<p>The preceding sections on</p>
+<ul class="simple">
+<li><a class="reference internal" href="udig_guidelines.html"><em>uDig Guidelines</em></a>,</li>
+<li><a class="reference internal" href="eclipse_house_rules.html"><em>Eclipse House Rules</em></a> and</li>
+<li><a class="reference internal" href="user_interface_guidelines.html"><em>User Interface Guidelines</em></a></li>
+</ul>
+<p>may be a little bit abstract. Here is the results of apply those guidelines into an
+actual Quality Assurance Checklist for the UDIGImportPage.</p>
+<p>Load Data</p>
+<ul class="simple">
+<li>listed in the &#8220;Add Layer&#8221; and &#8220;Data Import&#8221; wizards</li>
+<li>banner and a title</li>
+<li>starts with a prompt (not an error message)</li>
+<li>tab order as fields are filled in</li>
+<li>test if data is loaded correctly</li>
+<li>test that new content is selected (in layer or catalog view)</li>
+</ul>
+<p>Context and Error</p>
+<ul class="simple">
+<li>starts with fields based on workspace context (ie the data we just loaded)</li>
+<li>restart page and check that history is remembered</li>
+<li>fill out the fields incorrectly and check reporting of error messages</li>
+</ul>
+<p>Drag and Drop (Dnd):</p>
+<ul class="simple">
+<li>DnD with appropriate URL (check of canProcess method)</li>
+</ul>
+<p>Help and Internationalization</p>
+<ul class="simple">
+<li>Check for presense of online reference page for this wizard</li>
+<li>Press F1 and (or click on the ?) for context sensitive help</li>
+<li>Restart and run tests with Italian</li>
+</ul>
+</div>
+<div class="section" id="wizard-implementation-tips">
+<h2>Wizard Implementation Tips<a class="headerlink" href="#wizard-implementation-tips" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Workspace context is based on IDataWizard.getSelection().</li>
+<li>History is maintained in Dialog settings and is remembered across runs
+(See <a class="reference internal" href="adding_history_to_dialogs_and_wizards.html"><em>Adding History to Dialogs and Wizards</em></a>)</li>
+<li>Steal an existing wizban image and modify</li>
+<li>jdbc urls are not &#8220;valid&#8221; urls, see the <a class="reference external" href="http://java.sun.com/docs/books/tutorial/jdbc/basics/connecting.html">jdbc
+trail</a> and are not usual
+done using DND</li>
+</ul>
+</div>
+<div class="section" id="code-checks">
+<h2>Code Checks<a class="headerlink" href="#code-checks" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Turn on all warnings as in environment setup</li>
+<li>Classes have at minimum a javadoc comment</li>
+<li>Strings are externalized for internationalization</li>
+</ul>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="naming_conventions.html">Naming Conventions</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="working_with_eclipse_rcp.html">Working with Eclipse RCP</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2012, Refractions Research.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

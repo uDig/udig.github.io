@@ -1,0 +1,125 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Launching &mdash; uDig 1.3.2 Developers Guide</title>
+    <link rel="stylesheet" href="../_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/print.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="../_static/udig.ico"/>
+    <link rel="top" title="uDig 1.3.2 Developers Guide" href="../index.html" />
+    <link rel="up" title="Custom Application" href="CustomApplication.html" />
+    <link rel="next" title="Splash" href="Splash.html" />
+    <link rel="prev" title="Product Configuration" href="ProductConfiguration.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="ProductConfiguration.html">Product Configuration</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="Splash.html">Splash</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="launching">
+<h1>Launching<a class="headerlink" href="#launching" title="Permalink to this headline">¶</a></h1>
+<p>Eclipse RCP applications are bundled up with a platform specific launcher. You can run your application
+as a normal Java application but this is more fun.</p>
+<p>The osgi.parentClassloader=ext argument is used to let runtime system know that we want access to JRE
+extensions (specifically JAI and ImageIO).</p>
+<ul>
+<li><p class="first">Return to the <strong>custom.product</strong> editor, and change to the <em class="guilabel">Launching</em> tab.</p>
+</li>
+<li><p class="first">We are going to fill in the the Program Launcher section:</p>
+<ul class="simple">
+<li>Enter custom into the Launcher Name field</li>
+<li>Under Customizing the launcher icon varies per platform select <strong>win32</strong></li>
+<li>Select the <em class="guilabel">Use a single ICO file containing the 6 images:</em> radio button</li>
+<li>Press <em class="guilabel">Browse...</em> button and select <strong>icons/world.ico</strong> for the file</li>
+</ul>
+</li>
+<li><p class="first">Here is what this looks like when you are done:</p>
+<p><img alt="100002010000015F00000176A71E213B_png" src="../_images/100002010000015F00000176A71E213B.png" style="width: 6.5cm; height: 6.93cm;" /></p>
+</li>
+<li><p class="first">Now lets work on the Launching Arguments</p>
+<ul>
+<li><p class="first">Select the <em class="guilabel">All Platforms</em> tab, and fill the the following VM Arguments:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="o">-</span><span class="n">Xmx386M</span> <span class="o">-</span><span class="n">Dosgi</span><span class="o">.</span><span class="n">parentClassloader</span><span class="o">=</span><span class="n">ext</span>
+</pre></div>
+</div>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">If you want you can give your application more memory <tt class="docutils literal"><span class="pre">-Xmx756m</span></tt> is good for working with rasters</p>
+</div>
+</li>
+<li><p class="first">Select the <em class="guilabel">macosx</em> tab and add the following to the existing VM Arguments:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="o">-</span><span class="n">Djava</span><span class="o">.</span><span class="n">awt</span><span class="o">.</span><span class="n">headless</span><span class="o">=</span><span class="n">true</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p class="first">That is it; we have enough information to move along with.</p>
+</li>
+</ul>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="ProductConfiguration.html">Product Configuration</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="Splash.html">Splash</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2012, Refractions Research.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>
