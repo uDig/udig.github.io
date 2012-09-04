@@ -2,14 +2,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
     <title>Creating a Plugin &mdash; uDig 1.3.2 Developers Guide</title>
+    
     <link rel="stylesheet" href="_static/udig.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
@@ -105,29 +108,29 @@
 <col width="35%" />
 </colgroup>
 <thead valign="bottom">
-<tr><th class="head">Project</th>
+<tr class="row-odd"><th class="head">Project</th>
 <th class="head">Example</th>
 <th class="head">Naming Convention</th>
 </tr>
 </thead>
 <tbody valign="top">
-<tr><td>Plug-In</td>
+<tr class="row-even"><td>Plug-In</td>
 <td>net.refractions.udig.render</td>
 <td>named in agreement with internal package structure</td>
 </tr>
-<tr><td>JUnit Test Plug-In</td>
+<tr class="row-odd"><td>JUnit Test Plug-In</td>
 <td>net.refractions.udig.render-test</td>
 <td>Append &#8220;-test&#8221;</td>
 </tr>
-<tr><td>Plug-In Fragment</td>
+<tr class="row-even"><td>Plug-In Fragment</td>
 <td>net.refractions.udig.german</td>
 <td>Provide &#8221;.<em>language</em>&#8221; file at the root udig</td>
 </tr>
-<tr><td>Plug-In Fragment</td>
+<tr class="row-odd"><td>Plug-In Fragment</td>
 <td>net.refractions.render-1</td>
 <td>Do anything except add a dot</td>
 </tr>
-<tr><td>Features</td>
+<tr class="row-even"><td>Features</td>
 <td>net.refractions.udig.render-feature</td>
 <td>Append &#8220;-feature&#8221; to associated root Plug-In</td>
 </tr>
@@ -139,11 +142,11 @@
 <col width="100%" />
 </colgroup>
 <thead valign="bottom">
-<tr><th class="head"><strong>OSGi (from Rich Client Tutorial - Part 1)</strong></th>
+<tr class="row-odd"><th class="head"><strong>OSGi (from Rich Client Tutorial - Part 1)</strong></th>
 </tr>
 </thead>
 <tbody valign="top">
-<tr><td>Eclipse 3.0 introduced a new run-time system based on OSGi standards that uses
+<tr class="row-even"><td>Eclipse 3.0 introduced a new run-time system based on OSGi standards that uses
 bundles and a new manifest file (MANIFEST.MF) to implement plug-ins. The use of
 MANIFEST.MF, in normal circumstances, is completely optional.
 You will notice that almost all of the 3.0 SDK plug-ins do NOT have one yet all
@@ -186,11 +189,11 @@ digits have been known to cause odd bugs when other plugins depend on them.</li>
 <col width="100%" />
 </colgroup>
 <thead valign="bottom">
-<tr><th class="head"><strong>Plug-in Class (from Rich Client Tutorial - Part 1)</strong></th>
+<tr class="row-odd"><th class="head"><strong>Plug-in Class (from Rich Client Tutorial - Part 1)</strong></th>
 </tr>
 </thead>
 <tbody valign="top">
-<tr><td>The generated plug-in class that you may be familiar with in previous releases
+<tr class="row-even"><td>The generated plug-in class that you may be familiar with in previous releases
 is no longer required in Eclipse 3.0. You can still have one to hold global data if you like.
 In this case we would like to hold some global data, rather than use a singleton.
 This allows us to cleanup after the application (something that is hard with singletons).</td>
@@ -243,7 +246,7 @@ This allows us to cleanup after the application (something that is hard with sin
 
     <div class="footer">
         &copy; Copyright 2012, Refractions Research.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
     </div>
   </body>
 </html>

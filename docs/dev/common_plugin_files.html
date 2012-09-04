@@ -2,14 +2,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
     <title>Common Plugin Files &mdash; uDig 1.3.2 Developers Guide</title>
+    
     <link rel="stylesheet" href="_static/udig.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
@@ -70,120 +73,120 @@
 <col width="60%" />
 </colgroup>
 <thead valign="bottom">
-<tr><th class="head">plugin xyz</th>
+<tr class="row-odd"><th class="head">plugin xyz</th>
 <th class="head">Links to definition/explaination</th>
 </tr>
 </thead>
 <tbody valign="top">
-<tr><td><strong>src/</strong></td>
+<tr class="row-even"><td><strong>src/</strong></td>
 <td><a class="reference internal" href="creating_a_plugin.html"><em>source_files</em></a></td>
 </tr>
-<tr><td><strong>src/net/refractions/udig/xyz</strong></td>
+<tr class="row-odd"><td><strong>src/net/refractions/udig/xyz</strong></td>
 <td><a class="reference internal" href="api_rules_of_engagement.html"><em>API Package</em></a></td>
 </tr>
-<tr><td>src/net/refractions/udig/xyz/<a class="reference internal" href="plugin_activator.html"><em>XYZPlugin.java</em></a></td>
+<tr class="row-even"><td>src/net/refractions/udig/xyz/<a class="reference internal" href="plugin_activator.html"><em>XYZPlugin.java</em></a></td>
 <td>plugin resource and lifecycle management</td>
 </tr>
-<tr><td>src/net/refractions/udig/xyz/<a class="reference internal" href="plugin_internationalization_with_resourcebundles.html"><em>XYZPlugin.properties</em></a></td>
+<tr class="row-odd"><td>src/net/refractions/udig/xyz/<a class="reference internal" href="plugin_internationalization_with_resourcebundles.html"><em>XYZPlugin.properties</em></a></td>
 <td>option 1 for internationlization</td>
 </tr>
-<tr><td>src/net/refractions/udig/xyz/<a class="reference internal" href="imageregistry_and_images.html"><em>ISharedImages.java</em></a></td>
+<tr class="row-even"><td>src/net/refractions/udig/xyz/<a class="reference internal" href="imageregistry_and_images.html"><em>ISharedImages.java</em></a></td>
 <td>Constants to retrive shared images</td>
 </tr>
-<tr><td><strong>src/net/refractions/udig/xyz/internal</strong></td>
+<tr class="row-odd"><td><strong>src/net/refractions/udig/xyz/internal</strong></td>
 <td><a class="reference internal" href="api_rules_of_engagement.html"><em>Non API Package</em></a></td>
 </tr>
-<tr><td>src/net/refractions/udig/xyz/internal/<a class="reference internal" href="plugin_help.html"><em>IHelpContextIds.java</em></a></td>
+<tr class="row-even"><td>src/net/refractions/udig/xyz/internal/<a class="reference internal" href="plugin_help.html"><em>IHelpContextIds.java</em></a></td>
 <td>constants used for context sensitve help</td>
 </tr>
-<tr><td>src/net/refractions/udig/xyz/internal/<a class="reference internal" href="imageregistry_and_images.html"><em>IImageConstants.java</em></a></td>
+<tr class="row-odd"><td>src/net/refractions/udig/xyz/internal/<a class="reference internal" href="imageregistry_and_images.html"><em>IImageConstants.java</em></a></td>
 <td>Constants used to retrive images</td>
 </tr>
-<tr><td>src/net/refractions/udig/xyz/internal/<a class="reference internal" href="imageregistry_and_images.html"><em>Images.java</em></a></td>
+<tr class="row-even"><td>src/net/refractions/udig/xyz/internal/<a class="reference internal" href="imageregistry_and_images.html"><em>Images.java</em></a></td>
 <td>Manages images for plugin class</td>
 </tr>
-<tr><td>src/net/refractions/udig/xyz/internal/<a class="reference internal" href="plugin_internationalization_with_resourcebundles.html"><em>Messages.java</em></a></td>
+<tr class="row-odd"><td>src/net/refractions/udig/xyz/internal/<a class="reference internal" href="plugin_internationalization_with_resourcebundles.html"><em>Messages.java</em></a></td>
 <td>option 2 for internationlization</td>
 </tr>
-<tr><td>src/net/refractions/udig/xyz/internal/<a class="reference internal" href="plugin_internationalization_with_resourcebundles.html"><em>Messages.properties</em></a></td>
+<tr class="row-even"><td>src/net/refractions/udig/xyz/internal/<a class="reference internal" href="plugin_internationalization_with_resourcebundles.html"><em>Messages.properties</em></a></td>
 <td>text for internationlization</td>
 </tr>
-<tr><td>src/net/refractions/udig/xyz/internal/<a class="reference internal" href="plugin_internationalization_with_resourcebundles.html"><em>Policy.java</em></a></td>
+<tr class="row-odd"><td>src/net/refractions/udig/xyz/internal/<a class="reference internal" href="plugin_internationalization_with_resourcebundles.html"><em>Policy.java</em></a></td>
 <td>option 3 for internationlization</td>
 </tr>
-<tr><td><strong>src/net/refractions/udig/xyz/examples</strong></td>
+<tr class="row-even"><td><strong>src/net/refractions/udig/xyz/examples</strong></td>
 <td><a class="reference internal" href="api_rules_of_engagement.html"><em>Non API Package</em></a></td>
 </tr>
-<tr><td><strong>src/net/refractions/udig/xyz/tests</strong></td>
+<tr class="row-odd"><td><strong>src/net/refractions/udig/xyz/tests</strong></td>
 <td><a class="reference internal" href="api_rules_of_engagement.html"><em>Non API Package</em></a></td>
 </tr>
-<tr><td><strong>bin/</strong> - don&#8217;t add to svn/git</td>
+<tr class="row-even"><td><strong>bin/</strong> - don&#8217;t add to svn/git</td>
 <td><a class="reference internal" href="creating_a_plugin.html"><em>generated_class_files</em></a></td>
 </tr>
-<tr><td><strong>doc/</strong> - don&#8217;t add to svn/git</td>
+<tr class="row-odd"><td><strong>doc/</strong> - don&#8217;t add to svn/git</td>
 <td><a class="reference internal" href="creating_and_using_extension_points.html"><em>generated_schema_doc_files</em></a></td>
 </tr>
-<tr><td>doc/xyz_schema.xml</td>
+<tr class="row-even"><td>doc/xyz_schema.xml</td>
 <td><a class="reference internal" href="creating_and_using_extension_points.html"><em>generated_schema_doc_files</em></a></td>
 </tr>
-<tr><td><strong>html/</strong></td>
+<tr class="row-odd"><td><strong>html/</strong></td>
 <td><a class="reference internal" href="plugin_help.html"><em>online help</em></a></td>
 </tr>
-<tr><td>html/aHtmlDocument</td>
+<tr class="row-even"><td>html/aHtmlDocument</td>
 <td><a class="reference internal" href="plugin_help.html"><em>an online help page</em></a></td>
 </tr>
-<tr><td><strong>/icons/dlcl16/</strong></td>
+<tr class="row-odd"><td><strong>/icons/dlcl16/</strong></td>
 <td><a class="reference internal" href="icons.html"><em>disabled local toolbar</em></a></td>
 </tr>
-<tr><td><strong>/icons/dtool16/</strong></td>
+<tr class="row-even"><td><strong>/icons/dtool16/</strong></td>
 <td><a class="reference internal" href="icons.html"><em>disabled toolbar</em></a></td>
 </tr>
-<tr><td><strong>/icons/dview16/</strong></td>
+<tr class="row-odd"><td><strong>/icons/dview16/</strong></td>
 <td><a class="reference internal" href="icons.html"><em>disabled view</em></a></td>
 </tr>
-<tr><td><strong>/icons/elcl16/</strong></td>
+<tr class="row-even"><td><strong>/icons/elcl16/</strong></td>
 <td><a class="reference internal" href="icons.html"><em>enabled local toolbar</em></a></td>
 </tr>
-<tr><td><strong>/icons/etool16/</strong></td>
+<tr class="row-odd"><td><strong>/icons/etool16/</strong></td>
 <td><a class="reference internal" href="icons.html"><em>enabled toolbar</em></a></td>
 </tr>
-<tr><td><strong>/icons/eview16/</strong></td>
+<tr class="row-even"><td><strong>/icons/eview16/</strong></td>
 <td><a class="reference internal" href="icons.html"><em>enabled view</em></a></td>
 </tr>
-<tr><td><strong>/icons/obj16/</strong></td>
+<tr class="row-odd"><td><strong>/icons/obj16/</strong></td>
 <td><a class="reference internal" href="icons.html"><em>model object</em></a></td>
 </tr>
-<tr><td><strong>/icons/ovr16/</strong></td>
+<tr class="row-even"><td><strong>/icons/ovr16/</strong></td>
 <td><a class="reference internal" href="icons.html"><em>overlay</em></a></td>
 </tr>
-<tr><td><strong>/icons/wizban/</strong></td>
+<tr class="row-odd"><td><strong>/icons/wizban/</strong></td>
 <td><a class="reference internal" href="icons.html"><em>wizard banner</em></a></td>
 </tr>
-<tr><td>plugin.xml</td>
+<tr class="row-even"><td>plugin.xml</td>
 <td><a class="reference internal" href="plugin_setup.html"><em>plugin manifest file</em></a></td>
 </tr>
-<tr><td>plugin.properties</td>
+<tr class="row-odd"><td>plugin.properties</td>
 <td><a class="reference internal" href="plugin_setup.html"><em>plugin manifest internationalization</em></a></td>
 </tr>
-<tr><td>build.xml</td>
+<tr class="row-even"><td>build.xml</td>
 <td><a class="reference internal" href="plugin_setup.html"><em>generated ant export script</em></a></td>
 </tr>
-<tr><td>build.properties</td>
+<tr class="row-odd"><td>build.properties</td>
 <td><a class="reference internal" href="plugin_setup.html"><em>describes src, and export contents</em></a></td>
 </tr>
-<tr><td>.classpath</td>
+<tr class="row-even"><td>.classpath</td>
 <td><a class="reference external" href="http://udig.refractions.net/confluence//display/ADMIN/08+Libs+Jars">generated plug-in classpath information</a></td>
 </tr>
-<tr><td>.project</td>
+<tr class="row-odd"><td>.project</td>
 <td><a class="reference external" href="http://udig.refractions.net/confluence//display/ADMIN/08+Libs+Jars">plug-in project file</a></td>
 </tr>
-<tr><td>toc.xml</td>
+<tr class="row-even"><td>toc.xml</td>
 <td><a class="reference internal" href="plugin_help.html"><em>table of contents for the top level book</em></a></td>
 </tr>
-<tr><td>tocSubject.xml</td>
+<tr class="row-odd"><td>tocSubject.xml</td>
 <td><a class="reference internal" href="plugin_help.html"><em>table of contents for subject</em></a></td>
 </tr>
-<tr><td>contexts.xml</td>
+<tr class="row-even"><td>contexts.xml</td>
 <td><a class="reference internal" href="plugin_help.html"><em>Maps context ids to context-sensitve help</em></a></td>
 </tr>
 </tbody>
@@ -206,7 +209,7 @@
 
     <div class="footer">
         &copy; Copyright 2012, Refractions Research.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
     </div>
   </body>
 </html>

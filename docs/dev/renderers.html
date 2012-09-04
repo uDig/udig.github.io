@@ -2,14 +2,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
     <title>Renderers &mdash; uDig 1.3.2 Developers Guide</title>
+    
     <link rel="stylesheet" href="_static/udig.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
@@ -110,24 +113,24 @@ the renderer must render to.</p>
 <col width="80%" />
 </colgroup>
 <thead valign="bottom">
-<tr><th class="head">Object</th>
+<tr class="row-odd"><th class="head">Object</th>
 <th class="head">Task</th>
 </tr>
 </thead>
 <tbody valign="top">
-<tr><td>RenderManager</td>
+<tr class="row-even"><td>RenderManager</td>
 <td>Responsible for creating renderers and triggering refreshes.</td>
 </tr>
-<tr><td>RendererCreator</td>
+<tr class="row-odd"><td>RendererCreator</td>
 <td>The default implementation uses a renderer creator to create renderers. The default implementation
 chooses a renderer based on the criteria mentioned earler.</td>
 </tr>
-<tr><td>RenderMetricsFactory</td>
+<tr class="row-even"><td>RenderMetricsFactory</td>
 <td>Can create the RenderMetrics for a given renderer. It is the class that is created from Extensions.
 It has a short cut method that can detect whether a resource will ever be able to render the
 resource.</td>
 </tr>
-<tr><td>RenderMetrics</td>
+<tr class="row-odd"><td>RenderMetrics</td>
 <td>Provides information on whether the renderer can correctly style a layer, if it the renderer has
 been optimized for rendering the resource and whether more resources can be added to the context
 object (in the case where the renderer is a MultiLayerRenderer). It also creates the renderer. The
@@ -135,31 +138,31 @@ RenderMetrics is provided with a RenderContext to make these calculations. The M
 its information on the assumption that the renderer will use the GeoResource provided by the
 RenderContext.</td>
 </tr>
-<tr><td>RendererExecutor</td>
+<tr class="row-even"><td>RendererExecutor</td>
 <td>Each renderer has an executor that runs the renderer in a separate thread. There are currently 3
 implementations. One for each type of renderer. (Composite/MultiLayer/Renderer). The
 CompositeRendererExecutor provides the incremental update functionality.</td>
 </tr>
-<tr><td>Renderer</td>
+<tr class="row-odd"><td>Renderer</td>
 <td>Renders a resource, specifically, the resource referenced by the RenderContext. The renderer is
 responsible for listening to their resource and triggering updates when the resource changes.</td>
 </tr>
-<tr><td>MultiLayerRenderer</td>
+<tr class="row-even"><td>MultiLayerRenderer</td>
 <td>Takes a CompositeRenderContext and renders all the resources in the contexts into the image obtained
 from the composite RenderContext.</td>
 </tr>
-<tr><td>CompositeRenderer</td>
+<tr class="row-odd"><td>CompositeRenderer</td>
 <td>Creates a seperate renderer for each context in the CompositeRenderContext. Each Renderer is
 assigned to its own RenderExecutor. (The Standard implementation uses the same RendererCreator as
 the RenderManager).</td>
 </tr>
-<tr><td>RenderContext</td>
+<tr class="row-even"><td>RenderContext</td>
 <td>A RenderContext is a facade into the system in addition to having references to the Layer that the
 Renderer must render as and the GeoResource that the will be used by the renderer. Finally the
 RenderContext contains the image that the Renderer must render to and has a number of generally
 useful methods.</td>
 </tr>
-<tr><td>CompositeRenderContext</td>
+<tr class="row-odd"><td>CompositeRenderContext</td>
 <td>A CompositeRenderContext contains a set of RenderContexts. The image that is rendered to is the
 image contained by the CompositeRenderContext, the contained RenderContexts will not be rendered to.</td>
 </tr>
@@ -341,7 +344,7 @@ adaptors).</p>
 
     <div class="footer">
         &copy; Copyright 2012, Refractions Research.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
     </div>
   </body>
 </html>
