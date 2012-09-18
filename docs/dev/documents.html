@@ -1,0 +1,225 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Documents &mdash; uDig 1.3.3 Developers Guide</title>
+    
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.3.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.3.3 Developers Guide" href="index.html" />
+    <link rel="up" title="Working with GIS Application" href="working_with_gis_application.html" />
+    <link rel="next" title="FAQ" href="faq.html" />
+    <link rel="prev" title="Map Decorator" href="map_decorator.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="map_decorator.html">Map Decorator</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="faq.html">FAQ</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="documents">
+<h1>Documents<a class="headerlink" href="#documents" title="Permalink to this headline">¶</a></h1>
+<p>Documents provide support information for resources and features. These come in the form of attachments, links and hotlinks.</p>
+<p>The <em>Document View</em> provides a user interface to access and manage these documents. It is driven by an API that allows developers to customise the document data models and the document sources. This provides the flexibility of implementing your own document classes and publishing them to the view.</p>
+<div class="section" id="id1">
+<h2>Documents<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>These are the data models that we can implement to define a document.</p>
+<ul class="simple">
+<li><strong>IDocument</strong> - The basic document data model. This provides access to the document&#8217;s content and other metadata like label and description.</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">net</span><span class="o">.</span><span class="n">refractions</span><span class="o">.</span><span class="n">udig</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">FileLinkedDocument</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><strong>IAttachment</strong> - An add-on to IDocument. This provides the attachment specific <em>Save As</em> method.</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">net</span><span class="o">.</span><span class="n">refractions</span><span class="o">.</span><span class="n">udig</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">FileAttachmentDocument</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><strong>IHotlink</strong> - An add-on to IDocument. This provides access to hotlink metadata like attribute name and hotlink descriptors.</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">net</span><span class="o">.</span><span class="n">refractions</span><span class="o">.</span><span class="n">udig</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">FileHotlinkDocument</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="documents-sources">
+<h2>Documents Sources<a class="headerlink" href="#documents-sources" title="Permalink to this headline">¶</a></h2>
+<p>These are the document sources that we can implement to provide access to documents and allow getting, adding, updating and deleting of documents.</p>
+<p>These make use of the data models above to communicate to and from the <em>Document View</em>.</p>
+<ul class="simple">
+<li><strong>IDocumentSource</strong> - This provides access to resource-level attachments and links.</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">net</span><span class="o">.</span><span class="n">refractions</span><span class="o">.</span><span class="n">udig</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">ShpDocumentSource</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><strong>IAttachmentSource</strong> - This provides access to feature-level attachments and links.</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">net</span><span class="o">.</span><span class="n">refractions</span><span class="o">.</span><span class="n">udig</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">ShpAttachmentSource</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><strong>IHotlinkSource</strong> - This provides access to feature hotlinks.</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">net</span><span class="o">.</span><span class="n">refractions</span><span class="o">.</span><span class="n">udig</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">ShpHotlinkSource</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="integrating-with-document-view">
+<h2>Integrating with Document View<a class="headerlink" href="#integrating-with-document-view" title="Permalink to this headline">¶</a></h2>
+<p>The <em>Document View</em> basically listens to the workbench selection and checks if it can get a document source from <em>IGeoResource</em> selections.</p>
+<p><strong>How the view gets a document source:</strong></p>
+<div class="highlight-python"><pre>final IGeoResource geoResource = // Get from selection
+final Class&lt;T&gt; type = // IDocumentSource.class, IAttachmentSource.class or IHotlinkSource.class
+
+if (geoResource != null) {
+   if (geoResource.canResolve(type)) {
+      try {
+         return geoResource.resolve(type, monitor);
+      } catch (IOException e) {
+         e.printStackTrace();
+      }
+   }
+}
+return null;</pre>
+</div>
+<p><strong>How to hook up a document source:</strong></p>
+<ol class="arabic simple">
+<li>Implement the document sources, <em>see sample implementations above</em></li>
+<li>Extend the <em>net.refractions.udig.catalog.resolvers</em> extension point</li>
+</ol>
+<div class="highlight-python"><pre>&lt;extension
+      id="shp"
+      name="Shapefile Document Resolvers"
+      point="net.refractions.udig.catalog.resolvers"&gt;
+   &lt;factory
+         class="net.refractions.udig.document.source.ShpDocumentResolveFactory"
+         resolveableType="net.refractions.udig.catalog.internal.shp.ShpGeoResourceImpl"&gt;
+      &lt;resolve
+            type="net.refractions.udig.catalog.document.IHotlinkSource"&gt;&lt;/resolve&gt;
+      &lt;resolve
+            type="net.refractions.udig.catalog.document.IDocumentSource"&gt;&lt;/resolve&gt;
+      &lt;resolve
+            type="net.refractions.udig.catalog.document.IAttachmentSource"&gt;
+      &lt;/resolve&gt;
+   &lt;/factory&gt;
+&lt;/extension&gt;</pre>
+</div>
+<ol class="arabic simple" start="3">
+<li>Implement the <em>IResolveAdapterFactory</em> referenced by the extension and integrate the document sources</li>
+</ol>
+<div class="highlight-python"><pre>public class ShpDocumentResolveFactory implements IResolveAdapterFactory {
+
+ @Override
+ public boolean canAdapt(IResolve resolve, Class&lt;?&gt; adapter) {
+     if (resolve instanceof ShpGeoResourceImpl) {
+         if (adapter.isAssignableFrom(IDocumentSource.class)
+                 || adapter.isAssignableFrom(IHotlinkSource.class)
+                 || adapter.isAssignableFrom(IAttachmentSource.class)) {
+             return true;
+         }
+     }
+     return false;
+ }
+
+ @Override
+ public &lt;T&gt; T adapt(IResolve resolve, Class&lt;T&gt; adapter, IProgressMonitor monitor)
+         throws IOException {
+
+     if (resolve instanceof ShpGeoResourceImpl) {
+         final ShpGeoResourceImpl shpGeoResource = (ShpGeoResourceImpl) resolve;
+         if (adapter.isAssignableFrom(IDocumentSource.class)) {
+             IDocumentSource documentSource = new ShpDocumentSource(shpGeoResource);
+             if (documentSource != null) {
+                 return adapter.cast(documentSource);
+             }
+         }
+         if (adapter.isAssignableFrom(IHotlinkSource.class)) {
+             IHotlinkSource hotlink = new ShpHotlinkSource(shpGeoResource);
+             if (hotlink != null) {
+                 return adapter.cast(hotlink);
+             }
+         }
+         if (adapter.isAssignableFrom(IAttachmentSource.class)) {
+             IAttachmentSource attachmentSource = new ShpAttachmentSource(shpGeoResource);
+             if (attachmentSource != null) {
+                 return adapter.cast(attachmentSource);
+             }
+         }
+     }
+
+     return null;
+ }
+
+}</pre>
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="map_decorator.html">Map Decorator</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="faq.html">FAQ</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2012, Refractions Research.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
