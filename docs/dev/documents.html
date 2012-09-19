@@ -65,57 +65,91 @@
         
   <div class="section" id="documents">
 <h1>Documents<a class="headerlink" href="#documents" title="Permalink to this headline">¶</a></h1>
-<p>Documents provide support information for resources and features. These come in the form of attachments, links and hotlinks.</p>
-<p>The <em>Document View</em> provides a user interface to access and manage these documents. It is driven by an API that allows developers to customise the document data models and the document sources. This provides the flexibility of implementing your own document classes and publishing them to the view.</p>
-<div class="section" id="id1">
-<h2>Documents<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>Documents provide support information for resources and features. These come in the form of
+attachments, links and hotlinks.</p>
+<p>The <em>Document View</em> provides a user interface to access and manage these documents. It is driven
+by an API that allows developers to customise the document data models and the document sources.
+This provides the flexibility of implementing your own document classes and publishing them to
+the view.</p>
+<p>These facilities are also used to allow an IGeoResource to publish support files
+(such as default style or icon sets).</p>
+<div class="section" id="document">
+<h2>Document<a class="headerlink" href="#document" title="Permalink to this headline">¶</a></h2>
+<div class="figure align-center">
+<img alt="" src="_images/IDocument.PNG" />
+<p class="caption">IDocument Classes</p>
+</div>
 <p>These are the data models that we can implement to define a document.</p>
 <ul class="simple">
 <li><strong>IDocument</strong> - The basic document data model. This provides access to the document&#8217;s content and other metadata like label and description.</li>
-</ul>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">net</span><span class="o">.</span><span class="n">refractions</span><span class="o">.</span><span class="n">udig</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">FileLinkedDocument</span>
-</pre></div>
-</div>
-<ul class="simple">
 <li><strong>IAttachment</strong> - An add-on to IDocument. This provides the attachment specific <em>Save As</em> method.</li>
+<li><strong>IHotlink</strong> - An add-on to IDocument. This provides access to hotlink metadata including the attribute name used
+to record the file or web link. The list of descriptors captures how the hotlink is to be used,
+especially for attribtues that are configured with several actions.</li>
 </ul>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">net</span><span class="o">.</span><span class="n">refractions</span><span class="o">.</span><span class="n">udig</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">FileAttachmentDocument</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><strong>IHotlink</strong> - An add-on to IDocument. This provides access to hotlink metadata like attribute name and hotlink descriptors.</li>
-</ul>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">net</span><span class="o">.</span><span class="n">refractions</span><span class="o">.</span><span class="n">udig</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">FileHotlinkDocument</span>
-</pre></div>
-</div>
 </div>
 <div class="section" id="documents-sources">
 <h2>Documents Sources<a class="headerlink" href="#documents-sources" title="Permalink to this headline">¶</a></h2>
-<p>These are the document sources that we can implement to provide access to documents and allow getting, adding, updating and deleting of documents.</p>
+<p>These are the document sources that we can implement to provide access to documents and allow
+getting, adding, updating and deleting of documents.</p>
+<a class="reference internal image-reference" href="_images/DocumentSource.PNG"><img alt="Document Source Classes" class="align-center" src="_images/DocumentSource.PNG" /></a>
 <p>These make use of the data models above to communicate to and from the <em>Document View</em>.</p>
-<ul class="simple">
-<li><strong>IDocumentSource</strong> - This provides access to resource-level attachments and links.</li>
-</ul>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">net</span><span class="o">.</span><span class="n">refractions</span><span class="o">.</span><span class="n">udig</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">ShpDocumentSource</span>
-</pre></div>
+<div class="section" id="idocumentsource">
+<h3>IDocumentSource<a class="headerlink" href="#idocumentsource" title="Permalink to this headline">¶</a></h3>
+<p>IDocumentSource provides access to resource-level attachments and links.</p>
+<p>Example Implementation <strong>ShpDocumentSource</strong> copies attachments into a folder
+and records the <strong>DocumentInfo</strong> information in the property file.</p>
+<p>To access a list of documents:</p>
+<div class="highlight-python"><pre>IDocumentSource documents = geoResource.resolve( IDocumentSource.class, new NullProgressMonitor );
+List&lt;IDocument&gt; list = documents.getDocuments( new NullProgressMonitor() );</pre>
 </div>
-<ul class="simple">
-<li><strong>IAttachmentSource</strong> - This provides access to feature-level attachments and links.</li>
-</ul>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">net</span><span class="o">.</span><span class="n">refractions</span><span class="o">.</span><span class="n">udig</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">ShpAttachmentSource</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><strong>IHotlinkSource</strong> - This provides access to feature hotlinks.</li>
-</ul>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">net</span><span class="o">.</span><span class="n">refractions</span><span class="o">.</span><span class="n">udig</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">ShpHotlinkSource</span>
-</pre></div>
+<p>To register a support file (such as a default style) with a GeoResource:</p>
+<div class="highlight-python"><pre>IDocumentSource documents = geoResource.resolve( IDocumentSource.class, new NullProgressMonitor );
+
+DocumentInfo docInfo = new DocumentInfo("default.sld", "Default style", file.getAbsolutePath(), ContentType.FILE, false, Type.ATTACHMENT);
+documents.add(docInfo, new NullProgressMonitor() );</pre>
 </div>
 </div>
-<div class="section" id="integrating-with-document-view">
-<h2>Integrating with Document View<a class="headerlink" href="#integrating-with-document-view" title="Permalink to this headline">¶</a></h2>
-<p>The <em>Document View</em> basically listens to the workbench selection and checks if it can get a document source from <em>IGeoResource</em> selections.</p>
-<p><strong>How the view gets a document source:</strong></p>
+<div class="section" id="iattachmentsource">
+<h3>IAttachmentSource<a class="headerlink" href="#iattachmentsource" title="Permalink to this headline">¶</a></h3>
+<p>IAttachmentSource provides access to feature-level attachments and link.</p>
+<p>Example Implementation <strong>ShpAttachmentSource</strong> copies attachments into a folder and records
+the <strong>DocumentInfo</strong> metadata in a property file.</p>
+<p>To list attachments for a feature:</p>
+<div class="highlight-python"><pre>IAttachmentSource attachments = geoResource.resolve( IAttachmentSource.class, new NullProgressMonitor );
+List&lt;IDocument&gt; list = attachments.getDocuments(feature, monitor);</pre>
+</div>
+<p>To add an attachment, such as an image, to a feature:</p>
+<div class="highlight-python"><pre>IDocumentSource documents = geoResource.resolve( IDocumentSource.class, new NullProgressMonitor );
+
+DocumentInfo docInfo = new DocumentInfo("picture.jpg", "Location picture", file.getAbsolutePath(), ContentType.FILE, false, Type.ATTACHMENT);
+documents.add(feature, docInfo, new NullProgressMonitor() );</pre>
+</div>
+</div>
+<div class="section" id="ihotlinksource">
+<h3>IHotlinkSource<a class="headerlink" href="#ihotlinksource" title="Permalink to this headline">¶</a></h3>
+<p>Provides access to feature hotlinks. IHotlinkSource is interesting in that it is used to update
+the value of a feature, which you then need to commit in the usual manner.</p>
+<p>Example Implementation: net.refractions.udig.document.source.ShpHotlinkSource</p>
+<p>To list hotlinks for a feature:</p>
+<div class="highlight-python"><pre>IHotlinkSource hotlinks = geoResource.resolve( IHotlinkSource.class, new NullProgressMonitor );
+
+List&lt;HotlinkDescriptor&gt; descriptors = hotlinks.getHotlinkDescriptors( feature, new NullProgressMonitor() );
+List&lt;IDocument&gt; list = hotlinks.getDocuments(feature, monitor);</pre>
+</div>
+<p>To update a hotlink attribute:</p>
+<div class="highlight-python"><pre>hotlinks.setFile( feature, hotlinkDescriptor.getAttributeName(), file, new IProgressMonitor() );
+Object value = feature.getProperty( hotlinkDescriptor.getAttributeName() );
+Filter filter = ff.id( feature.getIdentifier() );
+featureStore.modifyFeatures( filter, hotlinkDescriptor.getAttributeName(), value );</pre>
+</div>
+</div>
+</div>
+<div class="section" id="integration-with-document-view">
+<h2>Integration with Document View<a class="headerlink" href="#integration-with-document-view" title="Permalink to this headline">¶</a></h2>
+<p>The <em>Document View</em> listens to the workbench selection and checks if it can get any of the
+document source classes from the current <em>IGeoResource</em> selections.</p>
+<p>How the view gets a document source:</p>
 <div class="highlight-python"><pre>final IGeoResource geoResource = // Get from selection
 final Class&lt;T&gt; type = // IDocumentSource.class, IAttachmentSource.class or IHotlinkSource.class
 
@@ -130,10 +164,53 @@ if (geoResource != null) {
 }
 return null;</pre>
 </div>
-<p><strong>How to hook up a document source:</strong></p>
+<p>To integrate with Document view make sure your selection resolves to an IGeoResource, and
+configure the IGeoResource to resolve to one of the document source interfaces.</p>
+</div>
+<div class="section" id="configure-generic-hotlink-support">
+<h2>Configure Generic Hotlink Support<a class="headerlink" href="#configure-generic-hotlink-support" title="Permalink to this headline">¶</a></h2>
+<p>Generic hotlink support is available for <em>any</em> FeatureSource hosted
+by the uDig catalog.</p>
+<p>The IGeoResource persisted properties are used to store
+metadata marking attributes to be used for hotlink storage.</p>
+<p>You can turn this on yourself as a developer using the following:</p>
+<div class="highlight-python"><pre>BasicHotlinkDescriptorParser configure = new BasicHotlinkDescriptorParser( geoResource );
+
+configure.setEnabled( true );
+List&lt;HotlinkDescriptor&gt; descriptors = new ArrayList&lt;HotlinkDescriptor&gt;();
+descriptors.add( new HotlinkDescriptor("report", ContentType.FILE ) );
+descriptors.add( new HotlinkDescriptor("citation", ContentType.WEB ) );
+
+configure.setDescriptors( descriptors );</pre>
+</div>
+</div>
+<div class="section" id="configure-shapefile-documents">
+<h2>Configure Shapefile Documents<a class="headerlink" href="#configure-shapefile-documents" title="Permalink to this headline">¶</a></h2>
+<p>Here is an example properties file:</p>
+<div class="highlight-ini"><div class="highlight"><pre><span class="c">#</span>
+<span class="c">#Thu Sep 13 10:32:49 EST 2012</span>
+<span class="na">shp_documents_enabled</span><span class="o">=</span><span class="s">true</span>
+<span class="na">australia.8_documents</span><span class="o">=</span><span class="s">http\://au.yahoo.com|~|LINKED|~|WEB|~|Yahoo Website|~|Sample website link.|~|false|\:|\</span>
+<span class="s">                      australia.documents/australia.8/template.dot|~|ATTACHMENT|~|FILE|~|Sample template|~|A template attachment|~|true|\:|\</span>
+<span class="s">                      australia.documents/australia.8/readme.txt|~|ATTACHMENT|~|FILE|~|ReadMe file|~|Sample file attachment|~|false</span>
+<span class="na">feature_documents_enabled</span><span class="o">=</span><span class="s">true</span>
+<span class="na">shp_documents</span><span class="o">=</span><span class="s">australia.documents/act-info.txt|~|ATTACHMENT|~|FILE|~|State Information|~|Information about the state|~|false|\:|\</span>
+<span class="s">              australia.documents/New File.doc|~|ATTACHMENT|~|FILE|~|Document attachment|~|Another attachment|~|false|\:|\</span>
+<span class="s">              http\://sports.yahoo.com/nba|~|LINKED|~|WEB|~|Sports Website|~|New website|~|false</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="configure-custom-documents">
+<h2>Configure Custom Documents<a class="headerlink" href="#configure-custom-documents" title="Permalink to this headline">¶</a></h2>
+<p>When working on your own data type or custom application you can add
+document support to any existing IGeoResource.</p>
+<p>Example: tie a database table to a content management system.</p>
+<p>How to hook up a document source:</p>
 <ol class="arabic simple">
 <li>Implement the document sources, <em>see sample implementations above</em></li>
-<li>Extend the <em>net.refractions.udig.catalog.resolvers</em> extension point</li>
+<li>If you have your own custom IGeoResource class you can update the IResolve methods <strong>canReoslve</strong> and <strong>resolve</strong>.</li>
+<li>If you are working with a provided <strong>IGeoResource</strong> class you can use the
+the <em>net.refractions.udig.catalog.resolvers</em> extension point</li>
 </ol>
 <div class="highlight-python"><pre>&lt;extension
       id="shp"
@@ -152,7 +229,7 @@ return null;</pre>
    &lt;/factory&gt;
 &lt;/extension&gt;</pre>
 </div>
-<ol class="arabic simple" start="3">
+<ol class="arabic simple" start="4">
 <li>Implement the <em>IResolveAdapterFactory</em> referenced by the extension and integrate the document sources</li>
 </ol>
 <div class="highlight-python"><pre>public class ShpDocumentResolveFactory implements IResolveAdapterFactory {
