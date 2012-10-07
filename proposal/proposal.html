@@ -1,0 +1,365 @@
+<!-- 
+	This document is provided as a template along with some guidance for creating
+	your project proposal. This is just a template. Feel free to change it as
+	you see fit (add sections, remove section). We feel, however, that the
+	suggestions represented in this document represent the reasonable minimum
+	amount of information to move forward.
+	
+	Please keep the formatting in this document simple. Please do not edit 
+	this document in Microsoft Word as it adds huge piles of markup that make
+	it difficult to restyle.
+	
+	More information is available here:
+	
+	http://wiki.eclipse.org/Development_Resources/HOWTO/Pre-Proposal_Phase
+	
+	Direct any questions about this template to emo@eclipse.org
+ -->
+
+<html>
+<head>
+
+<!-- 
+	Include the title here. We will parse it out of here and include it on the
+	rendered webpage. Do not duplicate the title within the text of your page.
+ -->
+
+<title>uDig</title>
+</head>
+
+<!-- 
+	We make use of the 'classic' HTML Definition List (dl) tag to specify
+	committers. I know... you haven't seen this tag in a long while...
+ -->
+ 
+<style>
+dt {
+display: list-item;
+list-style-position:outside;
+list-style-image:url(/eclipse.org-common/themes/Phoenix/images/arrow.gif);
+margin-left:16px;
+}
+dd {
+margin-left:25px;
+margin-bottom:5px;
+}
+</style>
+
+<body>
+<p>The User-friendly Desktop Internet GIS (uDig) project is a proposed open source project under the <a
+	href="http://wiki.eclipse.org/LocationTech">LocationTech Industry Working Group</a>.</p>
+
+<!-- 
+	The communication channel must be specified. Typically, this is the
+	"Proposals" forum. In general, you don't need to change this.
+ -->
+<p>This proposal is in the Project Proposal Phase (as defined in the
+Eclipse Development Process) and is written to declare its intent and
+scope. We solicit additional participation and input from the Eclipse
+community. Please send all feedback to the 
+<a href="https://dev.eclipse.org/mailman/listinfo/location-iwg">LocationTech Discussion</a>
+email list.</p>
+
+<h2>Background</h2>
+
+<!-- 
+	Optionally provide the background that has lead you to creating this project.
+ -->
+
+<h2>Scope</h2>
+
+<!-- 
+	All projects must have a well-defined scope. Describe, concisely, what
+	is in-scope and (optionally) what is out-of-scope. An Eclipse project
+	cannot have an open-ended scope.
+ -->
+
+<p>The scope of uDig is to:</p>
+
+<!-- WTB: "Mapping" seems too generic and meaningless. Perhaps this is because I don't live in the space.
+What sorts of things does uDig enable users/adopters to do? -->
+<!-- JG: that is our traditional scope definition from the initial project plan. Let me try and 
+translate... 
+
+DESKTOP GIS
+Well frankly the goal is to build a Desktop GIS so I will write that down. The answer
+however will not help - since what a GIS does is simialr to what a word processor does. Different
+professionals will use the tool for different uses. The actual utility depends on the data
+being used. As an example the same network traversal functionality can be used for water managements,
+SCADA system planning, road maintenance, enivornmental analysis and so on.
+
+GIS Platform SDK
+We want to bundle up all this stuff for normal Eclipse RCP developers. Drop in GIS
+components with clear documented integration path for developers used to working on a normal
+buisness domain model. 
+
+LOCAL AND EXTERNAL DATA
+How to put this bluntly. GIS professionals are still not used to the internet, most of the web
+service standards die when presented with GIS data volumes. The fact that we consider both
+local and external data (let alone OGC standard support) is still fairly unusual.
+
+-->
+
+<ul>
+<li><b>Produce a Desktop Geographic Information System (GIS) using Eclipse RCP technology.</b>
+    A Desktop GIS application is a general purpose tool, similar to a wordprocessor, that can
+    be put to a wide range of uses. Often the only limitation is the ingenuity of the operator
+    and the data information they have available to work with.
+    <p>
+    The <a href="http://en.wikipedia.org/wiki/Geographic_information_system">Wikipedia entry for
+    Geographic Information System</a> provides the following:
+    <ul>
+    <li>Relating information from different sources</li>
+    <li>GIS uncertainties</li>
+    <li>Data Representation</li>
+    <li>Data Capture: ranging from digitisation to automated techniques</li>
+    <li>Raster to vector conversation</li>
+    <li>Projection, coordinate systems and registration</li>
+    <li>spatial analysis with GIS</li>
+    <li>Data output and Cartography</li>
+    <li>Graphical display and techniques</li>
+    <li>Spatial ETL</li>
+    <li>GIS Data Mining</li>
+    </ul>
+    </p>
+</li>
+    
+<li><b>Provide Eclipse RCP developers an SDK of GIS components.</b> Used by business applications
+    for integration spatial information, rendering or display servies, and in-depth spatial analysis.
+    Allow the business domain model to be extended with minimal background knowledge in mapping.
+    Enable business applications to add "just enough" GIS to get the job done.</li>
+<li><b>Enable integration of local and external spatial data sources</b>. The rich history, and unusual
+    size, of spatial data presents a great integration challenge. To be effective uDig must remain
+    data provider, and data format, neutral. Respecting where organisations store their
+    information while leveraging international (ISO TC211) and industry (OGC) standards for
+    interoperability.</li>
+</ul>
+
+<h2>Description</h2>
+
+<!-- 
+	Describe the project here. Be concise, but provide enough information that
+	somebody who doesn't already know very much about your project idea or domain
+	has at least a fighting chance of understanding its purpose.
+ -->
+
+<p>uDig is an open source desktop application framework, built with Eclipse Rich Client (RCP) technology. uDig provides
+a complete Java solution for desktop GIS data access, editing, and viewing.</p>
+
+<ul>
+	<li><b>U</b>ser friendly: familiar graphical environment for GIS users;</li>
+	<li><b>D</b>esktop appliation: running as a thick client, natively user interface on Windows, Mac OS/X and Linux</li>
+	<li><b>I</b>nternet: supporting standard (WMS, WFS, WCS,KML) and de facto (GeoRSS, tiles) geospatial web services</li>
+	<li><b>G</b>IS: framework for spatial data exploration and analysis</li>
+</ul>
+
+<h2>Why LocationTech?</h2> 
+
+<!-- 
+	What value does this project bring to the LocationTech
+	community? What value do you expect to obtain from hosting your project at LocationTech?
+
+ -->
+<p>The uDig project brings LocationTech an established Eclipse RCP GIS solution with a strong focus on ease-of-use and
+integration.</p>
+
+<p>The uDig project is well known in the spatial software community and is taking this opportunity to join LocationTech as an outreach
+to Eclipse RCP developers.</p>
+
+<h2>Legal Issues</h2>
+
+<!-- 
+	Please describe any potential legal issues in this section. Does somebody else
+	own the trademark to the project name? Is there some issue that prevents you
+	from licensing the project under the Eclipse Public License? Are parts of the 
+	code available under some other license? Are there any LGPL/GPL bits that you
+	absolutely require?
+ -->
+
+<p>The project includes "GeoTools" components of the Open Source Geospatial Foundation made available under
+an LGPL license. Other noted dependencies are the Java extensions JAI, ImageIO and ImageIO-Ext.</p>
+
+<p>The use of LGPL components has been negotiated with the LocationTech industry working group and
+does not represent an issue.</p>
+
+<h2>Committers</h2>
+
+<!-- 
+	List any initial committers that should be provisioned along with the
+	new project. Include affiliation, but do not include email addresses at
+	this point.
+	
+	<dl>
+	<dt>Committer 1, Affiliation</dt>
+	<dd>Committer 1 is a committer on the *** project where he has made significant contributions over
+	many years. S/he will be contribute to the *** functionality in this new project.</dd>
+	<dt>Committer 2, Affiliation</dt>
+	<dd>Committer 2 has provided significant contributions to the existing code base. S/he will contribute
+	to the *** functionality in this new project.
+	</dd>
+	</dl>
+ -->
+
+<p>The following individuals are proposed as initial committers to the project:</p>
+
+<!-- WTB: Do you expect steering committee members and other contributors to be committers?
+It's not clear from this text. -->
+<!-- See email list we could not make sense of this section, changing it back and
+grabbing our full comitters list from github -->
+
+<dl>
+  <dt>Jody Garnett, Open Source Geospatial Foundation, LISAsoft, PSC</dt>
+  <dd>Jody is a committer on the uDig project where he has made significant contributions over
+      many years. He will contribute to the architecture and direction of this new project.</dd>
+  <dt>Andrea Antonello, HydoloGIS, PSC</dt>
+  <dd>Andrea has provided significant contributions to the existing code base. He will
+      contribute scientific guidance and raster expertise to this new project.</dd>
+  <dt>Jesse Eichar, Camptocamp, PSC</dt>
+  <dd>Jesse Eichar has made significant contributions over many years, acting as project lead
+      for some of that time. Jesse keeps track of the rendering and tools plugins. PSC member.</dd>
+  <dt>Mauricio Pazos, PSC</dt>
+  <dd>Mauricio is a major contributor to the codebase with a deep understanding of the edit tool
+      framework.</dd>
+  <dt>Frank Gasdorf, PSC</dt>
+  <dd>Frank has played a strong role in the codebase most recently championing documentation,
+      translation and project OSGi packaging.</dd>
+  <dt>Craig Taverner, AmanziTel</dt>
+  <dd>GSoC mentor for several projects to build support for the neo4j.org graph database spatial
+      capabilities and bridges to GeoTools, uDig and GeoServer</dd>
+  <dt>Davide Savazzi, AmanziTel</dt>
+  <dd>GSoC mentor for 2012 project to build support for routing tools in uDig using the neo4j.org
+      graph database. Initial contributor to Neo4j Spatial and uDig plugin for Neo4j Spatial</dd>
+  <dt>Naz Chan, LISAsoft</dt>
+  <dd>Naz has recently completed the Document view, and is currently working on a Legend view.</dd>
+  <dt>Mark Leslie, LISAsoft</dt>
+  <dd>Mark longstanding contributor and initial author of the style editor. Mark brings the project
+      a background in Sphinx documentation generation and is available for uDig training courses.</dd>
+  <dt>John Hudson, LISAsoft</dt>
+  <dd>John has been making uDig plugins for several years and is focused on interoperability with
+      OGC web servies.</dd>
+  <dt>Sam Guymer, QPWS</dt>
+  <dd>Sam is a new addition to the community who has recently upgraded the version of Tycho
+      used and sorted out various build and packaging issues.</dd>
+</dl>
+
+The following developers have commit access but are not currently active:
+
+<dl>
+  <dt>Levi Puntna</dt>
+  <dd>Levi is responsible for the recent tool palette work.</dd>
+  <dt>Cliff Broadbent, QPWS</dt>
+  <dd>Cliff is responsible for the recent transition to the Tycho build system.</dd>
+  <dt>Scott Henderson, LISAsoft</dt>
+  <dd>Scott is responsible for the recent contribution of ExpressionViewer.</dd>
+  <dt>Paul Pfeiffer, QPWS</dt>
+  <dd>Paul is responsible for the recent Area of Interest work, and refactoring the core uDig
+      EMF model.</dd>
+</dl>
+
+<p>We welcome additional committers and contributions.</p>
+
+<h2>Initial Contribution</h2>
+
+<!-- 
+	Describe any initial contributions of code that will be brought to the 
+	project. If there is no existing code, just remove this section.
+ -->
+<p>The initial contribution will be made by the uDig Project Steering Committee. Code ownership is held
+by Refractions Research under the direction of the uDig Project Steering Committee. Additional
+"jgrass" plugins made available by HydroloGIS. This is an established development community with
+world wide representation, drawn from a number of organisations.</p>
+
+<p>
+<b>GIS Platform</b>: provides a local catalog of spatial services, with minimal Dublin Core details
+supplemented with a spatial extent. Each listed item implements <b>IResolve</b> operating in a
+similar fashion to <b>IAdaptable</b> with the additional expectation of both latency and IOErrors.
+Implementations are provided to work with a range of spatial services from popular file formats,
+through to spatial databases (such as PostGIS, DB2 and Oracle) and of Open Geospaital 
+Consortium web servies (Web Feature Server, Web Map Server).
+</p>
+<p>
+<b>GIS Application</b> provides an EMF model for Project, Map and Layer with an implementation
+of <b>MapViewer</b> to facilitate embedding a map component in RCP apps. This forms the core
+of the example uDig application we make available to show case the SDK capabilities.
+</p>
+<p>
+Additional contributions cover raster processing and analysis (ie JGrass), printing and integration.
+</p>
+
+<h2>Mentors</h2>
+
+<!-- 
+	New Eclipse projects require a minimum of two mentors from the Architecture
+	Council. You need to identify two mentors before the project is created. The
+	proposal can be posted before this section is filled in (it's a little easier
+	to find a mentor when the proposal itself is public).
+ -->
+
+<p>The following Architecture Council members will mentor this
+project:</p>
+
+<ul>
+	<li>Mentor 1</li>
+	<li>Mentor 2</li>
+</ul>
+
+<h2>Interested Parties</h2>
+
+<!-- 
+	Provide a list of individuals, organisations, companies, and other Eclipse
+	projects that are interested in this project. This list will provide some
+	insight into who your project's community will ultimately include. Where
+	possible, include affiliations. Do not include email addresses.
+ -->
+
+<p>The following individuals, organisations, companies and projects have 
+expressed interest in this project:</p>
+
+<ul>
+	<li>Refractions Research</li>
+	<li>HydroloGIS</li>
+	<li>LISAsoft</li>
+	<li>Open Source Geospatial Foundation</li>
+	<li>AmanziTel</li>
+</ul>
+
+<h2>Project Scheduling</h2>
+
+<!-- 
+	Describe, in rough terms, what the basic scheduling of the project will
+	be. You might, for example, include an indication of when an initial contribution
+	should be expected, when your first build will be ready, etc. Exact
+	dates are not required.
+ -->
+<p>
+This is a live project with responsibility to existing development teams, training courses, 
+and interaction with downstream projects (such as OSGeo Live DVD). It is our intension to
+transition as quickly as possible and promptly issue a release.
+</p>
+
+<ul>
+<li>Q3 2012: Complete transition to Tycho</li>
+<li>Q4 2012: Upgrade to Juno and transition to Eclipse build facilities</li>
+<li>Q1 2013: Initial release</li>
+</ul>
+
+<h2>Changes to this Document</h2>
+
+<!-- 
+	List any changes that have occurred in the document here.
+	You only need to document changes that have occurred after the document
+	has been posted live for the community to view and comment.
+ -->
+
+<table>
+	<tr>
+		<th>Date</th>
+		<th>Change</th>
+	</tr>
+	<tr>
+		<td>28-August-2012</td>
+		<td>Document created</td>
+	</tr>
+</table>
+</body>
+</html>

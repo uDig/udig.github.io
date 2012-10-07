@@ -66,7 +66,7 @@ Structural
 #three_main {
  width:500;
  padding:5px 0 20px 40px;
- float:left;
+ /*float:left;*/
 }
 #three_right {
  width:215px;
@@ -130,14 +130,14 @@ Header
  height:39px;
  position:absolute;
  left:305px;
- top:52px;
+ top:22px;
 }
 #header #logo_row #tagline {
  width:274px;
  height:21px;
  position:absolute;
  left:398px;
- top:66px;
+ top:36px;
 }
 #header #nav_row {
  line-height:1.25em;

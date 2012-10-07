@@ -11,78 +11,82 @@
 </head>
  
 <body class="three">
- <div id="container">
-  <div id="header">
-   <div id="logo_row">
-    <div id="wordmark"><a href="/"><img src="images/wordmark.png" alt="uDig" width="74" height="39" border="0"></a></div>
-    <div id="tagline"><a href="/"><img src="images/tagline.png" alt="User-friendly Desktop Internet GIS" width="274" height="21" border="0"></a></div>
+    <div id="container">
+        <div id="header">
+          
+            <div id="nav_row">
+                <ul>
+                    <li><a href="http://udig.refractions.net/">uDig Home</a></li>
+                    <li><a href="https://github.com/uDig">Check out the sources</a></li>
+                    <li><a href="./docs/user/index.html">User Guide</a></li>
+                    <li><a href="./docs/dev/index.html">Developer Guide</a></li>
+            <!--li><a href="https://twitter.com/#!/search/%23udigGIS">Twitter Hashtag #udigGIS</a></li-->
+                </ul>
+           </div>
 
-   <div id="nav_row">
-    <ul>
-      <li><a href="http://udig.refractions.net/">uDig Home</a></li>
-      <li><a href="https://github.com/uDig">Check out the sources</a></li>
-      <li><a href="./docs/user">User Guide</a></li>
-      <li><a href="./docs/dev">Developer Guide</a></li>
-<!--
-      <li><a href="https://twitter.com/#!/search/%23udigGIS">Twitter Hashtag #udigGIS</a></li>
--->
-    </ul>
-   </div>
-  </div>
-
-  <div id="content">
-   <div id="three_left"></div>
-   <div id="three_main">
-    <h1>A GIS Framework for Eclipse</h1>
-    <img src="images/udig.png" width="63" height="63" class="right">
-
-    <p class="description">uDig is an <a href="http://www.opensource.org/docs/definition.php" target="_blank">open source</a> (<a href="http://www.opensource.org/licenses/lgpl-2.1.php" target="_blank">LGPL</a>) desktop application framework, built with Eclipse Rich Client (<a href="http://wiki.eclipse.org/index.php/Rich_Client_Platform" target="_blank">RCP</a>) technology.</p>
-    <ul class="description">
-    <li>uDig can be used as a stand-alone application.</li>
-    <li>uDig can be extended with RCP “plug-ins”.</li>
-    <li>uDig can be used as a plug-in in an existing RCP application.</li>
-    </ul>
-
-    <p>
-    The goal of uDig is to provide a complete Java solution for desktop GIS data access, editing, and viewing. uDig aims to be:
-    </p>
-    <ul>
-    <li><b>U</b>ser friendly, providing a familiar graphical environment for GIS users;</li>
-    <li><b>D</b>esktop located, running as a thick client, natively on Windows, Mac OS/X and Linux;</li>
-    <li><b>I</b>nternet oriented, consuming standard (WMS, WFS, WCS) and de facto (GeoRSS, KML, tiles) geospatial web services; and,</li>
-    <li><b>G</b>IS ready, providing the framework on which complex analytical capabilities can be built, and gradually subsuming those capabilities into the main application.
-    </li></ul>
-    <p>uDig is distributed under the open source <a href="http://www.opensource.org/licenses/lgpl-2.1.php">LGPL license</a>.</p>
-
+           <div id="logo_row">
+                <div id="wordmark"><a href="/"><img src="images/wordmark.png" alt="uDig" width="74" height="39" border="0"></a></div>
+                <div id="tagline"><a href="/"><img src="images/tagline.png" alt="User-friendly Desktop Internet GIS" width="274" height="21" border="0"></a></div>
+            </div>             
+        </div>
+      
+        <div id="content">
+            <!--<div id="three_left">
+            </div>-->
+            <div id="three_main">
+                <h1>A GIS Framework for Eclipse</h1>
+                <img src="images/udig.png" width="63" height="63" class="right">
+            
+                <p class="description">uDig is an <a href="http://www.opensource.org/docs/definition.php" target="_blank">open source</a> (<a href="http://www.opensource.org/licenses/lgpl-2.1.php" target="_blank">LGPL</a>) desktop application framework, built with Eclipse Rich Client (<a href="http://wiki.eclipse.org/index.php/Rich_Client_Platform" target="_blank">RCP</a>) technology.</p>
+                <ul class="description">
+                    <li>uDig can be used as a stand-alone application.</li>
+                    <li>uDig can be extended with RCP “plug-ins”.</li>
+                    <li>uDig can be used as a plug-in in an existing RCP application.</li>
+                </ul>
+            
+                <p>
+                The goal of uDig is to provide a complete Java solution for desktop GIS data access, editing, and viewing. uDig aims to be:
+                </p>
+                <ul>
+                    <li><b>U</b>ser friendly, providing a familiar graphical environment for GIS users;</li>
+                    <li><b>D</b>esktop located, running as a thick client, natively on Windows, Mac OS/X and Linux;</li>
+                    <li><b>I</b>nternet oriented, consuming standard (WMS, WFS, WCS) and de facto (GeoRSS, KML, tiles) geospatial web services; and,</li>
+                    <li><b>G</b>IS ready, providing the framework on which complex analytical capabilities can be built, and gradually subsuming those capabilities into the main application.</li>
+                </ul>
+                <p>uDig is distributed under the open source <a href="http://www.opensource.org/licenses/lgpl-2.1.php">LGPL license</a>.</p>
+            
+            <!--</div>
+            <div id="three_right"/>-->
+                <h1>Documentation</h1>
+                <ul>
+                  <li><a href="./docs/user/index.html">User Guide</a></li>
+                  <li><a href="./docs/dev/index.html">Developer Guide</a></li>
+                  <li><a href="https://github.com/uDig">Check out the sources</a></li>
+                </ul>
+         
+                <h1>Project Steering Committee</h1>
+                <ul>
+                  <li>Andrea Antonello (<a href="https://github.com/moovida" class="user-mention">@moovida</a>)</li>
+                  <li>Jesse Eichar (<a href="https://github.com/jesseeichar" class="user-mention">@jesseeichar</a>)</li>
+                  <li>Jody Garnett (<a href="https://github.com/jive" class="user-mention">@jive</a>)</li>
+                  <li>Mauricio Pazos (<a href="https://github.com/mpazos" class="user-mention">@mpazos</a>)</li>
+                </ul>
+                  
+                <h1>LocationTech</h1>
+                <ul>
+                  <li><a href="http://locationtech.org">LocationTech</a></li>
+                  <li><a href="./proposal/proposal.html">LocationTech Proposal</a></li>
+                </ul>
+                  
+                <h1>Community</h1>
+                <ul>
+                  <li><a href="https://twitter.com/#!/search/%23udigGIS">Twitter Hashtag #udigGIS</a></li>
+                  <li><a href="http://en.wikipedia.org/wiki/IRC">Internet Relay Chat</a> (IRC) chanel : <a href="irc://us.freenode.net/udig">#udig</a></li>
+                  <li><a href="https://jira.codehaus.org/browse/UDIG">JIRA Issue Tracker</a></li>
+                  <li><a href="http://lists.refractions.net/mailman/listinfo/udig-users">User Mailing List</a></li>
+                  <li><a href="http://lists.refractions.net/mailman/listinfo/udig-devel">Developer Mailing List</a></li>
+                </ul>
+        </div>
     </div>
-    <div id="three_right"/>
-<!--
-        <h1>Getting Started</h1>
-          <ul>
-            <li><a href="http://udig.refractions.net/">uDig Home</a></li>
-            <li><a href="https://github.com/uDig">Check out the sources</a></li>
-            <li><a href="./user">User Guide</a></li>
-            <li><a href="http://udig.refractions.net/confluence/display/EN/Home">Developer Guide</a></li>
-          </ul>
- 
-        <h1>Project Steering Committee</h1>
-          <ul>
-            <li>Andrea Antonello (<a href="https://github.com/moovida" class="user-mention">@moovida</a>)</li>
-            <li>Jesse Eichar (<a href="https://github.com/jesseeichar" class="user-mention">@jesseeichar</a>)</li>
-            <li>Jody Garnett (<a href="https://github.com/jive" class="user-mention">@jive</a>)</li>
-            <li>Mauricio Pazos (<a href="https://github.com/mpazos" class="user-mention">@mpazos</a>)</li>
-          </ul>
-
-        <h1>Community</h1>
-          <ul>
-            <li><a href="https://twitter.com/#!/search/%23udigGIS">Twitter Hashtag #udigGIS</a></li>
-            <li><a href="http://en.wikipedia.org/wiki/IRC">Internet Relay Chat</a> (IRC) chanel : <a href="irc://us.freenode.net/udig">#udig</a></li>
-            <li><a href="https://jira.codehaus.org/browse/UDIG">JIRA Issue Tracker</a></li>
-            <li><a href="http://lists.refractions.net/mailman/listinfo/udig-users">User Mailing List</a></li>
-            <li><a href="http://lists.refractions.net/mailman/listinfo/udig-devel">Developer Mailing List</a></li>
-          </ul>
-      </div>
--->
-  </div>
 </body>
 </html>
