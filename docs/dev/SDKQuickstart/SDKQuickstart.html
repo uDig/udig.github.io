@@ -102,22 +102,37 @@ as we wait for some of the larger downloads.</p>
 <p class="first admonition-title">Note</p>
 <p class="last">If you are using this work book in a lab setting you will find these downloads available on your course DVD.</p>
 </div>
+<p><strong>Target Platform Downloads</strong></p>
 <ul>
-<li><p class="first">For uDig 1.2 we are going going to download the latest SDK from here:</p>
+<li><p class="first">For uDig 1.3 we are going going to download the latest SDK from here:</p>
 <p><a class="reference external" href="http://udig.refractions.net/download/">http://udig.refractions.net/download/</a></p>
 <p>Early access downloads are available here:</p>
 <p><a class="reference external" href="http://udig.refractions.net/download/unstable/">http://udig.refractions.net/download/unstable/</a></p>
-<p>Normally you would grab the latest stable SDK from the public uDig download page.
-At the time of writing the latest uDig SDK was: udig-1.3-SNAPSHOT.zip</p>
+<p>At the time of writing the latest uDig SDK was: udig-1.3.3-SNAPSHOT.zip</p>
 </li>
+<li><p class="first">Download Eclipse RCP Delta Pack</p>
+<p><a class="reference external" href="http://download.eclipse.org/eclipse/downloads/eclipse3x.html">http://download.eclipse.org/eclipse/downloads/eclipse3x.html</a></p>
+<p>Download the RCP-Delta Pack from you will need to choose the &#8220;Latest Release&#8221; build; and the scroll
+down to the &#8220;Delta Pack&#8221; link to download.</p>
+<p>At the time of writing: <a class="reference external" href="http://download.eclipse.org/eclipse/downloads/drops/R-3.7.2-201202080800/download.php?dropFile=eclipse-3.7.2-delta-pack.zip">eclipse-3.7.2-delta-pack.zip</a></p>
+</li>
+</ul>
+<p><strong>IDE Downloads</strong></p>
+<ul>
 <li><p class="first">Visit and click on the link for “Eclipse Modeling Tools” and download the appropriate:</p>
 <p><img alt="eclipse_modeling_tools_png" src="../_images/eclipse_modeling_tools.jpg" style="width: 15.36cm; height: 2.221cm;" /></p>
 <p>Tested with <a class="reference external" href="http://www.eclipse.org/downloads/packages/eclipse-modeling-tools/indigosr2">Eclipse Indigo 3.7.2 Packages</a> :</p>
 <p><a class="reference external" href="http://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/indigo/SR2/eclipse-modeling-indigo-SR2-win32.zip">eclipse-modeling-indigo-SR2-win32.zip</a></p>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">New for uDig 1.3.3 is the ability to use the uDig SDK as a stand alone target platform.
+This allows you to use a newer version of the Eclipse IDE than the one referenced by
+the uDig SDK.</p>
+</div>
 </li>
 <li><p class="first">We have prepared an “dropins” download in the following folder:</p>
 <p><a class="reference external" href="http://udig.refractions.net/files/downloads/extras/">http://udig.refractions.net/files/downloads/extras/</a></p>
-<p>This download includes a developers guide for udig, platform language packs, and a resource bundle editor.</p>
+<p>This download includes a developers guide for udig, and a resource bundle editor.</p>
 <p>At the time of writing: <strong>dropins-3.7.2.zip</strong></p>
 </li>
 <li><p class="first">Download a Java Runtime Environment from this folder:</p>
@@ -129,15 +144,9 @@ spatial image formats.</p>
 <p class="last">GDAL support is provided by the imageio-ext project started by GeoTools alumni.</p>
 </div>
 <p>At the time of writing: <strong>jre1.6.0_25.win32_gdal_ecw.zip</strong></p>
-</li>
-<li><p class="first">Download Eclipse RCP Delta Pack</p>
-<p><a class="reference external" href="http://download.eclipse.org/eclipse/downloads/eclipse3x.html">http://download.eclipse.org/eclipse/downloads/eclipse3x.html</a></p>
-<p>Download the RCP-Delta Pack from you will need to choose the &#8220;Latest Release&#8221; build; and the scroll
-down to the &#8220;Delta Pack&#8221; link to download.</p>
-<p>At the time of writing: <a class="reference external" href="http://download.eclipse.org/eclipse/downloads/drops/R-3.7.2-201202080800/download.php?dropFile=eclipse-3.7.2-delta-pack.zip">eclipse-3.7.2-delta-pack.zip</a></p>
 <div class="admonition hint">
 <p class="first admonition-title">Hint</p>
-<p class="last">Please ensure your eclipse and jre match (both win32 – or both win64).</p>
+<p class="last">Please ensure your Eclipse IDE and jre match (both win32 – or both win64).</p>
 </div>
 </li>
 </ul>
@@ -246,9 +255,9 @@ run for the first time.</p>
 </li>
 </ul>
 </div>
-<div class="section" id="udig-sdk">
-<h2>uDIG SDK<a class="headerlink" href="#udig-sdk" title="Permalink to this headline">¶</a></h2>
-<p>We are now going to unpack the udig sdk and use it as our plug-in target platform.</p>
+<div class="section" id="udig-sdk-target-platform">
+<h2>uDIG SDK Target Platform<a class="headerlink" href="#udig-sdk-target-platform" title="Permalink to this headline">¶</a></h2>
+<p>We are now going to unpack the udig sdk and use it as our target platform for plug-in development:</p>
 <ul>
 <li><p class="first">Extract the <strong>udig sdk</strong> download into <tt class="file docutils literal"><span class="pre">C:\java\target\udig_sdk</span></tt></p>
 </li>
@@ -288,17 +297,12 @@ so it will be the Active target platform.</p>
 </ul>
 <p>At this point all the source code for the Eclipse and uDig plug-ins are available. We can now start
 working on uDig plug-ins, but before we do that lets try running the application.</p>
-<div class="admonition hint">
-<p class="first admonition-title">Hint</p>
-<p class="last">If you get a message indicating the SDK is newer then the version of eclipse you
-are running – then these instructions are out of date!</p>
-</div>
 </div>
 <div class="section" id="running-udig">
 <h2>Running uDig<a class="headerlink" href="#running-udig" title="Permalink to this headline">¶</a></h2>
-<p>With all this in place we can now run the uDig application from your development environment. This is a
-good way to test that everything is installed correctly.</p>
-<ul>
+<p>With all this in place we can now run the uDig application from your development environment. This
+is a good way to test that everything is installed correctly.</p>
+<ol class="arabic">
 <li><p class="first">To start out with we will switch to the <strong>Plug-in Development</strong> perspective;</p>
 <p>In the top right of the toolbar you can choose <strong>Other</strong> to open the Open Perspective dialog</p>
 <p><img alt="perspective_other_jpg" src="../_images/perspective_other.jpg" style="width: 3.371cm; height: 2.66cm;" /></p>
@@ -312,17 +316,19 @@ Select <em class="menuselection">Import As ‣ Source Project</em> to copy the p
 </li>
 <li><p class="first">Change to the <em class="guilabel">Package Explorer</em> view and open up the <strong>net.refractions.udig</strong> plugin
 and double click to open <strong>udig.product</strong>.</p>
-<p>Switch to the <em class="guilabel">dependencies</em> tab and review the features required for the product.</p>
-<p><img alt="product_dependencies_png" src="../_images/product_dependencies.jpg" style="width: 8.939cm; height: 7.721cm;" /></p>
+<p><img alt="product_open_jpg" src="../_images/product_open.jpg" style="width: 3.08cm; height: 7.08cm;" /></p>
+</li>
+<li><p class="first">Switch to the <em class="guilabel">dependencies</em> tab and review the features required for the product.</p>
+<p><img alt="product_dependencies_png" src="../_images/product_dependencies.jpg" style="width: 8.94cm; height: 7.72cm;" /></p>
 </li>
 <li><p class="first">Return to the <em class="guilabel">overview</em> tab of <strong>udig.product</strong> click on the <em class="guilabel">Launch Eclipse Application</em>
 link (it is located under testing as shown below).</p>
-<p><img alt="product_launch_png" src="../_images/product_launch.jpg" style="width: 12.839cm; height: 7.211cm;" /></p>
+<p><img alt="product_launch_png" src="../_images/product_launch.jpg" style="width: 6.458cm; height: 7.083cm;" /></p>
 </li>
 <li><p class="first">The application will now start!</p>
 <p><img alt="udig_welcome_jpg" src="../_images/udig_welcome.jpg" style="width: 14.559cm; height: 11cm;" /></p>
 </li>
-</ul>
+</ol>
 </div>
 <div class="section" id="what-to-do-next">
 <h2>What to Do Next<a class="headerlink" href="#what-to-do-next" title="Permalink to this headline">¶</a></h2>
