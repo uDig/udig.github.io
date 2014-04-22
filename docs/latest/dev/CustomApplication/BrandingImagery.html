@@ -1,0 +1,177 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Branding Imagery &mdash; uDig 1.4.0 Developers Guide</title>
+    
+    <link rel="stylesheet" href="../_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.0.0-SNAPSHOT',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="../_static/udig.ico"/>
+    <link rel="top" title="uDig 1.4.0 Developers Guide" href="../index.html" />
+    <link rel="up" title="Custom Application" href="CustomApplication.html" />
+    <link rel="next" title="Plugin Dependencies" href="PluginDependencies.html" />
+    <link rel="prev" title="Branding Plugin" href="BrandingPlugin.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="BrandingPlugin.html">Branding Plugin</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="PluginDependencies.html">Plugin Dependencies</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="branding-imagery">
+<h1>Branding Imagery<a class="headerlink" href="#branding-imagery" title="Permalink to this headline">¶</a></h1>
+<p>Now that your branding plug-in is created we need to provide a little bit of content before we get down to coding and configuration. An important aspect of defining a new product is the all important visual identity.</p>
+<p>Fiddling around with drawing programs is a bit beyond the scope of this workbook but we can quickly cover what is needed.</p>
+<ul>
+<li><p class="first">splash.bmp</p>
+<img alt="../_images/BrandingImagery_splash.png" src="../_images/BrandingImagery_splash.png" style="width: 9.26cm; height: 5.93cm;" />
+<p>The splash screen must be in bmp format, it is actually read by a C++ program responsible for
+launching your application. The recommended size for this image is 500x330 pixels.</p>
+</li>
+<li><p class="first">about.gif</p>
+<blockquote>
+<div><img alt="../_images/BrandingImagery_about.png" src="../_images/BrandingImagery_about.png" style="width: 1.981cm; height: 2.96cm;" />
+</div></blockquote>
+<p>The about image is limited to the gif format, the maximum limit is 500x330, for images smaller
+than 250x330 you have the option of including your own text and html links in the about dialog.</p>
+</li>
+<li><p class="first">Window images displayed by the operating system.</p>
+<p><img alt="gif128x128" src="../_images/BrandingImagery_gif_128x128.png" style="width: 3.388cm; height: 3.388cm;" /> <img alt="gif64x64" src="../_images/BrandingImagery_gif_64x64.png" style="width: 1.693cm; height: 1.693cm;" /> <img alt="gif48x48" src="../_images/BrandingImagery_gif_48x48.png" style="width: 1.272cm; height: 1.272cm;" /> <img alt="gif32x32" src="../_images/BrandingImagery_gif_32x32.png" style="width: 0.848cm; height: 0.848cm;" /> <img alt="gif16x16" src="../_images/BrandingImagery_gif_16x16.png" style="width: 0.452cm; height: 0.452cm;" /></p>
+<p>gif files sized 128x128, 64x64, 48x48, 32x32, 16x16</p>
+</li>
+<li><p class="first">Assorted icons</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="23%" />
+<col width="74%" />
+<col width="3%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><p class="first last">icons/elcl16
+icons/dlcl16</p>
+</td>
+<td><p class="first last">Used on a view tool bar actions.
+(16x16 left and top clear)</p>
+</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><p class="first last">icons/etool16
+icons/dtool16</p>
+</td>
+<td><p class="first last">Used in application tool bar and menu bar
+(16x16 left and top clear)</p>
+</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><p class="first last">icons/obj16</p>
+</td>
+<td><p class="first last">Used in trees to represent objects or ideas
+(16x16 centered, bottom clear)</p>
+</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><p class="first last">icons/ovr16</p>
+</td>
+<td><p class="first last">Used to decorate a obj16 icon to indicate state
+(7x8 one pixel white outline)</p>
+</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><p class="first last">icons/wizban</p>
+</td>
+<td><p class="first last">Banner used in wizard dialog windows
+(55x45 bottom left on a blue gradient)</p>
+</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<p>Enough of that - lets download the files we need and keep going. If you have any questions please consult the <a class="reference external" href="http://www.eclipse.org/articles/Article-UI-Guidelines/Index.html">Eclipse User Inferface Guidelines</a></p>
+</li>
+<li><p class="first">Download the following file: <cite>rcp_branding.zip</cite></p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you are using this workbook in a lab setting you will find the file rcp_branding.zip on your dvd.</p>
+</div>
+</li>
+<li><p class="first">Select <em class="menuselection">File ‣ Import</em> to open up the Import wizard</p>
+</li>
+<li><p class="first">Choose <em class="menuselection">General ‣ Archive File</em> and press <em class="guilabel">Next</em></p>
+<p><img alt="100000000000021F000001C065E7981C_png" src="../_images/100000000000021F000001C065E7981C.png" style="width: 8.62cm; height: 7.11cm;" /></p>
+</li>
+<li><p class="first">Fill in the following details on the Archive file page:</p>
+<p>From archive file: <cite>rcp_branding.zip</cite></p>
+<p>Into folder: <tt class="docutils literal"><span class="pre">org.locationtech.udig.tutorials.customapp</span></tt></p>
+<p><img alt="100000000000021F000002267C4B4FA7_png" src="../_images/100000000000021F000002267C4B4FA7.png" style="width: 8.62cm; height: 8.729cm;" /></p>
+</li>
+<li><p class="first">Press <em class="guilabel">Finish</em>, two folders will be added to your project.</p>
+<p>There is an “nl” folder with language specific branding; and an icons folder.</p>
+</li>
+</ul>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="BrandingPlugin.html">Branding Plugin</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="PluginDependencies.html">Plugin Dependencies</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2013, Refractions Research and others.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

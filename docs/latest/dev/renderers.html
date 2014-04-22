@@ -1,0 +1,350 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Renderers &mdash; uDig 1.4.0 Developers Guide</title>
+    
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.0.0-SNAPSHOT',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.4.0 Developers Guide" href="index.html" />
+    <link rel="up" title="Working with GIS Application" href="working_with_gis_application.html" />
+    <link rel="next" title="Render Creation" href="render_creation.html" />
+    <link rel="prev" title="Operation Examples" href="operation_examples.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="operation_examples.html">Operation Examples</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="render_creation.html">Render Creation</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="renderers">
+<h1>Renderers<a class="headerlink" href="#renderers" title="Permalink to this headline">¶</a></h1>
+<p>Renderers bring to gether information and put it on the screen.</p>
+<p>The interesting thing about the uDig renderering system is it is <strong>adaptive</strong>. The correct
+geospatial inforamtion is brought together based on the available metadata information (such as
+style or performance metrics).</p>
+<p>Related:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://www.ibm.com/developerworks/java/library/j-2dswt/">https://www.ibm.com/developerworks/java/library/j-2dswt/</a></li>
+</ul>
+<div class="section" id="renderer-interface">
+<h2>Renderer Interface<a class="headerlink" href="#renderer-interface" title="Permalink to this headline">¶</a></h2>
+<p>Renderers are associated with layers, and are specific to a GeoResources.</p>
+<p>A renderer is chosen if:</p>
+<ol class="arabic simple">
+<li>It can render the layer using an available GeoResource.</li>
+<li>It can style the layer. The renderer capable of the most accurate styling is chosen if both 1 and
+2 are satisfied.</li>
+<li>It is optimized for the particular GeoResource type.</li>
+</ol>
+<p>A Renderer class implements one of:</p>
+<ul class="simple">
+<li>Renderer interface: is responsible for renderering a <strong>single</strong> layer.</li>
+<li>MultiLayerRenderer interface: is responsible for renderering multiple layers</li>
+</ul>
+</div>
+<div class="section" id="making-it-easy-to-implement">
+<h2>Making it Easy to Implement<a class="headerlink" href="#making-it-easy-to-implement" title="Permalink to this headline">¶</a></h2>
+<p>Through the Map datastructure you have access to rather a lot of information, to make matters easier
+we have gathered together the &#8220;useful&#8221; information for you ... into a <strong>RenderContext</strong>. The Pattern
+police call this a Facade, we call it easier.</p>
+<p>Each renderer is provided with a context:</p>
+<ul class="simple">
+<li>Renderers get a IRenderContext</li>
+<li>MultiLayerRenderers get a ICompositeRenderContextfor (A ICompositeRenderContext contains a set
+of IRenderContexts, not necessarily ordered).</li>
+</ul>
+<p>The context objects provide access to the Map data model, provide useful methods, have methods to
+access the layer and GeoResource that the renderer must use and render and contains the image that
+the renderer must render to.</p>
+</div>
+<div class="section" id="the-big-picture">
+<h2>The Big Picture<a class="headerlink" href="#the-big-picture" title="Permalink to this headline">¶</a></h2>
+<img alt="_images/RenderingClassDiagram.jpg" src="_images/RenderingClassDiagram.jpg" />
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Object</th>
+<th class="head">Task</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>RenderManager</td>
+<td>Responsible for creating renderers and triggering refreshes.</td>
+</tr>
+<tr class="row-odd"><td>RendererCreator</td>
+<td>The default implementation uses a renderer creator to create renderers. The default implementation
+chooses a renderer based on the criteria mentioned earler.</td>
+</tr>
+<tr class="row-even"><td>RenderMetricsFactory</td>
+<td>Can create the RenderMetrics for a given renderer. It is the class that is created from Extensions.
+It has a short cut method that can detect whether a resource will ever be able to render the
+resource.</td>
+</tr>
+<tr class="row-odd"><td>RenderMetrics</td>
+<td>Provides information on whether the renderer can correctly style a layer, if it the renderer has
+been optimized for rendering the resource and whether more resources can be added to the context
+object (in the case where the renderer is a MultiLayerRenderer). It also creates the renderer. The
+RenderMetrics is provided with a RenderContext to make these calculations. The Metrics <strong>MUST</strong> base
+its information on the assumption that the renderer will use the GeoResource provided by the
+RenderContext.</td>
+</tr>
+<tr class="row-even"><td>RendererExecutor</td>
+<td>Each renderer has an executor that runs the renderer in a separate thread. There are currently 3
+implementations. One for each type of renderer. (Composite/MultiLayer/Renderer). The
+CompositeRendererExecutor provides the incremental update functionality.</td>
+</tr>
+<tr class="row-odd"><td>Renderer</td>
+<td>Renders a resource, specifically, the resource referenced by the RenderContext. The renderer is
+responsible for listening to their resource and triggering updates when the resource changes.</td>
+</tr>
+<tr class="row-even"><td>MultiLayerRenderer</td>
+<td>Takes a CompositeRenderContext and renders all the resources in the contexts into the image obtained
+from the composite RenderContext.</td>
+</tr>
+<tr class="row-odd"><td>CompositeRenderer</td>
+<td>Creates a seperate renderer for each context in the CompositeRenderContext. Each Renderer is
+assigned to its own RenderExecutor. (The Standard implementation uses the same RendererCreator as
+the RenderManager).</td>
+</tr>
+<tr class="row-even"><td>RenderContext</td>
+<td>A RenderContext is a facade into the system in addition to having references to the Layer that the
+Renderer must render as and the GeoResource that the will be used by the renderer. Finally the
+RenderContext contains the image that the Renderer must render to and has a number of generally
+useful methods.</td>
+</tr>
+<tr class="row-odd"><td>CompositeRenderContext</td>
+<td>A CompositeRenderContext contains a set of RenderContexts. The image that is rendered to is the
+image contained by the CompositeRenderContext, the contained RenderContexts will not be rendered to.</td>
+</tr>
+</tbody>
+</table>
+<p><a class="reference internal" href="render_creation.html"><em>Render Creation</em></a></p>
+</div>
+<div class="section" id="being-adaptive">
+<h2>Being Adaptive<a class="headerlink" href="#being-adaptive" title="Permalink to this headline">¶</a></h2>
+<p>As mentioned at the start of the page, uDig makes use of metadata and metrics to figure out which
+Renderer is best suited to the task at hand.</p>
+<p>Lets see how this works with a quick example.</p>
+<div class="section" id="example-one-named-style">
+<h3>Example One: Named Style<a class="headerlink" href="#example-one-named-style" title="Permalink to this headline">¶</a></h3>
+<div class="figure">
+<img alt="" src="_images/wms1.png" />
+<p class="caption">A layer makes use of a WMS GeoResource, a NamedStyle from the Blackboard,
+this results in a WMSRenderer being chosen to draw onto the screen.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Just because a WMS is being used to draw does not prevent other tools from using the layer in
+a different manner.</p>
+</div>
+<div class="figure">
+<img alt="" src="_images/wms2.png" />
+<p class="caption">An editor makes use of the same layer, this time a WFS is used to access the real Feature data</p>
+</div>
+</div>
+<div class="section" id="example-two-named-style-and-sld">
+<h3>Example Two: Named Style and SLD<a class="headerlink" href="#example-two-named-style-and-sld" title="Permalink to this headline">¶</a></h3>
+<p>Note that several renderers may draw from the same layer at once.</p>
+<div class="figure">
+<img alt="" src="_images/wms3.png" />
+<p class="caption">This time a custom SLD style is being used to draw the &#8220;selected&#8221; features</p>
+</div>
+</div>
+</div>
+<div class="section" id="available-rendering-technology">
+<h2>Available Rendering Technology<a class="headerlink" href="#available-rendering-technology" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="streaming-renderer">
+<h3>Streaming Renderer<a class="headerlink" href="#streaming-renderer" title="Permalink to this headline">¶</a></h3>
+<p>uDig currently uses <strong>StreamingRenderer</strong> as a general purpose feature renderer.</p>
+<p>There is an optimized <strong>ShapefileRenderer</strong> which is used to render shapefiles only. The shapefile
+renderer can only render data from shapefiles but it can do so at speeds from 20-500% faster than
+StreamingRenderer. Both feature renderers are fully SLD compliant.</p>
+</div>
+</div>
+<div class="section" id="web-map-server">
+<h2>Web Map Server<a class="headerlink" href="#web-map-server" title="Permalink to this headline">¶</a></h2>
+<p>A Web Map Server can be used to perform &#8220;portrayal&#8221; on the server side allowing you to retrieve a
+generated image for the area in place.</p>
+<div class="section" id="glasspane">
+<h3>GlassPane<a class="headerlink" href="#glasspane" title="Permalink to this headline">¶</a></h3>
+<p>The glasspane is a draw2D interface that you can use to draw directly onto the image drawn on the
+screen.</p>
+<p>It does not use any of the rendering classes and does not listen to events.&nbsp; If you want to update
+the screen and cause the GlassPane to be redraw you must call ViewportPane.repaint().</p>
+<p>The glass pane is owned by the ViewportPane.&nbsp; A ViewportPane can only have a single GlassPane.</p>
+<p>The GlassPaneSite is an AbstractContext that contains the viewport model and helper functions to
+convert from screen to world and world to screen coordinates.&nbsp; It is similar to the RenderContext
+associated with renderers.&nbsp; Each GlassPane will have a single GlassPaneSite.</p>
+<div class="figure align-center">
+<img alt="" src="_images/glasspane.png" />
+</div>
+<p>As shown in the following code snippet (from the ViewportPainter) the GlassPane is drawn after the
+background image (from the render manager) and before the draw commands.</p>
+<div class="highlight-java"><pre>public void paint( ViewportGraphics g, Image image, int minWidth, int minHeight ) {
+    processCommands(g, true);
+    clearPane(g, minWidth, minHeight);
+    g.drawImage(image, 0, 0, minWidth, minHeight, 0, 0, minWidth, minHeight);
+
+    //draw glass pane
+    drawGlassPane(g);
+
+    processCommands(g, false);
+    runEditFeatureCommand(g);
+}</pre>
+</div>
+</div>
+<div class="section" id="example-of-glasspane">
+<h3>Example of GlassPane<a class="headerlink" href="#example-of-glasspane" title="Permalink to this headline">¶</a></h3>
+<p>Two examples of using a glass pane can be found in the org.locationtech.udig.tutorials.tracking
+tutorial.</p>
+<ul class="simple">
+<li>SeagullGlassPaneOp - This adds an operation to the map.&nbsp; When executed a glass pane is added to
+the map that draws seagulls. The map image is updated on a timer and the seagulls randomly moved
+based on another timer.</li>
+<li>SeagulTool - This is a modal tool that when activated adds a glasspane to the viewport pane and
+draws a set of seagulls on the screen. These seagulls will follow your mouse around the screen
+until the tool is deactivated.</li>
+</ul>
+<p>Here are some subsets of code from these examples showing you how to add a new glass pane to the
+viewport pane and setup a timer to update the map at given intervals.</p>
+<p>This code examples shows how to add a GlassPane to a given ViewportPane. In this example the draw()
+function is drawing the seagulls on the screen.</p>
+<div class="highlight-java"><pre>private void addFlockGlassPane(ViewportPane p, final Collection&lt;Seagull&gt; gulls){
+       p.setGlass(new GlassPane(p){
+
+           @Override
+           public void draw( GC graphics ) {
+               for( Iterator&lt;Seagull&gt; iterator = gulls.iterator(); iterator.hasNext(); ) {
+                   Seagull bird = (Seagull) iterator.next();
+                   bird.drawSeagull(graphics, this);
+               }
+           }});
+
+   }</pre>
+</div>
+<p>This example shows how to setup a Timer to update the map at fixed intervals.</p>
+<div class="highlight-java"><pre>//timer to update map
+int refreshrate = 250;
+
+//draws the map at given intervals
+Timer mapupdatetimer = new Timer();
+mapupdatetimer.scheduleAtFixedRate(new TimerTask(){
+      @Override
+      public void run() {
+           viewer.repaint();
+      }}, new Date(), refreshrate);</pre>
+</div>
+</div>
+<div class="section" id="seagullglasspaneop-demo">
+<h3>SeagullGlassPaneOp Demo<a class="headerlink" href="#seagullglasspaneop-demo" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="http://udig.refractions.net/confluence//download/attachments/5049/seagulls.swf">seagulls.swf</a></p>
+</div>
+<div class="section" id="rendering-events">
+<h3>Rendering Events<a class="headerlink" href="#rendering-events" title="Permalink to this headline">¶</a></h3>
+<p>The classes used in the rendering process are implemented using Eclipse Modelling Framework (so
+rather then list to events you have a notifier that issues <strong>every</strong> kind of event to various
+adaptors).</p>
+<p>Here is a code example from Ugo Taddei:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="c1">// Print some state, for illustration&#39;s sake</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Some Rendering States---------------&quot;</span><span class="o">);</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;IRenderer.STARTING &quot;</span> <span class="o">+</span>  <span class="n">IRenderer</span><span class="o">.</span><span class="na">STARTING</span><span class="o">);</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;IRenderer.RENDERING &quot;</span> <span class="o">+</span>  <span class="n">IRenderer</span><span class="o">.</span><span class="na">RENDERING</span><span class="o">);</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;IRenderer.DONE &quot;</span> <span class="o">+</span>  <span class="n">IRenderer</span><span class="o">.</span><span class="na">DONE</span><span class="o">);</span>
+
+<span class="n">IMap</span> <span class="n">map</span> <span class="o">=</span> <span class="n">mapViewer</span><span class="o">.</span><span class="na">getMap</span><span class="o">();</span>
+<span class="kd">final</span> <span class="n">IRenderManager</span> <span class="n">rm</span> <span class="o">=</span> <span class="n">map</span><span class="o">.</span><span class="na">getRenderManager</span><span class="o">();</span>
+
+<span class="c1">//only the RendererImpl has a visible RendererExecutor</span>
+<span class="kd">final</span> <span class="n">RenderManagerImpl</span> <span class="n">rmi</span> <span class="o">=</span> <span class="o">(</span><span class="n">RenderManagerImpl</span><span class="o">)</span> <span class="n">rm</span><span class="o">;</span>
+
+<span class="c1">//add a listener to the model</span>
+<span class="n">rmi</span><span class="o">.</span><span class="na">getRenderExecutor</span><span class="o">().</span><span class="na">eAdapters</span><span class="o">().</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">AdapterImpl</span><span class="o">(){</span>
+   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">notifyChanged</span><span class="o">(</span><span class="n">Notification</span> <span class="n">notification</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="c1">//on change, print the name (in RendererImpl only) and the state</span>
+       <span class="k">for</span> <span class="o">(</span><span class="n">IRenderer</span> <span class="n">rdr</span> <span class="o">:</span> <span class="n">rm</span><span class="o">.</span><span class="na">getRenderers</span><span class="o">())</span> <span class="o">{</span>
+           <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span> <span class="o">((</span><span class="n">RendererImpl</span><span class="o">)</span><span class="n">rdr</span><span class="o">).</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot; -&gt; &quot;</span> <span class="o">+</span><span class="n">rdr</span><span class="o">.</span><span class="na">getState</span><span class="o">()</span> <span class="o">);</span>
+       <span class="o">}</span>
+   <span class="o">}</span>
+
+<span class="o">});</span>
+</pre></div>
+</div>
+<p>You can also use something similar directly on a single renderer</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="o">((</span><span class="n">RendererImpl</span><span class="o">)</span><span class="n">rdr</span><span class="o">).</span><span class="na">eAdapters</span><span class="o">().</span><span class="na">add</span><span class="o">(</span> <span class="n">theAdatper</span> <span class="o">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="operation_examples.html">Operation Examples</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="render_creation.html">Render Creation</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2013, Refractions Research and others.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

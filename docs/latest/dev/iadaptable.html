@@ -1,0 +1,174 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>IAdaptable &mdash; uDig 1.4.0 Developers Guide</title>
+    
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.0.0-SNAPSHOT',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.4.0 Developers Guide" href="index.html" />
+    <link rel="up" title="Reference" href="reference.html" />
+    <link rel="next" title="Icons" href="icons.html" />
+    <link rel="prev" title="Guide to MigLayout" href="guide_to_miglayout.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="guide_to_miglayout.html">Guide to MigLayout</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="icons.html">Icons</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="iadaptable">
+<h1>IAdaptable<a class="headerlink" href="#iadaptable" title="Permalink to this headline">¶</a></h1>
+<p>Learning how IAdaptable works is one of the big ideas you want to be comfortable with when starting
+Eclipse RCP development.</p>
+<p>Reference:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://www.eclipsezone.com/articles/what-is-iadaptable/">http://www.eclipsezone.com/articles/what-is-iadaptable/</a></li>
+<li><a class="reference external" href="http://help.eclipse.org/ganymede/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/core/runtime/IAdaptable.html">IAdaptable</a></li>
+<li><a class="reference external" href="http://help.eclipse.org/ganymede/topic/org.eclipse.platform.doc.isv/reference/extension-points/org_eclipse_core_runtime_adapters.html">org.eclipse.core.runtime.adapters</a></li>
+</ul>
+<div class="section" id="example-use">
+<h2>Example Use<a class="headerlink" href="#example-use" title="Permalink to this headline">¶</a></h2>
+<p>You can use the <strong>getAdapter</strong> method anywhere you would normally do an instanceof check.</p>
+<p>BEFORE:</p>
+<div class="highlight-python"><pre>if( object instanceof IMap ){
+   // work on a IMap
+}</pre>
+</div>
+<p>AFTER:</p>
+<div class="highlight-python"><pre>IMap map = (map)adaptable.getAdapter(IMap.class);
+if( map != null ){
+    // work on the map
+}</pre>
+</div>
+</div>
+<div class="section" id="implementation">
+<h2>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">¶</a></h2>
+<p>At a minimum every implementation of IAdaptable should implement the following:</p>
+<div class="highlight-python"><pre>class Foo implements IAdaptable {
+  public String text;
+  public Object getAdapter(Class adapter) {
+     return Platform.getAdapterManager().getAdapter(this, adapter);
+  }
+}</pre>
+</div>
+<p>Alternative: If you want you could also extend the &#8220;PlatformObject&#8221; for the same effect:</p>
+<div class="highlight-python"><pre>class Foo extends PlatformObject {
+  public String text;
+}</pre>
+</div>
+</div>
+<div class="section" id="example-of-direct-implementation">
+<h2>Example of Direct Implementation<a class="headerlink" href="#example-of-direct-implementation" title="Permalink to this headline">¶</a></h2>
+<p>You have a choice of two ways to make new &#8220;adapters&#8221; available:</p>
+<ul>
+<li><p class="first">Directly code in your class:</p>
+<div class="highlight-python"><pre>class Foo implements IAdaptable {
+  public String text;
+  public Object getAdapter(Class adapter) {
+     if( adapter.isAssignableFrom( String.class ) ){
+        return text;
+     }
+     return Platform.getAdapterManager().getAdapter(this, adapter);
+  }
+}</pre>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="example-using-adapterfactory">
+<h2>Example Using AdapterFactory<a class="headerlink" href="#example-using-adapterfactory" title="Permalink to this headline">¶</a></h2>
+<p>You can also implement an AdapterFactory to do the work:</p>
+<div class="highlight-python"><pre>public class FooStringFactory implements IAdapterFactory {
+  private static final Class[] TARGETS = {
+    String.class,
+  };
+  public Class[] getAdapterList() {
+    return TARGETS;
+  }
+  public Object getAdapter(Object adaptableObject, Class adapterType) {
+    if (adapterType.isAssignableFrom( String.class )) {
+      return ((Foo)adaptableObject).text;
+    }return null;
+  }
+}</pre>
+</div>
+<p>And contribute it to the Platform.getAdapterManager using the following plugin.xml fragment:</p>
+<div class="highlight-python"><pre>&lt;extension point="org.eclipse.core.runtime.adapters"&gt;
+  &lt;factory class="FooStringFactory" adaptableType="Foo"&gt;
+    &lt;adapter type="java.lang.String"/&gt;
+   &lt;/factory&gt;
+&lt;/extension&gt;</pre>
+</div>
+<p>Alternative: Registering AdapterFactory by Hand</p>
+<div class="highlight-python"><pre>Platform.getAdapterManager().registerAdapters(new FooStringFactory(), Foo.class);</pre>
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="guide_to_miglayout.html">Guide to MigLayout</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="icons.html">Icons</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2013, Refractions Research and others.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

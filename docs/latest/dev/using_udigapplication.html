@@ -1,0 +1,284 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Using UDIGApplication &mdash; uDig 1.4.0 Developers Guide</title>
+    
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.0.0-SNAPSHOT',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.4.0 Developers Guide" href="index.html" />
+    <link rel="up" title="Working with Eclipse RCP" href="working_with_eclipse_rcp.html" />
+    <link rel="next" title="Menus using Actions and ActionSets" href="menus_using_actions_and_actionsets.html" />
+    <link rel="prev" title="Making a Product and Executable" href="making_a_product_and_executable.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="making_a_product_and_executable.html">Making a Product and Executable</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="menus_using_actions_and_actionsets.html">Menus using Actions and ActionSets</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="using-udigapplication">
+<h1>Using UDIGApplication<a class="headerlink" href="#using-udigapplication" title="Permalink to this headline">¶</a></h1>
+<p>The base class UDIGApplication serves three purposes:</p>
+<ul class="simple">
+<li>It is a show case of what the SDK can do; usable by end-users as a functional GIS Application</li>
+<li>It is an example for other RCP developers to copy (either cut and paste or subclass)</li>
+<li>It provides static final helper methods that can be used by other RCP developers</li>
+</ul>
+<p>This class is to be used as part of a product definition:</p>
+<ul class="simple">
+<li>UDIG 1.0: IPlatformRunnable interface provided by RCP</li>
+<li>UDIG 1.1: IApplication interface provided by Equinox</li>
+</ul>
+<p>Links to Related Content:</p>
+<ul class="simple">
+<li>For the latest instructions please see the <a class="reference internal" href="getting_started.html"><em>Getting Started</em></a> tutorial</li>
+</ul>
+<div class="section" id="as-a-showcase">
+<h2>As a Showcase<a class="headerlink" href="#as-a-showcase" title="Permalink to this headline">¶</a></h2>
+<p>As a showcase the UDIGApplication needs to provide a fine balance between enough functionality to be
+useful; and not so much that the result is intimidating.</p>
+<p>The actual uDig application does not do much:</p>
+<ul class="simple">
+<li>Kicks the org.locationtech.udig.libs &#8220;Activator&#8221; into loading the EPSG database</li>
+<li>Does a few sanity checks about the execution environment; displaying warning dialogs if
+everything is not right</li>
+<li>Starts up a workbench using the UDIGWorkbenchAdvisor</li>
+</ul>
+</div>
+<div class="section" id="as-a-base">
+<h2>As a Base<a class="headerlink" href="#as-a-base" title="Permalink to this headline">¶</a></h2>
+<p>As base class UDIGApplication must ensure that every contribution shows up in a logical part of the
+user interface. This is especially important with respect to <strong>menubars</strong> and <strong>toolbars</strong>; we must
+include examples of each kind of contribution.</p>
+<p><strong>Check for JAI</strong></p>
+<p>This has moved to an <strong>org.eclipse.ui.startup</strong> for the org.locationtech.udig.ui. It will display a
+dialog if JAI is not found.</p>
+<p><strong>Login</strong></p>
+<p>Setting up an UDIGApplication that requires a login is a common request. This example shows how to
+use the checkLogin() method to talk to a &#8220;Client&#8221; plug-in and call its login method.</p>
+<p>The &#8220;Client&#8217; plug-in technique is used when you have a Client plugin that holds on to a Spring
+remoting Session with a J2EE server application.</p>
+<p>Here is an example of overriding the UDIGApplication checkLogin() method.</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">checkLogin</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">LoginDialog</span> <span class="n">loginDialog</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LoginDialog</span><span class="o">(</span>
+                <span class="s">&quot;Connecting Communities Login&quot;</span><span class="o">,</span>
+                <span class="s">&quot;Please login to Connecting Communities:&quot;</span> <span class="o">);</span>
+
+        <span class="kt">boolean</span> <span class="n">login</span><span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+        <span class="k">while</span><span class="o">(</span> <span class="o">!</span><span class="n">login</span> <span class="o">){</span>
+            <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">loginDialog</span><span class="o">.</span><span class="na">open</span><span class="o">();</span>
+            <span class="k">if</span><span class="o">(</span> <span class="n">result</span> <span class="o">==</span> <span class="n">MessageDialog</span><span class="o">.</span><span class="na">OK</span><span class="o">){</span>
+                <span class="k">try</span> <span class="o">{</span>
+                    <span class="n">login</span> <span class="o">=</span> <span class="n">Client</span><span class="o">.</span><span class="na">getDefault</span><span class="o">().</span><span class="na">login</span><span class="o">(</span> <span class="n">loginDialog</span><span class="o">.</span><span class="na">getUser</span><span class="o">(),</span> <span class="n">loginDialog</span><span class="o">.</span><span class="na">getPassword</span><span class="o">()</span> <span class="o">);</span>
+                    <span class="k">if</span><span class="o">(</span> <span class="o">!</span><span class="n">login</span> <span class="o">){</span>
+                        <span class="n">loginDialog</span><span class="o">.</span><span class="na">setMessage</span><span class="o">(</span><span class="s">&quot;Could not login - please try again&quot;</span><span class="o">);</span>
+                    <span class="o">}</span>
+                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">connectionProblem</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">MessageDialog</span><span class="o">.</span><span class="na">openInformation</span><span class="o">(</span><span class="kc">null</span><span class="o">,</span> <span class="s">&quot;Could not Connect&quot;</span><span class="o">,</span> <span class="n">connectionProblem</span><span class="o">.</span><span class="na">toString</span><span class="o">()</span> <span class="o">);</span>
+
+                    <span class="k">return</span> <span class="kc">false</span><span class="o">;</span> <span class="c1">// probably should prompt user here?</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+            <span class="k">else</span> <span class="o">{</span>
+                <span class="k">return</span> <span class="kc">false</span><span class="o">;</span> <span class="c1">// user cancelled</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+    <span class="o">}</span>
+</pre></div>
+</div>
+<p>The above example made use of a really simple MessageDialog shown bellow:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LoginDialog</span> <span class="kd">extends</span> <span class="n">MessageDialog</span> <span class="o">{</span>
+    <span class="n">String</span> <span class="n">user</span><span class="o">;</span>
+    <span class="n">String</span> <span class="n">password</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="nf">LoginDialog</span><span class="o">(</span> <span class="n">String</span> <span class="n">title</span><span class="o">,</span> <span class="n">String</span> <span class="n">dialogMessage</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">(</span><span class="kc">null</span><span class="o">,</span> <span class="n">title</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="n">dialogMessage</span><span class="o">,</span> <span class="n">QUESTION</span><span class="o">,</span>
+                <span class="k">new</span> <span class="n">String</span><span class="o">[]{</span><span class="s">&quot;Login&quot;</span><span class="o">,</span><span class="s">&quot;Exit&quot;</span><span class="o">},</span> <span class="mi">0</span> <span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">protected</span> <span class="n">Control</span> <span class="nf">createCustomArea</span><span class="o">(</span><span class="n">Composite</span> <span class="n">parent</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Composite</span> <span class="n">composite</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Composite</span><span class="o">(</span><span class="n">parent</span><span class="o">,</span> <span class="n">SWT</span><span class="o">.</span><span class="na">NONE</span><span class="o">);</span>
+        <span class="n">composite</span><span class="o">.</span><span class="na">setLayout</span><span class="o">(</span> <span class="k">new</span> <span class="n">GridLayout</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span><span class="kc">false</span><span class="o">)</span> <span class="o">);</span>
+
+        <span class="n">Label</span> <span class="n">label</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Label</span><span class="o">(</span> <span class="n">composite</span><span class="o">,</span> <span class="n">SWT</span><span class="o">.</span><span class="na">RIGHT</span> <span class="o">);</span>
+        <span class="n">label</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="s">&quot;User:&quot;</span><span class="o">);</span>
+        <span class="n">GridData</span> <span class="n">gridData</span> <span class="o">=</span> <span class="k">new</span> <span class="n">GridData</span><span class="o">(</span> <span class="n">SWT</span><span class="o">.</span><span class="na">FILL</span><span class="o">,</span> <span class="n">SWT</span><span class="o">.</span><span class="na">FILL</span><span class="o">,</span> <span class="kc">false</span><span class="o">,</span> <span class="kc">false</span> <span class="o">);</span>
+        <span class="n">gridData</span><span class="o">.</span><span class="na">widthHint</span> <span class="o">=</span> <span class="mi">100</span><span class="o">;</span> <span class="c1">// just a suggestion</span>
+        <span class="n">label</span><span class="o">.</span><span class="na">setLayoutData</span><span class="o">(</span> <span class="n">gridData</span> <span class="o">);</span>
+
+        <span class="kd">final</span> <span class="n">Text</span> <span class="n">userText</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Text</span><span class="o">(</span> <span class="n">composite</span><span class="o">,</span> <span class="n">SWT</span><span class="o">.</span><span class="na">SINGLE</span> <span class="o">);</span>
+        <span class="n">userText</span><span class="o">.</span><span class="na">setLayoutData</span><span class="o">(</span> <span class="k">new</span> <span class="n">GridData</span><span class="o">(</span> <span class="n">SWT</span><span class="o">.</span><span class="na">FILL</span><span class="o">,</span> <span class="n">SWT</span><span class="o">.</span><span class="na">CENTER</span><span class="o">,</span> <span class="kc">true</span><span class="o">,</span> <span class="kc">false</span> <span class="o">));</span>
+        <span class="n">userText</span><span class="o">.</span><span class="na">addModifyListener</span><span class="o">(</span> <span class="k">new</span> <span class="n">ModifyListener</span><span class="o">(){</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">modifyText</span><span class="o">(</span> <span class="n">ModifyEvent</span> <span class="n">e</span> <span class="o">)</span> <span class="o">{</span>
+                <span class="n">user</span> <span class="o">=</span> <span class="n">userText</span><span class="o">.</span><span class="na">getText</span><span class="o">();</span>
+            <span class="o">}</span>
+        <span class="o">});</span>
+
+        <span class="n">label</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Label</span><span class="o">(</span> <span class="n">composite</span><span class="o">,</span> <span class="n">SWT</span><span class="o">.</span><span class="na">RIGHT</span> <span class="o">);</span>
+        <span class="n">label</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="s">&quot;Password:&quot;</span><span class="o">);</span>
+        <span class="n">label</span><span class="o">.</span><span class="na">setLayoutData</span><span class="o">(</span> <span class="n">gridData</span> <span class="o">);</span>
+
+        <span class="kd">final</span> <span class="n">Text</span> <span class="n">passwordText</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Text</span> <span class="o">(</span> <span class="n">composite</span><span class="o">,</span> <span class="n">SWT</span><span class="o">.</span><span class="na">SINGLE</span> <span class="o">|</span> <span class="n">SWT</span><span class="o">.</span><span class="na">PASSWORD</span> <span class="o">);</span>
+        <span class="n">passwordText</span><span class="o">.</span><span class="na">setLayoutData</span><span class="o">(</span> <span class="k">new</span> <span class="n">GridData</span><span class="o">(</span> <span class="n">SWT</span><span class="o">.</span><span class="na">FILL</span><span class="o">,</span> <span class="n">SWT</span><span class="o">.</span><span class="na">CENTER</span><span class="o">,</span> <span class="kc">true</span><span class="o">,</span> <span class="kc">false</span> <span class="o">));</span>
+        <span class="n">passwordText</span><span class="o">.</span><span class="na">addModifyListener</span><span class="o">(</span> <span class="k">new</span> <span class="n">ModifyListener</span><span class="o">(){</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">modifyText</span><span class="o">(</span> <span class="n">ModifyEvent</span> <span class="n">e</span> <span class="o">)</span> <span class="o">{</span>
+                <span class="n">user</span> <span class="o">=</span> <span class="n">passwordText</span><span class="o">.</span><span class="na">getText</span><span class="o">();</span>
+            <span class="o">}</span>
+        <span class="o">});</span>
+        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getUser</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">user</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getPassword</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">password</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setMessage</span><span class="o">(</span> <span class="n">String</span> <span class="n">message</span> <span class="o">){</span>
+        <span class="n">messageLabel</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span> <span class="n">message</span> <span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p><strong>Init</strong></p>
+<p>The init method as provided will kick the org.locationtech.udig.libs Activator class into loading the
+EPSG database. It actually does a quick sanity check first (to see if loading will take a long
+time).</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="cm">/**</span>
+<span class="cm">  * We have a couple things that need to happen</span>
+<span class="cm">  * before the workbench is opened. The org.eclipse.ui.startup</span>
+<span class="cm">  * extension point is willing to run stuff for us *after*</span>
+<span class="cm">  * the workbench is opened - but that is not so useful</span>
+<span class="cm">  * when we need to configure the EPSG database for libs</span>
+<span class="cm">  * and load up the local catalog.</span>
+<span class="cm">  * &lt;p&gt;</span>
+<span class="cm">  * Long term we will want to create a startup list</span>
+<span class="cm">  * (much like we have shutdown hooks).</span>
+<span class="cm">  */</span>
+ <span class="kd">protected</span> <span class="kt">boolean</span> <span class="nf">init</span><span class="o">()</span> <span class="o">{</span>
+     <span class="n">ProgressMonitorDialog</span> <span class="n">progress</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ProgressMonitorDialog</span><span class="o">(</span> <span class="n">Display</span><span class="o">.</span><span class="na">getCurrent</span><span class="o">().</span><span class="na">getActiveShell</span><span class="o">());</span>
+     <span class="kd">final</span> <span class="n">Bundle</span> <span class="n">bundle</span> <span class="o">=</span> <span class="n">Platform</span><span class="o">.</span><span class="na">getBundle</span><span class="o">(</span><span class="n">Activator</span><span class="o">.</span><span class="na">ID</span><span class="o">);</span>
+
+     <span class="c1">// We should kick the libs plugin to load the EPSG database now</span>
+     <span class="k">if</span><span class="o">(</span> <span class="n">ThreadedH2EpsgFactory</span><span class="o">.</span><span class="na">isUnpacked</span><span class="o">()){</span>
+         <span class="c1">// if there is not going to be a long delay</span>
+         <span class="c1">// don&#39;t annoy users with a dialog</span>
+         <span class="n">Activator</span><span class="o">.</span><span class="na">initializeReferencingModule</span><span class="o">(</span> <span class="kc">null</span> <span class="o">);</span>
+     <span class="o">}</span>
+     <span class="k">else</span> <span class="o">{</span>
+         <span class="c1">// We are going to take a couple of minutes to set this up</span>
+         <span class="c1">// so we better set up a progress dialog thing</span>
+         <span class="c1">//</span>
+         <span class="k">try</span> <span class="o">{</span>
+             <span class="n">progress</span><span class="o">.</span><span class="na">run</span><span class="o">(</span><span class="kc">false</span><span class="o">,</span><span class="kc">false</span><span class="o">,</span> <span class="k">new</span> <span class="n">IRunnableWithProgress</span><span class="o">(){</span>
+                 <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span> <span class="n">IProgressMonitor</span> <span class="n">monitor</span> <span class="o">)</span> <span class="kd">throws</span> <span class="n">InvocationTargetException</span><span class="o">,</span>
+                         <span class="n">InterruptedException</span> <span class="o">{</span>
+                     <span class="n">Activator</span><span class="o">.</span><span class="na">initializeReferencingModule</span><span class="o">(</span> <span class="n">monitor</span><span class="o">);</span>
+                 <span class="o">}</span>
+             <span class="o">});</span>
+         <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InvocationTargetException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+             <span class="n">Platform</span><span class="o">.</span><span class="na">getLog</span><span class="o">(</span><span class="n">bundle</span><span class="o">).</span><span class="na">log</span><span class="o">(</span>
+                     <span class="k">new</span> <span class="nf">Status</span><span class="o">(</span><span class="n">IStatus</span><span class="o">.</span><span class="na">ERROR</span><span class="o">,</span> <span class="n">Activator</span><span class="o">.</span><span class="na">ID</span><span class="o">,</span> <span class="n">e</span><span class="o">.</span><span class="na">getCause</span><span class="o">().</span><span class="na">getLocalizedMessage</span><span class="o">(),</span> <span class="n">e</span>
+                             <span class="o">.</span><span class="na">getCause</span><span class="o">()));</span>
+             <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+         <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+             <span class="n">Platform</span><span class="o">.</span><span class="na">getLog</span><span class="o">(</span><span class="n">bundle</span><span class="o">).</span><span class="na">log</span><span class="o">(</span>
+                     <span class="k">new</span> <span class="nf">Status</span><span class="o">(</span><span class="n">IStatus</span><span class="o">.</span><span class="na">ERROR</span><span class="o">,</span> <span class="n">Activator</span><span class="o">.</span><span class="na">ID</span><span class="o">,</span> <span class="n">e</span><span class="o">.</span><span class="na">getCause</span><span class="o">().</span><span class="na">getLocalizedMessage</span><span class="o">(),</span> <span class="n">e</span>
+                             <span class="o">.</span><span class="na">getCause</span><span class="o">()));</span>
+             <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+         <span class="o">}</span>
+     <span class="o">}</span>
+     <span class="c1">// We should kick the CatalogPlugin to load now...</span>
+     <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+ <span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="as-a-utility-class">
+<h2>As a Utility Class<a class="headerlink" href="#as-a-utility-class" title="Permalink to this headline">¶</a></h2>
+<p>Utility methods exist to perform checks commonly needed at startup.</p>
+<p><strong>Java Advanced Imaging</strong></p>
+<p>The <strong>checkForJAI</strong> method will return false if JAI is not installed into the current JRE:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="kt">boolean</span> <span class="n">optional</span> <span class="o">=</span> <span class="n">UDIGApplication</span><span class="o">.</span><span class="na">checkForJAI</span><span class="o">();</span>
+</pre></div>
+</div>
+<p>Your application may need JAI or may not; it is required for raster operations - if your application
+is limited to vector work you can get by without this functionality.</p>
+<p><strong>GDI</strong></p>
+<p>The <strong>checkForGDI</strong> method will return false if GDI+ is required (ie on WIN_32 platform) and not
+available:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="kt">boolean</span> <span class="n">required</span> <span class="o">=</span> <span class="n">UDIGApplication</span><span class="o">.</span><span class="na">checkForGDI</span><span class="o">();</span>
+</pre></div>
+</div>
+<p>We required GDI+ for SWT matrix calculations; instructions on how to obtain GDI+ for older versions
+are provided as part of the running udig instructions.</p>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="making_a_product_and_executable.html">Making a Product and Executable</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="menus_using_actions_and_actionsets.html">Menus using Actions and ActionSets</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2013, Refractions Research and others.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

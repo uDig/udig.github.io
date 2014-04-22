@@ -1,0 +1,211 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Keyboard Shortcut Example &mdash; uDig 1.4.0 Developers Guide</title>
+    
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.0.0-SNAPSHOT',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.4.0 Developers Guide" href="index.html" />
+    <link rel="up" title="Examples" href="examples.html" />
+    <link rel="next" title="FeatureSourceOp Example" href="featuresourceop_example.html" />
+    <link rel="prev" title="Extending An Existing Perspective Example" href="extending_an_existing_perspective_example.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="extending_an_existing_perspective_example.html">Extending An Existing Perspective Example</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="featuresourceop_example.html">FeatureSourceOp Example</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="keyboard-shortcut-example">
+<h1>Keyboard Shortcut Example<a class="headerlink" href="#keyboard-shortcut-example" title="Permalink to this headline">¶</a></h1>
+<p><strong>Definitions:</strong></p>
+<ul class="simple">
+<li>Command - an abstract representation of some semantic behaviour, but not it&#8217;s actual
+implementation</li>
+<li>Key Binding - a mapping between a certain group of conditions, some user input and a triggered
+command</li>
+<li>Scheme - set of one or more bindings</li>
+<li>Context - Definition of a context where key bindings are active</li>
+</ul>
+<p>There are many steps that must be take in order to define a completely new command and assign it to
+an Action.</p>
+<ol class="arabic simple">
+<li>Define a org.eclipse.ui.command extension for the new command<ol class="arabic">
+<li>Define a category (part of the org.eclipse.ui.command extension) of the command. (You can also
+use an existing category if one that applies exists).</li>
+<li>Define the command (part of the org.eclipse.ui.command extension)</li>
+</ol>
+</li>
+<li>Define an org.eclipse.ui.contexts extension (or reuse and existing one). Common contexts are:</li>
+</ol>
+<ul class="simple">
+<li>org.eclipse.ui.textEditorScope</li>
+<li>org.eclipse.ui.contexts.dialogAndWindow</li>
+<li>org.eclipse.ui.contexts.window</li>
+<li>org.eclipse.ui.contexts.dialog</li>
+<li>org.locationtech.udig.project.ui.tool</li>
+</ul>
+<ol class="arabic">
+<li><p class="first">Define a org.eclipse.ui.bindings extension</p>
+<ol class="arabic simple">
+<li>Define a scheme (or use udig&#8217;s default scheme:
+org.locationtech.udig.defaultUDIGKeyConfiguration ). Schemes are part of the
+org.eclipse.ui.bindings extension.</li>
+</ol>
+</li>
+<li><p class="first">Only 1 scheme is active at a time. So if you create a new scheme you have to create new bindings
+for every command that you want to use in your application.</p>
+</li>
+<li><p class="first">To activate a new scheme you must create a plugin_customization.ini file in your application
+plugin or choose a new scheme in the Window &gt; Preferences &gt; Keys preference page.</p>
+<ol class="arabic simple">
+<li>Define a key binding for your command (part of the org.eclipse.ui.bindings extension). In the
+key binding definition you have to declare which command the binding applies to, the context
+that the binding will be active in and the scheme that the binding is part of.</li>
+</ol>
+</li>
+<li><p class="first">You are now done the extension definition, now you must programmatically bind the command to an
+action.</p>
+<ol class="arabic">
+<li><p class="first">When you create your action set the definitionID to the command&#8217;s id.</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">action</span><span class="o">.</span><span class="na">setActionDefinitionId</span><span class="o">(</span><span class="s">&quot;yourCommandsID&quot;</span><span class="o">);</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Next you must register your command with the current site&#8217;s keybinding service.</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">part</span><span class="o">.</span><span class="na">getSite</span><span class="o">().</span><span class="na">getKeyBindingService</span><span class="o">().</span><span class="na">registerAction</span><span class="o">(</span><span class="n">action</span><span class="o">);</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">During the creation of a view the context that are active must be defined as well. By default
+org.eclipse.ui.contexts.window context is active so if you keybinding is part of that context
+then you can skip this step.</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">site</span><span class="o">.</span><span class="na">getKeyBindingService</span><span class="o">().</span><span class="na">setScopes</span><span class="o">(</span><span class="k">new</span> <span class="n">String</span><span class="o">[]</span> <span class="o">{</span><span class="s">&quot;yourContextID&quot;</span><span class="o">});</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</li>
+</ol>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">The ToolManager&#8217;s contributeGlobalActions() sets all the &#8220;normal&#8221; uDig actions such as copy, paste,
+delete, undo, redo, etc... The ToolManager can be obtained with the method ApplicationGIS.getToolManager().</p>
+</div>
+<p><strong>Example:</strong></p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="c">&lt;!-- This is part of org.eclipse.ui plugin.xml --&gt;</span>
+      <span class="nt">&lt;extension</span>
+            <span class="na">point=</span><span class="s">&quot;org.eclipse.ui.contexts&quot;</span><span class="nt">&gt;</span>
+         <span class="nt">&lt;context</span>
+               <span class="na">description=</span><span class="s">&quot;%context.tool.description&quot;</span>
+               <span class="na">id=</span><span class="s">&quot;org.locationtech.udig.project.ui.tool&quot;</span>
+               <span class="na">name=</span><span class="s">&quot;%Tools&quot;</span>
+               <span class="na">parentId=</span><span class="s">&quot;org.eclipse.ui.contexts.window&quot;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;/extension&gt;</span>
+<span class="c">&lt;!-- This is part of org.locationtech.udig.project.ui plugin.xml --&gt;</span>
+      <span class="nt">&lt;extension</span>
+         <span class="na">point=</span><span class="s">&quot;org.eclipse.ui.commands&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;command</span>
+            <span class="na">categoryId=</span><span class="s">&quot;org.locationtech.udig.tools.toolCategory&quot;</span>
+            <span class="na">name=</span><span class="s">&quot;%zoom.category.name&quot;</span>
+            <span class="na">id=</span><span class="s">&quot;org.locationtech.udig.tools.ZoomCommand&quot;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;/extension&gt;</span>
+   <span class="nt">&lt;extension</span>
+         <span class="na">point=</span><span class="s">&quot;org.eclipse.ui.bindings&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;key</span>
+            <span class="na">commandId=</span><span class="s">&quot;org.locationtech.udig.tools.ZoomCommand&quot;</span>
+            <span class="na">contextId=</span><span class="s">&quot;org.locationtech.udig.project.ui.tool&quot;</span>
+            <span class="na">sequence=</span><span class="s">&quot;Z&quot;</span> <span class="na">schemeId=</span><span class="s">&quot;org.locationtech.udig.defaultUDIGKeyConfiguration&quot;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;/extension&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-python"><pre>// This is made up to illustrate the concept
+class NewView extends Viewpart {
+  public void createPartControl( Composite parent ){
+    // You don't need this step because it is included by default
+    String[] newScopes = new String[];
+    newScopes[0] = "org.locationtech.udig.project.ui.tool";
+    getSite().getKeyBindingService().setScopes(newScopes);
+
+    // Create action, assign and register action and its command
+    IAction action=createAction();
+    Action.setActionDefinitionId("org.locationtech.udig.tools.ZoomCommand");
+    IKeyBindingService service = part.getSite().getKeyBindingService();
+    service.registerAction(action);
+  }
+}</pre>
+</div>
+<p><strong>Resources</strong></p>
+<ul class="simple">
+<li>See the org.eclipse.ui plugin.xml for many existing commmands, categories, keybindings, contexts and schemes.</li>
+<li><a class="reference external" href="http://www.magma.ca/~pollockd/despumate/bindingsHowTo.html">http://www.magma.ca/~pollockd/despumate/bindingsHowTo.html</a></li>
+</ul>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="extending_an_existing_perspective_example.html">Extending An Existing Perspective Example</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="featuresourceop_example.html">FeatureSourceOp Example</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2013, Refractions Research and others.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

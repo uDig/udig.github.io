@@ -1,0 +1,125 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Dependencies &mdash; uDig 1.4.0 Developers Guide</title>
+    
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.0.0-SNAPSHOT',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.4.0 Developers Guide" href="index.html" />
+    <link rel="up" title="Reference" href="reference.html" />
+    <link rel="next" title="Debugging Tips" href="debugging_tips.html" />
+    <link rel="prev" title="Reading List" href="reading_list.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="reading_list.html">Reading List</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="debugging_tips.html">Debugging Tips</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="dependencies">
+<h1>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h1>
+<p>uDig makes use of several dependencies (as outlined in the <cite>Platform Architecture &lt;platform_architecture&gt;</cite> page)</p>
+<p>The vast majority of the dependencies in uDig are isolated into a single OSGi plugin
+(org.locationtech.udig.libs). The complete list of dependencies is generated on the fly using an ant
+script.</p>
+<div class="section" id="geotools">
+<h2>GeoTools<a class="headerlink" href="#geotools" title="Permalink to this headline">¶</a></h2>
+<p>Spatial library providing referencing and spatial format support including rendering.</p>
+<p>Documentation:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://geotools.org">http://geotools.org</a></li>
+<li><a class="reference external" href="http://docs.geotools.org/latest/userguide/">http://docs.geotools.org/latest/userguide/</a></li>
+<li><a class="reference external" href="http://docs.geotools.org/latest/developers/">http://docs.geotools.org/latest/developers/</a></li>
+</ul>
+<p>uDig master uses the latest GeoTools SNAPSHOT:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/geotools/geotools">https://github.com/geotools/geotools</a></li>
+</ul>
+<p>uDig 1.1 uses GeoTools 2.2:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://svn.osgeo.org/geotools/branches/2.2.x/">http://svn.osgeo.org/geotools/branches/2.2.x/</a></li>
+</ul>
+</div>
+<div class="section" id="jts-topology-suite">
+<h2>JTS Topology Suite<a class="headerlink" href="#jts-topology-suite" title="Permalink to this headline">¶</a></h2>
+<p>Provides the implementation of Geometry.</p>
+<p>Documentation:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://tsusiatsoftware.net/jts/main.html">http://tsusiatsoftware.net/jts/main.html</a></li>
+<li><a class="reference external" href="http://sourceforge.net/projects/jts-topo-suite/">http://sourceforge.net/projects/jts-topo-suite/</a></li>
+</ul>
+<p>Related:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://www.vividsolutions.com/jcs/">http://www.vividsolutions.com/jcs/</a> (JTS Comflation Suite
+is a good source of processing and analysis examples)</li>
+</ul>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="reading_list.html">Reading List</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="debugging_tips.html">Debugging Tips</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2013, Refractions Research and others.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

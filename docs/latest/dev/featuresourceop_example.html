@@ -1,0 +1,137 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>FeatureSourceOp Example &mdash; uDig 1.4.0 Developers Guide</title>
+    
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.0.0-SNAPSHOT',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.4.0 Developers Guide" href="index.html" />
+    <link rel="up" title="Reference" href="reference.html" />
+    <link rel="next" title="Fonts and Imagery" href="fonts_and_imagery.html" />
+    <link rel="prev" title="API rules of engagement" href="api_rules_of_engagement.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="api_rules_of_engagement.html">API rules of engagement</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="fonts_and_imagery.html">Fonts and Imagery</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="featuresourceop-example">
+<h1>FeatureSourceOp Example<a class="headerlink" href="#featuresourceop-example" title="Permalink to this headline">¶</a></h1>
+<p>IOps are included in the context menu in the Local Registry. Open Local Registry Dialog. Expand an
+entry and right click on the child item. A menu will appear with a Count item. The count item is a
+FeatureSourceOp and is the same Operation that is created by this tutorial. After this tutorial an
+addition Count item should appear in the Menu, unless you change the name of the extension in the
+plugin.xml.</p>
+<p>This tutorial creates a simple FeatureSourceOp implementation that counts all the features in a
+FeatureSource and displays the features in a dialog.</p>
+<p>In a eclipse plugin the following lines must be added to the plugin.xml file:</p>
+<p><strong>plugin.xml fragment</strong></p>
+<div class="highlight-python"><pre>&lt;extension
+         point="org.locationtech.udig.registry.ui.featureType"&gt;
+      &lt;process
+            class="xyz.examplepackage.CountOp"
+            name="Count"&gt;
+         &lt;tooltip&gt;
+            Counts Features in the selection
+         &lt;/tooltip&gt;
+      &lt;/process&gt;
+   &lt;/extension&gt;</pre>
+</div>
+<p>The xml fragment above declares an extension of the org.locationtech.udig.registry.ui.featureType.
+The type of operation is a process operation (A child of the &lt;extension&gt; tag is the &lt;process&gt; tag).
+The name of the process is Count and the operation class is xyz.examplepackage.CountOp. The
+&lt;tooltip&gt; tag provides the plugin with a tooltip, this is optional.</p>
+<p>Next the operation class must be defined:</p>
+<p><strong>CountOp.java</strong></p>
+<div class="highlight-python"><pre>public class CountOp extends FeatureSourceOp {
+
+    /**
+     * Counts the features in the feature source
+     *
+     * @see org.locationtech.udig.registry.ui.FeatureSourceOp#op(org.geotools.data.FeatureSource)
+     */
+    public void op( FeatureSource source ) throws Exception {
+        FeatureReader reader=source.getFeatures().reader();
+        int i=0;
+        while( reader.hasNext()){
+            i++;
+            reader.next();
+        }
+        reader.close();
+        MessageDialog.openInformation(Display.getDefault().getActiveShell(),
+                "Feature Count", "Number of Features: "+i);
+    }
+}</pre>
+</div>
+<p>Once the plugin is exported (Export-&gt;Deployable plug-ins and features) into the uDig plugin
+directory and uDig is started, the operation will be loaded.</p>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="api_rules_of_engagement.html">API rules of engagement</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="fonts_and_imagery.html">Fonts and Imagery</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2013, Refractions Research and others.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

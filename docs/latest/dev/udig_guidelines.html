@@ -1,0 +1,146 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>uDig Guidelines &mdash; uDig 1.4.0 Developers Guide</title>
+    
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.0.0-SNAPSHOT',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.4.0 Developers Guide" href="index.html" />
+    <link rel="up" title="Guidelines and Rules" href="guidelines_and_rules.html" />
+    <link rel="next" title="Eclipse House Rules" href="eclipse_house_rules.html" />
+    <link rel="prev" title="Guidelines and Rules" href="guidelines_and_rules.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="guidelines_and_rules.html">Guidelines and Rules</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="eclipse_house_rules.html">Eclipse House Rules</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="udig-guidelines">
+<h1>uDig Guidelines<a class="headerlink" href="#udig-guidelines" title="Permalink to this headline">¶</a></h1>
+<p>The uDig application is guided by a small number of general principles. These are simply guidelines
+and are not required, any plug-in that becomes part of the core uDig project should consider these
+points.</p>
+</div>
+<div class="section" id="guidelines">
+<h1>Guidelines<a class="headerlink" href="#guidelines" title="Permalink to this headline">¶</a></h1>
+<p><strong>Sensible Defaults</strong></p>
+<ul class="simple">
+<li>This is a User-friendly application, make the right choices rather than complicate matters.</li>
+</ul>
+<p>The idea here is to optimize for the 90% use case; it is okay have to more options available for
+&#8220;advanced&#8221; functionality, but please make them just that - optional.</p>
+<p><strong>Code for Convenience</strong></p>
+<ul class="simple">
+<li>principle of &#8220;least surprise&#8221; applies to developers as well as users</li>
+</ul>
+<p>This is a developer-friendly platform, designed to be extended by others.</p>
+<p><strong>Code like you mean it</strong></p>
+<ul class="simple">
+<li>if you change your mind change your code</li>
+</ul>
+<p>This project is commercial, ie always on a short timeline, don&#8217;t waste time in &#8220;Analysis Paralysis&#8221;.
+You have better things to do. There is time enough for the code base to be entrenched later</p>
+<p><strong>No API Before Its Time</strong></p>
+<p>Additional plug-ins and functionality can be added at the request of the developer community (this
+means you). We try not to add any functionality without a solid use-case from a real developer,
+preferably with a running example in a community module.</p>
+<p>If what you are looking for is not here - please ask on the developer list.</p>
+</div>
+<div class="section" id="we-trust-you">
+<h1>We Trust You<a class="headerlink" href="#we-trust-you" title="Permalink to this headline">¶</a></h1>
+<p>You may look at the above list and think &#8220;Those are not Guidelines&#8221;, and you are right. We trust you
+on the coding side of things.</p>
+<p>We don&#8217;t want to waste your time, or ours, deciding where spaces should go we have tools for that.</p>
+<p><strong>Use the Tools to keep things Sane</strong></p>
+<ul class="simple">
+<li>Use the <strong>code template</strong> to supply file headers and decide</li>
+<li>Use the <strong>code formatter</strong> to decide where the spaces go</li>
+<li>Please use JUnit rather than test everything by Hand</li>
+<li>Please run FindBugs it will perform static analysis and find those NPE for you</li>
+</ul>
+<p>You are a Java developer right? These are best practices.</p>
+<p><strong>Using Find Bugs</strong></p>
+<p>You can run FindBugs on each plug-in when it is committed (FindBugs is included in the extras pack).</p>
+<p>To run FindBugs:</p>
+<ol class="arabic simple">
+<li>Right clicking on your project</li>
+<li>Selecting <strong>Find Bugs &gt; Find Bugs</strong>.</li>
+<li>It will add a few more warnings for you to review in the &#8220;Problems&#8221; view</li>
+</ol>
+<p><strong>Provide warnings to Developers when you have to Guess</strong></p>
+<p>When you make an <strong>extention point</strong> for other developers to use we have a small favour to ask:</p>
+<ul class="simple">
+<li>When you are forced to use a default (because a developer did not give you a real value) please
+provide a warning. This way the developers know that they <strong>can</strong> provide their own value (or
+implementation, etc.)</li>
+</ul>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="guidelines_and_rules.html">Guidelines and Rules</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="eclipse_house_rules.html">Eclipse House Rules</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2013, Refractions Research and others.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

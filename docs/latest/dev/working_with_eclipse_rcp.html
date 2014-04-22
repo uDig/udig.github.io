@@ -1,0 +1,134 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Working with Eclipse RCP &mdash; uDig 1.4.0 Developers Guide</title>
+    
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.0.0-SNAPSHOT',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.4.0 Developers Guide" href="index.html" />
+    <link rel="next" title="Creating a Plugin" href="creating_a_plugin.html" />
+    <link rel="prev" title="Sphinx Syntax reStructuredText (rst)" href="docguide/sphinxSyntax.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="docguide/sphinxSyntax.html">Sphinx Syntax reStructuredText (rst)</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="creating_a_plugin.html">Creating a Plugin</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="working-with-eclipse-rcp">
+<h1>Working with Eclipse RCP<a class="headerlink" href="#working-with-eclipse-rcp" title="Permalink to this headline">¶</a></h1>
+<p>Tips, tricks and utility classes for working with the Eclipse RCP platform.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="creating_a_plugin.html">Creating a Plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="common_plugin_files.html">Common Plugin Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugin_structure.html">Plugin Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugin_setup.html">Plugin Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugin_dependency.html">Plugin Dependency</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugin_internationalization.html">Plugin Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugin_activator.html">Plugin Activator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugin_internationalization_with_resourcebundles.html">Plugin Internationalization with ResourceBundles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="imageregistry_and_images.html">ImageRegistry and Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jface_actions.html">JFace Actions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jface_field_decorations.html">Jface Field Decorations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jface_wizards.html">JFace Wizards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugin_help.html">Plugin Help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugin_classloader_use.html">Plugin Classloader Use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugin_debug_and_tracing_support.html">Plugin Debug and Tracing Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugin_debug_and_tracing_support.html#usage">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="working_with_features.html">Working With Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="working_with_features.html#exporting-a-feature">Exporting a Feature</a></li>
+<li class="toctree-l1"><a class="reference internal" href="making_a_branding_plugin.html">Making a Branding Plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="making_a_product_and_executable.html">Making a Product and Executable</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using_udigapplication.html">Using UDIGApplication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="menus_using_actions_and_actionsets.html">Menus using Actions and ActionSets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="menus_using_commands_and_handlers.html">Menus using Commands and Handlers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="menus_using_operations_and_tools.html">Menus using Operations and Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adding_history_to_dialogs_and_wizards.html">Adding History to Dialogs and Wizards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="swt_and_jface_widgets.html">SWT and JFace Widgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="what_is_an_extension_point.html">What is an Extension Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="creating_and_using_extension_points.html">Creating and Using Extension Points</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing_plugins.html">Testing Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bundle_a_jar_up_as_a_plugin.html">Bundle a JAR up as a Plugin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="how_to_turn_stuff_off.html">How to turn stuff off</a></li>
+<li class="toctree-l1"><a class="reference internal" href="how_do_i_turn_off_menus.html">How Do I Turn Off Menus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using_the_udigworkbenchadvisor.html">Using The Udigworkbenchadvisor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using_udigmenubuilder.html">Using Udigmenubuilder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using_workbenchconfigurations.html">Using Workbenchconfigurations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="working_with_cheat_sheets.html">Working With Cheat Sheets</a></li>
+</ul>
+</div>
+<p>Fashions change - and the Eclipse RCP API has evolved over time. As such some of these instructions
+will be dated; please make use of the Eclipse Help menu for accurate documentation that reflects the
+version of Eclipse you are running with today!</p>
+<p>As an example Eclipse 3.4 introduced a new &#8220;org.eclipse.ui.menu&#8221; extension point; use of this
+extension should gradually replace the use of Actions and ActionSets.</p>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="docguide/sphinxSyntax.html">Sphinx Syntax reStructuredText (rst)</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="creating_a_plugin.html">Creating a Plugin</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2013, Refractions Research and others.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

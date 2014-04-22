@@ -1,0 +1,163 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Making a Product and Executable &mdash; uDig 1.4.0 Developers Guide</title>
+    
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.0.0-SNAPSHOT',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.4.0 Developers Guide" href="index.html" />
+    <link rel="up" title="Working with Eclipse RCP" href="working_with_eclipse_rcp.html" />
+    <link rel="next" title="Using UDIGApplication" href="using_udigapplication.html" />
+    <link rel="prev" title="Making a Branding Plugin" href="making_a_branding_plugin.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="making_a_branding_plugin.html">Making a Branding Plugin</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="using_udigapplication.html">Using UDIGApplication</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="making-a-product-and-executable">
+<h1>Making a Product and Executable<a class="headerlink" href="#making-a-product-and-executable" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="a-product-for-your-application">
+<h2>A Product for your Application<a class="headerlink" href="#a-product-for-your-application" title="Permalink to this headline">¶</a></h2>
+<p>A product is a main entry point into your uDig (or Eclipse) based application. It is used within the
+Eclipse SDK to package your application for release, and to launch it from within Eclipse. The file
+is XML-based, but Eclipse provides a very nice GUI editor.</p>
+<p>uDig&#8217;s application lives in the org.locationtech.udig plug-in:</p>
+<p><a class="reference external" href="https://github.com/uDig/udig-platform/blob/master/plugins/org.locationtech.udig/udig.product">https://github.com/uDig/udig-platform/blob/master/plugins/org.locationtech.udig/udig.product</a></p>
+<div class="section" id="creating-the-product-file">
+<h3>Creating the .product File<a class="headerlink" href="#creating-the-product-file" title="Permalink to this headline">¶</a></h3>
+<p>To create a product for your application, you will need to create a product file and place it in
+your branding plug-in.</p>
+<p>In your Eclipse SDK:</p>
+<ol class="arabic simple">
+<li>Select <em class="menuselection">File  ‣ New ‣ Other...</em></li>
+<li>In the <strong>Plug-in Development</strong> folder, select <strong>Product Configuration</strong> and press <strong>Next</strong></li>
+<li>Select your <strong>branding plug-in</strong> for the parent folder. (eg:
+&#8220;<strong>org.locationtech.udig.community.jody.visual</strong>&#8221;)</li>
+<li>Under <strong>File name</strong>, enter a file name (eg: &#8220;<strong>visual.product&#8221;</strong>)</li>
+<li>If you are basing your application off of uDig, under <strong>Use an existing product</strong>, select
+<strong>org.locationtech.udig.product</strong> (Recommended)</li>
+<li>Press <strong>Finish</strong></li>
+</ol>
+<p>This screenshot shows a newly created visual.product file based on udig.product:</p>
+<img alt="_images/newProduct.jpg" src="_images/newProduct.jpg" />
+</div>
+</div>
+<div class="section" id="configuring-your-product">
+<h2>Configuring your Product<a class="headerlink" href="#configuring-your-product" title="Permalink to this headline">¶</a></h2>
+<p><strong>Product Name</strong></p>
+<p>Note that <strong>product name</strong> is set to &#8220;%product.name&#8221;. You should either create a plugin.properties
+file and provide a value, or change it to an appropriate product name (eg: &#8220;Visual Application&#8221;).
+For an example properties file, see
+<a class="reference external" href="https://github.com/uDig/udig-platform/blob/master/plugins/org.locationtech.udig/plugin.properties">https://github.com/uDig/udig-platform/blob/master/plugins/org.locationtech.udig/plugin.properties</a></p>
+<p><strong>Feature-Based Product</strong></p>
+<p>You can base your product on plug-ins or features. Features are generally preferable as they enable
+the use of an update-site. This is what uDig uses. If you change it to features, you will have to
+add the two features uDig depends on, on the <strong>Configuration</strong> page. These two features are
+<strong>org.locationtech.udig</strong> and <strong>org.eclipse.rcp</strong>. You should also add in your own feature for
+plug-ins you want to include (ex: <strong>org.locationtech.udig.community.jody.visual_feature</strong>)</p>
+<p>The following screenshot shows the <strong>Configuration</strong> page of a product based on features:</p>
+<img alt="_images/featureBasedProduct.jpg" src="_images/featureBasedProduct.jpg" />
+<p><strong>Branding</strong></p>
+<p>The <strong>Launcher</strong> and <strong>Branding</strong> pages can be used to configure the branding of your application.
+This includes items such as the launching executable&#8217;s name and icon, and the splash screen that is
+shown during start-up.</p>
+<p>You probably also want to give your product a <strong>launcher</strong> name. On the <strong>Launcher</strong> page, enter a
+value under Launcher name. (eg: &#8220;visual&#8221;)</p>
+</div>
+<div class="section" id="using-the-product-to-run-your-application">
+<h2>Using the Product to Run your Application<a class="headerlink" href="#using-the-product-to-run-your-application" title="Permalink to this headline">¶</a></h2>
+<p>A product file can be used to run your application within Eclipse. On the <strong>Overview</strong> page, under
+<strong>Testing</strong>, there are a couple buttons. <strong>Synchronize</strong> creates (or updates) the Eclipse run-time
+configuration (What you see under <em class="menuselection">Run ‣ Run History</em>), and <strong>Launch the Product</strong> or <strong>Launch the
+Product in Debug mode</strong>.</p>
+<p>To use the product file to run your application:</p>
+<ol class="arabic simple">
+<li>Press <strong>Synchronize</strong> (this isn&#8217;t always necessary, but can help fix problems sometimes)</li>
+<li>Press on of the <strong>Launch</strong> buttons.</li>
+</ol>
+</div>
+<div class="section" id="using-the-product-to-build-a-release">
+<h2>Using the Product to build a Release<a class="headerlink" href="#using-the-product-to-build-a-release" title="Permalink to this headline">¶</a></h2>
+<p>The product file can be used to build an archive containing an executable release of your
+application. On the <strong>Overview</strong> page, click <strong>Eclipse product export wizard</strong>. The wizard will
+appear and you will be prompted to enter configuration details, such as root directory and
+destination location.</p>
+<p>Change <strong>Root directory</strong> to something suitable for your application (eg: &#8220;visual&#8221;). Select
+<strong>Archive file</strong> and point it to a location where you want the zip file saved (eg: c:\visual.zip).
+Press Finish and then wait for it to build.</p>
+<p>The following screenshot shows the Eclipse export wizard:</p>
+<img alt="_images/export.jpg" src="_images/export.jpg" />
+<p>Note that if you wish to export for multiple platforms, you will need to install the Eclispe RCP
+Delta Pack.</p>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="making_a_branding_plugin.html">Making a Branding Plugin</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="using_udigapplication.html">Using UDIGApplication</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2013, Refractions Research and others.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

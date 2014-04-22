@@ -1,0 +1,166 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>GIS Application Tutorials &mdash; uDig 1.4.0 Developers Guide</title>
+    
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.0.0-SNAPSHOT',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.4.0 Developers Guide" href="index.html" />
+    <link rel="up" title="Getting Started" href="getting_started.html" />
+    <link rel="next" title="Map Decorator Tutorial" href="map_decorator_tutorial.html" />
+    <link rel="prev" title="Shapefile Export Tutorial" href="shapefile_export_tutorial.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="shapefile_export_tutorial.html">Shapefile Export Tutorial</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="map_decorator_tutorial.html">Map Decorator Tutorial</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="gis-application-tutorials">
+<h1>GIS Application Tutorials<a class="headerlink" href="#gis-application-tutorials" title="Permalink to this headline">¶</a></h1>
+<p>The GIS Application is used for the core uDig ideas of map, layers and tools.</p>
+<p>The following tutorials are available:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="map_decorator_tutorial.html">Map Decorator Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="feature_editor_tutorial.html">Feature Editor Tutorial</a></li>
+</ul>
+</div>
+<p>Reference:</p>
+<ul class="simple">
+<li><a class="reference internal" href="disk_to_screen_tutorials.html"><em>Disk to Screen Tutorials</em></a></li>
+<li><a class="reference internal" href="csv_renderer_tutorial.html"><em>CSV Renderer Tutorial</em></a></li>
+<li><a class="reference internal" href="style_tutorial.html"><em>Style Tutorial</em></a></li>
+</ul>
+<div class="section" id="gis-application">
+<h2>GIS Application<a class="headerlink" href="#gis-application" title="Permalink to this headline">¶</a></h2>
+<p>The GIS Application serves as the basic GIS for your own customisations. It is the second tier of
+the <a class="reference internal" href="platform_architecture.html"><em>Platform Architecture</em></a>:</p>
+<ul class="simple">
+<li>Custom Application</li>
+<li>GIS Application</li>
+<li>GIS Platform</li>
+</ul>
+<p>The GIS Application is essentially the running uDig application including the GUI.</p>
+</div>
+<div class="section" id="data-model">
+<h2>Data Model<a class="headerlink" href="#data-model" title="Permalink to this headline">¶</a></h2>
+<p>GIS Application provides a Project-Map-Layer model which you can see in the user interface:</p>
+<ul class="simple">
+<li><strong>Project</strong> is shown by the ProjectView with a breakdown of your open projects</li>
+<li><strong>Map</strong> is shown by the MapEditor - where it is used render your layers and allows you to zoom
+and edit features.</li>
+<li><strong>Layer</strong> is shown by the LayersView where you can select what layers to render, and order them.<ul>
+<li>The actual data from the Layers comes from a GeoResource (like PostGis or a Shape File). The
+rendering system will use IResolve to access the data as appropriate.</li>
+<li>The Style Editor (and Style view) allow you to change the style of various map features. This
+information is stored on a &#8220;style blackboard&#8221; for use by both the style editor and the
+rendering system.</li>
+<li>A &#8220;decorator&#8221; is implemented as a <strong>MapGraphic</strong> (basically a layer without specific data such
+as a scale bar or legend)</li>
+</ul>
+</li>
+</ul>
+<div class="figure align-center">
+<img alt="" src="_images/MapDataModel.png" />
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">uDig generally uses blackboard for inter component communication; the coordinate tool and
+coordinate map graphic is an introduction to this idea</p>
+</div>
+</div>
+<div class="section" id="commands">
+<h2>Commands<a class="headerlink" href="#commands" title="Permalink to this headline">¶</a></h2>
+<p>The second bit of fun here is the above data model is not available for you to change directly. In
+earlier copies of uDig we had the data model available for direct modification so you could call
+setter methods and the user interface would update.</p>
+<p>This resulted in a lot of deadlocks due to these restrictions:</p>
+<ul class="simple">
+<li>code that works with any kind of data should not be in the user interface thread (or the
+application will appear to &#8220;freeze up&#8221;)</li>
+<li>code that updates the screen or user interface must be in the Display Thread</li>
+</ul>
+<p>What we have come up with is the use of <strong>Commands</strong>:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">map</span><span class="o">.</span><span class="na">sendCommandASynch</span><span class="o">(</span> <span class="n">command</span> <span class="o">);</span>
+</pre></div>
+</div>
+<p>There are a number of commands available in uDig and you can role your own:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">NavCommand</span> <span class="n">goHome</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SetViewportCenterCommand</span><span class="o">(</span><span class="k">new</span> <span class="n">Coordinate</span><span class="o">(</span><span class="n">x</span><span class="o">,</span><span class="n">y</span><span class="o">),</span> <span class="n">DefaultGeographicCRS</span><span class="o">.</span><span class="na">WGS84</span> <span class="o">);</span>
+<span class="n">map</span><span class="o">.</span><span class="na">sendASyncCommand</span><span class="o">(</span> <span class="n">goHome</span> <span class="o">);</span>
+</pre></div>
+</div>
+<p>For more information:</p>
+<ul class="simple">
+<li><a class="reference internal" href="commands.html"><em>Commands</em></a> (Developers Guide)</li>
+</ul>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="shapefile_export_tutorial.html">Shapefile Export Tutorial</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="map_decorator_tutorial.html">Map Decorator Tutorial</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2013, Refractions Research and others.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

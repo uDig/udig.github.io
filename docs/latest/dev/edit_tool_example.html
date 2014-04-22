@@ -1,0 +1,154 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Edit Tool Example &mdash; uDig 1.4.0 Developers Guide</title>
+    
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.0.0-SNAPSHOT',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.4.0 Developers Guide" href="index.html" />
+    <link rel="up" title="Examples" href="examples.html" />
+    <link rel="next" title="Export Sld Plugin Tutorial" href="export_sld_plugin_tutorial.html" />
+    <link rel="prev" title="Training Materials" href="training_materials.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="training_materials.html">Training Materials</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="export_sld_plugin_tutorial.html">Export Sld Plugin Tutorial</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="edit-tool-example">
+<h1>Edit Tool Example<a class="headerlink" href="#edit-tool-example" title="Permalink to this headline">¶</a></h1>
+<p>This tutorial demonstrates how to make a simple custom edit tool. The tool will select features and
+change the geometry of the feature into a star.</p>
+<div class="section" id="requirements-for-tutorial">
+<h2>Requirements for tutorial<a class="headerlink" href="#requirements-for-tutorial" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Installed eclipse and uDig SDK 1.1 - <a class="reference internal" href="SDKQuickstart/SDKQuickstart.html"><em>SDK Quickstart</em></a></li>
+<li>Completion of the Plugin tutorial - <a class="reference internal" href="tool_plugin_tutorial.html"><em>Tool Plugin Tutorial</em></a></li>
+</ul>
+</div>
+<div class="section" id="what-is-a-edit-tool">
+<h2>What is a Edit Tool?<a class="headerlink" href="#what-is-a-edit-tool" title="Permalink to this headline">¶</a></h2>
+<p>Edit tools are another sub-type of tools, however they do not (yet) have their own extension point.
+Instead they are extensions of the org.locationtech.udig.project.ui.tool extension point. Because
+there are a large number of editing tools that can be created an many of them have similar
+functionality there is a little framework associated with edit tools development. The design and
+more detailed discussion of the edit tool framework can be found at <a class="reference internal" href="edit_tools.html"><em>Edit Tools</em></a></p>
+</div>
+<div class="section" id="tutorial">
+<h2>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Create a new Plugin called: <strong>org.locationtech.udig.tutorials.tool.star</strong></li>
+<li>Configure your new created plugin</li>
+<li>Open the Plug-in Development perspective.</li>
+<li>In the Package Explorer navigate to the plug-in created in the previous section. Open the plug-in
+manifest by navigating to the META-INF/MANIFEST.MF file under the root of the feature editor
+plug-in. Double click on the file to open the plug-in manifest editor.</li>
+<li>Open the plug-in dependencies by clicking on the Dependencies tab located at the bottom of the
+editor area.</li>
+<li>Click the Add button in the Required plugins column and add the following plugin:</li>
+</ol>
+<ul class="simple">
+<li>org.locationtech.udig.project.ui,</li>
+<li>org.locationtech.udig.ui</li>
+</ul>
+<ol class="arabic simple">
+<li>At this point it is critical that you <strong>Save</strong> your work as the dependencies need to propagate
+into the project.</li>
+</ol>
+<p>Import Resources Into Project</p>
+<p>Define a New Extension</p>
+<ol class="arabic simple">
+<li>Open the extensions page by clicking on the <strong>Extensions</strong> tab</li>
+<li>Click the Add button</li>
+<li>Select the <strong>org.locationtech.udig.project.ui.tool</strong> extension point from the list.</li>
+<li>Click the <strong>Finish</strong> button.</li>
+<li>Enter the following Extention Details:<ul>
+<li>ID: <em>org.locationtech.udig.tutorials.tool.star</em></li>
+<li>Name: <em>Star Geometry Tool Example</em></li>
+</ul>
+</li>
+</ol>
+<p>Create a New Tool</p>
+<ol class="arabic simple">
+<li>Right click on newly added extension, <strong>org.locationtech.udig.project.ui.tool</strong>, and
+select <em class="menuselection">New ‣ modalTool</em></li>
+<li>Replace the default data in the id field with <strong>org.locationtech.udig.tutorials.tool.star</strong>.</li>
+<li>Enter a tool tip message into the tooltip field: <strong>Changes Geometry to Star</strong></li>
+<li>Enter <strong>org.locationtech.udig.tutorials.tool.move.StarTool</strong> into the class field.</li>
+<li>Enter <strong>icons/etool16/</strong> into the icon field. (Or press the Browse button and locate the icon)</li>
+<li>Enter <strong>Move</strong> into the name field.</li>
+<li>Set onToolbar to <strong>true</strong>.</li>
+<li>Enter <strong>org.locationtech.udig.tool.edit.create</strong> into the categoryId field. This ensures that the
+tool will be created in the create Tool category.</li>
+</ol>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="training_materials.html">Training Materials</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="export_sld_plugin_tutorial.html">Export Sld Plugin Tutorial</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2013, Refractions Research and others.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

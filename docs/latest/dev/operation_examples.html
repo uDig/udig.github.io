@@ -1,0 +1,304 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Operation Examples &mdash; uDig 1.4.0 Developers Guide</title>
+    
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.0.0-SNAPSHOT',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.4.0 Developers Guide" href="index.html" />
+    <link rel="up" title="Working with GIS Application" href="working_with_gis_application.html" />
+    <link rel="next" title="Renderers" href="renderers.html" />
+    <link rel="prev" title="Edit Tools" href="edit_tools.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="edit_tools.html">Edit Tools</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="renderers.html">Renderers</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="operation-examples">
+<h1>Operation Examples<a class="headerlink" href="#operation-examples" title="Permalink to this headline">¶</a></h1>
+<p>Operations in uDig are extremely simple to make. A developer extends the
+org.locationtech.udig.operation extension point and implements the
+org.locationtech.udig.ui.operations.IOp interface which has a single op() method. An example is the
+Layer Summary Operation.</p>
+<p>The operation is ran in a background thread so updating the UI must be done by calling
+display.asyncExec(Runnable) or display.syncExec(Runnable) methods.</p>
+<p>In addition to declaring the operation the extension also allows categories to be declared.
+Categories allow operations to be organized in the operation menus.</p>
+<div class="section" id="legal-targets">
+<h2>Legal Targets<a class="headerlink" href="#legal-targets" title="Permalink to this headline">¶</a></h2>
+<p>One of the most common questions are &#8220;What are legal operation targets?}&#8221; and &#8220;How do I know when
+those targets will be active?&#8221;</p>
+<p>Targets are tied very closely to the Eclipse workspace&#8217;s selection framework and is designed to
+operate in a similar manner as the org.eclipse.popupMeus extension point. In Eclipse each <strong>view</strong>
+has a selection and the <em>current</em> selection is the selection of the current view. A selection can be
+empty, a single object or many objects. It may be heterogeneous or homogeneous. Currently operations
+will always be inactive if the selection is made up of many heterogeneous objects. However, as with
+the popupMenus extension point, operations can be defined so they are active for one or many and
+filters can be defined as well to further restrict what selections the operations will be enabled
+for.</p>
+<p>For the basic case, where only the target is defined, the object in the current selection is
+examined to see if it matches the declared target in the operation. However more than just and
+instanceof check is made. uDig, as with eclipse, uses the Extensible Interface/Adaptable pattern
+quite heavily. So if the object(s) in the selection can adapt to the target object then that is also
+considered a match.</p>
+<p><strong>Extensible Interface Pattern</strong>: the Extensible Interface pattern allows an object to <em>adapt</em> to
+objects of other types. An example of this is WMS IServices can <em>adapt</em> to WebMapServer objects.</p>
+</div>
+<div class="section" id="views-and-the-selections-that-can-be-expected">
+<h2>Views and the selections that can be expected<a class="headerlink" href="#views-and-the-selections-that-can-be-expected" title="Permalink to this headline">¶</a></h2>
+<p>Tour of the standard views in uDig and what selections you can expect in the different views.</p>
+<ul class="simple">
+<li>Project Explorer: IMap, IProject, IProjectElement, IPage</li>
+<li>Layers View: ILayer<ul>
+<li>Layers also adapt to their IGeoResources. However adapting only goes 1 level. So while layers
+adapt to IGeoResources they do not adapt to FeatureSources</li>
+</ul>
+</li>
+<li>Catalog View: IServices, IGeoResources<ul>
+<li>IServices can adapt to many different objects such as WebMapServers and DataStores</li>
+<li>IGeoResources can adapt to objects such as FeatureSources, FeatureStores, GridCoverages and
+WMSLayers</li>
+</ul>
+</li>
+<li>Info View: Features</li>
+<li>Selection View (Soon to be renamed to Table View): Features</li>
+<li>Feature Editor: Feature</li>
+<li>MapEditor: This is a trickier workbench part. The selection is determined by the active tool. By
+default, the current selection is the map but some tools (editing tools for example) will cause
+the current selection to be features.<ul>
+<li>Pan, Measurement and Zoom: Map</li>
+<li>Selection tools: AdaptiveFilter which is a org.geotools.filter.Filter and can adapt to the
+ILayer that it applies to.</li>
+<li>Info tool: ??? I don&#8217;t know yet probably features</li>
+<li>Edit tools: The features on the EditBlackboard</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="object-passed-to-the-operation">
+<h2>Object passed to the operation<a class="headerlink" href="#object-passed-to-the-operation" title="Permalink to this headline">¶</a></h2>
+<p>When the op method is called by the framework, the objected passed to the method is an instance of
+the declared class, not necessarily the class that is in the selection. For example if the class
+FeatureStore is the target class and the object that is clicked on is a IGeoResource that can
+resolve to a FeatureStore then a FeatureStore instance is passed to the operation, not the
+IGeoResource.</p>
+<p>A second point to note is that if the the class declares 1 as the enablesFor parameter then the
+single object will be passed to the operation. <strong>However</strong>, if the enablesFor parameter is anything
+else, (+,*,3,etc..) an array of the target type will be passed in as the target parameter. See Code
+Snippets for an example.</p>
+</div>
+<div class="section" id="code-snippets">
+<h2>Code Snippets<a class="headerlink" href="#code-snippets" title="Permalink to this headline">¶</a></h2>
+<p><strong>Example where target is a single IMap</strong></p>
+<p>The follow example declares an operation that is enabled when the selection is a <em>single</em> IMap
+object. This operation would be enabled in the MapEditor and the Project Explorer.</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;operation</span> <span class="na">categoryId=</span><span class="s">&quot;org.locationtech.udig.project.ui.informationOperations&quot;</span>
+    <span class="na">class=</span><span class="s">&quot;org.locationtech.udig.project.ui.operations.example.FeaturesInView&quot;</span>
+    <span class="na">enablesFor=</span><span class="s">&quot;1&quot;</span>
+    <span class="na">id=</span><span class="s">&quot;org.locationtech.udig.project.ui.featuresInView&quot;</span>
+    <span class="na">name=</span><span class="s">&quot;%featuresView&quot;</span>
+    <span class="na">targetClass=</span><span class="s">&quot;org.locationtech.udig.project.IMap&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p><strong>FeaturesInView.java</strong></p>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kt">void</span> <span class="nf">op</span><span class="o">(</span> <span class="kd">final</span> <span class="n">Display</span> <span class="n">display</span><span class="o">,</span> <span class="n">Object</span> <span class="n">target</span><span class="o">,</span> <span class="n">IProgressMonitor</span> <span class="n">monitor</span> <span class="o">)</span>
+            <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+    <span class="n">IMap</span> <span class="n">map</span> <span class="o">=</span> <span class="o">(</span><span class="n">IMap</span><span class="o">)</span> <span class="n">target</span><span class="o">;</span>
+
+    <span class="c1">// ... some work</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p><strong>Example where target is exactly 2 ILayers</strong></p>
+<p>The following example would be enabled when exactly 2 ILayers are selected. No more and no less.
+The standard views where this operation could be enabled in are the Layers View and Project
+Explorer.</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;operation</span>
+            <span class="na">class=</span><span class="s">&quot;org.locationtech.udig.tool.edit.DifferenceOp&quot;</span>
+            <span class="na">enablesFor=</span><span class="s">&quot;2&quot;</span>
+            <span class="na">id=</span><span class="s">&quot;org.locationtech.udig.tool.edit.difference&quot;</span>
+            <span class="na">name=</span><span class="s">&quot;%difference.name&quot;</span>
+            <span class="na">targetClass=</span><span class="s">&quot;org.locationtech.udig.project.ILayer&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p><strong>DifferenceOp.java</strong></p>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kt">void</span> <span class="nf">op</span><span class="o">(</span> <span class="kd">final</span> <span class="n">Display</span> <span class="n">display</span><span class="o">,</span> <span class="n">Object</span> <span class="n">target</span><span class="o">,</span> <span class="n">IProgressMonitor</span> <span class="n">monitor</span> <span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+        <span class="kd">final</span> <span class="n">ILayer</span><span class="o">[]</span> <span class="n">layers</span><span class="o">=(</span><span class="n">ILayer</span><span class="o">[])</span> <span class="n">target</span><span class="o">;</span>
+<span class="c1">// ... some work</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p><strong>Example using enablement filter</strong></p>
+<p>The following example show the declaration of an operation that is enabled only when the selection
+consists of a single IService that can adapt (resolve in the case of IService) to a DataStore
+object. The difference between this example and simply having the target as a DataStore is that the
+object that is passed in is a IService and not a DataStore. Obviously the functionality of IService
+is required and not the functionality of a DataStore.</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;operation</span>
+     <span class="na">categoryId=</span><span class="s">&quot;org.locationtech.udig.ui.edit&quot;</span>
+          <span class="na">class=</span><span class="s">&quot;org.locationtech.udig.catalog.internal.ui.ops.NewFeatureTypeOp&quot;</span>
+           <span class="na">enablesFor=</span><span class="s">&quot;1&quot;</span>
+           <span class="na">id=</span><span class="s">&quot;org.locationtech.udig.catalog.ui.newFeatureType&quot;</span>
+           <span class="na">menuPath=</span><span class="s">&quot;file/new&quot;</span>
+           <span class="na">name=</span><span class="s">&quot;%newFeatureType&quot;</span>
+           <span class="na">targetClass=</span><span class="s">&quot;org.locationtech.udig.catalog.IService&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;enablement&gt;</span>
+           <span class="nt">&lt;filter</span> <span class="na">adaptsTo=</span><span class="s">&quot;org.geotools.data.DataStore&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/enablement&gt;</span>
+</pre></div>
+</div>
+<p>Notice in the following snippet that the service is not checked to see if it can resolve to a
+DataStore, it is known because the operation is not enabled if the service cannot resolve to a
+DataStore.</p>
+<p><strong>NewFeatureTypeOp.java</strong></p>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kt">void</span> <span class="nf">op</span><span class="o">(</span> <span class="kd">final</span> <span class="n">Display</span> <span class="n">display</span><span class="o">,</span> <span class="kd">final</span> <span class="n">Object</span> <span class="n">target</span><span class="o">,</span> <span class="kd">final</span> <span class="n">IProgressMonitor</span> <span class="n">monitor</span> <span class="o">)</span>
+            <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+        <span class="n">IService</span> <span class="n">service</span> <span class="o">=</span> <span class="o">(</span><span class="n">IService</span><span class="o">)</span> <span class="n">target</span><span class="o">;</span>
+        <span class="n">DataStore</span> <span class="n">ds</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="na">resolve</span><span class="o">(</span><span class="n">DataStore</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">monitor</span><span class="o">);</span>
+<span class="c1">// ... some work</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="layer-summary-operation">
+<h2>Layer Summary Operation<a class="headerlink" href="#layer-summary-operation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="plugin-xml-extension-declaration">
+<h3>Plugin.xml extension declaration<a class="headerlink" href="#plugin-xml-extension-declaration" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;extension</span>
+   <span class="na">point=</span><span class="s">&quot;org.locationtech.udig.ui.operation&quot;</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;operation</span>
+      <span class="na">targetClass=</span><span class="s">&quot;org.locationtech.udig.project.ILayer&quot;</span>
+      <span class="na">class=</span><span class="s">&quot;org.locationtech.udig.project.ui.LayerSummary&quot;</span>
+      <span class="na">categoryId=</span><span class="s">&quot;org.locationtech.udig.project.ui.informationOperations&quot;</span>
+      <span class="na">name=</span><span class="s">&quot;Layer Summary&quot;</span>
+      <span class="na">id=</span><span class="s">&quot;org.locationtech.udig.project.ui.Operation1&quot;</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;category</span>
+      <span class="na">name=</span><span class="s">&quot;Information&quot;</span>
+      <span class="na">id=</span><span class="s">&quot;org.locationtech.udig.project.ui.informationOperations&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/extension&gt;</span>
+</pre></div>
+</div>
+<p>The <strong>targetClass</strong> indicates which type of objects the operation can operate on. The an instance of
+the targetClass will be passed to the operation as one of the parameters of the op(...) method.</p>
+<p>The <strong>class</strong> declares the operation class. It must implement the IOp interface.</p>
+<p>The <strong>categoryId</strong> declares which category the operation is part of. This determines where in the
+operations menu the operation is located.</p>
+<p>The <strong>category</strong> declaration declares a new category called Information. If there are any operations
+in the category the category will appear in all the Operations menus.</p>
+</div>
+<div class="section" id="layer-summary-class">
+<h3>Layer Summary Class<a class="headerlink" href="#layer-summary-class" title="Permalink to this headline">¶</a></h3>
+<p><strong>LayerSummary.java</strong></p>
+<div class="highlight-java"><div class="highlight"><pre><span class="cm">/**</span>
+<span class="cm"> * Displays a summary of the layer in a dialog.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @author jeichar</span>
+<span class="cm"> * @since 0.6.0</span>
+<span class="cm"> */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">LayerSummary</span> <span class="kd">implements</span> <span class="n">IOp</span> <span class="o">{</span>
+    <span class="cm">/**</span>
+<span class="cm">     * @see org.locationtech.udig.ui.operations.IOp#op(org.eclipse.swt.widgets.Display,</span>
+<span class="cm">         * java.lang.Object, org.eclipse.core.runtime.IProgressMonitor)</span>
+<span class="cm">     */</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">op</span><span class="o">(</span><span class="kd">final</span> <span class="n">Display</span> <span class="n">display</span><span class="o">,</span> <span class="n">Object</span> <span class="n">target</span><span class="o">,</span> <span class="n">IProgressMonitor</span> <span class="n">monitor</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+           <span class="kd">final</span> <span class="n">Layer</span> <span class="n">layer</span><span class="o">=(</span><span class="n">Layer</span><span class="o">)</span> <span class="n">target</span><span class="o">;</span>
+       <span class="n">monitor</span><span class="o">.</span><span class="na">beginTask</span><span class="o">(</span><span class="s">&quot;Layer Summary&quot;</span><span class="o">,</span> <span class="mi">1</span><span class="o">);</span>
+           <span class="n">Envelope</span> <span class="n">bounds</span><span class="o">=</span><span class="n">layer</span><span class="o">.</span><span class="na">getBounds</span><span class="o">(</span><span class="n">monitor</span><span class="o">,</span> <span class="n">layer</span><span class="o">.</span><span class="na">getMap</span><span class="o">().</span><span class="na">getViewportModel</span><span class="o">().</span><span class="na">getCRS</span><span class="o">());</span>
+           <span class="kd">final</span> <span class="n">StringBuffer</span> <span class="n">buffer</span><span class="o">=</span><span class="k">new</span> <span class="n">StringBuffer</span><span class="o">();</span>
+           <span class="n">buffer</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">&quot;Name: &quot;</span><span class="o">+</span><span class="n">layer</span><span class="o">.</span><span class="na">getName</span><span class="o">()+</span><span class="s">&quot;\n&quot;</span><span class="o">);</span>
+           <span class="n">buffer</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">&quot;ID: &quot;</span><span class="o">+</span><span class="n">layer</span><span class="o">.</span><span class="na">getID</span><span class="o">()+</span><span class="s">&quot;\n&quot;</span><span class="o">);</span>
+           <span class="n">buffer</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">&quot;z-order: &quot;</span><span class="o">+</span><span class="n">layer</span><span class="o">.</span><span class="na">getZorder</span><span class="o">()+</span><span class="s">&quot;\n&quot;</span><span class="o">);</span>
+           <span class="n">buffer</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">&quot;Data CRS: &quot;</span><span class="o">+</span><span class="n">layer</span><span class="o">.</span><span class="na">getCRS</span><span class="o">(</span><span class="n">monitor</span><span class="o">).</span><span class="na">getName</span><span class="o">()+</span><span class="s">&quot;\n&quot;</span><span class="o">);</span>
+           <span class="n">buffer</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">&quot;Bounds: (&quot;</span><span class="o">+</span><span class="n">bounds</span><span class="o">.</span><span class="na">getMinX</span><span class="o">()+</span><span class="s">&quot;,&quot;</span><span class="o">+</span><span class="n">bounds</span><span class="o">.</span><span class="na">getMinY</span><span class="o">()+</span><span class="s">&quot;)\n&quot;</span><span class="o">);</span>
+           <span class="n">buffer</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">&quot;            (&quot;</span><span class="o">+</span><span class="n">bounds</span><span class="o">.</span><span class="na">getMaxX</span><span class="o">()+</span><span class="s">&quot;,&quot;</span><span class="o">+</span><span class="n">bounds</span><span class="o">.</span><span class="na">getMaxY</span><span class="o">()+</span><span class="s">&quot;\n&quot;</span><span class="o">);</span>
+           <span class="n">buffer</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">&quot;Selection Filter: &quot;</span><span class="o">+</span><span class="n">layer</span><span class="o">.</span><span class="na">getFilter</span><span class="o">()+</span><span class="s">&quot;\n&quot;</span><span class="o">);</span>
+           <span class="n">display</span><span class="o">.</span><span class="na">asyncExec</span><span class="o">(</span><span class="k">new</span> <span class="n">Runnable</span><span class="o">()</span> <span class="o">{</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+                <span class="n">MessageDialog</span><span class="o">.</span><span class="na">openInformation</span><span class="o">(</span><span class="n">display</span><span class="o">.</span><span class="na">getActiveShell</span><span class="o">(),</span> <span class="s">&quot;Summary of &quot;</span><span class="o">+</span>
+                               <span class="n">layer</span><span class="o">.</span><span class="na">getName</span><span class="o">(),</span> <span class="n">buffer</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+            <span class="o">}</span>
+        <span class="o">});</span>
+       <span class="n">monitor</span><span class="o">.</span><span class="na">internalWorked</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+       <span class="n">monitor</span><span class="o">.</span><span class="na">done</span><span class="o">();</span>
+        <span class="o">}</span>
+
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>The parameter <strong>display</strong> is a display object the operation can use in order to interact with the
+User interface. The <strong>target</strong> parameter is guaranteed to be of the same type declared in the
+targetClass attribute of the xml extension declaration. The <strong>monitor</strong> parameter allows the
+operation to provide feedback to the UI on how much of the operation has been completed.</p>
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="edit_tools.html">Edit Tools</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="renderers.html">Renderers</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2013, Refractions Research and others.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

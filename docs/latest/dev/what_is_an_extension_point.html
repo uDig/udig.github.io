@@ -1,0 +1,190 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>What is an Extension Point &mdash; uDig 1.4.0 Developers Guide</title>
+    
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.0.0-SNAPSHOT',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.4.0 Developers Guide" href="index.html" />
+    <link rel="up" title="Working with Eclipse RCP" href="working_with_eclipse_rcp.html" />
+    <link rel="next" title="Creating and Using Extension Points" href="creating_and_using_extension_points.html" />
+    <link rel="prev" title="SWT and JFace Widgets" href="swt_and_jface_widgets.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="swt_and_jface_widgets.html">SWT and JFace Widgets</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="creating_and_using_extension_points.html">Creating and Using Extension Points</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="what-is-an-extension-point">
+<h1>What is an Extension Point<a class="headerlink" href="#what-is-an-extension-point" title="Permalink to this headline">¶</a></h1>
+<p>An extension point is a formal declaration in a plugin.xml file where customization is allowed.
+Customization takes the place of other plug-ins (inclusive) providing a little chunk of XML
+describing the specific customization that is requested.</p>
+<p>In practice, most extension points allow the XML to indicate a <strong>class</strong> of some sort (where all the
+magic occurs). If we were just doing straight-up object oriented programming, we would handle this
+kind of thing by allowing others to provide a <strong>strategy object</strong> that conformed to a specific
+interface.</p>
+<p>It works the same way with most extension points wherein, when they allow a class contribution, they
+indicate what interface is required.</p>
+<p>However, it is important to remember this is not straight-up object oriented programming, instead,
+that chunk of XML (the extension) also needs to correspond to a respective interface. In XML-speak,
+this is what is known as an XML Schema.</p>
+<p>Here is a link to the extension points used by uDig right now: <a class="reference internal" href="udig_extension_points_list.html"><em>uDig Extension Points List</em></a>.
+In addition to these extension points, you can use any of the extension points defined by the Eclipse
+RCP application (allowing you to do everything from additional views... to online help).</p>
+<hr class="docutils" />
+<p>When the class/interface is extended to create a plug-in, the plugin.xml file must be updated with
+the appropriate information.</p>
+<p>For example:</p>
+<div class="highlight-python"><pre>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;?eclipse version="3.0"?&gt;
+&lt;plugin
+    id="com.yourname.helloworld"
+    name="HelloWorld Plugin"
+    version="1.0.0"
+    provider="EXAMPLE"
+    class="com.yourname.helloworld.HelloWorldPlugin"&gt;
+
+   &lt;runtime&gt;
+    &lt;library name="helloworld.jar"&gt;
+     &lt;export name="*"/&gt;
+    &lt;/library&gt;
+   &lt;/runtime&gt;
+
+   &lt;requires&gt;
+    &lt;import plugin="org.eclipse.ui"/&gt;
+    &lt;import plugin="org.eclipse.core.runtime"/&gt;
+    &lt;import plugin="org.eclipse.core.runtime.compatibility"/&gt;
+   &lt;/requires&gt;
+
+   &lt;extension
+         point="org.eclipse.ui.views"&gt;
+      &lt;category
+            name="Hello Category"
+            id="com.yourname.helloworld"&gt;
+      &lt;/category&gt;
+      &lt;view
+            name="Hello View"
+            icon="icons/sample.gif"
+            category="com.yourname.helloworld"
+            class="com.yourname.helloworld.HelloWorldView"
+            id="com.yourname.helloworld.HelloWorldView"&gt;
+      &lt;/view&gt;
+   &lt;/extension&gt;
+
+&lt;/plugin&gt;</pre>
+</div>
+<p>Notice the &lt;extension&gt; tag. The extension point for this example hello world plug-in is the
+org.eclipse.ui.views class.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="100%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><dl class="first last docutils">
+<dt>The above example code can be found in the section:</dt>
+<dd>&#8220;Plug it in: Hello World meets the Workbench&#8221;</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="100%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><dl class="first last docutils">
+<dt>of the &#8220;Platform Plug-in Developer Guide&#8221;:</dt>
+<dd>org.eclipse.platform.doc.isv_3.0.1.pdf</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="100%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><dl class="first last docutils">
+<dt>Located on Eclipse&#8217;s documentation page:</dt>
+<dd><a class="reference external" href="http://www.eclipse.org/documentation/main.html">http://www.eclipse.org/documentation/main.html</a></dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The Plugin.xml file contains the XML code that allows the Eclipse run-time engine to execute new
+plug-ins. By specifying an &#8220;Extension Point&#8221; in the XML file, Eclipse can run the class, and because
+the class implements an already existing interface, Eclipse knows what functions it must run.</p>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="swt_and_jface_widgets.html">SWT and JFace Widgets</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="creating_and_using_extension_points.html">Creating and Using Extension Points</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2013, Refractions Research and others.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

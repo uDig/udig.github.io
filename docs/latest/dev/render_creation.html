@@ -1,0 +1,183 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Render Creation &mdash; uDig 1.4.0 Developers Guide</title>
+    
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.0.0-SNAPSHOT',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.4.0 Developers Guide" href="index.html" />
+    <link rel="up" title="Working with GIS Application" href="working_with_gis_application.html" />
+    <link rel="next" title="Interceptors" href="interceptors.html" />
+    <link rel="prev" title="Renderers" href="renderers.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="renderers.html">Renderers</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="interceptors.html">Interceptors</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="render-creation">
+<h1>Render Creation<a class="headerlink" href="#render-creation" title="Permalink to this headline">¶</a></h1>
+<p>Each time rendering is initiated a renderer must be chosen for each layer. This page is a deep dive
+into the internal implementation that is responsible for doing this task in particular it will look
+how RenderManagerDynamic does this. We are looking at RenderManagerDynamic because it is the more
+complicated mechanism since it is the RenderManager used when rendering to a <em>live</em> uDig map display
+(compared to printing a map.) Because the RenderManager is rendering to a ViewportPane it needs to
+render in multiple threads and incrementally update the viewport as data is made available.</p>
+<p>Before continuing one must understand the relationship between RenderContexts and Renderers. A
+Renderer can render a particular type of data to a Graphics2D object or a RenderContext&#8217;s
+BufferedImage. A RenderContext contains the image the Renderer must render to as well as a
+references to the Layer(s) that the Renderer is responsible for rendering. Each Renderer has exactly
+one RenderContext, however a MultiLayerRendererImpl is a renderer that takes a
+CompositeRenderContext. This is a subclass of RenderContext that contains multiple RenderContexts.
+In this case the Renderer is responsible for rendering all Layers referenced by the contained
+RenderContexts. This has several important consequences.</p>
+<ul class="simple">
+<li>First the renderer will only render to the BufferedImage of the CompositeRendererContext and
+therefore less memory is required and less time is taken to compose all the individual
+RenderContexts into a single image</li>
+<li>Second a single thread will render all the layers so it is possible that this is slower (but may
+be the same speed depending on the implementation).</li>
+<li>Third if any of the layers require an update all the layers must be redrawn</li>
+</ul>
+<p>To perform a rendering several steps are required. First, create a RenderContext for each Layer.
+Then find the appropriate renderer for each RenderContext (and by extension each Layer). During this
+process the renderers are queried to determine if they will handle multiple layers or not.</p>
+<p>The choosing of a Renderer has several intersecting concerns. First if the renderer is capable of
+rendering the Layer and, second, how suited that renderer is for rendering the layer given the
+current context of the map, editing, styling, bandwidth, etc... As such the eclipse renderer plugin
+do not register Renderers, instead RenderMetricFactories are registered. The factories are used to
+create a <em>Metrics</em> object which will (when passed a layer) calculate a value of <em>suitability</em> score.
+The higher the value the more indicators it satisfies.</p>
+<p>For example, a WMS renderer might be be able to render a layer and its associated metrics object
+would return a 2 (1 for being able to render and another 1 because it can perform the rendering
+efficiently in terms of performance and memory footprint). A WFS renderer might also be able to
+render the layer but only return a 1 because it cannot claim to be able to render the layer
+efficiently. However, if there is an open edit transaction open on the layer the WMS renderer would
+return a 0 because although it is capable of rendering the layer, under the current context it
+cannot correctly render an edited layer. While the WFS renderer could still correctly render the
+layer.</p>
+<p>These are the considerations we must keep in mind while analyzing the internals of the renderer
+creations process.</p>
+<div class="section" id="process-of-creating-renderers-and-keeping-them-in-sync">
+<h2>Process of Creating Renderers and Keeping them in Sync<a class="headerlink" href="#process-of-creating-renderers-and-keeping-them-in-sync" title="Permalink to this headline">¶</a></h2>
+<p>The starting point is the RenderManagerDynamic&#8217;s refresh(Envelope) method. At the time of this
+writing one of the first steps it makes is to get the RendererCreator and reset it. The reset method
+clears the previous configuration and recreates it based on the current set of layers. The steps in
+this process are roughly as follows:</p>
+<ol class="arabic simple">
+<li>For each layer process all the renderer extension points and find all the renderers capable of
+rendering the layer. This information is placed in a cache within the RendererCreator and is not
+calculated more than once. This is called the layerToMetricsFactoryMap.</li>
+<li>Next for each layer all the RenderMetricsFactories are obtained from the layerToMetricsFactoryMap
+and the factories are used to create RenderMetrics objects that will be used to calculate the
+<em>suitability</em> of the renderer. The Metrics are then sorted based on their <em>suitability</em> and the
+one with the highest score will be chosen for that layer and the metrics will be requested to
+create a RenderContext object</li>
+<li>If the RenderContext is a CompositeRenderContext then the Metrics object will be queried if it is
+capable of rendering the next layer (and the next and next until it cannot render one of the
+layers.) Each layer that it can render will be added to the RenderContext for rendering by its
+Renderer. Only layers that are adjacent in the z-order of the map can be added to the same
+RenderContext because a MultiLayerRenderer renders to a single BufferedImage and thus layers
+cannot be inserted in to the middle.</li>
+<li>After each layer has a RenderContext and Metrics object assigned they are put into a map which is
+commonly termed the renderer configuration.</li>
+</ol>
+<p>Note: The synchronization in the RendererCreator is very important because it is possible for a
+rendering to be triggered in two different threads and both threads could try to configure all the
+layers at the same time. The fact that the configuration could be calculated multiple times is
+acceptable but the synchronization and the copying of the different objects is required to ensure
+that each configuration calculation does not interfere with another and result in a potentially
+wrong result.</p>
+<p>After the RendererCreator has been reset and a configuration based on the latest layers and
+surrounding context has been constructed. The configuration is compared to the last configuration to
+see if the configuration has changed at all. For example if a RenderContext is in the previous
+configuration but not in the new configuration that RenderContext (and renderer) will be removed.</p>
+<p>In the RenderManagerDynamic there is a root CompositeRenderExecutor which has a
+CompositeRenderContext. The first time the map is renderered, the RenderExecutor is created. All
+RenderContexts in the configuration (obtained from the RendererCreator) are added to the executor&#8217;s
+CompositeRenderContext and the RenderExecutor uses the RendererCreator to instantiate each Renderer.
+More importantly a listener is added to the CompositeRenderContext so that when a RenderContext is
+added or removed the old renderer (in the case of a remove) is removed as well as the context and a
+new renderer is created using the RendererCreator (in the case of an add). In this way the Renderers
+are kept synchronized each time a render occurs.</p>
+<p>This occurs each time a render is triggered because the framework is so flexible that nearly any
+change could require the a new renderer. However in practice only rarely is a new configuration
+required so perhaps in the future the possible changes might be restricted so that only certain
+changes will result in a configuration synchronization</p>
+</div>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>To summarize: Each render a configuration is constructed. That configuration is compared to the
+previous configuration and in the case of differences renderers are removed or added to the root
+CompositeRenderExecutor.</p>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="renderers.html">Renderers</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="interceptors.html">Interceptors</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2013, Refractions Research and others.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

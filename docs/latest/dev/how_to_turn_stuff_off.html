@@ -1,0 +1,196 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>How to turn stuff off &mdash; uDig 1.4.0 Developers Guide</title>
+    
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.0.0-SNAPSHOT',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.4.0 Developers Guide" href="index.html" />
+    <link rel="up" title="Working with Eclipse RCP" href="working_with_eclipse_rcp.html" />
+    <link rel="next" title="How Do I Turn Off Menus" href="how_do_i_turn_off_menus.html" />
+    <link rel="prev" title="Bundle a JAR up as a Plugin" href="bundle_a_jar_up_as_a_plugin.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="bundle_a_jar_up_as_a_plugin.html">Bundle a JAR up as a Plugin</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="how_do_i_turn_off_menus.html">How Do I Turn Off Menus</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="how-to-turn-stuff-off">
+<h1>How to turn stuff off<a class="headerlink" href="#how-to-turn-stuff-off" title="Permalink to this headline">¶</a></h1>
+<p>This is a common question on the email list, this page has a couple useful starting points.</p>
+<div class="section" id="ground-rules-add-don-t-replace">
+<h2>Ground Rules: Add Don&#8217;t Replace<a class="headerlink" href="#ground-rules-add-don-t-replace" title="Permalink to this headline">¶</a></h2>
+<p>Just a pointer: The idea of turning off a contribution is not supported by Eclipse - one of the
+Eclipse House Rules is &#8220;Add Don&#8217;t Replace&#8221;. The idea being that the functionality should still
+be present and you should allow the user to choose what implementation they want to work with.</p>
+<p>There are a couple rules that follow as a consequence of this:</p>
+<ul class="simple">
+<li>&#8220;The Other Rule&#8221;: Provide a dialog allowing the user to choose between options (in cases where
+the number of options can grow without bound). As an example the <strong>Window &gt; View &gt; Other..</strong>
+menu.</li>
+</ul>
+<p>You can also think of this as a developer; even if the user interface does not show the option to
+the user other implementations may be extending or working with the classes involved.</p>
+<p>Eventually we will replace the uDig &#8220;Layers&#8221; view with something more capable; when that happens the
+implementations still needs to be available for all the applications that extend the Layers view for
+their own purpose.</p>
+</div>
+<div class="section" id="example-how-to-turn-off-the-data-menu">
+<h2>Example How to turn off the Data Menu<a class="headerlink" href="#example-how-to-turn-off-the-data-menu" title="Permalink to this headline">¶</a></h2>
+<p>The org.locationtech.udig.catalog.ui plugin contributes a &#8220;Data&#8221; menu, as an example here are some
+ways to &#8220;turn it off&#8221;.</p>
+<div class="section" id="don-t-include-the-plugin">
+<h3>Don&#8217;t include the plugin<a class="headerlink" href="#don-t-include-the-plugin" title="Permalink to this headline">¶</a></h3>
+<p>It is more that you should not include org.locationtech.udig.catalog.ui if you don&#8217;t want what it is
+offering.
+This is the approach taken by the &#8220;rcp tutorial&#8221; where just enough uDig plugins are assembled to
+display a map; carefully not taking any &#8220;ui&#8221; plugins so as to avoid menu contributions to the host
+Eclipse RCP application.</p>
+<div class="section" id="actionset">
+<h4>ActionSet<a class="headerlink" href="#actionset" title="Permalink to this headline">¶</a></h4>
+<p>Some extension points provide a mechanism to include/exclude functionality from the current
+perspective. For menus, operations and tools this mechanism is called &#8220;actionSets&#8221;.</p>
+<p>Indeed the data menu is controlled by an ActionSet &#8220;org.locationtech.udig.catalog.ui.data.menu&#8221;and
+this is on Page 18 of the Custom App tutorial. Just don&#8217;t include this actionset in your perspective
+and this menu will not be added.</p>
+<p>If the data menu was not controlled by an actionSet; ask on the email list and/or create a patch for
+review. We have a policy of not adding hooks such as this until they are requested. This prevents
+the core team from doing extra work that is not needed, and waits until someone wants and is (able
+to test) the functionality resulting in higher quality.</p>
+</div>
+</div>
+</div>
+<div class="section" id="activities">
+<h2>Activities<a class="headerlink" href="#activities" title="Permalink to this headline">¶</a></h2>
+<p>The hard way (and more general purpose) suitable for projects that are not quite as open as uDig is
+to make use of an advanced eclipse Platform facility called <strong>activities</strong>.</p>
+<p>Remember that when stuff is connected up - we make use of the Platform class to ask for all the
+extensions (in the case of the data menu it would be the eclipse menu system doing the processing).</p>
+<p>The actual data structure assembled by the platforms:</p>
+<ul class="simple">
+<li>is based on the plugin.xml file</li>
+<li>merged with any plugin.xml files added by a &#8220;fragment&#8221; (consider it a hot patch)</li>
+<li>modified by magic (activities)</li>
+</ul>
+<p>Activities allows you to fliter or strip out plugin contributions:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://wiki.eclipse.org/FAQ_How_do_I_add_activities_to_my_plug-in%3F">http://wiki.eclipse.org/FAQ_How_do_I_add_activities_to_my_plug-in%3F</a></li>
+<li><a class="reference external" href="http://stackoverflow.com/questions/1415700/disable-plugin-contributions-in-eclipse-rcp-application">http://stackoverflow.com/questions/1415700/disable-plugin-contributions-in-eclipse-rcp-application</a></li>
+<li><a class="reference external" href="http://www.eobjectsoft.com/product/EclipseInterviewQuestions.htm#q15">http://www.eobjectsoft.com/product/EclipseInterviewQuestions.htm#q15</a></li>
+</ul>
+<p>The idea is that an activity will filter/process the plugin.xml using an almost XSLT like
+transformation. Activitations are controlled using the same enablement system as menus (so you can
+make use of checks against the current selection and so forth).</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;extension</span> <span class="na">point=</span><span class="s">&quot;org.eclipse.ui.activities&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;activity</span> <span class="na">id=</span><span class="s">&quot;my.rcp.app.Activity&quot;</span>
+            <span class="na">description=</span><span class="s">&quot;Contributions from org.locationtech.udig.catalog.ui.&quot;</span>
+            <span class="na">name=</span><span class="s">&quot;My RCP Activity&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;category</span> <span class="na">id=</span><span class="s">&quot;my.rcp.app.Category&quot;</span>
+            <span class="na">description=</span><span class="s">&quot;my.rcp.app Activities&quot;</span>
+            <span class="na">name=</span><span class="s">&quot;My RCP Category&quot;</span><span class="nt">&gt;</span>
+
+     <span class="c">&lt;!-- put the activity in the category --&gt;</span>
+     <span class="nt">&lt;categoryActivityBinding</span> <span class="na">activityId=</span><span class="s">&quot;my.rcp.app.Activity&quot;</span>
+                              <span class="na">categoryId=</span><span class="s">&quot;my.rcp.app.Category&quot;</span><span class="nt">/&gt;</span>
+
+     <span class="c">&lt;!-- bind all contributions from plugin org.locationtech.udig.ui --&gt;</span>
+     <span class="nt">&lt;activityPatternBinding</span> <span class="na">id=</span><span class="s">&quot;my.rcp.app.Activity&quot;</span>
+                             <span class="na">pattern=</span><span class="s">&quot;org.locationtech.udig.catalog.ui/.*&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/extension&gt;</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>The interesting bit is the <strong>pattern</strong> which is a regular expression of things</dt>
+<dd>to filter out. You can also add isEqualityPattern=&#8221;true&#8221; to target one specific
+entry.</dd>
+</dl>
+<p>This would turn off the extension &#8220;foo&#8221; in the <strong>org.locationtech.udig.catalog.ui</strong> plugin.</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;activityPatternBinding</span> <span class="na">id=</span><span class="s">&quot;my.rcp.app.Activity&quot;</span>
+   <span class="na">isEqualityPattern=</span><span class="s">&quot;true&quot;</span>
+   <span class="na">pattern=</span><span class="s">&quot;org.locationtech.udig.catalog.ui/foo&quot;</span> <span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p>This would turn off any extension ending in &#8220;wizard&#8221; from the <strong>org.locationtech.udig.catalog.ui</strong>
+plugin</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;activityPatternBinding</span> <span class="na">id=</span><span class="s">&quot;my.rcp.app.Activity&quot;</span>
+   <span class="na">pattern=</span><span class="s">&quot;org.locationtech.udig.catalog.ui/[a-z[.]]*Wizard&quot;</span> <span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p>The above example is adapted from the links above; and needs to be tested.
+Since the data menu is already controlled by an ActionSet we have not had
+to make use of Activities when working with uDig yet.</p>
+<p>Eclipse Help:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://help.eclipse.org/helios/index.jsp?topic=/org.eclipse.platform.doc.isv/reference/extension-points/org_eclipse_ui_activities.html">http://help.eclipse.org/helios/index.jsp?topic=/org.eclipse.platform.doc.isv/reference/extension-points/org_eclipse_ui_activities.html</a></li>
+</ul>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="bundle_a_jar_up_as_a_plugin.html">Bundle a JAR up as a Plugin</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="how_do_i_turn_off_menus.html">How Do I Turn Off Menus</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2013, Refractions Research and others.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

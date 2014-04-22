@@ -1,0 +1,244 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ImageRegistry and Images &mdash; uDig 1.4.0 Developers Guide</title>
+    
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.0.0-SNAPSHOT',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.4.0 Developers Guide" href="index.html" />
+    <link rel="up" title="Working with Eclipse RCP" href="working_with_eclipse_rcp.html" />
+    <link rel="next" title="JFace Actions" href="jface_actions.html" />
+    <link rel="prev" title="Plugin Internationalization with ResourceBundles" href="plugin_internationalization_with_resourcebundles.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="plugin_internationalization_with_resourcebundles.html">Plugin Internationalization with ResourceBundles</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="jface_actions.html">JFace Actions</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="imageregistry-and-images">
+<h1>ImageRegistry and Images<a class="headerlink" href="#imageregistry-and-images" title="Permalink to this headline">¶</a></h1>
+<p>A Plugin is responsible for any resource used, including management of <a class="reference external" href="Icons.html">Icons</a>. SWT
+wants us to manually manage our images, this includes creation and disposal.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="22%" />
+<col width="78%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Image</td>
+<td>a real image from the operating system, i.e. a limited resource</td>
+</tr>
+<tr class="row-even"><td>ImageDescriptor</td>
+<td>a placeholder that allows the image to be used as needed</td>
+</tr>
+</tbody>
+</table>
+<p>Icons fall under the category of Images that are &#8220;used very frequently or must be shared among
+several widgets for unknown lengths of time&#8221;. This makes them a pain to manage on a per use basis.
+The solution is to create a class to manage these resources and clean up after them.</p>
+<p>This means we are allowed to keep an ImageRegistry of icons....</p>
+<div class="section" id="jface-and-imageregistry">
+<h2>JFace and ImageRegistry<a class="headerlink" href="#jface-and-imageregistry" title="Permalink to this headline">¶</a></h2>
+<p>JFace provides an ImageRegistry yourself (it works like a Map that will dispose of the Images when
+an associated Display is cleaned up).</p>
+<div class="highlight-python"><pre>static final String ICON = "obj16/icon.gif"
+ImageRegistry registry = new ImageRegistry();
+
+ImageDescriptor desc = ImageDescriptor.createFromURL( );
+registry.put( ICON, desc);</pre>
+</div>
+<p>JFace also offers a global JFaceResources class that provides a shared ImageRegistry.</p>
+<p><strong>The Party Line</strong></p>
+<p>There is a bit of a difference between the formal party line provided by the EclipseFAQ, and what
+everyone is really doing.</p>
+<p>Lets work through what is supposed to happen.</p>
+</div>
+<div class="section" id="abstractuiplugin-and-imageregistry">
+<h2>AbstractUIPlugin and ImageRegistry<a class="headerlink" href="#abstractuiplugin-and-imageregistry" title="Permalink to this headline">¶</a></h2>
+<p>Chances are your plugin extends AbstractUIPlugIn - this means there is a ImageRegistry already to
+go.</p>
+<p>We simply need to supply the icons using the provided callback:</p>
+<div class="highlight-python"><pre>public class MyPlugin extends AbstractUIPlugin {
+       public static final String ID = "example.package.my"; //$NON-NLS-1$
+       public final static String ICONS_PATH = "icons/";//$NON-NLS-1$
+       public final static String PATH_ELOCALTOOL = ICONS_PATH+"elcl16/";
+       public final static String ADD_CO = PATH_ELOCALTOOL + "add_co.gif";
+
+       protected void initializeImageRegistry(
+                ImageRegistry registry) {
+
+        Bundle bundle = Platform.getBundle(ID);
+        IPath path = new Path( ImageConstants.ADD_CO );
+        URL url = Platform.find(bundle, path);
+        ImageDescriptor desc = ImageDescriptor.createFromURL(url);
+        registry.put( ImageConstants.ADD_CO, desc);
+    }</pre>
+</div>
+<p>initializeImageRegistry is called during Plugin startup. An interesting thing to note is the use of
+Platform.getBundle( ID ) to locate the correct url to start searching from.</p>
+<p>Images are then available via:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">MyPlugIn</span><span class="o">.</span><span class="n">getDefault</span><span class="p">()</span><span class="o">.</span><span class="n">getImageRegistry</span><span class="p">()</span><span class="o">.</span><span class="n">getDescriptor</span><span class="p">(</span> <span class="n">ImageConstants</span><span class="o">.</span><span class="n">ADD_CO</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="isharedimages">
+<h2>ISharedImages<a class="headerlink" href="#isharedimages" title="Permalink to this headline">¶</a></h2>
+<p>If your icons need to be accessed from outside of your Plug-In a convention exists - provide the the
+constants in a ISharedImages file.</p>
+<p>The ISharedImage file need to be in a public directory:</p>
+<div class="highlight-python"><pre>public interface ISharedImages {
+    public final static String ICONS_PATH = "icons/";//$NON-NLS-1$
+    public final static String PATH_ELOCALTOOL = ICONS_PATH+"elcl16/";
+    public static final String IMG_ADD_COMMAND = PATH_ELOCALTOOL + "add_co.gif";
+}</pre>
+</div>
+<p>External code can now make use of your Images:</p>
+<div class="highlight-python"><pre>ImageRegistry images = MyPlugIn.getDefault().getImageRegistry();
+ImageDescriptor image = images.getDescriptor( ISharedImages.IMG_DATASTORE_OBJ );</pre>
+</div>
+</div>
+<div class="section" id="pragmatism">
+<h2>Pragmatism<a class="headerlink" href="#pragmatism" title="Permalink to this headline">¶</a></h2>
+<p>The above is a lot of work, forces a lot of complexity on your PlugIn class. And is not actually
+what several popular implementations are doing.</p>
+<p>Here are some of the forces that are effecting real world implementations:</p>
+<ul class="simple">
+<li>For images in very common use an shared Image, rather than a ImageDescriptor is made available
+via ISharedImage. This improves performance</li>
+<li>The size of resource keys has started to be a problem in the broader Eclipse project. Allowing
+the use of shorter strings apparently is worthwhile</li>
+<li>The need to publish Images for reuse with in a plug-in</li>
+<li>Separation of concerns, taking image resource code out of the plug-in class</li>
+</ul>
+<p><strong>ImageConstants</strong></p>
+<p>To ease access to your icons create a ImageConstants based on the path to the resource in your icons
+directory.</p>
+<p>This class should be located in an internal package.</p>
+<div class="highlight-python"><pre>public interface ImageConstants {
+    public final static String PATH_ELOCALTOOL = "elcl16/";
+    public final static String ADD_CO = PATH_ELOCALTOOL + "add_co.gif";
+}</pre>
+</div>
+<p>We have removed the leading ICONS_PATH in order to shorten key names.</p>
+<p><strong>ISharedImage</strong></p>
+<p>ISharedImage works just like before - only this time we can refer to some well know keys from
+ImageConstants.</p>
+<div class="highlight-python"><pre>public interface ISharedImages {
+    public static final String IMG_ADD_COMMAND = ImageConstants.ADD_CO;
+}</pre>
+</div>
+<p>Two out of three ISharedImage have defined methods:</p>
+<ul class="simple">
+<li>getImageDescriptor( String key ) - allows access to a shared ImageDescriptor (any created Image
+must be disposed)</li>
+<li>getImage( String key ) - allows access to a real shared Image that must not be disposed</li>
+</ul>
+<p>We need something to implement ISharedImage, the PlugIn is responsible for keeping providing a class
+implementing this interface.</p>
+<p><strong>Images</strong></p>
+<p>A utility class, created on PlugIn startup takes over the management of common images.</p>
+<p>Usually when it comes time to actually use an Image you are working in a View.</p>
+<p>Keeping track of your Images (in a cache) is a easy way to go:</p>
+<div class="highlight-python"><pre>private Map imageCache = new HashMap();
+        private Image getIcon(String icon) {
+            //obtain the cached image corresponding to the descriptor
+            Image image = (Image) imageCache.get(icon);
+            if (image == null) {
+                ImageDescriptor id = Images.image( icon );
+                image = id.createImage();
+                imageCache.put(icon, image);
+            }
+            return image;
+        }</pre>
+</div>
+<p>The only trick being that you need to clean up the cache in your dispose method:</p>
+<div class="highlight-python"><pre>public void dispose() {
+        for (Iterator i = imageCache.values().iterator(); i.hasNext(); ) {
+            ((Image) i.next()).dispose();
+        }
+        imageCache.clear();
+    }</pre>
+</div>
+<p>An alternative is using ImageRegistry instead of HashMap:</p>
+<div class="highlight-python"><pre>private ImageRegistry imageCache;
+public void createPartControl(Composite parent) {
+        imageCache = new ImageRegistry( parent.getDisplay() );
+        ....
+}</pre>
+</div>
+<p><strong>links</strong></p>
+<ul class="simple">
+<li><a class="reference external" href="http://www.eclipsefaq.org/chris/faq/html/faq154.html">Eclipse FAQs:How do I use image and font
+registries?</a></li>
+</ul>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="plugin_internationalization_with_resourcebundles.html">Plugin Internationalization with ResourceBundles</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="jface_actions.html">JFace Actions</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2013, Refractions Research and others.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

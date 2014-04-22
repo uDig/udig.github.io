@@ -1,0 +1,227 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Utility Classes &mdash; uDig 1.4.0 Developers Guide</title>
+    
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.0.0-SNAPSHOT',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.4.0 Developers Guide" href="index.html" />
+    <link rel="up" title="Working with the GIS Platform" href="working_with_the_gis_platform.html" />
+    <link rel="next" title="Connect to a Service on Startup" href="connect_to_a_service_on_startup.html" />
+    <link rel="prev" title="Implementing a Service" href="implementing_a_service.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="implementing_a_service.html">Implementing a Service</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="connect_to_a_service_on_startup.html">Connect to a Service on Startup</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="utility-classes">
+<h1>Utility Classes<a class="headerlink" href="#utility-classes" title="Permalink to this headline">¶</a></h1>
+<p>There are a host of utility classes provided to make your life as an RCP developer easier.</p>
+<div class="section" id="org-locationtech-udig-ui">
+<h2>org.locationtech.udig.ui<a class="headerlink" href="#org-locationtech-udig-ui" title="Permalink to this headline">¶</a></h2>
+<p>The <strong>org.locationtech.udig.ui</strong> plugin contains all manner of code and utilities that help with user
+interface development. You will find some of our basic drag and drop and operation support code
+here.</p>
+<div class="section" id="platformgis">
+<h3>PlatformGIS<a class="headerlink" href="#platformgis" title="Permalink to this headline">¶</a></h3>
+<p>The <strong>PlatformGIS</strong> class contains helper code that is useful when scheduling work from a user
+interface. The trick here is you want to make sure you do no work in a Display thread (no talking to
+disk, or external services for example). Every time you do it looks like your application has
+crashed; it won&#8217;t respond to the user and they think it is broken.</p>
+<p>Out of the box Eclipse RCP provides some facilities:</p>
+<ul class="simple">
+<li>Display.getCurrent(); will get the Display for the current thread - but <strong>only if</strong> an event
+thread</li>
+<li>Display.getDefault(); a good default Display (usually the one associated with the application)</li>
+</ul>
+<p>Once you have a Display you can call:</p>
+<ul class="simple">
+<li>Display.asyncExec( Runnable ); will schedule this Runnable to run on the event thread</li>
+<li>Display.syncExec( Runnable ); will block your current thread until this has been scheduled and
+run</li>
+</ul>
+<p>The tricks involved in making this code work and work well go something like this:</p>
+<div class="highlight-python"><pre>Display display = Display.getCurrent();
+if( display==null ){
+   display = Display.getDefault();
+}
+display.asyncExec( new Runnable(){
+    public void run(){
+       ... do some work that needs to talk to a user interface widget ...
+    }
+});</pre>
+</div>
+<p>But getting this perfect every time is boring (and figuring out how to make asyncExec work at all is
+a challenge); please use ...</p>
+</div>
+<div class="section" id="running-something-in-the-display-thread">
+<h3>Running something in the Display Thread<a class="headerlink" href="#running-something-in-the-display-thread" title="Permalink to this headline">¶</a></h3>
+<p>To run something in a display thread (it will check if the current thread is a display thread) try
+the following:</p>
+<div class="highlight-python"><pre>Runnable enableButton = new Runnable(){
+    public void run(){
+       button.setEnable( true );
+    }
+}
+PlatformGIS.asyncInDisplay( enableButton, true); // use the thread now if possible</pre>
+</div>
+<p>To schedule the runnable to go on the display thread later:</p>
+<div class="highlight-python"><pre>Runnable enableButton = new Runnable(){
+    public void run(){
+       button.setEnable( true );
+    }
+}
+PlatformGIS.asyncInDisplay( enableButton, false );</pre>
+</div>
+</div>
+<div class="section" id="waiting-for-something-from-the-display-thread">
+<h3>Waiting for something from the Display Thread<a class="headerlink" href="#waiting-for-something-from-the-display-thread" title="Permalink to this headline">¶</a></h3>
+<p>To ask for a value from a display widget you need to <strong>wait</strong> for the work in the Display thread to
+complete.</p>
+<div class="highlight-python"><pre>final String textPointer[] = new String[1]; // pointer to output
+Runnable queryText =
+PlatformGIS.syncInDisplay( new Runnable(){
+    public void run(){
+       textPointer[0] = inputField.getText(); // this is the users input
+    }
+});
+String inputText = textPointer[0];</pre>
+</div>
+<p>The above code example uses a final array to &#8220;hold&#8221; the value between the runnable and your code;
+you could also do this using a Class field.</p>
+</div>
+<div class="section" id="accessing-the-boundary-service">
+<h3>Accessing the Boundary Service<a class="headerlink" href="#accessing-the-boundary-service" title="Permalink to this headline">¶</a></h3>
+<p>The Boundary Service provides access to the boundary that the user has selected via the Boundary
+View. This boundary is then be used to restrict functionality such as zoom to extent and catalog
+search results.</p>
+<div class="highlight-python"><pre>IBoundaryService service = PlatformGIS.getBoundaryService();</pre>
+</div>
+<p>This service then provides methods to return the extent or an actual geometry of the current
+boundary.</p>
+<div class="highlight-python"><pre>ReferencedEnvelope extent = service.getExtent();</pre>
+</div>
+<p>or</p>
+<div class="highlight-python"><pre>Geometry boundingGeom = service.getGeometry();</pre>
+</div>
+</div>
+</div>
+<div class="section" id="org-locationtech-udig-core">
+<h2>org.locationtech.udig.core<a class="headerlink" href="#org-locationtech-udig-core" title="Permalink to this headline">¶</a></h2>
+<p>This plug-in contains adapters and wrapper between Eclipse RCP concepts (like IAdaptable) and open
+source concepts like Features; Filters and so on.</p>
+<div class="section" id="coreplugin-relaxed-handler">
+<h3>CorePlugin.RELAXED_HANDLER<a class="headerlink" href="#coreplugin-relaxed-handler" title="Permalink to this headline">¶</a></h3>
+<p>The CorePlugin class itself provides a RELAXED_HANDLER implementation of UrlHandler; you can use
+this class to construct &#8220;invalid&#8221; URLs. Normally java only lets you create a URL for content that it
+knows how to connect to; you can teach Java new formats by providing a URLHandler that knows how to
+connect and parse the content.</p>
+<p>Here is how to create a invalid URL:</p>
+<div class="highlight-python"><pre>return new URL(null, the_spec, CorePlugin.RELAXED_HANDLER);</pre>
+</div>
+<p>We ended up using URL as a strict &#8220;key&#8221; or &#8220;identifier&#8221; to look up content in our catalog; and we
+quickly ran into services for which no normal URL would suffice. While java has the concept of a
+&#8220;JDBC URL&#8221; it has not integrated this concept as a URL.</p>
+</div>
+<div class="section" id="pair">
+<h3>Pair<a class="headerlink" href="#pair" title="Permalink to this headline">¶</a></h3>
+<p>The Pair class is used to return two results out of a method; It is basically a pointer or a type
+safe replacement for Object2.</p>
+<div class="highlight-python"><pre>Pair&lt;String,Integer&gt; mapGrid = new Pair&lt;String,Integer&gt;( "A", 1 );
+System.out.println("You sunk my battleship: "+ mapGrid );</pre>
+</div>
+</div>
+<div class="section" id="option">
+<h3>Option<a class="headerlink" href="#option" title="Permalink to this headline">¶</a></h3>
+<p>An alternative to returning <strong>null</strong>.</p>
+<p>The Option class is used to return a single result; and communicate if the result is available. It
+is a type safe replacement for returning <strong>null</strong>.</p>
+<div class="highlight-python"><pre>Option&lt;String&gt; value = someFunction();
+if( value instanceof Option.Some ){
+  // we actually got an answer
+  String text = ((Some&lt;String&gt;)value).value();
+}</pre>
+</div>
+<p>This replaces code such as the following:</p>
+<div class="highlight-python"><pre>String value = someFunction();
+if( value != null ){
+  // we actually got an answer
+}</pre>
+</div>
+</div>
+</div>
+<div class="section" id="org-locationtech-udig-libs">
+<h2>org.locationtech.udig.libs<a class="headerlink" href="#org-locationtech-udig-libs" title="Permalink to this headline">¶</a></h2>
+<p>This plug-in rounds up all the open source libraries we use.</p>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="implementing_a_service.html">Implementing a Service</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="connect_to_a_service_on_startup.html">Connect to a Service on Startup</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2013, Refractions Research and others.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

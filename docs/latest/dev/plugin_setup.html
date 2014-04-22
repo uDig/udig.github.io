@@ -1,0 +1,236 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Plugin Setup &mdash; uDig 1.4.0 Developers Guide</title>
+    
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.0.0-SNAPSHOT',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.4.0 Developers Guide" href="index.html" />
+    <link rel="up" title="Working with Eclipse RCP" href="working_with_eclipse_rcp.html" />
+    <link rel="next" title="Plugin Dependency" href="plugin_dependency.html" />
+    <link rel="prev" title="Plugin Structure" href="plugin_structure.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="plugin_structure.html">Plugin Structure</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="plugin_dependency.html">Plugin Dependency</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="plugin-setup">
+<h1>Plugin Setup<a class="headerlink" href="#plugin-setup" title="Permalink to this headline">¶</a></h1>
+<p>Now that you have created a plug-in it is time to play the set up game. It may be helpfull to review
+the <a class="reference internal" href="common_plugin_files.html"><em>Common Plugin Files</em></a></p>
+<p>We are going to be setting up the following:</p>
+<ul class="simple">
+<li>plugin.xml</li>
+<li>build.properties</li>
+<li>plugin.properties</li>
+<li>build.xml (optional)</li>
+<li>.classpath</li>
+<li>.project</li>
+</ul>
+<div class="section" id="setting-up-plugin-xml">
+<h2>Setting up plugin.xml<a class="headerlink" href="#setting-up-plugin-xml" title="Permalink to this headline">¶</a></h2>
+<p>The plugin.xml file is known as the manifest and provides all the hooks used to tie together the
+Eclipse framework.</p>
+<p>Some of these entries were filled out for you during <a class="reference internal" href="creating_a_plugin.html"><em>Creating a Plugin</em></a>.</p>
+<ul>
+<li><p class="first">id: id for the plugin, each plug-in gets its own package tree to prevent source code conflict</p>
+</li>
+<li><p class="first">name: externalized to plugin.properties, display name for Plug-in</p>
+</li>
+<li><p class="first">version: release version based</p>
+</li>
+<li><p class="first">provider-name: externalized to plugin.properties, usual &#8220;Refractions Research, Inc.&#8221;</p>
+</li>
+<li><p class="first">runtime: identify jars for this plug-in</p>
+</li>
+<li><p class="first">requires: captures dependency information, this is a soft link that is resolved via &#8220;dynamic
+classpaths&#8221; as part of the eclipse plug-in development environment</p>
+<ul class="simple">
+<li>note import is based on <strong>plugin</strong></li>
+</ul>
+</li>
+<li><p class="first">extension: associates id with well known <a class="reference internal" href="what_is_an_extension_point.html"><em>What is an Extension Point</em></a> with classes in this plug-in</p>
+<ul class="simple">
+<li>try and make <strong>id</strong> match the class</li>
+<li>top level <strong>id</strong> entries have the plugin &#8220;id&#8221; prepended (like &#8220;org.geotools.udig.ui&#8221;&#8221;.&#8221;
+&#8220;UDigApplication&#8221;</li>
+<li>nested <strong>id</strong> entries need to be explicit (like &#8220;org.geotools.udig.ui.UDigPerspective&#8221;)</li>
+</ul>
+<div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="cp">&lt;?eclipse version=&quot;3.0&quot;?&gt;</span>
+<span class="nt">&lt;plugin</span>
+    <span class="na">id=</span><span class="s">&quot;org.geotools.udig.ui&quot;</span>
+    <span class="na">name=</span><span class="s">&quot;%pluginName&quot;</span>
+    <span class="na">version=</span><span class="s">&quot;0.1&quot;</span>
+    <span class="na">provider-name=</span><span class="s">&quot;%providerName&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;runtime&gt;</span>
+        <span class="nt">&lt;library</span> <span class="na">name=</span><span class="s">&quot;udig-ui.jar&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;export</span> <span class="na">name=</span><span class="s">&quot;*&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/library&gt;</span>
+    <span class="nt">&lt;/runtime&gt;</span>
+    <span class="nt">&lt;requires&gt;</span>
+        <span class="nt">&lt;import</span> <span class="na">plugin=</span><span class="s">&quot;org.eclipse.core.runtime&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;import</span> <span class="na">plugin=</span><span class="s">&quot;org.eclipse.ui&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/requires&gt;</span>
+
+    <span class="nt">&lt;extension</span>
+        <span class="na">id=</span><span class="s">&quot;UDigApplication&quot;</span>
+        <span class="na">point=</span><span class="s">&quot;org.eclipse.core.runtime.applications&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;application&gt;</span>
+            <span class="nt">&lt;run</span>
+                <span class="na">class=</span><span class="s">&quot;org.geotools.udig.ui.UDigApplication&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;/run&gt;</span>
+        <span class="nt">&lt;/application&gt;</span>
+    <span class="nt">&lt;/extension&gt;</span>
+    <span class="nt">&lt;extension</span>
+        <span class="na">point=</span><span class="s">&quot;org.eclipse.ui.perspectives&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;perspective</span>
+            <span class="na">name=</span><span class="s">&quot;%perspectiveName&quot;</span>
+            <span class="na">class=</span><span class="s">&quot;org.geotools.udig.ui.CatalogPerspective&quot;</span>
+            <span class="na">id=</span><span class="s">&quot;org.geotools.udig.ui.CatalogPerspective&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;/perspective&gt;</span>
+    <span class="nt">&lt;/extension&gt;</span>
+<span class="nt">&lt;/plugin&gt;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="setting-up-plugin-properties">
+<h2>Setting up plugin.properties<a class="headerlink" href="#setting-up-plugin-properties" title="Permalink to this headline">¶</a></h2>
+<p>The plugin.properties file is used to externalize strings from the plugin.xml manifest. This is good
+practice and will allow us to provide French support later.</p>
+<div class="highlight-python"><pre>pluginName = UDig Application Plug-in
+providerName = Refractions Research, Inc.
+perspectiveName = Local Catalog</pre>
+</div>
+<p>For more information:</p>
+<ul class="simple">
+<li><a class="reference internal" href="plugin_internationalization.html"><em>Plugin Internationalization</em></a></li>
+</ul>
+</div>
+<div class="section" id="setting-up-build-properties">
+<h2>Setting up build.properties<a class="headerlink" href="#setting-up-build-properties" title="Permalink to this headline">¶</a></h2>
+<p>The build.properties file is used when bundling up the plug-in for use:</p>
+<div class="highlight-python"><pre>bin.includes = plugin.xml,\
+               *.jar,\
+               udig-core.jar,\
+               plugin.properties
+source.udig-core.jar = src/</pre>
+</div>
+</div>
+<div class="section" id="setting-up-build-xml">
+<h2>Setting up build.xml<a class="headerlink" href="#setting-up-build-xml" title="Permalink to this headline">¶</a></h2>
+<p>Use of an ANT build.xml file for plug-in bundling is optional (although it does save you from using
+the wizard everytime).</p>
+<p>If you want to create an ANT build file to build your plug-in:</p>
+<ol class="arabic simple">
+<li>Right click on your plugin.xml file</li>
+<li>Select PDE-Tools-&gt; Ant build file</li>
+</ol>
+<p>When we set up nightly builds this step will be mandatory.</p>
+<p><strong>Dependency Hack</strong></p>
+<p>To set up proper dependencies, do the following:</p>
+<hr class="docutils" />
+<p>Set up proper classpath:</p>
+<ol class="arabic">
+<li><p class="first">Right click on project, select properties</p>
+</li>
+<li><p class="first">Select Java Build Path</p>
+</li>
+<li><p class="first">Select Projects tab</p>
+<ul class="simple">
+<li>Check org.eclipse.core.runtime</li>
+<li>Ok.</li>
+</ul>
+</li>
+<li><p class="first">Add the following to your plugin.xml:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;requires&gt;</span>
+   <span class="nt">&lt;import</span> <span class="na">plugin=</span><span class="s">&quot;org.eclipse.core.runtime.compatibility&quot;</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;import</span> <span class="na">plugin=</span><span class="s">&quot;org.eclipse.ui&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/requires&gt;</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p><strong>Reference</strong></p>
+<ul class="simple">
+<li><a class="reference external" href="http://dev.eclipse.org/viewcvs/index.cgi/%7echeckout%7e/org.eclipse.ui.tutorials.rcp.part1/html/tutorial1.html">Rich Client Paltform Tutorial - Part
+1</a><ul>
+<li>Handy for setting up the initial app, but also contains more information regarding the UI.</li>
+<li>A lot of this page is ripped from there</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="plugin_structure.html">Plugin Structure</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="plugin_dependency.html">Plugin Dependency</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2013, Refractions Research and others.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

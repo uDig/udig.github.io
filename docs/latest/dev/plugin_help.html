@@ -1,0 +1,251 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Plugin Help &mdash; uDig 1.4.0 Developers Guide</title>
+    
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.0.0-SNAPSHOT',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.4.0 Developers Guide" href="index.html" />
+    <link rel="up" title="Working with Eclipse RCP" href="working_with_eclipse_rcp.html" />
+    <link rel="next" title="Plugin Classloader Use" href="plugin_classloader_use.html" />
+    <link rel="prev" title="JFace Wizards" href="jface_wizards.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="jface_wizards.html">JFace Wizards</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="plugin_classloader_use.html">Plugin Classloader Use</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="plugin-help">
+<h1>Plugin Help<a class="headerlink" href="#plugin-help" title="Permalink to this headline">¶</a></h1>
+<p>The Eclipse RCP Platform provides the following:</p>
+<ul class="simple">
+<li>Online Help</li>
+<li>Context-Sensitive Help</li>
+<li>Dynamically Generated Help</li>
+</ul>
+<p>The literature suggests the creation of separate documentation plug-ins. That is a plug-in that only
+consists of XML configuration files and HTML content for the help system.</p>
+<p>In practice many plug-ins are package with there help files.</p>
+<p>File</p>
+<p>Use</p>
+<p>toc.xml</p>
+<p>table of contents for the top level &#8220;book&#8221;</p>
+<p>toc*.xml</p>
+<p>table of contents associated with a heading</p>
+<p>contexts*.xml</p>
+<p>maps context Ids to context-sensitive help</p>
+<dl class="docutils">
+<dt>The above filenames are only a suggestion -</dt>
+<dd>The help system actually makes use of extensions points allowing any file to be used.</dd>
+</dl>
+<p>plugin.xml is used to extend three kinds of extension points:</p>
+<ul class="simple">
+<li>toc - table of contents</li>
+<li>contexts</li>
+<li>contentProducer - allows for dynamic generation of help</li>
+</ul>
+<div class="section" id="online-help-files">
+<h2>Online Help Files<a class="headerlink" href="#online-help-files" title="Permalink to this headline">¶</a></h2>
+<p>The first configuration file used by Online help is one that is familiar to you - plugin.xml.</p>
+<p>plugin.xml extension points:</p>
+<div class="highlight-python"><pre>&lt;extension
+         point="org.eclipse.help.toc"&gt;
+      &lt;toc file="toc.xml" primary="true"/&gt;
+      &lt;toc file="tocconcepts.xml"/&gt;
+   &lt;/extension&gt;</pre>
+</div>
+<p>The next xml file is the above mentioned toc.xml file:</p>
+<div class="highlight-python"><pre>&lt;toc label="XYZ User's Guide" topic="html/overview.html"&gt;
+   &lt;topic label="Concepts"&gt;
+      &lt;anchor id="concepts"/&gt;
+   &lt;/topic&gt;
+&lt;/toc&gt;</pre>
+</div>
+<p>And the tocconcepts.xml file follows a similar format:</p>
+<div class="highlight-python"><pre>&lt;toc label="Concepts" link_to="toc.xml#concepts"&gt;
+    &lt;topic label="Main Topic"  href="html/concepts/maintopic.html"&gt;
+        &lt;topic label="Sub Topic" href="html/concepts/subtopic.html" /&gt;
+    &lt;/topic&gt;
+    &lt;topic label="Main Topic 2"&gt;
+        &lt;topic label="Sub Topic 2" href="html/concepts/subtopic2.html" /&gt;
+    &lt;/topic&gt;
+&lt;/toc&gt;</pre>
+</div>
+<p>The configuration files refer to the following directory structure:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">toc</span><span class="o">.</span><span class="n">xml</span>
+<span class="n">tocconcepts</span><span class="o">.</span><span class="n">xml</span>
+<span class="n">html</span><span class="o">/</span><span class="n">overview</span><span class="o">.</span><span class="n">html</span>
+<span class="n">html</span><span class="o">/</span><span class="n">concepts</span><span class="o">/</span><span class="n">maintopic</span><span class="o">.</span><span class="n">html</span>
+<span class="n">html</span><span class="o">/</span><span class="n">concepts</span><span class="o">/</span><span class="n">subtopic</span><span class="o">.</span><span class="n">html</span>
+<span class="n">html</span><span class="o">/</span><span class="n">concepts</span><span class="o">/</span><span class="n">subtopic2</span><span class="o">.</span><span class="n">html</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="help-category">
+<h2>Help Category<a class="headerlink" href="#help-category" title="Permalink to this headline">¶</a></h2>
+<p>Online help is traditional divided into four categories:</p>
+<ul class="simple">
+<li>Getting Started - for tutorials</li>
+<li>Concepts - to explain background information as needed</li>
+<li>Tasks - really quick instructions on how to do stuff</li>
+<li>Reference - screen snaps showing what everything is</li>
+</ul>
+</div>
+<div class="section" id="context-sensitive-help">
+<h2>Context Sensitive Help<a class="headerlink" href="#context-sensitive-help" title="Permalink to this headline">¶</a></h2>
+<p>Context sensitive help (or InfoPops) is available when the user presses the F1 key.</p>
+<p>Context sensitive help can be associated with:</p>
+<ul class="simple">
+<li>Control</li>
+<li>IAction - when used to generate a MenuItem (not toolbar)</li>
+<li>Menu</li>
+<li>MenuItem</li>
+</ul>
+<p>plugin.xml file extension point:</p>
+<div class="highlight-python"><pre>&lt;extension point="org.eclipse.help.contexts"&gt;
+       &lt;contexts file="contexts.xml" plugin="an.example.plugin"/&gt;
+   &lt;/extension&gt;</pre>
+</div>
+<p>Sample context.xml file:</p>
+<div class="highlight-python"><pre>&lt;contexts&gt;
+  &lt;context id="add_action_context"&gt;
+    &lt;description&gt;This command adds.&lt;/description&gt;
+    &lt;topic label="Add" href="tasks/tasks-1.htm"/&gt;
+    &lt;topic label="Concepts" href="html/concepts/maintopic.html"/&gt;
+  &lt;/context&gt;
+&lt;/contexts&gt;</pre>
+</div>
+<p>To connect everything up on the UI side of things we need to know the help contexts ids.</p>
+<div class="highlight-python"><pre>public interface IHelpContextIds {
+    public static final String PREFIX = XYZPlugin.ID + "."; //$NON-NLS-1$
+        // Dialogs
+        public static final String CONNECTION = PREFIX + "connection_context"; //$NON-NLS-1$
+
+        // View
+        public static final String SEARCH_VIEW = PREFIX + "search_view_context";
+        // Viewers
+        public static final String SEARCH_VIEWER = PREFIX + "search_viewer_context"; //$NON-NLS-1$
+ // Actions
+ public static final String SEARCH_ACTION = PREFIX + "search_action_context"; //$NON-NLS-1$
+}</pre>
+</div>
+<p>And finally the connection needs to be made to the control:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">WorkbenchHelp</span><span class="o">.</span><span class="n">setHelp</span><span class="p">(</span> <span class="n">newAction</span> <span class="p">,</span> <span class="n">HelpContextIds</span><span class="o">.</span><span class="n">NEW_REGISTRY_LOCATION_ACTION</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="dynamic-help">
+<h2>Dynamic Help<a class="headerlink" href="#dynamic-help" title="Permalink to this headline">¶</a></h2>
+<p>Figure out the contentProducer extension point in the hopes of generating context-sensitive help for
+DataStore parameter screens.</p>
+</div>
+<div class="section" id="sample-table-of-contents-wizard">
+<h2>Sample Table of Contents Wizard<a class="headerlink" href="#sample-table-of-contents-wizard" title="Permalink to this headline">¶</a></h2>
+<p>Eclipse provides a code generation template associated with the toc extension point.</p>
+<ol class="arabic">
+<li><dl class="first docutils">
+<dt>Start the Extension Point Selection Wizard</dt>
+<dd><p class="first last"><img alt="image0" src="_images/HelpTocExtentionPoint.jpg" /></p>
+</dd>
+</dl>
+<ol class="arabic simple">
+<li>Open the plugin.xml file, and switch to the extensions point tab</li>
+<li>Press the &#8220;Add&#8221; button</li>
+</ol>
+</li>
+<li><dl class="first docutils">
+<dt>Start the &#8220;Help Content&#8221; template</dt>
+<dd><p class="first last"><img alt="image1" src="_images/HelpSampleTableOfContents.jpg" /></p>
+</dd>
+</dl>
+<ol class="arabic simple">
+<li>Select &#8220;org.exlipse.help.toc&#8221;</li>
+<li>Select &#8220;Help Content&#8221; from the available templates</li>
+<li>Next</li>
+</ol>
+</li>
+<li><p class="first">Chose the categories required for you plug-in</p>
+<ol class="arabic simple">
+<li>Note the Primary check box will result in a separate top level &#8220;book&#8221; in the help system</li>
+</ol>
+</li>
+</ol>
+<p>This is enough to get us going.</p>
+<p><strong>Links</strong></p>
+<ul class="simple">
+<li><a class="reference external" href="http://dev.eclipse.org/viewcvs/index.cgi/%7echeckout%7e/org.eclipse.ui.tutorials.rcp.part3/html/tutorial3.html">Rich Client Platform Tutorial
+3</a></li>
+<li><a class="reference external" href="http://devresource.hp.com/drc/technical_white_papers/ecliphelp/index.jsp#contexts_xml">Eclipse Online Help Tutorial
+101</a></li>
+</ul>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="jface_wizards.html">JFace Wizards</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="plugin_classloader_use.html">Plugin Classloader Use</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2013, Refractions Research and others.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,231 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Catalog Notifications &mdash; uDig 1.4.0 Developers Guide</title>
+    
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.0.0-SNAPSHOT',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.4.0 Developers Guide" href="index.html" />
+    <link rel="up" title="Working with the GIS Platform" href="working_with_the_gis_platform.html" />
+    <link rel="next" title="Drag and Drop" href="drag_and_drop.html" />
+    <link rel="prev" title="Catalog" href="catalog.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="catalog.html">Catalog</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="drag_and_drop.html">Drag and Drop</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="catalog-notifications">
+<h1>Catalog Notifications<a class="headerlink" href="#catalog-notifications" title="Permalink to this headline">¶</a></h1>
+<p>What if you want to keep track of all of the changes to the catalog that happen while your plug-in
+is running? You can register an IResolveChangeListener with the catalog plugin. Your listener will
+be notified of the changes via an IResolveChangeEvent object, which describes the changes.</p>
+<p>If you are an proficient eclipse developer you can consider IResolve as similar to the IResource api
+provided by eclipse. There is a difference in blocking behavior, as resolve explicitly represents a
+handle to a remote resource or service.</p>
+<p>Have a look at the article below; you may find it better written than what we have here (both
+systems use the same design).</p>
+<div class="section" id="registering-a-listener">
+<h2>Registering a listener<a class="headerlink" href="#registering-a-listener" title="Permalink to this headline">¶</a></h2>
+<p>First, you must register a resource change listener with the catalog plugin.</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">IResolveChangeListener</span> <span class="n">listener</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MyResolveChangeReporter</span><span class="o">();</span>
+   <span class="n">CataqlogPlugin</span><span class="o">.</span><span class="na">addResourceChangeListener</span><span class="o">(</span> <span class="n">listener</span> <span class="o">);</span>
+</pre></div>
+</div>
+<p>Your listener will be notified after modifications to the resources have been made. Catalog API
+methods that modify resources trigger these events as part of their documented behavior. The method
+comment for a Catalog API method explicitly states whether or not it triggers a resource change
+event.</p>
+<p>For example, the following is included in the IService.getInfo() comment:</p>
+<p>When new information is available changes will be reported in a change event, including an
+indication that this service&#8217;s contents have been changed.</p>
+<p>Most catalog resources trigger these events the first time the handle is used. Methods that create,
+delete, or change a resource typically trigger these events on every use.</p>
+</div>
+<div class="section" id="resolve-change-events">
+<h2>Resolve change events<a class="headerlink" href="#resolve-change-events" title="Permalink to this headline">¶</a></h2>
+<p>The resolve change event describes the specifics of the change that have occurred in the catalog.
+The event contains a &#8220;delta&#8221; that describes the net effect of the changes.</p>
+<p>The resolve delta is structured as a tree rooted at the catalog. The resolve delta tree describes
+these types of changes:</p>
+<ul class="simple">
+<li>Resources that have been created, deleted, or changed. If you have deleted (or added) a Web Map
+Server, the resource delta will include the Web Map Server and all Layers provided by that
+service.</li>
+<li>Resources that have been replaced replaced.</li>
+</ul>
+<p>To traverse a resolve delta tree, you may implement the IResolveDeltaVisitor interface or traverse
+the tree explicitly using IResource.getChildren. Resolve delta visitors implement a visit method
+that is called by the resource delta as it enumerates each change in the tree.</p>
+<p>The types of resource change events and when they are reported.</p>
+<ul>
+<li><p class="first">PRE_CLOSE</p>
+<p>Notifies listeners that resolve is about to be closed. This event can be used to save necessary
+information from the in-memory representation (e.g., session properties) before it is closed.</p>
+</li>
+<li><p class="first">PRE_DELETE</p>
+<p>Notifies listeners that a project is about to be deleted. This event can be used to perform
+clean-up operations, such as removing any saved state that is related to the resolve.</p>
+</li>
+<li><p class="first">POST_CHANGE</p>
+<p>Describes a set of changes that have occured to the workspace since the last POST_CHANGE event
+was reported. Triggered after the catalog API is used. The event contains a resource delta
+describing the net changes since the last POST_CHANGE event.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="implementing-a-resolve-change-listener">
+<h2>Implementing a resolve change listener<a class="headerlink" href="#implementing-a-resolve-change-listener" title="Permalink to this headline">¶</a></h2>
+<p>The following example implements a console-based resolve change listener. A resolve change listener
+is registered for events and information about these events is printed to the console:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">IResolveChangeListener</span> <span class="n">listener</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MyResolveChangeReporter</span><span class="o">();</span>
+   <span class="n">CatalogPlugin</span><span class="o">.</span><span class="na">addListener</span><span class="o">(</span><span class="n">listener</span><span class="o">);</span>
+</pre></div>
+</div>
+<p>The listener checks for each event type and reports information about the resolve that was changed
+and the kinds of changes that occurred.</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">org.eclipse.resources.*</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.eclipse.runtime.*</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyResolveChangeReporter</span> <span class="kd">implements</span> <span class="n">IResolveChangeListener</span> <span class="o">{</span>
+   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">changed</span><span class="o">(</span><span class="n">IResolveChangeEvent</span> <span class="n">event</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">IResolve</span> <span class="n">res</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="na">getResolve</span><span class="o">();</span>
+      <span class="k">switch</span> <span class="o">(</span><span class="n">event</span><span class="o">.</span><span class="na">getType</span><span class="o">())</span> <span class="o">{</span>
+         <span class="k">case</span> <span class="n">IResolveChangeEvent</span><span class="o">.</span><span class="na">PRE_CLOSE</span><span class="o">:</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">res</span><span class="o">.</span><span class="na">getIdentifier</span><span class="o">());</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot; is about to close.&quot;</span><span class="o">);</span>
+            <span class="k">break</span><span class="o">;</span>
+         <span class="k">case</span> <span class="n">IResolveChangeEvent</span><span class="o">.</span><span class="na">PRE_DELETE</span><span class="o">:</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">res</span><span class="o">.</span><span class="na">getFullPath</span><span class="o">());</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot; is about to be deleted.&quot;</span><span class="o">);</span>
+            <span class="k">break</span><span class="o">;</span>
+         <span class="k">case</span> <span class="n">IResolveChangeEvent</span><span class="o">.</span><span class="na">POST_CHANGE</span><span class="o">:</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Resources have changed.&quot;</span><span class="o">);</span>
+            <span class="n">event</span><span class="o">.</span><span class="na">getDelta</span><span class="o">().</span><span class="na">accept</span><span class="o">(</span><span class="k">new</span> <span class="n">DeltaPrinter</span><span class="o">());</span>
+            <span class="k">break</span><span class="o">;</span>
+      <span class="o">}</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>The DeltaPrinter class implements the IResolveDeltaVisitor interface to interrogate the resolve
+delta. The visit() method is called for each resolve change in the resolve delta. The visitor uses a
+return value to indicate whether deltas for children should be visited.</p>
+<div class="highlight-java"><pre>class DeltaPrinter implements IResolveDeltaVisitor {
+      public boolean visit(IResourceDelta delta) {
+         IResource res = delta.getResource();
+         IResource old = delta.getOldResource();
+         switch (delta.getKind()) {
+            case IResolveDelta.Kind.ADDED:
+               System.out.print("Resource ");
+               System.out.print(res.getIdentifier());
+               System.out.println(" was added.");
+               break;
+            case IResolveDelta.Kind.REMOVED"
+               System.out.print("Resource ");
+               System.out.print(res.getIdentifier());
+               System.out.println(" was removed.");
+               break;
+            case IResolveDelta.Kind.CHANGED:
+               System.out.print("Resource ");
+               System.out.print(res.getIdentifier());
+               System.out.println(" has changed.");
+               break;
+            case IResolveDelta.Kind.REPLACED:
+               System.out.print("Resource ");
+               System.out.print(res.getIdentifier());
+               System.out.print(" is replaced by ");
+               System.out.print(res.getNewIdentifier().getIdentifier());
+               break;
+         }
+         return true; // visit the children
+      }
+  }</pre>
+</div>
+<p>For a complete description of resolve deltas, visitors, consult the API specification for
+IResolveDelta and IResolveDeltaVisitor.</p>
+<p>Note: Resolve change listeners are useful for tracking changes that occur to resources while your
+plug-in is activated. If your plug-in registers a listener during its startup code, it&#8217;s possible
+that many resolve change events have been triggered before the activation of your plug-in.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Note most change events are triggered during processing that occurs in a background
+thread. Resolve change listeners should be thread-safe.</p>
+</div>
+</div>
+<div class="section" id="related-reference">
+<h2>Related reference<a class="headerlink" href="#related-reference" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="http://www.eclipse.org/articles/Article-Resource-deltas/resource-deltas.html">How You&#8217;ve Changed!</a></li>
+</ul>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="catalog.html">Catalog</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="drag_and_drop.html">Drag and Drop</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2013, Refractions Research and others.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
