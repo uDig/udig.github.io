@@ -1,0 +1,147 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>DATA &mdash; uDig 1.4.0 User Guide</title>
+    
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.0.0-SNAPSHOT',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.4.0 User Guide" href="#" />
+    <link rel="next" title="Brandenburg" href="brandenburg.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        <a class="uplink" href="#">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="brandenburg.html">Brandenburg</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="data">
+<h1>DATA<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h1>
+<p>The WMS and WFS links links server &#8220;Capabilities Documents&#8221; you can drag into uDig directly:</p>
+<p><strong>Technology Demo</strong></p>
+<ul class="simple">
+<li><a class="reference external" href="http://www2.dmsolutions.ca/cgi-bin/mswms_gmap?Service=WMS&amp;VERSION=1.1.0&amp;REQUEST=GetCapabilities">WMS:dm solutions</a> <a class="reference external" href="http://www2.dmsolutions.ca/cgi-bin/mswfs_gmap?version=1.0.0&amp;request=getcapabilities&amp;service=wfs">WFS:dm solutions</a></li>
+<li><a class="reference external" href="http://demo.cubewerx.com/demo/cubeserv/cubeserv.cgi?CONFIG=main&amp;SERVICE=WMS&amp;?VERSION=1.1.1&amp;REQUEST=GetCapabilities">WMS:Demo Cubwerx</a></li>
+<li><a class="reference external" href="http://demo.opengeo.org/geoserver/ows?service=wms&amp;version=1.1.1&amp;request=GetCapabilities">WMS:demo.opengeo.org</a></li>
+<li><a class="reference external" href="http://demo.mapserver.org/cgi-bin/wms?SERVICE=WMS&amp;VERSION=1.1.1&amp;REQUEST=GetCapabilities">WMS:demo.mapsserver.org</a></li>
+<li><a class="reference external" href="http://sigma.openplans.org:8080/geowebcache/service/wms?request=getcapabilities&amp;tiled=true">WMS-C:sigma.openplans.org</a></li>
+<li><a class="reference external" href="http://labs.metacarta.com/wms-c/tilecache.py?SERVICE=WMS&amp;VERSION=1.1.1&amp;REQUEST=GetCapabilities&amp;tiled=true">WMS-C:labs.metacarta.com</a></li>
+<li><a class="reference external" href="http://demo.opengeo.org/geoserver/gwc/service/wms?request=getcapabilities&amp;tiled=true">WMS-C:demo.opengeo.org</a></li>
+</ul>
+<p><strong>World</strong></p>
+<p>Download: <a class="reference external" href="http://www.naturalearthdata.com/">Natural Earth</a></p>
+<p><strong>Canada</strong></p>
+<ul class="simple">
+<li><a class="reference external" href="http://wms.geobase.ca/wms-bin/cubeserv.cgi?request=getCapabilities">WMS:Geobase</a></li>
+<li><a class="reference external" href="http://atlas.gc.ca/cgi-bin/atlaswms_en?VERSION=1.1.1&amp;Request=GetCapabilities&amp;Service=WMS">WMS:Atlas of Canada</a></li>
+<li><a class="reference external" href="http://wms.cits.rncan.gc.ca/cgi-bin/cubeserv.cgi?VERSION=1.1.0&amp;REQUEST=GetCapabilities">WMS:wms.cits.rncan.gc.ca</a></li>
+<li><a class="reference external" href="http://map.ns.ec.gc.ca/MapServer/mapserv.exe?map=/mapserver/services/envdat/config.map&amp;service=WFS&amp;version=1.0.0&amp;request=GetCapabilities">WFS:env dat</a></li>
+<li><a class="reference external" href="http://openmaps.gov.bc.ca/mapserver/aps?service=wms&amp;request=getcapabilities&amp;version=1.1.1">WMS:bc air photos</a></li>
+<li><a class="reference external" href="http://openmaps.gov.bc.ca/mapserver/base2?service=wms&amp;request=getcapabilities&amp;version=1.1.1">WMS:bc base</a></li>
+<li><a class="reference external" href="http://openmaps.gov.bc.ca/mapserver/cadastre?service=wms&amp;request=getcapabilities&amp;version=1.1.1">WMS:bc cadastre</a></li>
+<li><a class="reference external" href="http://openmaps.gov.bc.ca/mapserver/forestvegetation?service=wms&amp;request=getcapabilities&amp;version=1.1.1">WMS:bc forestvegetation</a></li>
+<li><a class="reference external" href="http://openmaps.gov.bc.ca/images/base.xml?service=wms&amp;request=getcapabilities&amp;version=1.1.1">WMS:bc images</a></li>
+<li><a class="reference external" href="http://openmaps.gov.bc.ca/mapserver/terrestrial_ecology?service=wms&amp;request=getcapabilities&amp;version=1.1.1">WMS:bc terrestrial ecology</a></li>
+<li><a class="reference external" href="http://openmaps.gov.bc.ca/mapserver/watermanagement?service=wms&amp;request=getcapabilities&amp;version=1.1.1">WMS:bc water management</a></li>
+<li><a class="reference external" href="http://openmaps.gov.bc.ca/mapserver/wildlifemanagement?service=wms&amp;request=getcapabilities&amp;version=1.1.1">WMS:bc wild lifemanagement</a></li>
+<li><a class="reference external" href="http://libcwms.gov.bc.ca/wmsconnector/com.esri.wsit.WMSServlet/ogc_layer_service?REQUEST=GetCapabilities&amp;Service=WMS">WMS:libcwms.gov.bc.ca</a></li>
+</ul>
+<p><strong>New Zealand</strong></p>
+<p>Catalog: <a class="reference external" href="http://geodata.govt.nz/">http://geodata.govt.nz/</a></p>
+<p><strong>Thanks</strong></p>
+<ul class="simple">
+<li><a class="reference external" href="http://openmaps.gov.bc.ca/">http://openmaps.gov.bc.ca/</a></li>
+<li><a class="reference external" href="http://atlas.nrcan.gc.ca/site/english/dataservices/">National Resource Canada</a></li>
+<li><a class="reference external" href="http://www.mappinghacks.com/data/">Mapping Hacks Data</a></li>
+<li><a class="reference external" href="http://www.nysgis.state.ny.us/gateway/mg/webserv/">NYSDOP orthoimagery for New York State</a></li>
+</ul>
+<div class="section" id="search">
+<h2>Search<a class="headerlink" href="#search" title="Permalink to this headline">¶</a></h2>
+<p>You can find additional information directly from the application <a class="reference external" href="http://udig.github.io/docs/user/reference/Search%20view.html">Search
+view</a>. This content is backed by
+several public catalogs.</p>
+</div>
+<div class="section" id="id1">
+<h2>Data<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>This data space is a wiki, please share your stories, tips, trips and scripts - we will all benefit.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="brandenburg.html">Brandenburg</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo_servers.html">Demo Servers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="experimental_servers.html">Experimental Servers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="foss4g_2007.html">Foss4g 2007</a></li>
+<li class="toctree-l1"><a class="reference internal" href="foss4g_2009.html">Foss4g 2009</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geobase.ca_placenames.html">Geobase.ca Placenames</a></li>
+<li class="toctree-l1"><a class="reference internal" href="massachusetts.html">Massachusetts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sedac_wms.html">Sedac WMS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="slip.html">Slip</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test_servers.html">Test Servers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test_servers_2.html">Test Servers 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="udig_sample_data.html">Udig Sample Data</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        <a class="uplink" href="#">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="brandenburg.html">Brandenburg</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2013, Refractions Research and others.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,121 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Slip &mdash; uDig 1.4.0 User Guide</title>
+    
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.0.0-SNAPSHOT',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.4.0 User Guide" href="index.html" />
+    <link rel="next" title="Test Servers" href="test_servers.html" />
+    <link rel="prev" title="Sedac WMS" href="sedac_wms.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="sedac_wms.html">Sedac WMS</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="test_servers.html">Test Servers</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="slip">
+<h1>Slip<a class="headerlink" href="#slip" title="Permalink to this headline">¶</a></h1>
+<p>The <a class="reference external" href="https://www2.landgate.wa.gov.au/slip/portal/home/home.html">SLIP portal</a> is a great
+collection of Australian spatial information brought together by Landgate in western australia. This
+portal is a showcase of how governments at all levels can collaborate to make information available
+to the public.</p>
+<p><a class="reference external" href="https://www2.landgate.wa.gov.au/ows/wmspublic?request=GetCapabilities&amp;Service=WMS">Public WMS Data Service (Information is able to be reprojected on the fly)</a></p>
+<p><a class="reference external" href="https://www2.landgate.wa.gov.au/ows/wmspublicimagery?request=GetCapabilities&amp;Service=WMS">Public WMS Imagery Service (Information is able to be reprojected on the fly)</a></p>
+<p>The following information is available to SLIP registered users:</p>
+<p><a class="reference external" href="https://www2.landgate.wa.gov.au/ows/wfspublic_4283/wfs?request=GetCapabilities&amp;Service=WFS]">GDA94 - Lat/Long WFS Public</a></p>
+<p><a class="reference external" href="https://www2.landgate.wa.gov.au/ows/wfspublic_4326/wfs?request=GetCapabilities&amp;Service=WFS]">WGS84 - Lat/Long WFS Public</a></p>
+<p><a class="reference external" href="http://www2.landgate.wa.gov.au/ows/wfspublic_4283/wfs">GDA94 - Lat/Long WFS Public - Recommended for users of ArcGIS v9.2 and earlier, and MapInfo v9.0 and later</a></p>
+<p><a class="reference external" href="http://www2.landgate.wa.gov.au/ows/wfspublic_4326/wfs?request=GetCapabilities&amp;Service=WFS">WGS84 - Lat/Long WFS Public - Recommended for users of ArcGIS v9.2 and earlier, and MapInfo v9.0 and later</a></p>
+<p><a class="reference external" href="https://www2.landgate.wa.gov.au/ows/wfspublic_28349/wfs?request=GetCapabilities&amp;Service=WFS">GDA94 - MGA49 WFS Public</a></p>
+<p><a class="reference external" href="https://www2.landgate.wa.gov.au/ows/wfspublic_28350/wfs?request=GetCapabilities&amp;Service=WFS">GDA94 - MGA50 WFS Public</a></p>
+<p><a class="reference external" href="https://www2.landgate.wa.gov.au/ows/wfspublic_28351/wfs?request=GetCapabilities&amp;Service=WFS">GDA94 - MGA51 WFS Public</a></p>
+<p><a class="reference external" href="https://www2.landgate.wa.gov.au/ows/wfspublic_28352/wfs?request=GetCapabilities&amp;Service=WFS">GDA94 - MGA52 WFS Public</a></p>
+<div class="section" id="tile-servers">
+<h2>Tile Servers<a class="headerlink" href="#tile-servers" title="Permalink to this headline">¶</a></h2>
+<p>An experimental WMS-C service (use the Add Layer menu for this one drag and drop will not work):
+<a class="reference external" href="http://beta.landgate.wa.gov.au/tilecache/?REQUEST=GetCapabilities&amp;SERVICE=WMS&amp;tiled=true">http://beta.landgate.wa.gov.au/tilecache/?REQUEST=GetCapabilities&amp;SERVICE=WMS&amp;tiled=true</a></p>
+</div>
+<div class="section" id="using-slip-services">
+<h2>Using SLIP Services<a class="headerlink" href="#using-slip-services" title="Permalink to this headline">¶</a></h2>
+<p>To access these services you will need to register at the <a class="reference external" href="https://www2.landgate.wa.gov.au/slip/portal/home/home.html">SLIP portal</a>.</p>
+<ol class="arabic simple">
+<li>From uDig click on any of the above links (or drag and drop one of the above links from your web
+browser to uDig)</li>
+<li>Enter the username/passowrd used to access the SLIP portal when prompted by uDig</li>
+</ol>
+</div>
+<div class="section" id="thanks">
+<h2>Thanks<a class="headerlink" href="#thanks" title="Permalink to this headline">¶</a></h2>
+<p>We would like to thank SLIP for listing uDig as recommended desktop client.</p>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="sedac_wms.html">Sedac WMS</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="test_servers.html">Test Servers</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2013, Refractions Research and others.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

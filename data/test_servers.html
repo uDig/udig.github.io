@@ -1,0 +1,209 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Test Servers &mdash; uDig 1.4.0 User Guide</title>
+    
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.0.0-SNAPSHOT',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.4.0 User Guide" href="index.html" />
+    <link rel="next" title="Test Servers 2" href="test_servers_2.html" />
+    <link rel="prev" title="Slip" href="slip.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="slip.html">Slip</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="test_servers_2.html">Test Servers 2</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="test-servers">
+<h1>Test Servers<a class="headerlink" href="#test-servers" title="Permalink to this headline">¶</a></h1>
+<p>The following servers are used when we test uDig before each major release. For servers we have
+tested a green <img alt="checkIcon" src="_images/check1.gif" /> indicates that everything worked, a red <img alt="errorIcon" src="_images/error1.gif" /> indicates a connection
+error.</p>
+<ul class="simple">
+<li><a class="reference external" href="http://www.bsrsi.msu.edu/cgi-bin/wmt/wms.cgi?WMTVER=1.0.0&amp;REQUEST=capabilities-">TRFIC Map Server</a> (5 layers)</li>
+<li><a class="reference external" href="http://maps.yorkcountygov.com/servlet/com.esri.wms.Esrimap?REQUEST=GetCapabilities&amp;SERVICENAME=NC1Map_YorkCo_SC_Bldg_Footprints_WMS-">York County, SC - Building Footprints</a> (1 layer)</li>
+<li><a class="reference external" href="http://maps.yorkcountygov.com/servlet/com.esri.wms.Esrimap?REQUEST=GetCapabilities&amp;SERVICENAME=NC1Map_YorkCo_SC_Parcels_WMS-">York County, SC - Parcels</a> (1 layer)</li>
+<li><a class="reference external" href="http://www.digitalearth.gov/wmt/xml/capabilities_1_0_0.xml-">Acme Corp. Map Server</a> (7 layers)</li>
+<li><a class="reference external" href="http://gis.vibamt.dk/ArealInfo/AI_WMS.asp?service=wms&amp;VERSION=1.1.0&amp;REQUEST=Getcapabilities-">ArealInformation - Viborg Amt, Denmark</a> (223 layers)</li>
+<li><a class="reference external" href="http://atlas.gc.ca/cgi-bin/atlaswms_en?VERSION=1.1.0&amp;request=GetCapabilities-">Atlas of Canada WMS</a> (26 layers)</li>
+<li><a class="reference external" href="http://www.bsc-eoc.org/cgi-bin/bsc_ows.asp?version=1.1.1&amp;service=WMS&amp;request=GetCapabilities-">Bird Studies Canada WMS/WFS Server</a> (9 layers)</li>
+<li><a class="reference external" href="http://ceoware2.ccrs.nrcan.gc.ca/cubewerx/cubeserv/cubeserv.cgi?version=1.1.1&amp;service=WMS&amp;request=GetCapabilities-">Canada Centre for Remote Sensing Web Map Service</a> (254 layers)</li>
+<li><a class="reference external" href="http://cgns.nrcan.gc.ca/wms/cubeserv.cgi?request=getCapabilities-">Canadian Geographical Names Web Map Service</a> (3 layers)</li>
+<li><a class="reference external" href="http://cgns.nrcan.gc.ca/wfs/cubeserv.cgi?request=getCapabilities-">Canadian Geographical Names Web Feature Service</a> (3 layers)</li>
+<li><a class="reference external" href="http://mds.glc.org/cgi-bin/carolwms?VERSION=1.1.1&amp;REQUEST=GetCapabilities-">CAROL WMS</a> (1316 layers)</li>
+<li><a class="reference external" href="http://ogc.cast.uark.edu:8080/tnm/servlet/mapserver?REQUEST=Capabilities&amp;WMTVER=1.0.0-">CAST TNM Map Server</a> (10 layers)</li>
+<li><a class="reference external" href="http://maps.customweather.com/image?REQUEST=GetCapabilities-">CustomWeather Map Server</a> (38 layers)</li>
+<li><a class="reference external" href="http://webapps.datafed.net/dvoy_services/ogc.wsfl?SERVICE=WMS&amp;VERSION=1.1.1&amp;REQUEST=GetCapabilities-">DataFed Layers</a> (1348 layers)</li>
+<li><a class="reference external" href="http://demo.deegree.org:8080/deegree/wms?SERVICE=WMS&amp;VERSION=1.1.1&amp;REQUEST=GetCapabilities-">deegree wms providing free geospatial data from NGA (U.S.), Intevation (Germany) and OGC (U.S.)</a> (29 layers)</li>
+<li><a class="reference external" href="http://www.gis.nrw.de/wms/DGM50?REQUEST=GetCapabilities&amp;VERSION=1.1.0&amp;SERVICE=WMS-">DGM50</a> (1 layer)</li>
+<li><a class="reference external" href="http://www.gis2.nrw.de/wmsconnector/wms/hochwasser?REQUEST=GetCapabilities&amp;VERSION=1.1.0&amp;SERVICE=WMS-">Digitale Karte der hochwassergefaehrdeten Bereiche NRW</a> (12 layers)</li>
+<li><a class="reference external" href="http://195.27.54.43/wms/dlk/request.asp?request=GetCapabilities-">DLK (GeoContent GmbH) hosted by terramapserver</a> (6 layers)</li>
+<li><a class="reference external" href="http://excise.pyr.ec.gc.ca/cgi-bin/mapserv.exe?map=/LocalApps/Mapsurfer/PYRWQMP.map&amp;version=1.1.1&amp;service=WMS&amp;request=GetCapabilities-">Environment Canada - Pacific and Yukon Region - Water Quality Monitoring Program - WMS</a> (7 layers)</li>
+<li><a class="reference external" href="http://mapserv2.esrin.esa.it/cubestor/cubeserv/cubeserv.cgi?REQUEST=GetCapabilities-">ESA CubeSERV</a> (193 layers)</li>
+<li><a class="reference external" href="http://www.geographynetwork.com/ogc/com.esri.ogc.wms.WMSServlet?REQUEST=GetCapabilities&amp;SERVICE=wms-">ESRI Co. Map Server</a> (1 layer)</li>
+<li><a class="reference external" href="http://inside3.uidaho.edu/servlet/com.esri.wms.Esrimap?REQUEST=GetCapabilities-">ESRI Inc. Map Server</a> (12 layers)</li>
+<li><a class="reference external" href="http://maps.ciesin.org/servlet/com.esri.wms.Esrimap?request=capabilities&amp;wmtver=1.0.0-">ESRI Inc. Map Server (WMT)</a> (10 layers)</li>
+<li><a class="reference external" href="http://142.176.62.108/wmsconnector/com.esri.wsit.WMSServlet/GeoNovaSDE?service=WMS&amp;request=GetCapabilities-">ESRI Web Map Service 1</a> (19 layers)</li>
+<li><a class="reference external" href="http://www.geographynetwork.ca/wmsconnector/com.esri.wsit.WMSServlet/Geobase_NRN_NewfoundlandAndLabrador_I_Detail?request=GetCapabilities-">ESRI Web Map Service 2</a> (8 layers)</li>
+<li><a class="reference external" href="http://clearinghouse1.fgdc.gov/scripts/ogc/ms.pl?request=capabilities-">FGDC Base Map Services</a> (16 layers)</li>
+<li><a class="reference external" href="http://www.gis2.nrw.de/wmsconnector/wms/stobo?REQUEST=GetCapabilities&amp;VERSION=1.1.0&amp;SERVICE=WMS-">FIS Stobo NRW</a> (10 layers)</li>
+<li><a class="reference external" href="http://www.gis2.nrw.de/wmsconnector/wms/forstamtsgr?REQUEST=GetCapabilities&amp;VERSION=1.1.0&amp;SERVICE=WMS-">Forstliche Verwaltungsgrenzen NRW</a> (1 layer)</li>
+<li><a class="reference external" href="http://www.ga.gov.au/bin/getmap.pl?request=capabilities-">Geoscience Australia Map Server</a> (102 layers)</li>
+<li><a class="reference external" href="http://vesta.cast.uark.edu/wmscast/servlet/wmsesri?WMTVER=1.0.0&amp;REQUEST=capabilities-">GeoStor Map Server</a> (8 layers)</li>
+<li><a class="reference external" href="http://www.gis2.nrw.de/wmsconnector/wms/gewstat?REQUEST=GetCapabilities&amp;VERSION=1.1.0&amp;SERVICE=WMS-">Gewaesserstationierungskarte des Landes NRW</a> (18 layers)</li>
+<li><a class="reference external" href="http://www2.dmsolutions.ca/cgi-bin/mswms_gmap?SERVICE=WMS&amp;VERSION=1.1.1&amp;REQUEST=GetCapabilities-">GMap WMS Demo Server 1</a> (12 layers)</li>
+<li><a class="reference external" href="http://dev1.dmsolutions.ca/cgi-bin/mswms_gmap?version=1.1.1&amp;request=GetCapabilities-">GMap WMS Demo Server 2</a> (12 layers)</li>
+<li><a class="reference external" href="http://www2.dmsolutions.ca/cgi-bin/mswms_gmap?VERSION=1.1.0&amp;REQUEST=GetCapabilities-">GMap WMS Demo Server 3</a> (12 layers)</li>
+<li><a class="reference external" href="http://www.gworks.ca/site/lib/wms/simple_wms.php?REQUEST=GetCapabilities-">Greater Victoria Green Map</a> (2 layers)</li>
+<li><a class="reference external" href="http://maps1.intergraph.com/wms/ussample/request.asp?SERVICE=WMS&amp;REQUEST=GetCapabilities-">Intergraph US sample WMS</a> (7 layers)</li>
+<li><a class="reference external" href="http://maps1.intergraph.com/wms/world/request.asp?service=WMS&amp;request=GetCapabilities-">Intergraph World Map 1</a> (8 layers)</li>
+<li><a class="reference external" href="http://maps1.intergraph.com/wms/world/request.asp?REQUEST=GetCapabilities-">Intergraph World Map 2</a> (8 layers)</li>
+<li><a class="reference external" href="http://onearth.jpl.nasa.gov/wms.cgi?REQUEST=GetCapabilities-">JPL World Map Service 1</a> (11 layers)</li>
+<li><a class="reference external" href="http://mapus.jpl.nasa.gov/wms.cgi?request=GetCapabilities-">JPL World Map Service 2</a> (11 layers)</li>
+<li><a class="reference external" href="http://onearth.jpl.nasa.gov/wms.cgi?request=GetCapabilities-">JPL World Map Service 3</a> (11 layers)</li>
+<li><a class="reference external" href="http://wmt.jpl.nasa.gov/wms.cgi?request=GetCapabilities-">JPL World Map Service 4</a> (11 layers)</li>
+<li><a class="reference external" href="http://wmt.jpl.nasa.gov/cgi-bin/wmt.cgi?request=capabilities-">JPL World Map Service 5</a> (11 layers)</li>
+<li><a class="reference external" href="http://wms.jpl.nasa.gov/wms.cgi?service=WMS&amp;request=GetCapabilities-">JPL World Map Service 6</a> (11 layers)</li>
+<li><a class="reference external" href="http://212.124.44.166/wmsborken/wmsborken?Service=WMS&amp;REQUEST=GetCapabilities-">Kreis Borken WMS</a> (38 layers)</li>
+<li><a class="reference external" href="http://www.gis2.nrw.de/wmsconnector/wms/linfos?REQUEST=GetCapabilities&amp;VERSION=1.1.0&amp;SERVICE=WMS-">LINFOS NRW</a> (10 layers)</li>
+<li><a class="reference external" href="http://wms.lizardtech.com/lizardtech/iserv/ows?REQUEST=GetCapabilities&amp;SERVICE=WMS&amp;VERSION=1.1.1-">LizardTech Express Server WMS</a> (4 layers)</li>
+<li><a class="reference external" href="http://www.indexgeo.com.au/cgi-bin/wms-location?request=GetCapabilities&amp;service=WMS-">Location mapserver</a> (5 layers)</li>
+<li><a class="reference external" href="http://cooa.whoi.edu/cw/mapserv?map=etopo2_wms.map&amp;REQUEST=GetCapabilities-">MapServer WMS Demo</a> (9 layers)</li>
+<li><a class="reference external" href="http://megisims.state.me.us/wmsconnector/com.esri.wsit.WMSServlet/WMSFramework?VERSION=1.1.1&amp;REQUEST=GetCapabilities-">MEGIS Web Map Service</a> (15 layers)</li>
+<li><a class="reference external" href="http://terraservice.net/ogccapabilities.ashx?version=1.1.1&amp;request=GetCapabilties-">Microsoft TerraServer Map Server 1</a> (3 layers)</li>
+<li><a class="reference external" href="http://terraserver.microsoft.com/ogccapabilities.ashx?version=1.1.1&amp;request=getcapabilities&amp;service=wms-">Microsoft TerraServer Map Server 2</a> (3 layers)</li>
+<li><a class="reference external" href="http://terraservice.net/ogccapabilities.ashx-">Microsoft TerraServer Map Server 3</a> (3 layers)</li>
+<li><a class="reference external" href="http://terraserver.homeadvisor.msn.com/ogccapabilities.ashx?version=1.1.1&amp;request=getcapabilities&amp;service=wms-">Microsoft TerraServer Map Server 4</a> (3 layers)</li>
+<li><a class="reference external" href="http://terraservice.net/ogccapabilities.ashx?version=1.1.1&amp;request=getcapabilities&amp;service=wms-">Microsoft TerraServer Map Server 5</a> (3 layers)</li>
+<li><a class="reference external" href="http://www.terraserver.microsoft.com/ogccapabilities.ashx?version=1.1.1&amp;request=getcapabilities&amp;service=wms-">Microsoft TerraServer Map Server 6</a> (3 layers)</li>
+<li><a class="reference external" href="http://www.terraservice.net/ogccapabilities.ashx?version=1.1.1&amp;request=getcapabilities&amp;service=wms-">Microsoft TerraServer Map Server 7</a> (3 layers)</li>
+<li><a class="reference external" href="http://www.terraserver-usa.com/ogccapabilities.ashx?version=1.1.1&amp;request=getcapabilities&amp;service=wms-">Microsoft TerraServer Map Server 8</a> (3 layers)</li>
+<li><a class="reference external" href="http://maps.dnr.state.mn.us/cgi-bin/mapserv43?map=DELI_WMS_MAPFILE&amp;service=wms&amp;version=1.1.1&amp;request=GetCapabilities-">MNDNR Data Deli WMS Server</a> (7 layers)</li>
+<li><a class="reference external" href="http://www.hazardmaps.gov/wmsRequest.php?request=GetCapabilities-">Multi-Hazard Mapping Initiative WMS Map Server (HDM)</a> (6 layers)</li>
+<li><a class="reference external" href="http://nationalatlas.gov/natlas/capabilities.xml-">National Atlas of the United States Map Server</a> (149 layers)</li>
+<li><a class="reference external" href="http://www.gis2.nrw.de/wmsconnector/wms/hangneigung?REQUEST=GetCapabilities&amp;VERSION=1.1.0&amp;SERVICE=WMS-">Neigungsklassen zur Gelaendebefahrbarkeit</a> (2 layers)</li>
+<li><a class="reference external" href="http://www.geoserver.nrw.de/GeoOgcWms1.3/servlet/DTK10?REQUEST=GetCapabilities&amp;VERSION=1.1.0&amp;SERVICE=WMS-">NRW: DTK10</a> (2 layers)</li>
+<li><a class="reference external" href="http://www.geoserver.nrw.de/GeoOgcWms1.3/servlet/GEPNRW?REQUEST=GetCapabilities&amp;SERVICE=WMS-">NRW: Gebietsentwicklungsplan</a> (11 layers)</li>
+<li><a class="reference external" href="http://www.geoserver.nrw.de/GeoOgcWms1.3/servlet/LEPNRW?REQUEST=GetCapabilities&amp;SERVICE=WMS-">NRW: Landesentwicklungsplan</a> (8 layers)</li>
+<li><a class="reference external" href="http://www.geoserver.nrw.de/GeoOgcWms1.3/servlet/NW2?REQUEST=GetCapabilities&amp;VERSION=1.1.0&amp;SERVICE=WMS-">NRW: TK</a> (24 layers)</li>
+<li><a class="reference external" href="http://www.geoserver.nrw.de/GeoOgcWms1.3/servlet/TK100?REQUEST=GetCapabilities&amp;VERSION=1.1.0&amp;SERVICE=WMS-">NRW: TK100 Farbe</a> (1 layer)</li>
+<li><a class="reference external" href="http://www.geoserver.nrw.de/GeoOgcWms1.3/servlet/TK25?REQUEST=GetCapabilities&amp;VERSION=1.1.0&amp;SERVICE=WMS-">NRW: TK25 Farbe</a> (1 layer)</li>
+<li><a class="reference external" href="http://www.geoserver.nrw.de/GeoOgcWms1.3/servlet/TK50?REQUEST=GetCapabilities&amp;VERSION=1.1.0&amp;SERVICE=WMS-">NRW: TK50 Farbe</a> (1 layer)</li>
+<li><a class="reference external" href="http://www.geoserver.nrw.de/GeoOgcWms1.3/servlet/NRW_Uebersicht?REQUEST=GetCapabilities&amp;VERSION=1.1.0&amp;SERVICE=WMS-">NRW: Uebersichtskarte</a> (1 layer)</li>
+<li><a class="reference external" href="http://atlas.canri.nsw.gov.au/proxy/wms?request=capabilities-">NSW DIPNR Image Server</a> (1 layer)</li>
+<li><a class="reference external" href="http://www.gis2.nrw.de/wmsconnector/wms/luftbild?REQUEST=GetCapabilities&amp;VERSION=1.1.0&amp;SERVICE=WMS-">Orthophotos NRW</a> (2 layers)</li>
+<li><a class="reference external" href="http://atlas.gc.ca/cgi-bin/atlaswms_fr?VERSION=1.1.0&amp;request=GetCapabilities-">SCW de L</a> (26 layers)</li>
+<li><a class="reference external" href="http://nautilus.baruch.sc.edu/wms/seacoos_in_situ?REQUEST=GetCapabilities-">SEACOOS Observations</a> (7 layers)</li>
+<li><a class="reference external" href="http://nautilus.baruch.sc.edu/wms/seacoos_rs?REQUEST=GetCapabilities-">SEACOOS Remotely-Sensed Imagery</a> (20 layers)</li>
+<li><a class="reference external" href="http://nautilus.baruch.sc.edu/wms/seacoos_rs_256?REQUEST=GetCapabilities-">SEACOOS Remotely-Sensed Imagery 256</a> (8 layers)</li>
+<li><a class="reference external" href="http://mapper.tat.fws.gov/ogcwms/WmsServlet?servicename=nwi_wms&amp;version=1.1.0&amp;request=getcapabilities&amp;service=wms-">Technology Applications Team Wms 1.1.0 Service</a> (3 layers)</li>
+<li><a class="reference external" href="http://mapper.tat.fws.gov/ogcwms/WmsServlet?servicename=nwi_wms&amp;version=1.1.1&amp;request=getcapabilities&amp;service=wms-">Technology Applications Team Wms 1.1.1 Service</a> (3 layers)</li>
+<li><a class="reference external" href="http://mapper.tat.fws.gov/ogcwms/WmsServlet?service=wms&amp;servicename=crithab&amp;VERSION=1.1.0&amp;REQUEST=getcapabilities-">Technology Applications Team Wms Service</a> (297 layers)</li>
+<li><a class="reference external" href="http://globe.digitalearth.gov/viz-bin/wmt.cgi?SERVICE=WMS&amp;VERSION=1.1.1&amp;REQUEST=GetCapabilities-">The GLOBE Program Visualization Server</a> (173 layers)</li>
+<li><a class="reference external" href="http://globe.digitalearth.gov/viz-bin/wmt.cgi?VERSION=1.1.0&amp;Request=GetCapabilities-">The GLOBE Program Visualization Server WMS 1.1.0</a> (173 layers)</li>
+<li><a class="reference external" href="http://viz.globe.gov/viz-bin/wmt.cgi?SERVICE=WMS&amp;VERSION=1.1.1&amp;REQUEST=GetCapabilities-">The GLOBE Program Visualization Server WMS 1.1.1</a> (173 layers)</li>
+<li><a class="reference external" href="http://globe.digitalearth.gov/viz-bin/wmt.cgi?REQUEST=GetCapabilities&amp;VERSION=1.1-">The GLOBE Program Visualization Server WMT 1.1</a> (173 layers)</li>
+<li><a class="reference external" href="http://gisdata.usgs.net/servlet/com.esri.wms.Esrimap?servicename=USGS_WMS_BTS_Roads&amp;request=capabilities-">USGS EROS Data Center WMS Map Server: USGS_WMS_BTS_Roads</a> (2 layers)</li>
+<li><a class="reference external" href="http://gisdata.usgs.net/servlet/com.esri.wms.Esrimap?WMTVER=1.1.0&amp;ServiceName=USGS_WMS_LANDSAT7&amp;REQUEST=capabilities-">USGS EROS Data Center WMS Map Server: USGS_WMS_LANDSAT7</a> (3 layers)</li>
+<li><a class="reference external" href="http://gisdata.usgs.net/servlet/com.esri.wms.Esrimap?servicename=USGS_WMS_NED&amp;request=capabilities-">USGS EROS Data Center WMS Map Server: USGS_WMS_NED</a> (46 layers)</li>
+<li><a class="reference external" href="http://gisdata.usgs.net/servlet/com.esri.wms.Esrimap?servicename=USGS_WMS_NHD&amp;request=capabilities-">USGS EROS Data Center WMS Map Server: USGS_WMS_NHD</a> (10 layers)</li>
+<li><a class="reference external" href="http://gisdata.usgs.net/servlet/com.esri.wms.Esrimap?servicename=USGS_WMS_NLCD&amp;request=capabilities-">USGS EROS Data Center WMS Map Server: USGS_WMS_NLCD</a> (6 layers)</li>
+<li><a class="reference external" href="http://gisdata.usgs.net/servlet/com.esri.wms.Esrimap?servicename=USGS_WMS_REF&amp;request=capabilities-">USGS EROS Data Center WMS Map Server: USGS_WMS_REF</a> (30 layers)</li>
+<li><a class="reference external" href="http://gisdata.usgs.net:80/servlet/com.esri.wms.Esrimap/world?SERVICE=WMS&amp;VERSION=1.1.1&amp;REQUEST=GetCapabilities-">USGS EROS Data Center WMS Map Server: world 1</a> (6 layers)</li>
+<li><a class="reference external" href="http://gisdata.usgs.net/servlet/com.esri.wms.Esrimap?REQUEST=GetCapabilities&amp;SERVICE=wms-">USGS EROS Data Center WMS Map Server: world 2</a> (6 layers)</li>
+<li><a class="reference external" href="http://gisdata.usgs.net/servlet/com.esri.wms.Esrimap/world?SERVICE=WMS&amp;VERSION=1.1.1&amp;REQUEST=GetCapabilities-">USGS EROS Data Center WMS Map Server: world 3</a> (6 layers)</li>
+<li><a class="reference external" href="http://www.gis2.nrw.de/wmsconnector/wms/waldtyp?REQUEST=GetCapabilities&amp;VERSION=1.1.0&amp;SERVICE=WMS-">Waldtypenkarte NRW</a> (3 layers)</li>
+<li><a class="reference external" href="http://www.gis2.nrw.de/wmsconnector/wms/wsg?REQUEST=GetCapabilities&amp;VERSION=1.1.0&amp;SERVICE=WMS-">Wasserschutzgebiete NRW</a> (4 layers)</li>
+<li><a class="reference external" href="http://edcw2ks51.cr.usgs.gov/servlet/com.esri.wms.Esrimap?WMTVER=1.1.1&amp;ServiceName=133urban&amp;REQUEST=capabilities-">Web Map Service 133urban</a> (94 layers)</li>
+<li><a class="reference external" href="http://dmzims.wupperverband.de/wmsconnector/com.esri.wsit.WMSServlet/WV_WMS?Request=GetCapabilities&amp;Version=1.1.0-">Web Map Service Wupperverband</a> (51 layers)</li>
+<li><a class="reference external" href="http://www.geographynetwork.com/servlet/com.esri.wms.Esrimap?&amp;REQUEST=capabilities-">WMS Map Server</a> (109 layers)</li>
+<li><a class="reference external" href="http://www.geographynetwork.com/servlet/com.esri.wms.Esrimap?ServiceName=GFW_Forest&amp;VERSION=1.0.0&amp;request=capabilities-">WMS Map Server GFW_Forest</a> (13 layers)</li>
+<li><a class="reference external" href="http://212.124.44.166/servlet/com.esri.wms.Esrimap?REQUEST=GetCapabilities&amp;SERVICE=WMS-">WMS Map Server 212.124.44.166</a> (20 layers)</li>
+<li><a class="reference external" href="http://www.geographynetwork.com/servlet/com.esri.wms.Esrimap?request=GetCapabilities&amp;ServiceName=ESRI_Soil-">WMS Map Server Soil</a> (11 layers)</li>
+<li><a class="reference external" href="http://www.geographynetwork.com/servlet/com.esri.wms.Esrimap?request=GetCapabilities&amp;ServiceName=ESRI_Snow-">WMS Map Server Snow</a> (11 layers)</li>
+<li><a class="reference external" href="http://www.geographynetwork.com/servlet/com.esri.wms.Esrimap?request=GetCapabilities&amp;ServiceName=ESRI_Veg-">WMS Map Server ESRI_Veg</a> (11 layers)</li>
+<li><a class="reference external" href="http://www.geographynetwork.com/servlet/com.esri.wms.Esrimap?request=GetCapabilities&amp;ServiceName=ESRI_Precip_Yr-">WMS Map Server ESRI_Precip_Yr</a> (11 layers)</li>
+<li><a class="reference external" href="http://www.geographynetwork.com/servlet/com.esri.wms.Esrimap?request=GetCapabilities&amp;ServiceName=ESRI_Elev-">WMS Map Server ESRI_Elev</a> (11 layers)</li>
+<li><a class="reference external" href="http://www.geographynetwork.com/servlet/com.esri.wms.Esrimap?request=GetCapabilities&amp;ServiceName=ESRI_World-">WMS Map Server ESRI_World</a> (109 layers)</li>
+<li><a class="reference external" href="http://www.geographynetwork.com/servlet/com.esri.wms.Esrimap?request=GetCapabilities&amp;ServiceName=FEMA_Flood-">WMS Map Server FEMA_Flood</a> (20 layers)</li>
+<li><a class="reference external" href="http://www.geographynetwork.com/servlet/com.esri.wms.Esrimap?request=GetCapabilities&amp;ServiceName=ESRI_Landuse-">WMS Map Server ESRI_Landuse</a> (11 layers)</li>
+<li><a class="reference external" href="http://www.geographynetwork.com/servlet/com.esri.wms.Esrimap?request=GetCapabilities&amp;ServiceName=ESRI_Pop-">WMS Map Server ESRI_Pop</a> (17 layers)</li>
+<li><a class="reference external" href="http://atlas.walis.wa.gov.au/servlet/com.esri.wms.Esrimap?VERSION=1.1.0&amp;Request=getcapabilities-">WMS Map Server Atlas Walis</a> (6 layers)</li>
+<li><a class="reference external" href="http://www.geographynetwork.com/servlet/com.esri.wms.Esrimap?ServiceName=ESRI_World&amp;WMTVER=1.0.0&amp;request=capabilities-">WMS Map Server www.geographynetwork.com</a> (109 layers)</li>
+<li><a class="reference external" href="http://www.neonet.nl/servlet/WmsServlet?REQUEST=GetCapabilities-">WMS-Neonet</a> (15 layers)</li>
+<li><a class="reference external" href="http://services.interactive-instruments.de/xtra/cgi-bin/wms?REQUEST=GetCapabilities&amp;SERVICENAME=wms-">XtraServer/WMS fuer GDI NRW Verbundprojekt 2004</a> (26 layers)</li>
+<li><a class="reference external" href="http://maps.yorkcountygov.com/servlet/com.esri.wms.Esrimap?REQUEST=GetCapabilities&amp;SERVICENAME=NC1Map_YorkCo_SC_Orthos_WMS-">York County, SC - Color Orthophotos from 2000</a> (2 layers)</li>
+<li><img alt="errorIcon" src="_images/error1.gif" /> <a class="reference external" href="http://maps.yorkcountygov.com/servlet/com.esri.wms.Esrimap?REQUEST=GetCapabilities&amp;SERVICENAME=NC1Map_YorkCo_SC_Corporate_Limits_WMS">York County, SC - Corporate Limits</a> - (1 layer)</li>
+<li><img alt="errorIcon" src="_images/error1.gif" /> <a class="reference external" href="http://maps.yorkcountygov.com/servlet/com.esri.wms.Esrimap?REQUEST=GetCapabilities&amp;SERVICENAME=NC1Map_YorkCo_SC_Zoning_WMS-">York County, SC - Zoning</a> (1 layer)</li>
+<li><img alt="errorIcon" src="_images/error1.gif" /> <a class="reference external" href="http://maps.yorkcountygov.com/servlet/com.esri.wms.Esrimap?REQUEST=GetCapabilities&amp;SERVICENAME=NC1Map_YorkCo_SC_Streets_WMS-">York County, SC Streets</a> (1 layer)</li>
+</ul>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="slip.html">Slip</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="test_servers_2.html">Test Servers 2</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2013, Refractions Research and others.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
