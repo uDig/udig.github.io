@@ -1,0 +1,115 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Plugin Internationalization &mdash; uDig 1.5.0 Developers Guide</title>
+    
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.5.0.RC1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.5.0 Developers Guide" href="index.html" />
+    <link rel="up" title="Working with Eclipse RCP" href="working_with_eclipse_rcp.html" />
+    <link rel="next" title="Plugin Activator" href="plugin_activator.html" />
+    <link rel="prev" title="Plugin Dependency" href="plugin_dependency.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="plugin_dependency.html">Plugin Dependency</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="plugin_activator.html">Plugin Activator</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="plugin-internationalization">
+<h1>Plugin Internationalization<a class="headerlink" href="#plugin-internationalization" title="Permalink to this headline">¶</a></h1>
+<p>The file plugin.properties is used to internationalize the plugin.xml file. Since some of these
+descriptions will be showing up in client code.</p>
+<p>As an example the view name is supposed to be &#8220;a translatable name that will be used in the UI for
+this view&#8221;.</p>
+<p>How to acomplish this?</p>
+<p>Change the name to a %LocalRegistry (in this example)</p>
+<img alt="_images/InternationalizationPlugInProperties.jpg" src="_images/InternationalizationPlugInProperties.jpg" />
+<p>Cerate a plugin.properties file with an entry for LocalRegistry.</p>
+<div class="highlight-python"><pre>LocalRegistry=Local Registry
+Provider=Refractions Research, Inc.</pre>
+</div>
+<p>You can use this trick to manage many aspects of the plugin.xml file including schema descriptions.</p>
+<p><strong>Links</strong></p>
+<ul class="simple">
+<li><a class="reference external" href="http://www.eclipse.org/articles/Article-Internationalization/how2I18n.html">http://www.eclipse.org/articles/Article-Internationalization/how2I18n.html</a></li>
+<li><a class="reference external" href="http://dev.eclipse.org/viewcvs/index.cgi/%7echeckout%7e/org.eclipse.ui.tutorials.rcp.part2/html/tutorial2.html">RCP Tutorial Part 2</a></li>
+</ul>
+<p>To internationalize your source code, see <a class="reference internal" href="plugin_internationalization_with_resourcebundles.html"><em>Plugin Internationalization with ResourceBundles</em></a>.</p>
+<div class="section" id="problems">
+<h2>Problems?<a class="headerlink" href="#problems" title="Permalink to this headline">¶</a></h2>
+<p>With Eclipse 3.4 if your strings are internationalized and the plugin.properties file exists;
+however they are not showing up as internationalized ensure that the MANIFEST.MF has the following
+line.</p>
+<div class="highlight-python"><pre>Bundle-Localization: plugin</pre>
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="plugin_dependency.html">Plugin Dependency</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="plugin_activator.html">Plugin Activator</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2015, Refractions Research and others.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

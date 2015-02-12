@@ -1,0 +1,121 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Plugin Dependencies &mdash; uDig 1.5.0 Developers Guide</title>
+    
+    <link rel="stylesheet" href="../_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.RC1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="../_static/udig.ico"/>
+    <link rel="top" title="uDig 1.5.0 Developers Guide" href="../index.html" />
+    <link rel="up" title="Custom Application" href="CustomApplication.html" />
+    <link rel="next" title="Application" href="Application.html" />
+    <link rel="prev" title="Branding Imagery" href="BrandingImagery.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="BrandingImagery.html">Branding Imagery</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="Application.html">Application</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="plugin-dependencies">
+<h1>Plugin Dependencies<a class="headerlink" href="#plugin-dependencies" title="Permalink to this headline">¶</a></h1>
+<p>The plug-in MANIFEST.MF file is used to define the requirements and capabilities of any plug-in. You will recognize a lot of the information here from when you defined the plug-in.</p>
+<ul>
+<li><p class="first">Open the MANIFEST.MF file:</p>
+<p><img alt="10000201000002510000021DFB2A863D_png" src="../_images/10000201000002510000021DFB2A863D.png" style="width: 10.98cm; height: 10.021cm;" /></p>
+</li>
+<li><p class="first">Switch to the Dependencies tab.</p>
+</li>
+<li><p class="first">Press the <em class="guilabel">Add</em> button in the Required Plug-ins section.</p>
+<p><img alt="100002010000015E000000C28304E1EB_png" src="../_images/100002010000015E000000C28304E1EB.png" style="width: 6.481cm; height: 3.59cm;" /></p>
+</li>
+<li><p class="first">Select the org.locationtech.udig.ui plug-in and press <em class="guilabel">OK</em>.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">You can start typing *.udig.ui to quickly filter the list.</p>
+</div>
+<p><img alt="1000000000000146000000F851DB08F7_png" src="../_images/1000000000000146000000F851DB08F7.png" style="width: 6.04cm; height: 4.59cm;" /></p>
+</li>
+<li><p class="first">Select <em class="menuselection">File ‣ Save</em> from the menu bar to save the file.</p>
+<p>This step is important as it gives the MANIFEST.MF a chance to generate:</p>
+<ul class="simple">
+<li>The <strong>.classpath</strong> file used by the Java build system</li>
+<li>The <strong>.project</strong> file used by the IDE</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The classpath used for compiling is updated to include jars provided by the dependencies.</p>
+</div>
+</li>
+<li><p class="first">With this information in place the wizards and dialogs we used in the next section will be able to find
+classes defined by the <strong>org.locationtech.udig.ui</strong> plug-in.</p>
+</li>
+</ul>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="BrandingImagery.html">Branding Imagery</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="Application.html">Application</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2015, Refractions Research and others.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,363 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Icons &mdash; uDig 1.5.0 Developers Guide</title>
+    
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.5.0.RC1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.5.0 Developers Guide" href="index.html" />
+    <link rel="up" title="Reference" href="reference.html" />
+    <link rel="next" title="User Interface Workflow" href="user_interface_workflow.html" />
+    <link rel="prev" title="IAdaptable" href="iadaptable.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="iadaptable.html">IAdaptable</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="user_interface_workflow.html">User Interface Workflow</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="icons">
+<h1>Icons<a class="headerlink" href="#icons" title="Permalink to this headline">¶</a></h1>
+<p>References:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://wiki.eclipse.org/User_Interface_Guidelines#Folder_Structure">http://wiki.eclipse.org/User_Interface_Guidelines#Folder_Structure</a></li>
+</ul>
+<div class="section" id="organization-of-the-icons-directory">
+<h2>Organization of the icons/ directory<a class="headerlink" href="#organization-of-the-icons-directory" title="Permalink to this headline">¶</a></h2>
+<p>DIRECTORY</p>
+<p>distabled</p>
+<p>enabled</p>
+<p>Other</p>
+<p>Banner</p>
+<p>Size</p>
+<p>Placement</p>
+<p>local toolbar</p>
+<p>dlcl16</p>
+<p>elcl16</p>
+<p>16x16</p>
+<p>left &amp; top clear</p>
+<p>toolbar</p>
+<p>dtool16</p>
+<p>etool16</p>
+<p>16x16</p>
+<p>left &amp; top clear</p>
+<p>view</p>
+<p>dview16</p>
+<p>eview16</p>
+<p>16x16</p>
+<p>left &amp; bottom clear</p>
+<p>model object</p>
+<p>obj16</p>
+<p>16x16</p>
+<p>centered, bottom clear</p>
+<p>overlay</p>
+<p>ovr16</p>
+<p>7x8</p>
+<p>one pixel white outline</p>
+<p>wizard banner</p>
+<p>wizban</p>
+<p>55x45</p>
+<p>bottom left on blue gradient</p>
+<p>PALETTE</p>
+<p>color</p>
+<p>grayscale</p>
+<p>color</p>
+<p>color</p>
+<p>*perspective &amp; fastview icons require the right, and bottom edges to be clear.</p>
+</div>
+<div class="section" id="icon-types">
+<h2>Icon Types<a class="headerlink" href="#icon-types" title="Permalink to this headline">¶</a></h2>
+<p>TYPE</p>
+<p>type</p>
+<p>description</p>
+<p>local toolbar</p>
+<p>lcl</p>
+<p>found on the far right of the title area of a view</p>
+<p>toolbar</p>
+<p>tool</p>
+<p>used in cascading menus, and the global toolbar</p>
+<p>view</p>
+<p>view</p>
+<p>found in the top, left corner of a new view</p>
+<p>model object</p>
+<p>obj</p>
+<p>used in the tree, list, properties views, and editor tabs</p>
+<p>overlay</p>
+<p>ovr</p>
+<p>placed on top of model object to indicate a change</p>
+<p>wizard banner</p>
+<p>wizban</p>
+<p>used in wizard dialog windows</p>
+</div>
+<div class="section" id="filename-conventions">
+<h2>Filename Conventions<a class="headerlink" href="#filename-conventions" title="Permalink to this headline">¶</a></h2>
+<p>FILENAME SUFFIX</p>
+<p>lcl</p>
+<p>tool</p>
+<p>view</p>
+<p>obj</p>
+<p>ovr</p>
+<p>wizban</p>
+<p>invoke a wizard, or graphics in a wizard</p>
+<p>_wiz</p>
+<p>_wiz</p>
+<p>invoke executable file</p>
+<p>_exec</p>
+<p>in an editor view</p>
+<p>_edit</p>
+<p>in a navigator view</p>
+<p>_nav</p>
+<p>_nav</p>
+<p>_nav</p>
+<p>do not fit into a category</p>
+<p>_misc</p>
+<p>_misc</p>
+<p>represent tasks that user can do</p>
+<p>_tsk</p>
+<p>_tsk</p>
+<p>_tsk</p>
+<p>_tsk</p>
+<p>toggles the working mode of the view</p>
+<p>_mode</p>
+<p>found in a menu</p>
+<p>_menu</p>
+<p>found in a property sheet</p>
+<p>_ps</p>
+<p>_ps</p>
+<p>used in the tree, list, or property view</p>
+<p>_obj</p>
+<p>model object icons on object palettes</p>
+<p>_pal</p>
+<p>commands that engage the system</p>
+<p>_co</p>
+<p>_co</p>
+<p>The original 2.1 guidelines provided two additional directories clcl &amp; ctool which allowed a full
+color palette, the enabled and disabled icons were restricted to 8 and 2 colors respectively. This
+restriction has since been relaxed.</p>
+</div>
+<div class="section" id="lcl16">
+<h2>lcl16<a class="headerlink" href="#lcl16" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>/icons/elcl16/zoom_layer_co.gif Zoom to layer</li>
+</ul>
+</div>
+<div class="section" id="obj16">
+<h2>obj16<a class="headerlink" href="#obj16" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>icons/obj16/feature_obj.gif feature</li>
+<li>icons/obj16/grid_obj.gif grid or raster</li>
+</ul>
+<p>Service:</p>
+<ul class="simple">
+<li>icons/obj16/database_obj.gif! database (feature service)</li>
+<li>icons/obj16/datastore_obj.gif! datastore (generic feature service)</li>
+<li>icons/obj16/gce_obj.gif! grid coverage exchange (generic raster service)</li>
+<li>icons/obj16/memory_obj.gif! memory (generated or temporary content)</li>
+<li>icons/obj16/repository_obj.gif! repository (catalog service)</li>
+</ul>
+<p>Server:</p>
+<ul class="simple">
+<li>icons/obj16/server_obj.gif! generic server</li>
+<li>icons/obj16/wfs_obj.gif! web feature server (open web services feature server)</li>
+<li>icons/obj16/wms_obj.gif! web map server (open web services rendering service)</li>
+<li>icons/obj16/wrs_obj.gif! web registry service (open web services catalog service)</li>
+</ul>
+<p>File:</p>
+<ul class="simple">
+<li>icons/obj16/feature_file_obj.gif file (feature file)</li>
+<li>icons/obj16/grid_file_obj.gif file (grid file)</li>
+</ul>
+<p>Misc:</p>
+<ul class="simple">
+<li>icons/obj16/world_obj.gif! world used in logo</li>
+</ul>
+</div>
+<div class="section" id="ovr16">
+<h2>ovr16<a class="headerlink" href="#ovr16" title="Permalink to this headline">¶</a></h2>
+<p>Status</p>
+<ul class="simple">
+<li>icons/ovr16/error_ovr.gif! error</li>
+</ul>
+</div>
+<div class="section" id="tool16">
+<h2>tool16<a class="headerlink" href="#tool16" title="Permalink to this headline">¶</a></h2>
+<p>Project</p>
+<ul class="simple">
+<li>icons/etool16/addlayer_wiz.gif Add layer</li>
+<li>icons/etool16/newfile_wiz.gif New file</li>
+<li>icons/etool16/newfolder_wiz.gif New folder</li>
+<li>icons/etool16/newlayer_wiz.gif New layer</li>
+<li>icons/etool16/newmap_wiz.gif New map</li>
+<li>icons/etool16/newprj_wiz.gif New projet</li>
+<li>icons/etool16/new_wiz.gif New wizard</li>
+<li>icons/etool16/newtemplate_wiz.gif New template</li>
+<li>icons/etool16/save_edit.gif Save</li>
+<li>icons/etool16/saveas_edit.gif Save As</li>
+<li>icons/etool16/saveall_edit.gif Save All</li>
+</ul>
+<p>Catalog:</p>
+<ul class="simple">
+<li>icons/etool16/datastore_wiz.gif DataStore wizard</li>
+<li>icons/etool16/file_wiz.gif File Wizard</li>
+<li>icons/etool16/wms_wiz.gif WMS wizard</li>
+<li>icons/etool16/wfs_wiz.gif WFS Wizard</li>
+<li>icons/etool16/postgis_wiz.gif PostGIS wizard</li>
+<li>icons/etool16/oracle_wiz.gif Oracle Wizard</li>
+<li>icons/etool16/acrsde_wiz.gif ArcSDE Wizard</li>
+</ul>
+<p>Edit Tools</p>
+<ul class="simple">
+<li>icons/etool16/add_vertext_edit.gif Add Vertex Edit</li>
+<li>icons/etool16/remove_vertext_edit.gif Remove Vertex Edit</li>
+<li>icons/etool16/edit_line_mode.gif Edit Line mode</li>
+<li>icons/etool16/edit_point_mode.gif Edit Point mode</li>
+<li>icons/etool16/edit_polygon_mode.gif Edit Polygon mode</li>
+<li>icons/etool16/edit_mode.gif Edit mode</li>
+</ul>
+<p>Zoom Tools</p>
+<ul class="simple">
+<li>icons/etool16/zoom_extent_co.gif Zoom extend</li>
+<li>icons/etool16/zoom_in_co.gif Zoom in</li>
+<li>icons/etool16/zoom_out_co.gif Zoom out</li>
+<li>icons/etool16/zoom_mode.gif Zoom mode</li>
+</ul>
+<p>Pan Tools</p>
+<ul class="simple">
+<li>icons/etool16/pan_mode.gif Pan mode</li>
+</ul>
+<p>Selection Tools</p>
+<ul class="simple">
+<li>icons/etool16/selection_mode.gif Pan mode</li>
+</ul>
+<p>Information Tools</p>
+<ul class="simple">
+<li>icons/etool16/info_mode.gif Information mode</li>
+</ul>
+<p>Printing</p>
+<ul class="simple">
+<li>icons/etool16/newpage_wiz.gif New Page</li>
+<li>icons/etool16/newtemplate_wiz.gif New template</li>
+<li>icons/etool16/print_tsk.gif Print</li>
+</ul>
+<p>Misc Tools</p>
+<ul class="simple">
+<li>icons/etool16/cancel_all_co.gif Cancel all</li>
+<li>icons/etool16/clear_co.gif Clear</li>
+<li>icons/etool16/delete.gif Delete</li>
+<li>icons/etool16/refresh_co.gif Refresh</li>
+<li>icons/etool16/incom_synch.gif Incoming synchronization</li>
+<li>icons/etool16/outgo_synch.gif Outgoing synchronization</li>
+</ul>
+</div>
+<div class="section" id="view16">
+<h2>view16<a class="headerlink" href="#view16" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>icons/eview16/catalog_view.gif Information View</li>
+<li>icons/eview16/view_obj.gif Catalog View</li>
+<li>icons/eview16/layer_view.gif Layer View</li>
+<li>icons/eview16/style_view.gif Style View</li>
+<li>icons/eview16/select_view.gif Select View</li>
+</ul>
+</div>
+<div class="section" id="wizban">
+<h2>wizban<a class="headerlink" href="#wizban" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>icons/wizban/arcsde_wiz.gif ArcSDE Wizard</li>
+<li>icons/wizban/oracle_wiz.gif Oracle Wizard</li>
+<li>icons/wizban/postgis_wiz.gif PostGIS Wizard</li>
+<li>icons/wizban/shapefile_wiz.gif ShapeFile Wizard</li>
+<li>icons/wizban/wms_wiz.gif WMS Wizard</li>
+<li>icons/wizban/wfs_wiz.gif WFS Wizard</li>
+<li>icons/wizban/add_wiz.gif Add Wizard</li>
+<li>icons/wizban/catalog_wiz.gif Catalog Wizard</li>
+<li>icons/wizban/datastore_wiz.gif Datastore Wizard</li>
+<li>icons/wizban/export_wiz.gif Export Wizard</li>
+<li>icons/wizban/feature_file_wiz.gif Feature File Wizard</li>
+<li>icons/wizban/file_wiz.gif File Wizard</li>
+<li>icons/wizban/gce_wiz.gif Grid Coverage Exchange Wizard</li>
+<li>icons/wizban/grid_file_wiz.gif Grid File Wizard</li>
+<li>icons/wizban/import_wiz.gif Import Wizard</li>
+<li>icons/wizban/repository_wiz.gif Repository Wizard</li>
+<li>icons/wizban/server_wiz.gif Server Wizard</li>
+<li>icons/wizban/wrs_wiz.gif WRS Wizard</li>
+<li>icons/wizban/chooselayer_wiz.gif Choose Layer</li>
+<li>icons/wizban/newfolder_wiz.gif New Folder</li>
+<li>icons/wizban/file_wiz.gif File Wizard</li>
+<li>icons/wizban/new_wiz.gif New Wizard</li>
+<li>icons/wizban/newfile_wiz.gif New File Wizard</li>
+<li>icons/wizban/newlayer_wiz.gif New Layer Wizard</li>
+<li>icons/wizban/newmap_wiz.gif New Map Wizard</li>
+<li>icons/wizban/newpage_wiz.gif New Page Wizard</li>
+<li>icons/wizban/newprj_wiz.gif New Project Wizard</li>
+<li>icons/wizban/newtemplate_wiz.gif New Template Wizard</li>
+</ul>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="iadaptable.html">IAdaptable</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="user_interface_workflow.html">User Interface Workflow</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2015, Refractions Research and others.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,472 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>SDK Quickstart &mdash; uDig 1.5.0 Developers Guide</title>
+    
+    <link rel="stylesheet" href="../_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5.0.RC1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="../_static/udig.ico"/>
+    <link rel="top" title="uDig 1.5.0 Developers Guide" href="../index.html" />
+    <link rel="up" title="Getting Started" href="../getting_started.html" />
+    <link rel="next" title="Custom Application" href="../CustomApplication/CustomApplication.html" />
+    <link rel="prev" title="Getting Started" href="../getting_started.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="../getting_started.html">Getting Started</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="../CustomApplication/CustomApplication.html">Custom Application</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="sdk-quickstart">
+<h1>SDK Quickstart<a class="headerlink" href="#sdk-quickstart" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><img alt="udig_logo_gif" src="../_images/udig_logo1.gif" /> <img alt="refractions_png" src="../_images/refractions_logo1.png" style="height: 2.8cm;" /> <img alt="lisasoft_png" src="../_images/lisasoft_logo1.png" style="height: 2.8cm;" /> <img alt="camptocamp_logo" src="../_images/camptocamp_logo.png" /> <img alt="sponsor_logo" src="../_images/sponsor_logo.png" /> <img alt="hydrologis_logo" src="../_images/hydrologis_logo.png" /></div></blockquote>
+<img alt="../_images/background1.png" src="../_images/background1.png" style="width: 100%;" />
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>This workbook is aimed at those doing plug-in development against the uDig platform. Follow these instructions
+to quickly set up a development environment for working on your own plug-ins.</p>
+<p>Eclipse is familiar to most developers as a Java Integrated Development Environment (IDE). The Eclipse IDE
+can be extended with additional “capabilities” to work with alternate programming languages (like C++ or Ruby),
+or additional subject matter such as Java Enterprise Edition or in this case Eclipse Plug-in development.</p>
+<p>In this Quickstart we are going to use the Eclipse Plug-in Development capability; with the uDIG SDK as the
+target platform. This workbook covers setting up a development environment for working on your own plug-ins.</p>
+<p>If you have an existing Eclipse installation please do not skip this tutorial – we are going to very carefully
+set up a copy of Eclipse with a few more additional tools then you are perhaps used to.</p>
+<p>The Eclipse developers themselves make use of the Plug-in Development Environment (PDE) day in and day out –
+so it has gotten a lot of polish over the years. In some respects it is more polished then the Java development
+environment (with custom editors for all kinds of little files).</p>
+<p>Some of the terminology used when working with the PDE:</p>
+<ul class="simple">
+<li>Everything is a <strong>Plug-in</strong></li>
+<li>A plug-in can implement an <strong>extension</strong></li>
+<li>A plug-in can provide an <strong>extension-point</strong> for others</li>
+</ul>
+<p>Please keep these ideas in mind – even an “Application” is considered an extension when working with the
+Eclipse Platform.</p>
+<div class="figure align-center">
+<img alt="" src="../_images/uDigApplicationAsPlugin.jpg" />
+</div>
+</div>
+<div class="section" id="downloads">
+<h2>Downloads<a class="headerlink" href="#downloads" title="Permalink to this headline">¶</a></h2>
+<p>We are going to start by downloading all the software we need; we will be able to proceed with installation
+as we wait for some of the larger downloads.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you are using this work book in a lab setting you will find these downloads available on your course DVD.</p>
+</div>
+<p><strong>Target Platform Downloads</strong></p>
+<ul>
+<li><p class="first">For uDig 1.3 we are going going to download the latest SDK from here:</p>
+<p><a class="reference external" href="http://udig.refractions.net/download/">http://udig.refractions.net/download/</a></p>
+<p>Early access downloads are available here:</p>
+<p><a class="reference external" href="http://udig.refractions.net/download/unstable/">http://udig.refractions.net/download/unstable/</a></p>
+<p>At the time of writing the latest uDig SDK was: udig-1.3.3-SNAPSHOT.zip</p>
+</li>
+<li><p class="first">Download Eclipse RCP Delta Pack</p>
+<p><a class="reference external" href="http://download.eclipse.org/eclipse/downloads/eclipse3x.html">http://download.eclipse.org/eclipse/downloads/eclipse3x.html</a></p>
+<p>Download the RCP-Delta Pack from you will need to choose the &#8220;Latest Release&#8221; build; and the scroll
+down to the &#8220;Delta Pack&#8221; link to download.</p>
+<p>At the time of writing: <a class="reference external" href="http://download.eclipse.org/eclipse/downloads/drops/R-3.7.2-201202080800/download.php?dropFile=eclipse-3.7.2-delta-pack.zip">eclipse-3.7.2-delta-pack.zip</a></p>
+</li>
+</ul>
+<p><strong>IDE Downloads</strong></p>
+<ul>
+<li><p class="first">Visit and click on the link for “Eclipse Modeling Tools” and download the appropriate:</p>
+<p><img alt="eclipse_modeling_tools_png" src="../_images/eclipse_modeling_tools.jpg" style="width: 15.36cm; height: 2.221cm;" /></p>
+<p>Tested with <a class="reference external" href="http://www.eclipse.org/downloads/packages/eclipse-modeling-tools/indigosr2">Eclipse Indigo 3.7.2 Packages</a> :</p>
+<p><a class="reference external" href="http://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/indigo/SR2/eclipse-modeling-indigo-SR2-win32.zip">eclipse-modeling-indigo-SR2-win32.zip</a></p>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">New for uDig 1.3.3 is the ability to use the uDig SDK as a stand alone target platform.
+This allows you to use a newer version of the Eclipse IDE than the one referenced by
+the uDig SDK.</p>
+</div>
+</li>
+<li><p class="first">We have prepared an “dropins” download in the following folder:</p>
+<p><a class="reference external" href="http://udig.refractions.net/files/downloads/extras/">http://udig.refractions.net/files/downloads/extras/</a></p>
+<p>This download includes a developers guide for udig, and a resource bundle editor.</p>
+<p>At the time of writing: <strong>dropins-3.7.2.zip</strong></p>
+</li>
+<li><p class="first">Download a Java Runtime Environment from this folder:</p>
+<p><a class="reference external" href="http://udig.refractions.net/files/downloads/jre/">http://udig.refractions.net/files/downloads/jre/</a></p>
+<p>This is a special JRE that has been extended with Java Advanced Imaging and Image IO and GDAL for
+spatial image formats.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">GDAL support is provided by the imageio-ext project started by GeoTools alumni.</p>
+</div>
+<p>At the time of writing: <strong>jre1.6.0_25.win32_gdal_ecw.zip</strong></p>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">Please ensure your Eclipse IDE and jre match (both win32 – or both win64).</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="eclipse-sdk-installation">
+<h2>Eclipse SDK Installation<a class="headerlink" href="#eclipse-sdk-installation" title="Permalink to this headline">¶</a></h2>
+<p>When your eclipse download has finished and we can begin to installation.</p>
+<ul>
+<li><p class="first">Create a folder: <tt class="file docutils literal"><span class="pre">C:\java\</span></tt></p>
+</li>
+<li><p class="first">Unzip the downloaded <a class="reference external" href="http://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/indigo/SR2/eclipse-modeling-indigo-SR2-win32.zip">eclipse-modeling-indigo-SR2-win32.zip</a>
+file to your directory – the folder <tt class="file docutils literal"><span class="pre">C:\java\eclipse</span></tt> will be created</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Unzipping using windows does not support long filenames.</p>
+</div>
+<p><img alt="install_eclipse_png" src="../_images/install_eclipse.jpg" style="width: 12.19cm; height: 7.05cm;" /></p>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">If you need a good program to unzip archive files try <a class="reference external" href="http://www.7-zip.org">7zip</a>.</p>
+</div>
+</li>
+<li><p class="first">Open up the jre zip file Drag from the 7zip window.</p>
+<p><img alt="install_jre_7zip_png" src="../_images/install_jre_7zip.jpg" style="width: 8.01cm; height: 5.941cm;" /></p>
+</li>
+<li><p class="first">Drop into your <tt class="file docutils literal"><span class="pre">C:\java\eclipse</span></tt></p>
+<p><img alt="install_jre_png" src="../_images/install_jre.jpg" style="width: 12.19cm; height: 7.05cm;" /></p>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">The folder must be called “jre” for the <strong class="command">eclipse.exe</strong> to recognize it.</p>
+</div>
+</li>
+<li><p class="first">Unzip the dropins file to your eclipse/dropins folder. The download will add additional plug-ins
+and features to to your eclipse installation without getting mixed up with the bare-bones eclipse.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Be careful when extracting this zip not to get something silly like dropins/dropins.</p>
+</div>
+<p><img alt="install_dropins_png" src="../_images/install_dropins.jpg" style="width: 12.19cm; height: 7.05cm;" /></p>
+</li>
+<li><p class="first">Navigate to <tt class="file docutils literal"><span class="pre">C:\java\eclipse</span></tt> and right-click on the <strong class="command">eclipse.exe</strong>
+file and select <em class="menuselection">Send To ‣ Desktop (create shortcut)</em>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You may want to modify the “eclipse.ini” file to specify additional command line
+options such as more memory.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="eclipse-workspace">
+<h2>Eclipse Workspace<a class="headerlink" href="#eclipse-workspace" title="Permalink to this headline">¶</a></h2>
+<p>The Eclipse IDE keeps track of what you are doing in a workspace. You can have several workspaces (often
+for different projects) each with its own configuration.</p>
+<ul>
+<li><p class="first">Double click on your desktop short cut to start up eclipse. When you start up eclipse for the first
+time it prompt you for a workspace.</p>
+</li>
+<li><p class="first">Choose a workspace for your sdk development: <tt class="file docutils literal"><span class="pre">C:\java\workspace</span></tt></p>
+<p><img alt="eclipse_workspace_jpg" src="../_images/eclipse_workspace.jpg" style="width: 10.97cm; height: 5.23cm;" /></p>
+</li>
+<li><p class="first">Wait a few moments while eclipse starts up.</p>
+</li>
+<li><p class="first">On the Welcome view press the <em class="guilabel">Workbench</em> button along the right hand side.</p>
+<p><img alt="eclipse_welcome_jpg" src="../_images/eclipse_welcome.jpg" style="width: 14.559cm; height: 11cm;" /></p>
+</li>
+</ul>
+</div>
+<div class="section" id="eclipse-preferences">
+<h2>Eclipse Preferences<a class="headerlink" href="#eclipse-preferences" title="Permalink to this headline">¶</a></h2>
+<p>We have a few global settings to configure before we can proceed.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">We are waiting for a Mac OSX JRE to be available before using Java 7.</p>
+</div>
+<ul>
+<li><p class="first">Open up <em class="menuselection">Window ‣ Preferences</em> from the menu bar.</p>
+</li>
+<li><p class="first">Navigate to the <em class="menuselection">Java ‣ Compiler</em> page and change:</p>
+<ul class="simple">
+<li>Compiler compliance level: 1.6</li>
+</ul>
+</li>
+<li><p class="first">Check the <em class="menuselection">Java ‣ Installed JREs</em> page:</p>
+<ul>
+<li><p class="first">Should have Location: <tt class="file docutils literal"><span class="pre">C:\java\eclipse</span></tt></p>
+<p>If the setting is not correct you can use the <em class="guilabel">Add..</em> button and create a
+JRE entry for <tt class="file docutils literal"><span class="pre">C:\java\eclipse</span></tt></p>
+</li>
+<li><p class="first">You can press <em class="guilabel">Edit</em> to look at the installed JRE.</p>
+<p>Regardless of platform we are interested in making sure <tt class="file docutils literal"><span class="pre">jai_core.jar</span></tt>, <tt class="file docutils literal"><span class="pre">jai_imageio.jar</span></tt>
+and <tt class="file docutils literal"><span class="pre">jai_codec.jar</span></tt> are available.</p>
+</li>
+</ul>
+<p><img alt="jre_definitino_jpg" src="../_images/jre_definitino.jpg" style="width: 9.359cm; height: 9.47cm;" /></p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">On OSX we are not able to provide a JRE for you to download – uDig will install JAI and ImageIO when
+run for the first time.</p>
+</div>
+<ul>
+<li><p class="first">As a result of these changes, Eclipse may prompt you to perform a clean build.</p>
+<p>Simply accept this request; it won&#8217;t take long since we don&#8217;t yet have any source code.</p>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="udig-sdk-target-platform">
+<h2>uDIG SDK Target Platform<a class="headerlink" href="#udig-sdk-target-platform" title="Permalink to this headline">¶</a></h2>
+<p>We are now going to unpack the udig sdk and use it as our target platform for plug-in development:</p>
+<ul>
+<li><p class="first">Extract the <strong>udig sdk</strong> download into <tt class="file docutils literal"><span class="pre">C:\java\target\udig_sdk</span></tt></p>
+</li>
+<li><p class="first">Extract the <strong>eclipse-delta-pack</strong> download into <tt class="file docutils literal"><span class="pre">C:\java\target\eclipse</span></tt></p>
+</li>
+<li><p class="first">You will be left with the following directory structure:</p>
+<p><img alt="install_delta_png" src="../_images/install_delta.jpg" style="width: 12.19cm; height: 7.181cm;" /></p>
+</li>
+<li><p class="first">Go back to eclipse and open <em class="menuselection">Window ‣ Preferences</em>.</p>
+</li>
+<li><p class="first">Select the <em class="menuselection">Plugin Development ‣ Target Platform</em> page.</p>
+</li>
+<li><p class="first">Press the <em class="guilabel">Add</em> button to start a new target definition.</p>
+</li>
+<li><p class="first">Choose <em class="guilabel">Default</em> as we are going to include the eclipse plugins.</p>
+<p><img alt="target_platform_definition_png" src="../_images/target_platform_definition.jpg" style="width: 11.411cm; height: 5.429cm;" /></p>
+</li>
+<li><p class="first">Press <em class="guilabel">Next</em> to continue. This will open the “Target Content” page.</p>
+</li>
+<li><p class="first">Press the <em class="guilabel">Add</em> button and add a Directory. Choose the <tt class="file docutils literal"><span class="pre">C:\java\target\eclipse</span></tt>
+directory where you unpacked the eclipse-delta-pack.</p>
+<p><img alt="target_platform_add_eclipse_png" src="../_images/target_platform_add_eclipse.jpg" style="width: 8.331cm; height: 4.399cm;" /></p>
+</li>
+<li><p class="first">Press <em class="guilabel">Add...</em> again and add the <tt class="file docutils literal"><span class="pre">C:\java\target\udig_sdk</span></tt> directory.</p>
+<p><img alt="target_platform_add_sdk_png" src="../_images/target_platform_add_sdk.jpg" style="width: 8.331cm; height: 4.54cm;" /></p>
+</li>
+<li><p class="first">Change the name to “uDig SDK” and confirm all three folders are listed.</p>
+<p><img alt="target_platform_locations_png" src="../_images/target_platform_locations.jpg" style="width: 11.411cm; height: 7.519cm;" /></p>
+</li>
+<li><p class="first">Press <em class="guilabel">Finish</em> to complete the “uDig SDK” target platform.</p>
+</li>
+<li><p class="first">Back in the <strong>Target Platform</strong> preference page tick the checkbox next to the “uDig SDK”
+so it will be the Active target platform.</p>
+</li>
+<li><p class="first">Press <em class="guilabel">OK</em>.</p>
+</li>
+</ul>
+<p>At this point all the source code for the Eclipse and uDig plug-ins are available. We can now start
+working on uDig plug-ins, but before we do that lets try running the application.</p>
+</div>
+<div class="section" id="running-udig">
+<h2>Running uDig<a class="headerlink" href="#running-udig" title="Permalink to this headline">¶</a></h2>
+<p>With all this in place we can now run the uDig application from your development environment. This
+is a good way to test that everything is installed correctly.</p>
+<ol class="arabic">
+<li><p class="first">To start out with we will switch to the <strong>Plug-in Development</strong> perspective;</p>
+<p>In the top right of the toolbar you can choose <strong>Other</strong> to open the Open Perspective dialog</p>
+<p><img alt="perspective_other_jpg" src="../_images/perspective_other.jpg" style="width: 3.371cm; height: 2.66cm;" /></p>
+</li>
+<li><p class="first">Chose <strong>Plugin-Development</strong> from the list and press <em class="guilabel">OK</em></p>
+<p><img alt="perspective_open_jpg" src="../_images/perspective_open.jpg" style="width: 6.549cm; height: 6.77cm;" /></p>
+</li>
+<li><p class="first">Click on the <em class="guilabel">Plugins view</em> and right click on <strong>org.locationtech.udig</strong> plug-in the list.
+Select <em class="menuselection">Import As ‣ Source Project</em> to copy the plugin into your workspace.</p>
+<p><img alt="import_source_project_jpg" src="../_images/import_source_project.jpg" style="width: 13.651cm; height: 10.321cm;" /></p>
+</li>
+<li><p class="first">Change to the <em class="guilabel">Package Explorer</em> view and open up the <strong>org.locationtech.udig</strong> plugin
+and double click to open <strong>udig.product</strong>.</p>
+<p><img alt="product_open_jpg" src="../_images/product_open.jpg" style="width: 3.08cm; height: 7.08cm;" /></p>
+</li>
+<li><p class="first">Switch to the <em class="guilabel">dependencies</em> tab and review the features required for the product.</p>
+<p><img alt="product_dependencies_png" src="../_images/product_dependencies.jpg" style="width: 8.94cm; height: 7.72cm;" /></p>
+</li>
+<li><p class="first">Return to the <em class="guilabel">overview</em> tab of <strong>udig.product</strong> click on the <em class="guilabel">Launch Eclipse Application</em>
+link (it is located under testing as shown below).</p>
+<p><img alt="product_launch_png" src="../_images/product_launch.jpg" style="width: 6.458cm; height: 7.083cm;" /></p>
+</li>
+<li><p class="first">The application will now start!</p>
+<p><img alt="udig_welcome_jpg" src="../_images/udig_welcome.jpg" style="width: 14.559cm; height: 11cm;" /></p>
+</li>
+</ol>
+</div>
+<div class="section" id="what-to-do-next">
+<h2>What to Do Next<a class="headerlink" href="#what-to-do-next" title="Permalink to this headline">¶</a></h2>
+<p>Here are some additional things to try when running uDig.</p>
+<ul>
+<li><p class="first">From Eclipse open up <em class="menuselection">Run ‣ Run Configurations</em> to examine or customize configuration
+of uDig you are running. Many of these fields were filled in for you by the udig.product.</p>
+</li>
+<li><p class="first">The number one tip is to go to the Arguments tab and enable console logging. To send log information to
+the console as udig runs add:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="o">-</span><span class="n">consolelog</span>
+</pre></div>
+</div>
+<p>to your “program arguments”.</p>
+<p><img alt="run_arguments_jpg" src="../_images/run_arguments.jpg" style="width: 15.199cm; height: 11cm;" /></p>
+<p>You can also review the VM arguments; including changing the amount of memory available to your uDig
+application:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="o">-</span><span class="n">Xmx512m</span>
+</pre></div>
+</div>
+<p>may be useful when working with large images? The:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="o">-</span><span class="n">Dosgi</span><span class="o">.</span><span class="n">parentClassload</span><span class="o">=</span><span class="n">ext</span>
+</pre></div>
+</div>
+<p>setting allows uDig to find JRE extensions such as Java Advanced Imaging and ImageIO.</p>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">For documentation on these command line parameters check the eclipse help menu.</p>
+</div>
+</li>
+<li><p class="first">The running uDig application makes use of the “Workspace Data” folder defined in the Run dialog. Try checking
+clear and workspace in order to simulate starting uDig from a fresh install.</p>
+<p><img alt="run_main_jpg" src="../_images/run_main.jpg" style="width: 15.199cm; height: 11cm;" /></p>
+</li>
+<li><p class="first">Have a look on the Tracing tab of the Run dialog; you can control the amount of logging
+information produced (for example WMS logging is turned on below).</p>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">Tracing is especially useful when the -consolelog program argument is used.</p>
+</div>
+<p><img alt="run_tracing_jpg" src="../_images/run_tracing.jpg" style="width: 15.199cm; height: 11cm;" /></p>
+</li>
+<li><p class="first">Have a look at the plug-ins tab and see if you can turn off: printing support.</p>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">Normally the plugins included by an application are organized into features – we will cover
+how to do this in the <a class="reference internal" href="../CustomApplication/CustomApplication.html"><em>Custom Application Tutorial</em></a>.</p>
+</div>
+<p><img alt="run_plugins_jpg" src="../_images/run_plugins.jpg" style="width: 15.199cm; height: 11cm;" /></p>
+</li>
+<li><p class="first">Advanced: When working on the uDig project itself we use the FindBugz tool to check for obvious
+mistakes prior to committing. You can add FindBugz to your environment using the following update site:</p>
+<p><a class="reference external" href="http://findbugs.cs.umd.edu/eclipse">http://findbugs.cs.umd.edu/eclipse</a></p>
+<p><img alt="install_findbugs_jpg" src="../_images/install_findbugs.jpg" style="width: 8.58cm; height: 3.491cm;" /></p>
+</li>
+</ul>
+</div>
+<div class="section" id="tips-ticks-and-suggestions">
+<h2>Tips, Ticks and Suggestions<a class="headerlink" href="#tips-ticks-and-suggestions" title="Permalink to this headline">¶</a></h2>
+<p>The following tips, tricks and suggestions have been collected from the udig-devel email list. If
+you have any questions feel free to drop by and introduce yourself.</p>
+<div class="section" id="classnotfoundexception-at-eclipsestarter">
+<h3>ClassNotFoundException at EclipseStarter<a class="headerlink" href="#classnotfoundexception-at-eclipsestarter" title="Permalink to this headline">¶</a></h3>
+<p>If your uDig application fails to load due to a ClassNotFoundException at
+org.eclipse.core.runtime.adaptor.EclipseStarter then we have a problem with the plugin dependencies.
+The EclipseStarter is doing its best to load the UDIGApplication; however the UDIGApplication is
+not available as the Platform refused to load the org.locationtech.udig.ui plugin as some of the
+dependencies were not available.</p>
+<p>This usually happens each time we update the version of Eclipse we use. Each version of eclipse
+changes the plugins required; requiring us to review and examine the plugins we include in our SDK.</p>
+<p>As a temporary measure:</p>
+<ol class="arabic simple">
+<li>Open up your Run Configuration</li>
+<li>Navigate to the Plugins tab</li>
+<li>Hit &#8220;Verify Plugins&#8221; (to list the plugins that failed to load; you should see that
+org.locationtech.udig.ui is in this list)</li>
+<li>Hit add required plugins</li>
+</ol>
+<p>Please email the <a class="reference external" href="https://locationtech.org/mailman/listinfo/udig-dev">udig-dev</a> list; and
+volunteer to test the SDK with the version of eclipse you are using.</p>
+</div>
+<div class="section" id="noclassdeffounderror-jai">
+<h3>NoClassDefFoundError JAI<a class="headerlink" href="#noclassdeffounderror-jai" title="Permalink to this headline">¶</a></h3>
+<p>The class JAI is provided as part of the custom <strong>jre</strong> you downloaded. In order for uDig to see
+this class it needs to be run using the &#8220;ext&#8221; classpath. This information is part of the
+udig.product file you run during the SDK Quickstart.</p>
+<p>For reference here is the command line option it sets:</p>
+<div class="highlight-python"><pre>-Dosgi.parentClassloader:ext</pre>
+</div>
+</div>
+<div class="section" id="linux">
+<h3>Linux<a class="headerlink" href="#linux" title="Permalink to this headline">¶</a></h3>
+<p>Please follow the same procedure; there is a &#8220;prepackaged&#8221; JRE available for you in our
+<a class="reference external" href="http://udig.refractions.net/downloads/jre/">http://udig.refractions.net/downloads/jre/</a> folder.</p>
+<p>Please don&#8217;t do anything tricky like trying to &#8220;app get&#8221; a copy of Eclipse and Java; version numbers
+are important and we are setting up this environment very carefully.</p>
+<p>If you would like to patch up your system Java you can do so by installing the versions of JAI and
+ImageIO mentioned above.</p>
+</div>
+<div class="section" id="mac-os-x">
+<h3>Mac OS-X<a class="headerlink" href="#mac-os-x" title="Permalink to this headline">¶</a></h3>
+<p>The Java included with your operating system is &#8220;good enough&#8221; for now - JAI is already installed on
+Tiger and Leopard. Some raster formats may not work out.</p>
+</div>
+<div class="section" id="how-to-build-udig-from-source-code">
+<h3>How to build uDig from Source Code<a class="headerlink" href="#how-to-build-udig-from-source-code" title="Permalink to this headline">¶</a></h3>
+<p>If you are interested in taking part on trunk development please consider <a class="reference external" href="http://udig.refractions.net/confluence/display/ADMIN/02+Development+Environment">these instructions for
+checking out and building uDig</a>.</p>
+</div>
+<div class="section" id="jvm-terminated-with-exit-code-1">
+<h3>JVM Terminated with Exit Code=-1<a class="headerlink" href="#jvm-terminated-with-exit-code-1" title="Permalink to this headline">¶</a></h3>
+<p>If you have a really old machine with lots of versions of Java installed you may be in trouble! If
+you start eclipse and big dialog saying <strong>JVM Terminated with Exit Code=-1</strong> then add the following
+to your command line options:</p>
+<div class="highlight-python"><pre>-vm C:\java\eclipse\jre\\bin\javaw.exe</pre>
+</div>
+<p>This will force <strong class="command">eclipse.exe</strong> to use the jre you downloaded.</p>
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="../getting_started.html">Getting Started</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="../CustomApplication/CustomApplication.html">Custom Application</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2015, Refractions Research and others.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,238 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Reading List &mdash; uDig 1.5.0 Developers Guide</title>
+    
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.5.0.RC1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.5.0 Developers Guide" href="index.html" />
+    <link rel="up" title="Reference" href="reference.html" />
+    <link rel="next" title="Dependencies" href="dependencies.html" />
+    <link rel="prev" title="uDig Extension Points List" href="udig_extension_points_list.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="udig_extension_points_list.html">uDig Extension Points List</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="dependencies.html">Dependencies</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="reading-list">
+<h1>Reading List<a class="headerlink" href="#reading-list" title="Permalink to this headline">¶</a></h1>
+<p>This list is not ordered, how important I feel these documents are really changed as I climbed up
+the learning curve. Suffice to say that each link here saved me weeks rather then days.</p>
+<div class="section" id="getting-started">
+<h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
+<p>When starting out it is easy to get stuck in the details of how to accomplish things. These links
+not only help with that, but also provide some lasting understanding.</p>
+<div class="section" id="the-big-picture-platform-and-plug-ins">
+<h3>The Big Picture / Platform and Plug-ins<a class="headerlink" href="#the-big-picture-platform-and-plug-ins" title="Permalink to this headline">¶</a></h3>
+<p><strong>Notes on the Eclipse Plug-in Architecture</strong> (Article)</p>
+<p><a class="reference external" href="http://www.eclipse.org/articles/Article-Plug-in-architecture/plugin_architecture.html">http://www.eclipse.org/articles/Article-Plug-in-architecture/plugin_architecture.html</a></p>
+<p>A watershed document with a clear explanation about how an Eclipse application is assembled out of
+extension points and extensions.</p>
+<ul class="simple">
+<li>learning what an extension point is good for</li>
+<li>understanding lolly-pop diagrams</li>
+<li>Comparision with Publish/Subscribe</li>
+</ul>
+<dl class="docutils">
+<dt><strong>Contributing to Eclipse Principles, Patterns and Plug-ins</strong> (Book)</dt>
+<dd><a class="reference external" href="http://www.awprofessional.com/title/0321205758">http://www.awprofessional.com/title/0321205758</a></dd>
+</dl>
+<p>This book answers the crucial <strong>why</strong> questions I had about Eclipse development.</p>
+<ul class="simple">
+<li>Buy for the UDIG:Eclipse House Rules</li>
+<li>Buy if <strong>IAdaptable</strong> is bothering you</li>
+<li>Some examples are showing their age</li>
+</ul>
+<p>The last couple chapters that use patterns to show you how things work, and what trade-offs were
+considered, is worth the price of admission alone.</p>
+<dl class="docutils">
+<dt><strong>Eclipse Plug-ins</strong> (Book)</dt>
+<dd>Previous edition: Building Commercial Quality Plug-ins
+<a class="reference external" href="http://www.qualityeclipse.com/">http://www.qualityeclipse.com/</a></dd>
+</dl>
+<p>Despite its title, and perhaps intent, this book covers a great middle ground between the the
+<strong>Contributing to</strong> and the <strong>FAQ</strong> books. Covers a range of topics, communicating the <em>tricks</em> that
+we would not have found otherwise.</p>
+<ul class="simple">
+<li>SWT Layout tutorial with the same form done with each layout manager</li>
+<li>Was how I finally learned how to use Viewers, LabelDirectors and ItemProviders</li>
+<li>Only book intro to building offline with PDE Build / Ant</li>
+<li>Content occasionally needs adapting for RCP use</li>
+</ul>
+<p>The main benefit is showing the use of these technologies in a more realistic context. Recommend
+this book as an alternative to the FAQ book if you can make it through the first month without being
+annoyed at your ability to update a status bar.</p>
+</div>
+<div class="section" id="rich-client-platform">
+<h3>Rich Client Platform<a class="headerlink" href="#rich-client-platform" title="Permalink to this headline">¶</a></h3>
+<p><strong>Developing Eclipse Rich Client Applications</strong> (Tutorial)</p>
+<p><a class="reference external" href="http://www.eclipsecon.org/2005/presentations/EclipseCon2005_Tutorial8.pdf">http://www.eclipsecon.org/2005/presentations/EclipseCon2005_Tutorial8.pdf</a></p>
+<p>Makes use of the Eclipse wizards to make a quick intro. A good tutorial to check out while we wait
+for the other links to get updates.</p>
+<ul class="simple">
+<li>Use of Wizards to limit writing of code</li>
+<li>Intro to PDE Units</li>
+<li>Predates the switch to Manifests (so you need to do a few extra steps to get your unit test to
+work)</li>
+</ul>
+<p><strong>Eclipse Rich Client Platform : Design, Coding, and Packaging Java Applications</strong> (Review)</p>
+<p><a class="reference external" href="http://www.eclipsezone.com/articles/rcp-review/">http://www.eclipsezone.com/articles/rcp-review/</a></p>
+<p>I have a copy of it, I read it from cover to cover and I agree with this review Alain Demers, Faune
+Quebec</p>
+</div>
+<div class="section" id="tips">
+<h3>Tips<a class="headerlink" href="#tips" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Website:
+<a class="reference external" href="http://dev.eclipse.org/viewcvs/index.cgi/%7Echeckout%7E/platform-ui-home/rcp/faq.html">http://dev.eclipse.org/viewcvs/index.cgi/%7Echeckout%7E/platform-ui-home/rcp/faq.html</a></li>
+<li>Article:
+<a class="reference external" href="http://www.eclipse.org/articles/Article-RCP-1/tutorial1.html">http://www.eclipse.org/articles/Article-RCP-1/tutorial1.html</a></li>
+<li>Article:
+<a class="reference external" href="http://www.eclipse.org/articles/Article-RCP-2/tutorial2.html">http://www.eclipse.org/articles/Article-RCP-2/tutorial2.html</a></li>
+<li>Article:
+<a class="reference external" href="http://www.eclipse.org/articles/Article-RCP-3/tutorial3.html">http://www.eclipse.org/articles/Article-RCP-3/tutorial3.html</a></li>
+<li>Article:
+<a class="reference external" href="http://dev.eclipse.org/viewcvs/index.cgi/-checkout-/pde-build-home/articles/export%20rcp%20apps/article.html">http://dev.eclipse.org/viewcvs/index.cgi/-checkout-/pde-build-home/articles/export%20rcp%20apps/article.html</a></li>
+<li>Reference:
+<a class="reference external" href="http://wiki.eclipse.org/index.php/Rich_Client_Platform">http://wiki.eclipse.org/index.php/Rich_Client_Platform</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h2>
+<p>For day to day day UDIG development you will find the following useful.</p>
+<div class="section" id="development">
+<h3>Development<a class="headerlink" href="#development" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><strong>Eclipse Documentation</strong></dt>
+<dd><a class="reference external" href="http://help.eclipse.org/">http://help.eclipse.org/</a></dd>
+</dl>
+<p>Find yourself using outdated tutorials from the web? Check the latest online help to see how things
+are done today.</p>
+<ul class="simple">
+<li>From within Eclipse: <strong>Help &gt; Help Contents</strong></li>
+<li>This is the only information that is actually up to date.</li>
+<li>Use the website to provide links for others</li>
+<li>Often can only be understood as a reference (after you have figured it out once)</li>
+</ul>
+</div>
+<div class="section" id="swt-jface">
+<h3>SWT &amp; JFace<a class="headerlink" href="#swt-jface" title="Permalink to this headline">¶</a></h3>
+<p><strong>SWT: The Standard Widget Toolkit, Volume 1</strong> (Book)</p>
+<blockquote>
+<div><a class="reference external" href="http://www.awprofessional.com/title/0321256638">http://www.awprofessional.com/title/0321256638</a></div></blockquote>
+<p>A good reference (but so is the source code), I found the <strong>Building Commercial Quaility Plug-ins</strong>
+examples of using the SWT/JFace in anger more compelling.</p>
+<ul class="simple">
+<li>Least used of all the books we bought</li>
+</ul>
+</div>
+<div class="section" id="editors-and-views">
+<h3>Editors and Views<a class="headerlink" href="#editors-and-views" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference external" href="http://www.eclipse.org/articles/viewArticle/ViewArticle2.html">Creating an Eclipse View</a></li>
+<li><a class="reference external" href="http://www.eclipse.org/articles/using-perspectives/PerspectiveArticle.html">Using Perspectives</a></li>
+<li>Use <em class="menuselection">Import ‣ External Plug-ins and Fragments</em> to import the source code for a an eclipse view
+you are familar with and see how it works.</li>
+</ul>
+</div>
+<div class="section" id="help-system">
+<h3>Help system<a class="headerlink" href="#help-system" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference external" href="http://www.eclipse.org/articles/Article-Online%20Help%20for%202_0/help1.htm">http://www.eclipse.org/articles/Article-Online%20Help%20for%202_0/help1.htm</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="arcane-advanced">
+<h2>Arcane &amp; Advanced<a class="headerlink" href="#arcane-advanced" title="Permalink to this headline">¶</a></h2>
+<p>If you wander into the guts of uDig development the following will be of service.</p>
+<div class="section" id="eclipse-modeling-framework-emf">
+<h3>Eclipse Modeling Framework (EMF)<a class="headerlink" href="#eclipse-modeling-framework-emf" title="Permalink to this headline">¶</a></h3>
+<p><strong>Eclipse Modeling Framework</strong> (Book)</p>
+<p><a class="reference external" href="http://www.awprofessional.com/titles/0131425420">http://www.awprofessional.com/titles/0131425420</a></p>
+<p>Eclipse Modeling Framework seems to be the first successful Model Driven Design framework. It uses a
+Ecore for modeling, a reduced subset of the UML2 Meta Object Facility (MOF).</p>
+<ul class="simple">
+<li>Buy if you need to patch the core of the uDig application - Project, Map, Page etc..</li>
+<li>Look into it for your own needs, it seems to be stupidly useful</li>
+<li>IAdaptable is used instead of traditional listeners/events</li>
+</ul>
+<p>It literally appears the be the shape of the future as the OMG is targeting the same subset w/ their
+EMOF work.</p>
+<ul class="simple">
+<li><a class="reference external" href="http://download.eclipse.org/tools/emf/scripts/docs.php?doc=references/overview/EMF.html">http://download.eclipse.org/tools/emf/scripts/docs.php?doc=references/overview/EMF.html</a></li>
+<li><a class="reference internal" href="guide_to_emf.html"><em>Guide To EMF</em></a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="udig_extension_points_list.html">uDig Extension Points List</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="dependencies.html">Dependencies</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2015, Refractions Research and others.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,165 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Using The Udigworkbenchadvisor &mdash; uDig 1.5.0 Developers Guide</title>
+    
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.5.0.RC1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.5.0 Developers Guide" href="index.html" />
+    <link rel="up" title="Working with Eclipse RCP" href="working_with_eclipse_rcp.html" />
+    <link rel="next" title="Using Udigmenubuilder" href="using_udigmenubuilder.html" />
+    <link rel="prev" title="How Do I Turn Off Menus" href="how_do_i_turn_off_menus.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="how_do_i_turn_off_menus.html">How Do I Turn Off Menus</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="using_udigmenubuilder.html">Using Udigmenubuilder</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="using-the-udigworkbenchadvisor">
+<h1>Using The Udigworkbenchadvisor<a class="headerlink" href="#using-the-udigworkbenchadvisor" title="Permalink to this headline">¶</a></h1>
+<p>The UDIGWorkbenchAdvisor is a stratagy objected used to configure the application workbench. As such
+it defines how the menu and tool bars are structured, provides a default perspective to layout the
+views and so on.</p>
+<p>You may wish to override the
+<a class="reference external" href="https://raw.github.com/uDig/udig-platform/locationtech_rename/plugins/org.locationtech.udig.ui/src/org/locationtech/udig/internal/ui/UDIGWorkbenchAdvisor.java">UDIGWorkbenchAdvisor</a>
+(link to source code) when creating your own application.</p>
+<p>The menus scene in the uDig are a combination of:</p>
+<ul class="simple">
+<li>The UDIGWorkbenchAdvistor providing the general layout</li>
+<li>Plugins adding additional menus using <strong>org.eclipse.ui.menus</strong> extentions</li>
+<li>Note the perspectives may set menus visibility, often using &#8220;ActionSets&#8221; to toggle of a category
+of contributions in one go</li>
+</ul>
+<p>For uDig 1.0.1 the straight up use of a WorkbenchAdvisor was hacked out of the way and replaced with
+<strong>UDIGMenuBuilder</strong>; the functionality is similar - UDIGMenuBuilder can be used to:</p>
+<ul class="simple">
+<li>Set up the uDig menus from scratch (like a workbench advisor)</li>
+<li>Add the uDig menus to an existing RCP application</li>
+</ul>
+<div class="section" id="udigworkbnechadvisor-additions-and-group-markers">
+<h2>UDIGWorkbnechAdvisor Additions and Group Markers<a class="headerlink" href="#udigworkbnechadvisor-additions-and-group-markers" title="Permalink to this headline">¶</a></h2>
+<p>When defining menu bar structure &#8220;Additions&#8221; is used to register a &#8220;target&#8221; which other
+contributions can insert additional menu actions.</p>
+<p>Here is an example:</p>
+<div class="highlight-python"><pre>private void fillMenuBar( IWorkbenchWindow window, IActionBarConfigurer configurer ) {
+    IMenuManager menuBar = configurer.getMenuManager();
+    menuBar.add(createFileMenu(window));
+    menuBar.add(createEditMenu(window));
+    menuBar.add(createNavigationMenu(window));
+    menuBar.add(new GroupMarker(IWorkbenchActionConstants.MB_ADDITIONS));
+
+    menuBar.add(createLayerMenu());
+    menuBar.add(createMapMenu());
+    menuBar.add(createDataMenu());
+    menuBar.add(createWindowMenu(window));
+    menuBar.add(createHelpMenu(window));
+}</pre>
+</div>
+<p>You can see that IWorkbenchActionConstants.MB_ADDITIONS is placed between the Navigation menu and
+the Layer menu. Any additional &#8220;top level&#8221; menus (for example the top level menu &#8220;Road&#8221; in road
+editing application) would appear here.</p>
+<dl class="docutils">
+<dt>For the complete list either use the source as shown below or review</dt>
+<dd>this page:</dd>
+</dl>
+<ul class="simple">
+<li><a class="reference internal" href="menus_using_actions_and_actionsets.html"><em>Menus using Actions and ActionSets</em></a></li>
+</ul>
+</div>
+<div class="section" id="use-the-source-luke">
+<h2>Use the Source Luke<a class="headerlink" href="#use-the-source-luke" title="Permalink to this headline">¶</a></h2>
+<p>While the above list of Additions is great for uDIG 1.1.0 you may be extending a different version
+of uDig; or a project based on uDig. Have a look at the source code and check where the group
+markers in your application:</p>
+<p>Example using the Layer menu from uDig 1.0:</p>
+<div class="highlight-python"><pre>private MenuManager createLayerMenu() {
+   MenuManager menu = new MenuManager(Policy.bind("UDIGWorkbenchAdvisor.layerMenu"), "layer");
+   menu.add(new GroupMarker("add.ext")); //$NON-NLS-1$
+   menu.add(new Separator());
+   menu.add(new GroupMarker("edit.ext")); //$NON-NLS-1$
+
+   menu.add(new Separator());
+   menu.add(new GroupMarker(IWorkbenchActionConstants.MB_ADDITIONS));
+
+   return menu;
+}</pre>
+</div>
+<p>So for the Layer menu there are three group markers:</p>
+<ul class="simple">
+<li>add.ext</li>
+<li>edit.ext</li>
+<li>additions</li>
+</ul>
+<p>By convention, &#8220;additions&#8221; is created in the correct spot (before Window and Help for the menu bar,
+or before Exit in the file menu, or at the end of the menu most everywhere else.</p>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="how_do_i_turn_off_menus.html">How Do I Turn Off Menus</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="using_udigmenubuilder.html">Using Udigmenubuilder</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2015, Refractions Research and others.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

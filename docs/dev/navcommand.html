@@ -1,0 +1,211 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Navcommand &mdash; uDig 1.5.0 Developers Guide</title>
+    
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.5.0.RC1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.5.0 Developers Guide" href="index.html" />
+    <link rel="up" title="Working with GIS Application" href="working_with_gis_application.html" />
+    <link rel="next" title="Draw Command" href="draw_command.html" />
+    <link rel="prev" title="Simple Commands" href="simple_commands.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="simple_commands.html">Simple Commands</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="draw_command.html">Draw Command</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="navcommand">
+<h1>Navcommand<a class="headerlink" href="#navcommand" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="navcommand-example">
+<h2>NavCommand Example<a class="headerlink" href="#navcommand-example" title="Permalink to this headline">¶</a></h2>
+<p>NavCommand is used to go places, specifically these are used to modify the Viewport.</p>
+<p>Changes to the viewport are kept in their own undo/redo stack accessible with the Back/Forward
+navigation buttons (just like a web browser).</p>
+<div class="section" id="use-from-an-actiontool">
+<h3>Use from an ActionTool<a class="headerlink" href="#use-from-an-actiontool" title="Permalink to this headline">¶</a></h3>
+<p>Action Tools are a good place to issue commands from; this example places a &#8220;Go Home&#8221; option in the
+Navigate menu. This example is included in org.locationtech.udig.tutorials.examples.</p>
+<div class="highlight-python"><pre>&lt;extension
+         point="org.locationtech.udig.project.ui.tool"&gt;
+      &lt;actionTool
+            class="org.locationtech.udig.tutorials.examples.GoHomeActionTool"
+            id="org.locationtech.udig.tutorials.examples.actionTool1"
+            menuPath="navigate/gohome"
+            name="Home"
+            onToolbar="false"
+            tooltip="Go Home"&gt;
+         &lt;enablement&gt;&lt;/enablement&gt;
+      &lt;/actionTool&gt;
+   &lt;/extension&gt;</pre>
+</div>
+<p>And here is the implementation:</p>
+<div class="highlight-python"><pre>public class GoHomeActionTool extends AbstractActionTool {
+    public void run() {
+        NavigationCommandFactory factory = getContext().getNavigationFactory();
+
+        CoordinateReferenceSystem worldCRS = getContext().getCRS();
+        double y = 48.428611;
+        double x = -123.365556;
+        NavCommand goHome = new SetViewportCenterCommand(new Coordinate(x,y), DefaultGeographicCRS.WGS84 );
+
+        getContext().sendASyncCommand( goHome );
+    }
+    public void dispose() {
+    }
+}</pre>
+</div>
+</div>
+<div class="section" id="custom-navigation-command">
+<h3>Custom Navigation Command<a class="headerlink" href="#custom-navigation-command" title="Permalink to this headline">¶</a></h3>
+<p>A navigation command (INavCommand) is a special type of command that changes the current area being
+viewed, the viewport. Navigation commands are placed in a separate stack from normal commands and
+are undone and redone using the navigation arrows on the user interface as opposed to the undo/redo
+buttons int the edit menu.</p>
+<p>Navigation commands should be limited to commands that only change the view area, not changing the
+current CRS.</p>
+<p>The class AbstractNavCommand reduces the burden on the developer by implementing undo functionality.</p>
+</div>
+<div class="section" id="inavcommand-code-example">
+<h3>INavCommand Code Example<a class="headerlink" href="#inavcommand-code-example" title="Permalink to this headline">¶</a></h3>
+<p><strong>PanCommand.java</strong></p>
+<div class="highlight-python"><pre>/**
+ * A command that pans the viewport. The command can be defined in terms of pixels on the screen or
+ * in terms of world units.
+ *
+ * @author jeichar
+ * @since 0.3
+ */
+public class PanCommand extends AbstractNavCommand implements NavCommand {
+
+    double worldx, worldy;
+
+    int pixelx, pixely;
+
+    boolean inPixel;
+
+    /**
+     * Creates a new instance of PanCommand
+     *
+     * @param pixelx The amount to pan in the x direction
+     * @param pixely The amount to pan in the y direction
+     */
+    public PanCommand(int pixelx, int pixely) {
+        this.pixelx = pixelx;
+        this.pixely = pixely;
+        inPixel = true;
+    }
+
+    /**
+     * Creates a new instance of PanCommand
+     *
+     * @param worldx The amount to pan in the x direction
+     * @param worldy The amount to pan in the y direction
+     */
+    public PanCommand(double worldx, double worldy) {
+        this.worldx = worldx;
+        this.worldy = worldy;
+        inPixel = false;
+    }
+
+    /**
+     * @see org.locationtech.udig.project.internal.command.navigation.AbstractNavCommand#runImpl()
+     */
+    protected void runImpl() throws Exception {
+        if (inPixel)
+            model.panUsingScreenCoords(pixelx, pixely);
+        else
+            model.panUsingWorldCoords(worldx, worldy);
+    }
+
+    /**
+     * @see org.locationtech.udig.project.internal.command.Command#copy()
+     */
+    public Command copy() {
+        if (inPixel)
+            return new PanCommand(pixelx, pixely);
+
+        return new PanCommand(worldx, worldy);
+    }
+
+    /**
+     * @see org.locationtech.udig.project.command.Command#getName()
+     */
+    public String getName() {
+        return Policy.bind("PanCommand.pan"); //$NON-NLS-1$
+ }
+
+}</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="simple_commands.html">Simple Commands</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="draw_command.html">Draw Command</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2015, Refractions Research and others.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

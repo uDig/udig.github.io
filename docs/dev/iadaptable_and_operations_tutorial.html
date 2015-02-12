@@ -1,0 +1,200 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>IAdaptable and Operations Tutorial &mdash; uDig 1.5.0 Developers Guide</title>
+    
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.5.0.RC1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.5.0 Developers Guide" href="index.html" />
+    <link rel="up" title="GIS Platform Tutorials" href="gis_platform_tutorials.html" />
+    <link rel="next" title="Shapefile Export Tutorial" href="shapefile_export_tutorial.html" />
+    <link rel="prev" title="GIS Platform Tutorials" href="gis_platform_tutorials.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="gis_platform_tutorials.html">GIS Platform Tutorials</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="shapefile_export_tutorial.html">Shapefile Export Tutorial</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="iadaptable-and-operations-tutorial">
+<h1>IAdaptable and Operations Tutorial<a class="headerlink" href="#iadaptable-and-operations-tutorial" title="Permalink to this headline">¶</a></h1>
+<p>An introduction to two key concepts: do stuff (udig IOp) in more places (eclipse IAdaptable)!.</p>
+<div class="figure">
+<img alt="" src="_images/IAdaptableOperationWorkbook.png" />
+</div>
+<p>Developers Guide:</p>
+<ul class="simple">
+<li><a class="reference internal" href="workbench_selection_tutorial.html"><em>Workbench Selection Tutorial</em></a></li>
+<li><a class="reference internal" href="menus_using_operations_and_tools.html"><em>Menus using Operations and Tools</em></a></li>
+</ul>
+<p>Source code:</p>
+<ul class="simple">
+<li>Available in your uDig SDK (import the <a class="reference internal" href="code_examples.html"><em>source code</em></a> from the plugins
+view)</li>
+<li>plugin:
+<a class="reference external" href="https://github.com/uDig/udig-platform/tree/master/plugins/org.locationtech.udig.tutorials.urladapter">org.locationtech.udig.tutorials.urladapter</a>
+(github)</li>
+</ul>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p><strong>IAdaptable</strong></p>
+<p>IAdaptable is the easies example of the &#8220;extensible interface&#8221; pattern. This is a core concepts for
+Eclipse RCP development also covered in the <a class="reference internal" href="workbench_selection_tutorial.html"><em>Workbench Selection Tutorial</em></a>.</p>
+<p>It is a straight forward combination of two patterns you may already be familiar with:</p>
+<ul class="simple">
+<li>AbstractFactory - code that creates an instance of a specific instance at runtime</li>
+<li>Adapter - code that adapts an existing object into a required interface</li>
+</ul>
+<p>In this workbook we are going to define an adapter extension allowing an <strong>IGeoResource</strong> to adapt
+to a <strong>URL</strong>. We will also create an operation that operates on a URL in order to test our work. The
+extensible interface pattern is used to &#8220;teach an old dog new tricks&#8221;, you can make use of this
+technique to integrate your concepts and ideas directly into the uDig GIS Platform (without having
+to download and modify the source code).</p>
+<p><strong>Operation</strong></p>
+<p>This workbook also covers one of the uDig ui concepts - the idea of an &#8220;operation&#8221;. A lot of your
+day to day work will be based on defining operations to get something done; allowing the user to
+right click on a &#8220;noun&#8221; and perform a &#8220;verb&#8221;.</p>
+<div class="figure align-center">
+<img alt="" src="_images/DisplayURL.png" />
+</div>
+<p>These operations actually show up all over the uDig application (because some platforms such as mac
+do not have a right click):</p>
+<ul class="simple">
+<li><a class="reference external" href="http://udig.refractions.net/confluence//display/EN/Edit+Menu">Edit Menu</a> - lists All
+Operations in a dialog (following the Eclipse House Rules &#8220;Other Rule&#8221;)</li>
+<li><a class="reference external" href="http://udig.refractions.net/confluence//display/EN/Layer+Menu">Layer Menu</a> - lists operations
+available for the currently selected layer</li>
+<li><a class="reference external" href="http://udig.refractions.net/confluence//display/EN/Map+Menu">Map Menu</a> - lists operations
+available for the current map</li>
+<li><a class="reference external" href="http://udig.refractions.net/confluence//display/EN/Data+Menu">Data Menu</a> - lists operations
+for the current selected GeoResource (the data for a layer) or IService (where the data comes
+from)</li>
+</ul>
+<p>The general idea is that you can define the operation on a kind of object; and the uDig application
+will make it available to users in as many places as possible.</p>
+</div>
+<div class="section" id="what-to-do-next">
+<h2>What to Do Next<a class="headerlink" href="#what-to-do-next" title="Permalink to this headline">¶</a></h2>
+<p>For better understanding of these facilities please try the following:</p>
+<div class="section" id="context-menu">
+<h3>Context Menu<a class="headerlink" href="#context-menu" title="Permalink to this headline">¶</a></h3>
+<p>You now know how to add to the context menu (right click menu) for almost anything!</p>
+<p>This is how we make sure a layer acts like a layer no matter where you see it.</p>
+</div>
+<div class="section" id="iservice">
+<h3>IService<a class="headerlink" href="#iservice" title="Permalink to this headline">¶</a></h3>
+<p>See if you can make your Dialog only work on IService.</p>
+<p>How about both an IService and an IGeoResource?</p>
+</div>
+<div class="section" id="extensible-interface">
+<h3>Extensible Interface<a class="headerlink" href="#extensible-interface" title="Permalink to this headline">¶</a></h3>
+<p>IAdaptable is an example of the Extensible Interface pattern, can you recognize another use of this
+pattern?</p>
+</div>
+<div class="section" id="adapters">
+<h3>Adapters<a class="headerlink" href="#adapters" title="Permalink to this headline">¶</a></h3>
+<p>Adapters usually end up listening for events in the original object (so that everything can stay in
+sync). The Eclipse Modeling Framework (EMF), only provides adapters - and you must use them rather
+than add a listener for events.</p>
+</div>
+<div class="section" id="workbench-selection-advanced">
+<h3>Workbench Selection (Advanced)<a class="headerlink" href="#workbench-selection-advanced" title="Permalink to this headline">¶</a></h3>
+<p>If you completed the workbench selection tutorial you can see what is happening using the
+SelectionView. See what it tells you when a Service or GeoResource is selected in the Catalog view.</p>
+</div>
+</div>
+<div class="section" id="tips-tricks-and-suggestions">
+<h2>Tips, Tricks and Suggestions<a class="headerlink" href="#tips-tricks-and-suggestions" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="difference-between-iservice-and-igeoresource">
+<h3>Difference between IService and IGeoResource<a class="headerlink" href="#difference-between-iservice-and-igeoresource" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>IService - represents where information (for example a shapefile on disk)</li>
+<li>IGeoResource - represents the actual information (for example the contents of the shapefile)</li>
+</ul>
+</div>
+<div class="section" id="commercial-training-materials">
+<h3>Commercial Training Materials<a class="headerlink" href="#commercial-training-materials" title="Permalink to this headline">¶</a></h3>
+<p>Please contact any of the organisations listed on the main <a class="reference external" href="http://udig.refractions.net/users/">uDig support
+page</a> for details on uDig training.</p>
+<p>The workbooks and slides for the training course are available here:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://svn.refractions.net/udig_training/trunk">http://svn.refractions.net/udig_training/trunk</a></li>
+</ul>
+<p>This is a private svn repository that is open to those who have taken the training course.</p>
+</div>
+<div class="section" id="academic-access">
+<h3>Academic Access<a class="headerlink" href="#academic-access" title="Permalink to this headline">¶</a></h3>
+<p>The course materials can be made available to those working at academic institutions - we ask for an
+email from your Professor.</p>
+<p>Please ask your professor to email <a class="reference external" href="mailto:admin&#37;&#52;&#48;refractions&#46;net">admin<span>&#64;</span>refractions<span>&#46;</span>net</a> with the request.</p>
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="gis_platform_tutorials.html">GIS Platform Tutorials</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="shapefile_export_tutorial.html">Shapefile Export Tutorial</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2015, Refractions Research and others.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

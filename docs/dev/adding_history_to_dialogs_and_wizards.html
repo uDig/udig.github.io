@@ -1,0 +1,257 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Adding History to Dialogs and Wizards &mdash; uDig 1.5.0 Developers Guide</title>
+    
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.5.0.RC1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.5.0 Developers Guide" href="index.html" />
+    <link rel="up" title="Working with Eclipse RCP" href="working_with_eclipse_rcp.html" />
+    <link rel="next" title="SWT and JFace Widgets" href="swt_and_jface_widgets.html" />
+    <link rel="prev" title="Menus using Operations and Tools" href="menus_using_operations_and_tools.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="menus_using_operations_and_tools.html">Menus using Operations and Tools</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="swt_and_jface_widgets.html">SWT and JFace Widgets</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="adding-history-to-dialogs-and-wizards">
+<h1>Adding History to Dialogs and Wizards<a class="headerlink" href="#adding-history-to-dialogs-and-wizards" title="Permalink to this headline">¶</a></h1>
+<p>It is often beneficial to add a &#8216;history&#8217; to some of the widgets to increase the useability of a
+wizard or dialog. This article will explain how to use Eclipse&#8217;s IDialogSettings interface to
+achieve this easily and will show how it was implemented in uDig&#8217;s WMS Wizard.</p>
+<p>The terms wizard and dialog are interchangeable in this document.</p>
+<p>Here is a screenshot of the WMS Wizard, displaying the rememberance of previously-entered URLs.</p>
+<img alt="_images/wizardHistory.jpg" src="_images/wizardHistory.jpg" />
+<p>Here is what the contents of the file look like when saved out to disk:</p>
+<p><strong>dialog_settings.xml</strong></p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;section</span> <span class="na">name=</span><span class="s">&quot;Workbench&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;section</span> <span class="na">name=</span><span class="s">&quot;WMS_WIZARD&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;list</span> <span class="na">key=</span><span class="s">&quot;WMS_RECENT&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;item</span> <span class="na">value=</span><span class="s">&quot;http://wms.cits.rncan.gc.ca/cgi-bin/cubeserv.cgi?VERSION=1.1.0&amp;amp;REQUEST=GetCapabilities&quot;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;item</span> <span class="na">value=</span><span class="s">&quot;http://www2.dmsolutions.ca/cgi-bin/mswms_gmap?VERSION=1.1.0&amp;amp;REQUEST=GetCapabilities&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/list&gt;</span>
+  <span class="nt">&lt;/section&gt;</span>
+<span class="nt">&lt;/section&gt;</span>
+</pre></div>
+</div>
+<p>The overview:
+#. In the dialog&#8217;s constructor, access the previously saved settings, or create them if they don&#8217;t exist.
+#. When creating the widgets for the dialog, populate them with previously entered settings.
+#. When the OK button is pushed (or the wizard is finished), save the entered values.</p>
+<div class="section" id="idialogsettings">
+<h2>IDialogSettings<a class="headerlink" href="#idialogsettings" title="Permalink to this headline">¶</a></h2>
+<p>The JavaDoc for IDialogSettings can be viewed
+<a class="reference external" href="http://www.eclipse.org/documentation/html/plugins/org.eclipse.platform.doc.isv/doc/reference/api/org/eclipse/jface/dialogs/IDialogSettings.html">here</a>.</p>
+<p>The interesting methods are:</p>
+<ul class="simple">
+<li>IDialogSettings getSection(String sectionName)</li>
+<li>IDialogSettings addNewSection(String name)</li>
+<li>String[] getArray(String key)</li>
+<li>void put(String key, String[] value)</li>
+</ul>
+<p>Dialog settings are used to store information about particular dialogs. The settings are stored in
+the plugin&#8217;s runtime workspace. Because each plugin can have more than one dialog or wizard, the
+settings are divided up into sections designated by a string. To create a new section, call
+settings.addNewSection(&#8220;example_id&#8221;).</p>
+<p>Values saved into a dialog can be any primitive type, a String or array of Strings. An array of
+Strings is the most interesting for dialogs, as they often use combo boxes for fields with history.</p>
+<p>The loading and saving is handled by the plugin class.</p>
+</div>
+<div class="section" id="an-example">
+<h2>An Example<a class="headerlink" href="#an-example" title="Permalink to this headline">¶</a></h2>
+<p>The WMS Wizard inside uDig has been converted to use IDialogSettings to store previously entered
+URLs.</p>
+</div>
+<div class="section" id="initializing-the-settings">
+<h2>Initializing the settings<a class="headerlink" href="#initializing-the-settings" title="Permalink to this headline">¶</a></h2>
+<p><strong>WMSWizardPage.java</strong></p>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">WMS_WIZARD</span> <span class="o">=</span> <span class="s">&quot;WMS_WIZARD&quot;</span><span class="o">;</span> <span class="c1">//$NON-NLS-1$</span>
+  <span class="kd">private</span> <span class="n">IDialogSettings</span> <span class="n">settings</span><span class="o">;</span>
+
+  <span class="kd">public</span> <span class="nf">WMSWizardPage</span><span class="o">()</span> <span class="o">{</span>
+    <span class="o">...</span>
+
+    <span class="n">settings</span> <span class="o">=</span> <span class="n">WmsPlugin</span><span class="o">.</span><span class="na">getDefault</span><span class="o">().</span><span class="na">getDialogSettings</span><span class="o">().</span><span class="na">getSection</span><span class="o">(</span><span class="n">WMS_WIZARD</span><span class="o">);</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">settings</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">settings</span> <span class="o">=</span> <span class="n">WmsPlugin</span><span class="o">.</span><span class="na">getDefault</span><span class="o">().</span><span class="na">getDialogSettings</span><span class="o">().</span><span class="na">addNewSection</span><span class="o">(</span><span class="n">WMS_WIZARD</span><span class="o">);</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+</pre></div>
+</div>
+<p>This code accesses the previously entered values stored at the section named &#8216;WMS_WIZARD&#8217;. If they
+don&#8217;t exist (settings == null), the section must be added.</p>
+</div>
+<div class="section" id="reading-the-settings">
+<h2>Reading the settings<a class="headerlink" href="#reading-the-settings" title="Permalink to this headline">¶</a></h2>
+<p>The code in WMSWizardPage that instantiates the widgets is also responsible for populating those
+widgets with previously entered values.</p>
+<p><strong>WMSWizardPage.java</strong></p>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">WMS_RECENT</span> <span class="o">=</span> <span class="s">&quot;WMS_RECENT&quot;</span><span class="o">;</span> <span class="c1">//$NON-NLS-1$</span>
+
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">createControl</span><span class="o">(</span><span class="n">Composite</span> <span class="n">parent</span><span class="o">)</span> <span class="o">{</span>
+  <span class="n">String</span><span class="o">[]</span> <span class="n">recentWMSs</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="na">getArray</span><span class="o">(</span><span class="n">WMS_RECENT</span><span class="o">);</span>
+  <span class="k">if</span> <span class="o">(</span><span class="n">recentWMSs</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">recentWMSs</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+  <span class="o">}</span>
+
+  <span class="o">...</span>
+
+  <span class="n">url</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Combo</span><span class="o">(</span><span class="n">composite</span><span class="o">,</span> <span class="n">SWT</span><span class="o">.</span><span class="na">BORDER</span><span class="o">);</span>
+  <span class="n">url</span><span class="o">.</span><span class="na">setItems</span><span class="o">(</span><span class="n">recentWMSs</span><span class="o">);</span>
+
+  <span class="o">...</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>This code accesses all the values stored at the key &#8216;WMS_RECENT&#8217;. If no values are there, it will
+return null. Later on, the Combo widget &#8216;url&#8217; has its items set to those values.</p>
+</div>
+<div class="section" id="saving-the-settings">
+<h2>Saving the settings<a class="headerlink" href="#saving-the-settings" title="Permalink to this headline">¶</a></h2>
+<p>Saving the settings is a little more complicated than using them. The IDialogSettings interface only
+allows an entire key to be saved at once, so we must add our new history item to the array and save
+it again. Some convienence code has been taken from the
+org.eclipse.team.internal.ccvs.ui.wizards.ConfigurationWizardMainPage class to make this job easy.</p>
+<p>The addToHistory methods also limit the size of the history for each widget. Simply alter the value
+of COMBO_HISTORY_LENGTH to change the size.</p>
+<p>The only one here you should have to alter is saveWidgetValues(). Simply create a key (WMS_RECENT)
+for each widget, retrieve the previous values, and call addToHistory, passing in the value from the
+widget as well. After that, just add the key and the values to the IDialogSettings.</p>
+<p><strong>WMSWizardPage.java</strong></p>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">COMBO_HISTORY_LENGTH</span> <span class="o">=</span> <span class="mi">15</span><span class="o">;</span>
+
+<span class="cm">/**</span>
+<span class="cm">  * Saves the widget values</span>
+<span class="cm">  */</span>
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">saveWidgetValues</span><span class="o">()</span> <span class="o">{</span>
+  <span class="c1">// Update history</span>
+  <span class="k">if</span> <span class="o">(</span><span class="n">settings</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">String</span><span class="o">[]</span> <span class="n">recentWMSs</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="na">getArray</span><span class="o">(</span><span class="n">WMS_RECENT</span><span class="o">);</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">recentWMSs</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">recentWMSs</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+    <span class="o">}</span>
+    <span class="n">recentWMSs</span> <span class="o">=</span> <span class="n">addToHistory</span><span class="o">(</span><span class="n">recentWMSs</span><span class="o">,</span> <span class="n">url</span><span class="o">.</span><span class="na">getText</span><span class="o">());</span>
+    <span class="n">settings</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">WMS_RECENT</span><span class="o">,</span> <span class="n">recentWMSs</span><span class="o">);</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="cm">/**</span>
+<span class="cm">  * Adds an entry to a history, while taking care of duplicate history items</span>
+<span class="cm">  * and excessively long histories.  The assumption is made that all histories</span>
+<span class="cm">  * should be of length &lt;code&gt;COMBO_HISTORY_LENGTH&lt;/code&gt;.</span>
+<span class="cm">  *</span>
+<span class="cm">  * @param history the current history</span>
+<span class="cm">  * @param newEntry the entry to add to the history</span>
+<span class="cm">  * @return the history with the new entry appended</span>
+<span class="cm">  * Stolen from org.eclipse.team.internal.ccvs.ui.wizards.ConfigurationWizardMainPage</span>
+<span class="cm">  */</span>
+<span class="kd">private</span> <span class="n">String</span><span class="o">[]</span> <span class="nf">addToHistory</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">history</span><span class="o">,</span> <span class="n">String</span> <span class="n">newEntry</span><span class="o">)</span> <span class="o">{</span>
+  <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">l</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;(</span><span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="n">history</span><span class="o">));</span>
+  <span class="n">addToHistory</span><span class="o">(</span><span class="n">l</span><span class="o">,</span> <span class="n">newEntry</span><span class="o">);</span>
+  <span class="n">String</span><span class="o">[]</span> <span class="n">r</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">[</span><span class="n">l</span><span class="o">.</span><span class="na">size</span><span class="o">()];</span>
+  <span class="n">l</span><span class="o">.</span><span class="na">toArray</span><span class="o">(</span><span class="n">r</span><span class="o">);</span>
+  <span class="k">return</span> <span class="n">r</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="cm">/**</span>
+<span class="cm">  * Adds an entry to a history, while taking care of duplicate history items</span>
+<span class="cm">  * and excessively long histories.  The assumption is made that all histories</span>
+<span class="cm">  * should be of length &lt;code&gt;COMBO_HISTORY_LENGTH&lt;/code&gt;.</span>
+<span class="cm">  *</span>
+<span class="cm">  * @param history the current history</span>
+<span class="cm">  * @param newEntry the entry to add to the history</span>
+<span class="cm">  * Stolen from org.eclipse.team.internal.ccvs.ui.wizards.ConfigurationWizardMainPage</span>
+<span class="cm">  */</span>
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">addToHistory</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">history</span><span class="o">,</span> <span class="n">String</span> <span class="n">newEntry</span><span class="o">)</span> <span class="o">{</span>
+  <span class="n">history</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="n">newEntry</span><span class="o">);</span>
+  <span class="n">history</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span><span class="n">newEntry</span><span class="o">);</span>
+
+  <span class="c1">// since only one new item was added, we can be over the limit</span>
+  <span class="c1">// by at most one item</span>
+  <span class="k">if</span> <span class="o">(</span><span class="n">history</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">&gt;</span> <span class="n">COMBO_HISTORY_LENGTH</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">history</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="n">COMBO_HISTORY_LENGTH</span><span class="o">);</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>Once saveWidgetValues() is configured, you simply need to call it when your dialog or wizard is
+done.</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="cm">/*</span>
+<span class="cm"> * Success! Store the URL in history.</span>
+<span class="cm"> */</span>
+<span class="n">saveWidgetValues</span><span class="o">();</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="menus_using_operations_and_tools.html">Menus using Operations and Tools</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="swt_and_jface_widgets.html">SWT and JFace Widgets</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2015, Refractions Research and others.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

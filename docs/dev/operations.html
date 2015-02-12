@@ -1,0 +1,188 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Operations &mdash; uDig 1.5.0 Developers Guide</title>
+    
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.5.0.RC1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.5.0 Developers Guide" href="index.html" />
+    <link rel="up" title="Working with the GIS Platform" href="working_with_the_gis_platform.html" />
+    <link rel="next" title="Implementing a Service" href="implementing_a_service.html" />
+    <link rel="prev" title="Drag and Drop" href="drag_and_drop.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="drag_and_drop.html">Drag and Drop</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="implementing_a_service.html">Implementing a Service</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="operations">
+<h1>Operations<a class="headerlink" href="#operations" title="Permalink to this headline">¶</a></h1>
+<p>The operation extension point is one of the most useful (and used) facilities of the uDig SDK. It
+allows you to contribute functionality to the user interface based on what is selected, regardless
+of which view it is displayed in.</p>
+<p>Related:</p>
+<ul class="simple">
+<li>Export Shapefile tutorial</li>
+</ul>
+<div class="section" id="iop">
+<h2>IOp<a class="headerlink" href="#iop" title="Permalink to this headline">¶</a></h2>
+<p>The IOp interface is used to define user interface needs. This represents a suitable compromise that
+can be maintained both by uDig and Toolkit providers.</p>
+<div class="highlight-python"><pre>&lt;extension
+         point="org.locationtech.udig.ui.operation"&gt;
+      &lt;operation
+            class="org.locationtech.udig.tool.edit.DifferenceOp"
+            enablesFor="2"
+            id="org.locationtech.udig.tool.edit.difference"
+            name="%difference.name"
+            targetClass="org.locationtech.udig.project.ILayer"/&gt;
+      &lt;operation
+            class="org.locationtech.udig.tool.edit.SplitLineOp"
+            enablesFor="+"
+            id="org.locationtech.udig.tool.edit.operation1"
+            menuPath="edit/add.ext"
+            name="%operation.splitLine.name"
+            targetClass="org.locationtech.udig.tools.edit.support.Point"&gt;
+         &lt;enablement&gt;
+            &lt;and&gt;
+                &lt;property propertyId="org.locationtech.udig.tools.edit.CurrentShape.ShapeType" expectedValue="LINE"/&gt;
+                &lt;property propertyId="org.locationtech.udig.project.ui.OpenMap" expectedValue="java.lang.Object"/&gt;
+            &lt;/and&gt;
+         &lt;/enablement&gt;
+      &lt;/operation&gt;
+   &lt;/extension&gt;</pre>
+</div>
+<p>The above example (from org.locationtech.udig.tool.edit) contributes two &#8220;operations&#8221; to the system:</p>
+<ul class="simple">
+<li>DifferenceOp which is available whenever the user is working with a ILayer (or even something
+that can adapt to an ILayer)</li>
+<li>SplitLineOp which is available whenever the user has selected a point using the edit tool and the
+enablement conditions are met.</li>
+</ul>
+<p>All operations are available in the <strong>Edit &gt; Operations...</strong> menu in accordance with the Eclipse
+House Rules.</p>
+</div>
+<div class="section" id="implementation-of-an-operation">
+<h2>Implementation of an Operation<a class="headerlink" href="#implementation-of-an-operation" title="Permalink to this headline">¶</a></h2>
+<p>The targetClass mentioned in the extension point is an actual API contract; the system will make
+sure the user has supplied you with an actual object of the requested Class before you are called.
+So performing a cast to the expected targetClass is expected.</p>
+<p>Here is an example from the Export Shapefile tutorial:</p>
+<div class="highlight-python"><pre>public class ShpExportOp implements IOp {
+  public void op(Display display, Object target, IProgressMonitor monitor)
+        throws Exception {
+    FeatureSource source = (FeatureSource) target;
+
+    SimpleFeatureType featureType = source.getSchema();
+    GeometryDescriptor geometryType = featureType.getGeometryDescriptor();
+    CoordinateReferenceSystem crs = geometryType.getCoordinateReferenceSystem();
+
+    String typeName = featureType.getTypeName();
+    ...
+  }
+}</pre>
+</div>
+<p>The system will contribute this operation to the user interface whenever the conditions can be met.
+So this operation will work on both GeoResources that can adapt to FeatureSource; and on ILayers
+used to render a FeatureSource.</p>
+</div>
+<div class="section" id="contributing-operations-to-a-menu">
+<h2>Contributing Operations to a Menu<a class="headerlink" href="#contributing-operations-to-a-menu" title="Permalink to this headline">¶</a></h2>
+<p>Operations are slotted into a menu position using the eclipse menu contribution system. The idea
+here is to slot an entire category of operations into a menu location:</p>
+<ul class="simple">
+<li>if the category contains one operation it will be shown as is</li>
+<li>if more than one operation they will be displayed as a submenu</li>
+<li>any operations not assigned a menu slot will be available in the Edit &gt; Operations dialog</li>
+</ul>
+<p>Future improvements:</p>
+<ul class="simple">
+<li>to meet the eclipse other Rule we should limit the size of the submenu and allow an &#8220;Other...&#8221;
+menu item to bring up a dialog showing all the operations in the category</li>
+</ul>
+<p>In the uDig application you can see this in action where shapefile operations are added to the menu
+system as shown below:</p>
+<div class="highlight-python"><pre>&lt;extension
+          point="org.eclipse.ui.menus"&gt;
+       &lt;menuContribution
+             locationURI="menu:data?before=reset"&gt;
+          &lt;dynamic
+                class="org.locationtech.udig.ui.operations.OpCategoryContributionItem:org.locationtech.udig.catalog.shp.operationCategory"
+                id="org.locationtech.udig.catalog.shp.menu"&gt;
+          &lt;/dynamic&gt;
+       &lt;/menuContribution&gt;
+    &lt;/extension&gt;</pre>
+</div>
+<p>Note how in the above example the cateogry is provided as a parameter to the
+OpCategoryContributionItem.</p>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="drag_and_drop.html">Drag and Drop</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="implementing_a_service.html">Implementing a Service</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2015, Refractions Research and others.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
