@@ -7,7 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Expression viewer &mdash; uDig 1.4.0 User Guide</title>
+    <title>Expression viewer &mdash; uDig 2.0.0.RC1 User Guide</title>
     
     <link rel="stylesheet" href="../_static/udig.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '2.0.0-SNAPSHOT',
+        VERSION:     '2.0.0.RC1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  false
@@ -27,7 +27,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/theme_extras.js"></script>
     <link rel="shortcut icon" href="../_static/udig.ico"/>
-    <link rel="top" title="uDig 1.4.0 User Guide" href="../index.html" />
+    <link rel="top" title="uDig 2.0.0.RC1 User Guide" href="../index.html" />
     <link rel="up" title="Filters and Expressions" href="Filters and Expressions.html" />
     <link rel="next" title="Filter viewer" href="Filter viewer.html" />
     <link rel="prev" title="Filters and Expressions" href="Filters and Expressions.html" /> 
@@ -84,13 +84,13 @@ different options will be listed some of which are described below:</p>
 <p>When defining an expression you can make use of the full range of <a class="reference internal" href="../concepts/Constraint Query Language.html"><em>Constraint Query Language</em></a> functions.</p>
 <ul>
 <li><p class="first">To concatenate several values into a single text output:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">Concatenate</span><span class="p">(</span> <span class="n">NAME</span><span class="p">,</span> <span class="s">&#39; &#39;</span><span class="p">,</span> <span class="n">CITY_CODE</span><span class="p">,</span> <span class="s">&#39; Zone &#39;</span><span class="p">,</span> <span class="n">ZONE</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">Concatenate</span><span class="p">(</span> <span class="n">NAME</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">CITY_CODE</span><span class="p">,</span> <span class="s1">&#39; Zone &#39;</span><span class="p">,</span> <span class="n">ZONE</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
 <li><p class="first">To smoothly interpolate between a min and a max value (used here to write out LEVEL as a
 percentage):</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">Concatenate</span><span class="p">(</span> <span class="n">Interpolate</span><span class="p">(</span> <span class="n">LEVEL</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3046</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="s">&quot;linear&quot;</span><span class="p">),</span> <span class="s">&quot;%&quot;</span> <span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">Concatenate</span><span class="p">(</span> <span class="n">Interpolate</span><span class="p">(</span> <span class="n">LEVEL</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3046</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="s2">&quot;linear&quot;</span><span class="p">),</span> <span class="s2">&quot;%&quot;</span> <span class="p">)</span>
 </pre></div>
 </div>
 </li>

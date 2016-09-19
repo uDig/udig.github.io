@@ -7,7 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Style &mdash; uDig 1.4.0 Developers Guide</title>
+    <title>Style &mdash; uDig 2.0.0.RC1 Developers Guide</title>
     
     <link rel="stylesheet" href="_static/udig.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '2.0.0-SNAPSHOT',
+        VERSION:     '2.0.0.RC1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  false
@@ -27,7 +27,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/theme_extras.js"></script>
     <link rel="shortcut icon" href="_static/udig.ico"/>
-    <link rel="top" title="uDig 1.4.0 Developers Guide" href="index.html" />
+    <link rel="top" title="uDig 2.0.0.RC1 Developers Guide" href="index.html" />
     <link rel="up" title="Working with GIS Application" href="working_with_gis_application.html" />
     <link rel="next" title="Tools" href="tools.html" />
     <link rel="prev" title="Composite Commands" href="composite_commands.html" /> 
@@ -138,7 +138,7 @@ the change.</p>
 values of style objects on the blackboard. This should be performed every time refresh() is called.</p>
 <p>Whenever style objects are read from the blackboard, the example below is pretending to talk to a
 &#8220;point.style&#8221; key that is used to store a Point object.</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="kt">void</span> <span class="nf">apply</span><span class="o">()</span> <span class="o">{</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">apply</span><span class="o">()</span> <span class="o">{</span>
       <span class="n">StyleBlackboard</span> <span class="n">styleBlackboard</span> <span class="o">=</span> <span class="n">getStyleBlackboard</span><span class="o">();</span>
       <span class="n">Point</span> <span class="n">point</span> <span class="o">=</span> <span class="n">styleBlackboard</span><span class="o">.</span><span class="na">lookup</span><span class="o">(</span><span class="s">&quot;point.style&quot;</span><span class="o">);</span>
       <span class="k">if</span> <span class="o">(</span><span class="n">style</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
@@ -171,13 +171,13 @@ standards body.</p>
 <p>This is an entry on the style blackboard that can be used to hold an OGC Filter or WFS Query. This
 is used to turn your layer into a simple &#8220;view&#8221; of the complete content provided by the GeoResource.</p>
 <p>To quickly create a filter you can use the CQL utility class:</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">Filter</span> <span class="n">filter</span> <span class="o">=</span> <span class="n">CQL</span><span class="o">.</span><span class="na">toFilter</span><span class="o">(</span><span class="s">&quot;attName &gt;= 5&quot;</span><span class="o">);</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">Filter</span> <span class="n">filter</span> <span class="o">=</span> <span class="n">CQL</span><span class="o">.</span><span class="na">toFilter</span><span class="o">(</span><span class="s">&quot;attName &gt;= 5&quot;</span><span class="o">);</span>
 
 <span class="n">layer</span><span class="o">.</span><span class="na">getStyleBlackboard</span><span class="o">().</span><span class="na">put</span><span class="o">(</span><span class="n">ProjectBlackboardConstants</span><span class="o">.</span><span class="na">LAYER__DATA_QUERY</span><span class="o">,</span> <span class="n">filter</span><span class="o">);</span>
 </pre></div>
 </div>
 <p>Or a FilterFactory:</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">FilterFactory</span> <span class="n">ff</span> <span class="o">=</span> <span class="n">CommonFactoryFinder</span><span class="o">.</span><span class="na">getFilterFactory</span><span class="o">(</span> <span class="kc">null</span> <span class="o">);</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">FilterFactory</span> <span class="n">ff</span> <span class="o">=</span> <span class="n">CommonFactoryFinder</span><span class="o">.</span><span class="na">getFilterFactory</span><span class="o">(</span> <span class="kc">null</span> <span class="o">);</span>
 <span class="n">Filter</span> <span class="n">filter</span> <span class="o">=</span> <span class="n">ff</span><span class="o">.</span><span class="na">propertyLessThan</span><span class="o">(</span> <span class="n">ff</span><span class="o">.</span><span class="na">property</span><span class="o">(</span> <span class="s">&quot;AGE&quot;</span><span class="o">),</span> <span class="n">ff</span><span class="o">.</span><span class="na">literal</span><span class="o">(</span> <span class="mi">12</span> <span class="o">)</span> <span class="o">);</span>
 
 <span class="n">layer</span><span class="o">.</span><span class="na">getStyleBlackboard</span><span class="o">().</span><span class="na">put</span><span class="o">(</span><span class="n">ProjectBlackboardConstants</span><span class="o">.</span><span class="na">LAYER__DATA_QUERY</span><span class="o">,</span> <span class="n">filter</span><span class="o">);</span>
@@ -204,7 +204,7 @@ and GridCoverages.</p>
 <p>The class <strong>SLDContent</strong> is used to store an <strong>org.geotools.styling.Style</strong> object (representing a
 SLD file). If you would like to interact with this object you can request it from the style
 blackboard using the key SLDContent.ID.</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">Style</span> <span class="n">sld</span> <span class="o">=</span> <span class="o">(</span><span class="n">Style</span><span class="o">)</span> <span class="o">=</span> <span class="n">layer</span><span class="o">.</span><span class="na">getStyleBlackboard</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="n">SLDContent</span><span class="o">.</span><span class="na">ID</span><span class="o">);</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">Style</span> <span class="n">sld</span> <span class="o">=</span> <span class="o">(</span><span class="n">Style</span><span class="o">)</span> <span class="o">=</span> <span class="n">layer</span><span class="o">.</span><span class="na">getStyleBlackboard</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="n">SLDContent</span><span class="o">.</span><span class="na">ID</span><span class="o">);</span>
 </pre></div>
 </div>
 <p>References:</p>
@@ -225,7 +225,7 @@ this file and will provide it to SLDContent – using resolve( Style, null )</li
 an IResolveAdapaterFactory to teach the existing class about your default style</li>
 </ul>
 <p>To ask SLDContent for a default style yourself:</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">SLDContent</span> <span class="n">sldContent</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SLDContent</span><span class="o">(</span><span class="n">SLDContent</span><span class="o">.</span><span class="na">ID</span><span class="o">);</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">SLDContent</span> <span class="n">sldContent</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SLDContent</span><span class="o">(</span><span class="n">SLDContent</span><span class="o">.</span><span class="na">ID</span><span class="o">);</span>
 <span class="n">Style</span> <span class="n">sld</span> <span class="o">=</span> <span class="o">(</span><span class="n">Style</span><span class="o">)</span> <span class="n">SLDContent</span><span class="o">.</span><span class="na">createDefaultStyle</span><span class="o">(</span> <span class="n">resource</span><span class="o">,</span> <span class="n">Color</span><span class="o">.</span><span class="na">BLACK</span><span class="o">,</span> <span class="k">new</span> <span class="n">NullProgressMonitor</span><span class="o">()</span> <span class="o">);</span>
 </pre></div>
 </div>
@@ -235,7 +235,7 @@ an IResolveAdapaterFactory to teach the existing class about your default style<
 <h2>GeoTools Style Class<a class="headerlink" href="#geotools-style-class" title="Permalink to this headline">¶</a></h2>
 <p>The GeoTools Style object represents the contents of an SLD file. You can create a Style using a
 StyleBuilder</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">StyleFactory</span> <span class="n">styleFactory</span> <span class="o">=</span> <span class="n">StyleFactory</span><span class="o">.</span><span class="na">createStyleFactory</span><span class="o">();</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">StyleFactory</span> <span class="n">styleFactory</span> <span class="o">=</span> <span class="n">StyleFactory</span><span class="o">.</span><span class="na">createStyleFactory</span><span class="o">();</span>
 <span class="n">Style</span> <span class="n">style</span> <span class="o">=</span> <span class="n">styleFactory</span><span class="o">.</span><span class="na">getDefaultStyle</span><span class="o">();</span>
 
 <span class="n">FeatureTypeStyle</span> <span class="n">fts</span> <span class="o">=</span> <span class="n">styleFactory</span><span class="o">.</span><span class="na">createFeatureTypeStyle</span><span class="o">();</span>
@@ -282,7 +282,7 @@ conveniently build simple styles without the need to build all of the style elem
 example, you can create a PolygonSymbolizer and then create a Style out of it with a single method
 call: the builder will generate a default FeatureTypeStyle and the Rule for you.</p>
 <p>Using SLDs utility class to query an SLD:</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">Style</span> <span class="n">sld</span> <span class="o">=</span> <span class="o">(</span><span class="n">Style</span><span class="o">)</span> <span class="o">=</span> <span class="n">layer</span><span class="o">.</span><span class="na">getStyleBlackboard</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="n">SLDContent</span><span class="o">.</span><span class="na">ID</span><span class="o">);</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">Style</span> <span class="n">sld</span> <span class="o">=</span> <span class="o">(</span><span class="n">Style</span><span class="o">)</span> <span class="o">=</span> <span class="n">layer</span><span class="o">.</span><span class="na">getStyleBlackboard</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="n">SLDContent</span><span class="o">.</span><span class="na">ID</span><span class="o">);</span>
 <span class="n">FeatureTypeStyle</span> <span class="n">style</span> <span class="o">=</span> <span class="n">SLDs</span><span class="o">.</span><span class="na">getFeatureTypeStyle</span><span class="o">(</span> <span class="n">sld</span> <span class="o">);</span>
 <span class="kt">double</span> <span class="n">minScale</span> <span class="o">=</span> <span class="n">SLDs</span><span class="o">.</span><span class="na">minScale</span><span class="o">(</span> <span class="n">style</span> <span class="o">);</span>
 </pre></div>

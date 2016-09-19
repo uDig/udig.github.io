@@ -7,7 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Guide To EMF &mdash; uDig 1.4.0 Developers Guide</title>
+    <title>Guide To EMF &mdash; uDig 2.0.0.RC1 Developers Guide</title>
     
     <link rel="stylesheet" href="_static/udig.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '2.0.0-SNAPSHOT',
+        VERSION:     '2.0.0.RC1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  false
@@ -27,7 +27,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/theme_extras.js"></script>
     <link rel="shortcut icon" href="_static/udig.ico"/>
-    <link rel="top" title="uDig 1.4.0 Developers Guide" href="index.html" />
+    <link rel="top" title="uDig 2.0.0.RC1 Developers Guide" href="index.html" />
     <link rel="up" title="Reference" href="reference.html" />
     <link rel="next" title="Guide to MigLayout" href="guide_to_miglayout.html" />
     <link rel="prev" title="Fonts and Imagery" href="fonts_and_imagery.html" /> 
@@ -240,7 +240,7 @@ therefore part of the EMF model. However IBlackboard is not part of the Model (d
 cannot be resolved&#8221;; this is because it is not part of the model as a EClass. To fix this error the
 following must be added to the Package interface:</p>
 <p><strong>ProjectPackage.java</strong></p>
-<div class="highlight-java"><div class="highlight"><pre><span class="cm">/**</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm">* @model instanceClass=&quot;org.locationtech.udig.project.IBlackboard&quot;</span>
 <span class="cm">*/</span>
 <span class="n">EClass</span> <span class="nf">getIBlackboard</span><span class="o">();</span>

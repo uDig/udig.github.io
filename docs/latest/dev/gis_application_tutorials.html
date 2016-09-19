@@ -7,7 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>GIS Application Tutorials &mdash; uDig 1.4.0 Developers Guide</title>
+    <title>GIS Application Tutorials &mdash; uDig 2.0.0.RC1 Developers Guide</title>
     
     <link rel="stylesheet" href="_static/udig.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '2.0.0-SNAPSHOT',
+        VERSION:     '2.0.0.RC1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  false
@@ -27,7 +27,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/theme_extras.js"></script>
     <link rel="shortcut icon" href="_static/udig.ico"/>
-    <link rel="top" title="uDig 1.4.0 Developers Guide" href="index.html" />
+    <link rel="top" title="uDig 2.0.0.RC1 Developers Guide" href="index.html" />
     <link rel="up" title="Getting Started" href="getting_started.html" />
     <link rel="next" title="Map Decorator Tutorial" href="map_decorator_tutorial.html" />
     <link rel="prev" title="Shapefile Export Tutorial" href="shapefile_export_tutorial.html" /> 
@@ -129,11 +129,11 @@ application will appear to &#8220;freeze up&#8221;)</li>
 <li>code that updates the screen or user interface must be in the Display Thread</li>
 </ul>
 <p>What we have come up with is the use of <strong>Commands</strong>:</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">map</span><span class="o">.</span><span class="na">sendCommandASynch</span><span class="o">(</span> <span class="n">command</span> <span class="o">);</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">map</span><span class="o">.</span><span class="na">sendCommandASynch</span><span class="o">(</span> <span class="n">command</span> <span class="o">);</span>
 </pre></div>
 </div>
 <p>There are a number of commands available in uDig and you can role your own:</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">NavCommand</span> <span class="n">goHome</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SetViewportCenterCommand</span><span class="o">(</span><span class="k">new</span> <span class="n">Coordinate</span><span class="o">(</span><span class="n">x</span><span class="o">,</span><span class="n">y</span><span class="o">),</span> <span class="n">DefaultGeographicCRS</span><span class="o">.</span><span class="na">WGS84</span> <span class="o">);</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">NavCommand</span> <span class="n">goHome</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SetViewportCenterCommand</span><span class="o">(</span><span class="k">new</span> <span class="n">Coordinate</span><span class="o">(</span><span class="n">x</span><span class="o">,</span><span class="n">y</span><span class="o">),</span> <span class="n">DefaultGeographicCRS</span><span class="o">.</span><span class="na">WGS84</span> <span class="o">);</span>
 <span class="n">map</span><span class="o">.</span><span class="na">sendASyncCommand</span><span class="o">(</span> <span class="n">goHome</span> <span class="o">);</span>
 </pre></div>
 </div>

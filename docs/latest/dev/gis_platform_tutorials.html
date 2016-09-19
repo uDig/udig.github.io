@@ -7,7 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>GIS Platform Tutorials &mdash; uDig 1.4.0 Developers Guide</title>
+    <title>GIS Platform Tutorials &mdash; uDig 2.0.0.RC1 Developers Guide</title>
     
     <link rel="stylesheet" href="_static/udig.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '2.0.0-SNAPSHOT',
+        VERSION:     '2.0.0.RC1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  false
@@ -27,7 +27,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/theme_extras.js"></script>
     <link rel="shortcut icon" href="_static/udig.ico"/>
-    <link rel="top" title="uDig 1.4.0 Developers Guide" href="index.html" />
+    <link rel="top" title="uDig 2.0.0.RC1 Developers Guide" href="index.html" />
     <link rel="up" title="Getting Started" href="getting_started.html" />
     <link rel="next" title="IAdaptable and Operations Tutorial" href="iadaptable_and_operations_tutorial.html" />
     <link rel="prev" title="Workbench Selection Tutorial" href="workbench_selection_tutorial.html" /> 
@@ -112,7 +112,7 @@ weight objects such as databases)</li>
 object contains information about how to access the file; and can be used to interact with the file;
 but are not actually the bytes on disk available when you &#8220;open&#8221; a file and get the input stream.</p>
 <p>Here is how to use a getResource to access features:</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="k">if</span><span class="o">(</span> <span class="n">geoResource</span><span class="o">.</span><span class="na">canResolve</span><span class="o">(</span> <span class="n">FeatureStore</span><span class="o">.</span><span class="na">class</span> <span class="o">)</span> <span class="o">){</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="k">if</span><span class="o">(</span> <span class="n">geoResource</span><span class="o">.</span><span class="na">canResolve</span><span class="o">(</span> <span class="n">FeatureStore</span><span class="o">.</span><span class="na">class</span> <span class="o">)</span> <span class="o">){</span>
     <span class="n">FeatureSource</span> <span class="n">featureSource</span> <span class="o">=</span> <span class="n">handle</span><span class="o">.</span><span class="na">resolve</span><span class="o">(</span> <span class="n">FeatureSource</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">monitor</span> <span class="o">);</span>
     <span class="o">...</span>
 <span class="o">}</span>
@@ -131,14 +131,14 @@ use</li>
 <div class="section" id="eclipse-rcp-iadaptable">
 <h2>Eclipse RCP IAdaptable<a class="headerlink" href="#eclipse-rcp-iadaptable" title="Permalink to this headline">¶</a></h2>
 <p>The Eclipse concept of IAdaptable is similar to the normal example of a Java interface:</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="k">if</span><span class="o">(</span> <span class="n">object</span> <span class="k">instanceof</span> <span class="n">WebMapServer</span> <span class="o">){</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="k">if</span><span class="o">(</span> <span class="n">object</span> <span class="k">instanceof</span> <span class="n">WebMapServer</span> <span class="o">){</span>
    <span class="n">WebMapServer</span> <span class="n">wms</span> <span class="o">=</span> <span class="o">(</span><span class="n">WebMapServer</span><span class="o">)</span> <span class="n">object</span><span class="o">;</span>
    <span class="c1">// use wms here</span>
 <span class="o">}</span>
 </pre></div>
 </div>
 <p>Using IAdaptable this would become:</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="k">if</span><span class="o">(</span> <span class="n">object</span> <span class="k">instanceof</span> <span class="n">IAdaptable</span><span class="o">){</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="k">if</span><span class="o">(</span> <span class="n">object</span> <span class="k">instanceof</span> <span class="n">IAdaptable</span><span class="o">){</span>
    <span class="n">IAdaptable</span> <span class="n">adaptee</span> <span class="o">=</span> <span class="o">(</span><span class="n">IAdaptable</span><span class="o">)</span> <span class="n">object</span><span class="o">;</span>
    <span class="n">WebMapServer</span> <span class="n">wms</span> <span class="o">=</span>
       <span class="o">(</span><span class="n">WebMapServer</span><span class="o">)</span> <span class="n">adaptee</span><span class="o">.</span><span class="na">getAdapter</span><span class="o">(</span> <span class="n">WebMapServer</span><span class="o">.</span><span class="na">class</span> <span class="o">);</span>
@@ -149,7 +149,7 @@ use</li>
 </pre></div>
 </div>
 <p>Or using IResolve which uses the same general approach:</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="k">if</span><span class="o">(</span> <span class="n">service</span><span class="o">.</span><span class="na">canResolve</span><span class="o">(</span> <span class="n">WebMapServer</span><span class="o">.</span><span class="na">class</span> <span class="o">)</span> <span class="o">){</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="k">if</span><span class="o">(</span> <span class="n">service</span><span class="o">.</span><span class="na">canResolve</span><span class="o">(</span> <span class="n">WebMapServer</span><span class="o">.</span><span class="na">class</span> <span class="o">)</span> <span class="o">){</span>
     <span class="n">WebMapServer</span><span class="o">.</span><span class="na">class</span> <span class="n">wms</span> <span class="o">=</span> <span class="n">handle</span><span class="o">.</span><span class="na">resolve</span><span class="o">(</span> <span class="n">WebMapServer</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="k">new</span> <span class="n">NullProgressMonitor</span><span class="o">()</span> <span class="o">);</span>
     <span class="c1">// use wms here</span>
 <span class="o">}</span>

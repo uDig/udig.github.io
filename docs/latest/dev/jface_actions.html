@@ -7,7 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>JFace Actions &mdash; uDig 1.4.0 Developers Guide</title>
+    <title>JFace Actions &mdash; uDig 2.0.0.RC1 Developers Guide</title>
     
     <link rel="stylesheet" href="_static/udig.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '2.0.0-SNAPSHOT',
+        VERSION:     '2.0.0.RC1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  false
@@ -27,7 +27,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/theme_extras.js"></script>
     <link rel="shortcut icon" href="_static/udig.ico"/>
-    <link rel="top" title="uDig 1.4.0 Developers Guide" href="index.html" />
+    <link rel="top" title="uDig 2.0.0.RC1 Developers Guide" href="index.html" />
     <link rel="up" title="Working with Eclipse RCP" href="working_with_eclipse_rcp.html" />
     <link rel="next" title="Jface Field Decorations" href="jface_field_decorations.html" />
     <link rel="prev" title="ImageRegistry and Images" href="imageregistry_and_images.html" /> 
@@ -71,7 +71,7 @@ using the concept of Actions and ActionSets.</p>
 <h2>Action<a class="headerlink" href="#action" title="Permalink to this headline">¶</a></h2>
 <p>You can use action directly - this is an acceptable approach if you are going to use the action
 within your plugin.</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">newAction</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Action</span><span class="o">(</span><span class="s">&quot;New...&quot;</span><span class="o">)</span> <span class="o">{</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">newAction</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Action</span><span class="o">(</span><span class="s">&quot;New...&quot;</span><span class="o">)</span> <span class="o">{</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
         <span class="n">registerDatasource</span><span class="o">();</span>
     <span class="o">}</span>
@@ -80,7 +80,7 @@ within your plugin.</p>
 </pre></div>
 </div>
 <p>Example use with a toolbar:</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">IToolBarManager</span> <span class="n">mgr</span> <span class="o">=</span> <span class="n">getViewSite</span><span class="o">().</span><span class="na">getActionBars</span><span class="o">().</span><span class="na">getToolBarManager</span><span class="o">();</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">IToolBarManager</span> <span class="n">mgr</span> <span class="o">=</span> <span class="n">getViewSite</span><span class="o">().</span><span class="na">getActionBars</span><span class="o">().</span><span class="na">getToolBarManager</span><span class="o">();</span>
 <span class="n">mgr</span><span class="o">.</span><span class="na">add</span><span class="o">(</span> <span class="n">newAction</span> <span class="o">);</span>
 </pre></div>
 </div>
@@ -100,7 +100,7 @@ enabled/disabled state of the action is controlled by other XML attributes like 
 <div class="section" id="workbench-and-actions">
 <h2>Workbench and Actions<a class="headerlink" href="#workbench-and-actions" title="Permalink to this headline">¶</a></h2>
 <p>Uses IWorkbenchWindowActionDelegate ...</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">EditStyleAction</span> <span class="kd">implements</span> <span class="n">IWorkbenchWindowActionDelegate</span> <span class="o">{</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">EditStyleAction</span> <span class="kd">implements</span> <span class="n">IWorkbenchWindowActionDelegate</span> <span class="o">{</span>
 
     <span class="kd">public</span> <span class="kd">final</span> <span class="kd">static</span> <span class="n">String</span> <span class="n">ID</span> <span class="o">=</span> <span class="s">&quot;org.locationtech.udig.style.openStyleEditorAction&quot;</span><span class="o">;</span> <span class="c1">//$NON-NLS-1$</span>
 
@@ -199,7 +199,7 @@ the action is disabled. If attribute is skipped default is enable for any number
 </table>
 <p>Here is an example used in udig with the zoom to layer action in the Layers View.
 Create an object contribution to ILayer class and add the zoom to layer action to your plugin.</p>
-<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;objectContribution</span>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="nt">&lt;objectContribution</span>
           <span class="na">adaptable=</span><span class="s">&quot;false&quot;</span>
           <span class="na">objectClass=</span><span class="s">&quot;org.locationtech.udig.project.ILayer&quot;</span>
           <span class="na">id=</span><span class="s">&quot;org.locationtech.udig.project.ui.LayerContribution&quot;</span><span class="nt">&gt;</span>
@@ -214,7 +214,7 @@ Create an object contribution to ILayer class and add the zoom to layer action t
 </pre></div>
 </div>
 <p>Then create the ZoomToLayer class that implements IViewActionDelegate</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ZoomToLayer</span> <span class="kd">extends</span> <span class="n">ActionDelegate</span> <span class="kd">implements</span> <span class="n">IViewActionDelegate</span> <span class="o">{</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ZoomToLayer</span> <span class="kd">extends</span> <span class="n">ActionDelegate</span> <span class="kd">implements</span> <span class="n">IViewActionDelegate</span> <span class="o">{</span>
 
     <span class="n">IStructuredSelection</span> <span class="n">selection</span><span class="o">;</span>
 
@@ -229,7 +229,7 @@ Create an object contribution to ILayer class and add the zoom to layer action t
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">runWithEvent</span><span class="o">(</span> <span class="n">IAction</span> <span class="n">action</span><span class="o">,</span> <span class="n">Event</span> <span class="n">event</span> <span class="o">)</span> <span class="o">{</span>
        <span class="k">try</span> <span class="o">{</span>
           <span class="n">PlatformUI</span><span class="o">.</span><span class="na">getWorkbench</span><span class="o">().</span><span class="na">getActiveWorkbenchWindow</span><span class="o">().</span><span class="na">run</span><span class="o">(</span><span class="kc">false</span><span class="o">,</span> <span class="kc">true</span><span class="o">,</span>
-                 <span class="k">new</span> <span class="nf">IRunnableWithProgress</span><span class="o">()</span> <span class="o">{</span>
+                 <span class="k">new</span> <span class="n">IRunnableWithProgress</span><span class="o">()</span> <span class="o">{</span>
 
                     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="n">IProgressMonitor</span> <span class="n">monitor</span><span class="o">)</span> <span class="o">{</span>
                        <span class="n">Envelope</span> <span class="n">bounds</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Envelope</span><span class="o">();</span>
@@ -277,7 +277,7 @@ The interface IEditorActionDelegate allows the action delegate to retarget itsel
 editor.
 The action delegate must implement the method setActiveEditor(IAction action, IEditorPart
 targetEditor).</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">CommitAction</span> <span class="kd">implements</span> <span class="n">IEditorActionDelegate</span> <span class="o">{</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">CommitAction</span> <span class="kd">implements</span> <span class="n">IEditorActionDelegate</span> <span class="o">{</span>
 
     <span class="kd">private</span> <span class="n">MapEditor</span> <span class="n">editor</span><span class="o">;</span>
 
@@ -307,7 +307,7 @@ For object contributions, the class attribute of the action element is the name 
 that implements the org.eclipse.ui.IObjectActionDelegate interface. The interface
 IObjectActionDelegate allows the action delegate to retarget itself to the active part.
 The action delegate must implement the method</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">setActivePart</span><span class="o">(</span><span class="n">IAction</span> <span class="n">action</span><span class="o">,</span> <span class="n">IWorkbenchPart</span> <span class="n">targetPart</span><span class="o">)</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">setActivePart</span><span class="o">(</span><span class="n">IAction</span> <span class="n">action</span><span class="o">,</span> <span class="n">IWorkbenchPart</span> <span class="n">targetPart</span><span class="o">)</span>
 </pre></div>
 </div>
 <p>Q: Where are the Actions?</p>

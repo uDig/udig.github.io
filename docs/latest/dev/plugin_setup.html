@@ -7,7 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Plugin Setup &mdash; uDig 1.4.0 Developers Guide</title>
+    <title>Plugin Setup &mdash; uDig 2.0.0.RC1 Developers Guide</title>
     
     <link rel="stylesheet" href="_static/udig.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '2.0.0-SNAPSHOT',
+        VERSION:     '2.0.0.RC1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  false
@@ -27,7 +27,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/theme_extras.js"></script>
     <link rel="shortcut icon" href="_static/udig.ico"/>
-    <link rel="top" title="uDig 1.4.0 Developers Guide" href="index.html" />
+    <link rel="top" title="uDig 2.0.0.RC1 Developers Guide" href="index.html" />
     <link rel="up" title="Working with Eclipse RCP" href="working_with_eclipse_rcp.html" />
     <link rel="next" title="Plugin Dependency" href="plugin_dependency.html" />
     <link rel="prev" title="Plugin Structure" href="plugin_structure.html" /> 
@@ -105,7 +105,7 @@ classpaths&#8221; as part of the eclipse plug-in development environment</p>
 &#8220;UDigApplication&#8221;</li>
 <li>nested <strong>id</strong> entries need to be explicit (like &#8220;org.geotools.udig.ui.UDigPerspective&#8221;)</li>
 </ul>
-<div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
 <span class="cp">&lt;?eclipse version=&quot;3.0&quot;?&gt;</span>
 <span class="nt">&lt;plugin</span>
     <span class="na">id=</span><span class="s">&quot;org.geotools.udig.ui&quot;</span>
@@ -194,7 +194,7 @@ the wizard everytime).</p>
 </ul>
 </li>
 <li><p class="first">Add the following to your plugin.xml:</p>
-<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;requires&gt;</span>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="nt">&lt;requires&gt;</span>
    <span class="nt">&lt;import</span> <span class="na">plugin=</span><span class="s">&quot;org.eclipse.core.runtime.compatibility&quot;</span><span class="nt">/&gt;</span>
    <span class="nt">&lt;import</span> <span class="na">plugin=</span><span class="s">&quot;org.eclipse.ui&quot;</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/requires&gt;</span>

@@ -7,7 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>How to turn stuff off &mdash; uDig 1.4.0 Developers Guide</title>
+    <title>How to turn stuff off &mdash; uDig 2.0.0.RC1 Developers Guide</title>
     
     <link rel="stylesheet" href="_static/udig.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '2.0.0-SNAPSHOT',
+        VERSION:     '2.0.0.RC1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  false
@@ -27,7 +27,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/theme_extras.js"></script>
     <link rel="shortcut icon" href="_static/udig.ico"/>
-    <link rel="top" title="uDig 1.4.0 Developers Guide" href="index.html" />
+    <link rel="top" title="uDig 2.0.0.RC1 Developers Guide" href="index.html" />
     <link rel="up" title="Working with Eclipse RCP" href="working_with_eclipse_rcp.html" />
     <link rel="next" title="How Do I Turn Off Menus" href="how_do_i_turn_off_menus.html" />
     <link rel="prev" title="Bundle a JAR up as a Plugin" href="bundle_a_jar_up_as_a_plugin.html" /> 
@@ -129,7 +129,7 @@ extensions (in the case of the data menu it would be the eclipse menu system doi
 <p>The idea is that an activity will filter/process the plugin.xml using an almost XSLT like
 transformation. Activitations are controlled using the same enablement system as menus (so you can
 make use of checks against the current selection and so forth).</p>
-<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;extension</span> <span class="na">point=</span><span class="s">&quot;org.eclipse.ui.activities&quot;</span><span class="nt">&gt;</span>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="nt">&lt;extension</span> <span class="na">point=</span><span class="s">&quot;org.eclipse.ui.activities&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;activity</span> <span class="na">id=</span><span class="s">&quot;my.rcp.app.Activity&quot;</span>
             <span class="na">description=</span><span class="s">&quot;Contributions from org.locationtech.udig.catalog.ui.&quot;</span>
             <span class="na">name=</span><span class="s">&quot;My RCP Activity&quot;</span> <span class="nt">/&gt;</span>
@@ -153,14 +153,14 @@ make use of checks against the current selection and so forth).</p>
 entry.</dd>
 </dl>
 <p>This would turn off the extension &#8220;foo&#8221; in the <strong>org.locationtech.udig.catalog.ui</strong> plugin.</p>
-<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;activityPatternBinding</span> <span class="na">id=</span><span class="s">&quot;my.rcp.app.Activity&quot;</span>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="nt">&lt;activityPatternBinding</span> <span class="na">id=</span><span class="s">&quot;my.rcp.app.Activity&quot;</span>
    <span class="na">isEqualityPattern=</span><span class="s">&quot;true&quot;</span>
    <span class="na">pattern=</span><span class="s">&quot;org.locationtech.udig.catalog.ui/foo&quot;</span> <span class="nt">/&gt;</span>
 </pre></div>
 </div>
 <p>This would turn off any extension ending in &#8220;wizard&#8221; from the <strong>org.locationtech.udig.catalog.ui</strong>
 plugin</p>
-<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;activityPatternBinding</span> <span class="na">id=</span><span class="s">&quot;my.rcp.app.Activity&quot;</span>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="nt">&lt;activityPatternBinding</span> <span class="na">id=</span><span class="s">&quot;my.rcp.app.Activity&quot;</span>
    <span class="na">pattern=</span><span class="s">&quot;org.locationtech.udig.catalog.ui/[a-z[.]]*Wizard&quot;</span> <span class="nt">/&gt;</span>
 </pre></div>
 </div>

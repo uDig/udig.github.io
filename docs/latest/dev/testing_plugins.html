@@ -7,7 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Testing Plugins &mdash; uDig 1.4.0 Developers Guide</title>
+    <title>Testing Plugins &mdash; uDig 2.0.0.RC1 Developers Guide</title>
     
     <link rel="stylesheet" href="_static/udig.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '2.0.0-SNAPSHOT',
+        VERSION:     '2.0.0.RC1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  false
@@ -27,7 +27,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/theme_extras.js"></script>
     <link rel="shortcut icon" href="_static/udig.ico"/>
-    <link rel="top" title="uDig 1.4.0 Developers Guide" href="index.html" />
+    <link rel="top" title="uDig 2.0.0.RC1 Developers Guide" href="index.html" />
     <link rel="up" title="Working with Eclipse RCP" href="working_with_eclipse_rcp.html" />
     <link rel="next" title="Bundle a JAR up as a Plugin" href="bundle_a_jar_up_as_a_plugin.html" />
     <link rel="prev" title="Creating and Using Extension Points" href="creating_and_using_extension_points.html" /> 
@@ -117,7 +117,7 @@ net.refractoins.udig.project.ui</pre>
 <p>the feature.xml file</p>
 <p>The naming convention for test plugins is [namespace].[major subsystem].<strong>tests</strong>.[minor
 subsystem]. Examples include:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">org</span><span class="o">.</span><span class="n">locationtech</span><span class="o">.</span><span class="n">udig</span><span class="o">.</span><span class="n">catalog</span><span class="o">.</span><span class="n">tests</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">org</span><span class="o">.</span><span class="n">locationtech</span><span class="o">.</span><span class="n">udig</span><span class="o">.</span><span class="n">catalog</span><span class="o">.</span><span class="n">tests</span>
 <span class="n">org</span><span class="o">.</span><span class="n">locationtech</span><span class="o">.</span><span class="n">udig</span><span class="o">.</span><span class="n">catalog</span><span class="o">.</span><span class="n">tests</span><span class="o">.</span><span class="n">wfs</span>
 
 <span class="n">org</span><span class="o">.</span><span class="n">locationtech</span><span class="o">.</span><span class="n">udig</span><span class="o">.</span><span class="n">project</span><span class="o">.</span><span class="n">tests</span>
@@ -149,11 +149,11 @@ steps must be taken:</p>
 <p>A test suite is a java class which extends <strong>junit.framework.TestSuite</strong>. Each test class you write
 must be added to the test suite. The following is an example of a test suite which contains three
 test classes.</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">CatalogUITestSuite</span> <span class="kd">extends</span> <span class="n">TestSuite</span> <span class="o">{</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">CatalogUITestSuite</span> <span class="kd">extends</span> <span class="n">TestSuite</span> <span class="o">{</span>
 
     <span class="cm">/** Returns the suite. This is required to use the JUnit Launcher. */</span>
     <span class="kd">public</span> <span class="kd">static</span> <span class="n">Test</span> <span class="nf">suite</span><span class="o">()</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="k">new</span> <span class="nf">CatalogUITestSuite</span><span class="o">();</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="n">CatalogUITestSuite</span><span class="o">();</span>
     <span class="o">}</span>
 
     <span class="kd">public</span> <span class="nf">CatalogUITestSuite</span><span class="o">()</span> <span class="o">{</span>
@@ -169,7 +169,7 @@ test classes.</p>
 <p class="first admonition-title">Warning</p>
 <p><strong>The test suite must provide an implementation of a method with the following
 signature, which returns an instnace of the suite</strong></p>
-<div class="last highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">static</span> <span class="n">Test</span> <span class="nf">suite</span><span class="o">();</span>
+<div class="last highlight-java"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">static</span> <span class="n">Test</span> <span class="nf">suite</span><span class="o">();</span>
 </pre></div>
 </div>
 </div>
@@ -238,7 +238,7 @@ org.locationtech.udig.project.tests.ui=org.locationtech.udig.project.tests.ui_1.
 above. In order to have to the root script call your test.xml script, you must modify the target
 named <strong>all</strong> and add a call to your target. The <strong>all</strong> target is located near the bottom of the
 script and looks like the following:</p>
-<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;target</span> <span class="na">name=</span><span class="s">&quot;all&quot;</span><span class="nt">&gt;</span>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="nt">&lt;target</span> <span class="na">name=</span><span class="s">&quot;all&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;antcall</span> <span class="na">target=</span><span class="s">&quot;catalog&quot;</span> <span class="nt">/&gt;</span>
   <span class="nt">&lt;antcall</span> <span class="na">target=</span><span class="s">&quot;catalog.wfs&quot;</span> <span class="nt">/&gt;</span>
   <span class="nt">&lt;antcall</span> <span class="na">target=</span><span class="s">&quot;project&quot;</span> <span class="nt">/&gt;</span>
@@ -247,13 +247,13 @@ script and looks like the following:</p>
 </pre></div>
 </div>
 <p>To add the catalog.tests.ui plugin, we add the following line:</p>
-<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;antcall</span> <span class="na">target=</span><span class="s">&quot;catalog.ui&quot;</span> <span class="nt">/&gt;</span>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="nt">&lt;antcall</span> <span class="na">target=</span><span class="s">&quot;catalog.ui&quot;</span> <span class="nt">/&gt;</span>
 </pre></div>
 </div>
 <p>The final step is to add a target which matches the name above.</p>
 <p>This name MUST match the plugin-name property declared in the test.xml file created above}</p>
 <p>The following is an example of a target:</p>
-<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;target</span> <span class="na">name=</span><span class="s">&quot;catalog.ui&quot;</span><span class="nt">&gt;</span>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="nt">&lt;target</span> <span class="na">name=</span><span class="s">&quot;catalog.ui&quot;</span><span class="nt">&gt;</span>
    <span class="nt">&lt;antcall</span> <span class="na">target=</span><span class="s">&quot;runtests&quot;</span><span class="nt">&gt;</span>
      <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;testPlugin&quot;</span> <span class="na">value=</span><span class="s">&quot;${org.locationtech.udig.catalog.tests.ui}&quot;</span><span class="nt">/&gt;</span>
      <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;report&quot;</span> <span class="na">value=</span><span class="s">&quot;org.locationtech.udig.catalog.tests.ui&quot;</span><span class="nt">/&gt;</span>

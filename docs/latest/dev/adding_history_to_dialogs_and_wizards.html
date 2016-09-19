@@ -7,7 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Adding History to Dialogs and Wizards &mdash; uDig 1.4.0 Developers Guide</title>
+    <title>Adding History to Dialogs and Wizards &mdash; uDig 2.0.0.RC1 Developers Guide</title>
     
     <link rel="stylesheet" href="_static/udig.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '2.0.0-SNAPSHOT',
+        VERSION:     '2.0.0.RC1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  false
@@ -27,7 +27,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/theme_extras.js"></script>
     <link rel="shortcut icon" href="_static/udig.ico"/>
-    <link rel="top" title="uDig 1.4.0 Developers Guide" href="index.html" />
+    <link rel="top" title="uDig 2.0.0.RC1 Developers Guide" href="index.html" />
     <link rel="up" title="Working with Eclipse RCP" href="working_with_eclipse_rcp.html" />
     <link rel="next" title="SWT and JFace Widgets" href="swt_and_jface_widgets.html" />
     <link rel="prev" title="Menus using Operations and Tools" href="menus_using_operations_and_tools.html" /> 
@@ -73,7 +73,7 @@ achieve this easily and will show how it was implemented in uDig&#8217;s WMS Wiz
 <img alt="_images/wizardHistory.jpg" src="_images/wizardHistory.jpg" />
 <p>Here is what the contents of the file look like when saved out to disk:</p>
 <p><strong>dialog_settings.xml</strong></p>
-<div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
 <span class="nt">&lt;section</span> <span class="na">name=</span><span class="s">&quot;Workbench&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;section</span> <span class="na">name=</span><span class="s">&quot;WMS_WIZARD&quot;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;list</span> <span class="na">key=</span><span class="s">&quot;WMS_RECENT&quot;</span><span class="nt">&gt;</span>
@@ -115,7 +115,7 @@ URLs.</p>
 <div class="section" id="initializing-the-settings">
 <h2>Initializing the settings<a class="headerlink" href="#initializing-the-settings" title="Permalink to this headline">¶</a></h2>
 <p><strong>WMSWizardPage.java</strong></p>
-<div class="highlight-java"><div class="highlight"><pre><span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">WMS_WIZARD</span> <span class="o">=</span> <span class="s">&quot;WMS_WIZARD&quot;</span><span class="o">;</span> <span class="c1">//$NON-NLS-1$</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">WMS_WIZARD</span> <span class="o">=</span> <span class="s">&quot;WMS_WIZARD&quot;</span><span class="o">;</span> <span class="c1">//$NON-NLS-1$</span>
   <span class="kd">private</span> <span class="n">IDialogSettings</span> <span class="n">settings</span><span class="o">;</span>
 
   <span class="kd">public</span> <span class="nf">WMSWizardPage</span><span class="o">()</span> <span class="o">{</span>
@@ -136,7 +136,7 @@ don&#8217;t exist (settings == null), the section must be added.</p>
 <p>The code in WMSWizardPage that instantiates the widgets is also responsible for populating those
 widgets with previously entered values.</p>
 <p><strong>WMSWizardPage.java</strong></p>
-<div class="highlight-java"><div class="highlight"><pre><span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">WMS_RECENT</span> <span class="o">=</span> <span class="s">&quot;WMS_RECENT&quot;</span><span class="o">;</span> <span class="c1">//$NON-NLS-1$</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">WMS_RECENT</span> <span class="o">=</span> <span class="s">&quot;WMS_RECENT&quot;</span><span class="o">;</span> <span class="c1">//$NON-NLS-1$</span>
 
 <span class="kd">public</span> <span class="kt">void</span> <span class="nf">createControl</span><span class="o">(</span><span class="n">Composite</span> <span class="n">parent</span><span class="o">)</span> <span class="o">{</span>
   <span class="n">String</span><span class="o">[]</span> <span class="n">recentWMSs</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="na">getArray</span><span class="o">(</span><span class="n">WMS_RECENT</span><span class="o">);</span>
@@ -168,7 +168,7 @@ of COMBO_HISTORY_LENGTH to change the size.</p>
 for each widget, retrieve the previous values, and call addToHistory, passing in the value from the
 widget as well. After that, just add the key and the values to the IDialogSettings.</p>
 <p><strong>WMSWizardPage.java</strong></p>
-<div class="highlight-java"><div class="highlight"><pre><span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">COMBO_HISTORY_LENGTH</span> <span class="o">=</span> <span class="mi">15</span><span class="o">;</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">COMBO_HISTORY_LENGTH</span> <span class="o">=</span> <span class="mi">15</span><span class="o">;</span>
 
 <span class="cm">/**</span>
 <span class="cm">  * Saves the widget values</span>
@@ -226,7 +226,7 @@ widget as well. After that, just add the key and the values to the IDialogSettin
 </div>
 <p>Once saveWidgetValues() is configured, you simply need to call it when your dialog or wizard is
 done.</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="cm">/*</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="cm">/*</span>
 <span class="cm"> * Success! Store the URL in history.</span>
 <span class="cm"> */</span>
 <span class="n">saveWidgetValues</span><span class="o">();</span>

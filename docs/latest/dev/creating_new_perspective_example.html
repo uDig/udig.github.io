@@ -7,7 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Creating new Perspective Example &mdash; uDig 1.4.0 Developers Guide</title>
+    <title>Creating new Perspective Example &mdash; uDig 2.0.0.RC1 Developers Guide</title>
     
     <link rel="stylesheet" href="_static/udig.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '2.0.0-SNAPSHOT',
+        VERSION:     '2.0.0.RC1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  false
@@ -27,7 +27,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/theme_extras.js"></script>
     <link rel="shortcut icon" href="_static/udig.ico"/>
-    <link rel="top" title="uDig 1.4.0 Developers Guide" href="index.html" />
+    <link rel="top" title="uDig 2.0.0.RC1 Developers Guide" href="index.html" />
     <link rel="up" title="Examples" href="examples.html" />
     <link rel="next" title="Extending An Existing Perspective Example" href="extending_an_existing_perspective_example.html" />
     <link rel="prev" title="View Extension Point Example" href="view_extension_point_example.html" /> 
@@ -69,7 +69,7 @@
 <div class="section" id="declare-new-perspective">
 <h2>Declare new Perspective<a class="headerlink" href="#declare-new-perspective" title="Permalink to this headline">¶</a></h2>
 <p>Add the following XML snippet to your plugin.xml:</p>
-<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;extension</span>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="nt">&lt;extension</span>
          <span class="na">point=</span><span class="s">&quot;org.eclipse.ui.perspectives&quot;</span><span class="nt">&gt;</span>
       <span class="nt">&lt;perspective</span>
             <span class="na">class=</span><span class="s">&quot;tutorial.PerspectiveFactory1&quot;</span>
@@ -87,7 +87,7 @@ last two tutorials):</p>
 <div class="section" id="create-a-perspective-factory-class">
 <h2>Create a Perspective Factory class<a class="headerlink" href="#create-a-perspective-factory-class" title="Permalink to this headline">¶</a></h2>
 <p><strong>PerspectiveFactory1</strong></p>
-<div class="highlight-java"><div class="highlight"><pre><span class="kn">package</span> <span class="n">tutorial</span><span class="o">;</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nn">tutorial</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">org.eclipse.ui.IPageLayout</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.eclipse.ui.IPerspectiveFactory</span><span class="o">;</span>
@@ -110,7 +110,7 @@ last two tutorials):</p>
 <p>See the <a class="reference internal" href="extending_an_existing_perspective_example.html"><em>Extending An Existing Perspective Example</em></a> tutorial on how to create
 Perspective extensions.</p>
 <p>Add the following xml snippet to the plugin.xml.</p>
-<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;extension</span>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="nt">&lt;extension</span>
          <span class="na">point=</span><span class="s">&quot;org.eclipse.ui.perspectiveExtensions&quot;</span><span class="nt">&gt;</span>
       <span class="nt">&lt;perspectiveExtension</span> <span class="na">targetID=</span><span class="s">&quot;tutorial.perspective1&quot;</span><span class="nt">&gt;</span>
          <span class="nt">&lt;view</span>

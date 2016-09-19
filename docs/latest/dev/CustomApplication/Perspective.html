@@ -7,7 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Perspective &mdash; uDig 1.4.0 Developers Guide</title>
+    <title>Perspective &mdash; uDig 2.0.0.RC1 Developers Guide</title>
     
     <link rel="stylesheet" href="../_static/udig.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '2.0.0-SNAPSHOT',
+        VERSION:     '2.0.0.RC1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  false
@@ -27,7 +27,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/theme_extras.js"></script>
     <link rel="shortcut icon" href="../_static/udig.ico"/>
-    <link rel="top" title="uDig 1.4.0 Developers Guide" href="../index.html" />
+    <link rel="top" title="uDig 2.0.0.RC1 Developers Guide" href="../index.html" />
     <link rel="up" title="Custom Application" href="CustomApplication.html" />
     <link rel="next" title="Perspective Extensions" href="PerspectiveExtensions.html" />
     <link rel="prev" title="Application" href="Application.html" /> 
@@ -94,7 +94,7 @@ is still on the Extensions tab.</p>
 <li><p class="first">Press <em class="guilabel">Finish</em> to create the class.</p>
 </li>
 <li><p class="first">Add the following static constants:</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">BOOKMARKS</span> <span class="o">=</span> <span class="s">&quot;org.locationtech.udig.bookmarks.internal.ui.BookmarksView&quot;</span><span class="o">;</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">BOOKMARKS</span> <span class="o">=</span> <span class="s">&quot;org.locationtech.udig.bookmarks.internal.ui.BookmarksView&quot;</span><span class="o">;</span>
 
 <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">PROJECTS</span> <span class="o">=</span> <span class="s">&quot;org.locationtech.udig.project.ui.projectExplorer&quot;</span><span class="o">;</span>
 
@@ -103,7 +103,7 @@ is still on the Extensions tab.</p>
 </div>
 </li>
 <li><p class="first">In the createInitialLayout method, add the following code:</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">layout</span><span class="o">.</span><span class="na">addFastView</span><span class="o">(</span><span class="n">PROJECTS</span><span class="o">);</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">layout</span><span class="o">.</span><span class="na">addFastView</span><span class="o">(</span><span class="n">PROJECTS</span><span class="o">);</span>
 
 <span class="n">layout</span><span class="o">.</span><span class="na">addView</span><span class="o">(</span><span class="n">LAYERS</span><span class="o">,</span> <span class="n">IPageLayout</span><span class="o">.</span><span class="na">LEFT</span><span class="o">,</span> <span class="mf">0.3f</span><span class="o">,</span> <span class="n">IPageLayout</span><span class="o">.</span><span class="na">ID_EDITOR_AREA</span><span class="o">);</span>
 

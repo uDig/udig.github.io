@@ -7,7 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Reference &mdash; uDig 1.4.0 User Guide</title>
+    <title>Reference &mdash; uDig 2.0.0.RC1 User Guide</title>
     
     <link rel="stylesheet" href="../_static/udig.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '2.0.0-SNAPSHOT',
+        VERSION:     '2.0.0.RC1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  false
@@ -27,7 +27,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/theme_extras.js"></script>
     <link rel="shortcut icon" href="../_static/udig.ico"/>
-    <link rel="top" title="uDig 1.4.0 User Guide" href="../index.html" />
+    <link rel="top" title="uDig 2.0.0.RC1 User Guide" href="../index.html" />
     <link rel="next" title="Advanced Tools" href="Advanced Tools.html" />
     <link rel="prev" title="Selection using CQL" href="../tasks/Selection using CQL.html" /> 
   </head>
@@ -67,18 +67,114 @@
 <p>Reference for the uDig application describing wizards, views, and shortcuts.</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="Advanced Tools.html">Advanced Tools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Filters and Expressions.html">Filters and Expressions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Help contents.html">Help contents</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Icons and buttons.html">Icons and buttons</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Menus.html">Menus</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Perspectives.html">Perspectives</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Preferences.html">Preferences</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Property Pages.html">Property Pages</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Style Pages.html">Style Pages</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Spatial Operations.html">Spatial Operations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Views and editors.html">Views and editors</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Wizards and Dialogs.html">Wizards and Dialogs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Advanced Tools.html">Advanced Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Advanced Tools.html#editing-tools-overview">Editing Tools Overview</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Filters and Expressions.html">Filters and Expressions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Expression viewer.html">Expression viewer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Filter viewer.html">Filter viewer</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Help contents.html">Help contents</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Cheat sheets.html">Cheat sheets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="uDig User Guide.html">uDig User Guide</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Icons and buttons.html">Icons and buttons</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Icons and buttons.html#catalog-view">Catalog view</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Icons and buttons.html#projects-view">Projects view</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Icons and buttons.html#layers-view">Layers view</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Icons and buttons.html#toolbar">Toolbar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Icons and buttons.html#map-palette">Map Palette</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Icons and buttons.html#page-palette">Page Palette</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Menus.html">Menus</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Data Menu.html">Data Menu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Edit Menu.html">Edit Menu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="File Menu.html">File Menu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Help Menu.html">Help Menu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Layer Menu.html">Layer Menu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Map Menu.html">Map Menu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Navigation Menu.html">Navigation Menu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Window Menu.html">Window Menu</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Perspectives.html">Perspectives</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Map Perspective.html">Map Perspective</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Style Perspective.html">Style Perspective</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Preferences.html">Preferences</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Preferences.html#preference-pages">Preference Pages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Preferences.html#restore-defaults">Restore Defaults</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Preferences.html#apply">Apply</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Preferences.html#ok">OK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Preferences.html#cancel">Cancel</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Property Pages.html">Property Pages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Interaction Properties page.html">Interaction Properties page</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Projection page.html">Projection page</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Summary page.html">Summary page</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Tileset page.html">Tileset page</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Service page.html">Service page</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Resource page.html">Resource page</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Resource Information page.html">Information page</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Resource Document page.html">Document page</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Style Pages.html">Style Pages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Feature Style Pages.html">Feature Style Pages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Raster Style Pages.html">Raster Style Pages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Web Map Server Style Pages.html">Web Map Server Style Pages</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Spatial Operations.html">Spatial Operations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Spatial Operations.html#introduction">Introduction</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Views and editors.html">Views and editors</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="AOI view.html">AOI view</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Bookmarks View.html">Bookmarks View</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Catalog view.html">Catalog view</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Cheat Sheet view.html">Cheat Sheet view</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Document view.html">Document view</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GeoScript editor.html">GeoScript editor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Help view.html">Help view</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Information view.html">Information view</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Layers view.html">Layers view</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Legend View.html">Legend View</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Location View.html">Location View</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Map editor.html">Map editor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Outline view.html">Outline view</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Page editor.html">Page editor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Palette View.html">Palette View</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Projects view.html">Projects view</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Search view.html">Search view</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Spatial Toolbox View.html">Spatial Toolbox view</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Style View.html">Style View</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Table view.html">Table view</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Tasks view.html">Tasks view</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Web view.html">Web view</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Wizards and Dialogs.html">Wizards and Dialogs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Add Data wizard.html">Add Data wizard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Cheat Sheet Selection dialog.html">Cheat Sheet Selection dialog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Export Wizard.html">Export Wizard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Import Wizard.html">Import Wizard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="New Project wizard.html">New Project wizard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Operations dialog.html">Operations dialog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Properties dialog.html">Properties dialog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Send Log dialog.html">Send Log dialog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Style Editor dialog.html">Style Editor dialog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Transform dialog.html">Transform dialog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Font Selector dialog.html">Font Selector dialog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Color Selector dialog.html">Color Selector dialog</a></li>
+</ul>
+</li>
 </ul>
 </div>
 <p>Other reference material:</p>

@@ -7,7 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Keyboard Shortcut Example &mdash; uDig 1.4.0 Developers Guide</title>
+    <title>Keyboard Shortcut Example &mdash; uDig 2.0.0.RC1 Developers Guide</title>
     
     <link rel="stylesheet" href="_static/udig.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '2.0.0-SNAPSHOT',
+        VERSION:     '2.0.0.RC1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  false
@@ -27,7 +27,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/theme_extras.js"></script>
     <link rel="shortcut icon" href="_static/udig.ico"/>
-    <link rel="top" title="uDig 1.4.0 Developers Guide" href="index.html" />
+    <link rel="top" title="uDig 2.0.0.RC1 Developers Guide" href="index.html" />
     <link rel="up" title="Examples" href="examples.html" />
     <link rel="next" title="FeatureSourceOp Example" href="featuresourceop_example.html" />
     <link rel="prev" title="Extending An Existing Perspective Example" href="extending_an_existing_perspective_example.html" /> 
@@ -115,19 +115,19 @@ that the binding will be active in and the scheme that the binding is part of.</
 action.</p>
 <ol class="arabic">
 <li><p class="first">When you create your action set the definitionID to the command&#8217;s id.</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">action</span><span class="o">.</span><span class="na">setActionDefinitionId</span><span class="o">(</span><span class="s">&quot;yourCommandsID&quot;</span><span class="o">);</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">action</span><span class="o">.</span><span class="na">setActionDefinitionId</span><span class="o">(</span><span class="s">&quot;yourCommandsID&quot;</span><span class="o">);</span>
 </pre></div>
 </div>
 </li>
 <li><p class="first">Next you must register your command with the current site&#8217;s keybinding service.</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">part</span><span class="o">.</span><span class="na">getSite</span><span class="o">().</span><span class="na">getKeyBindingService</span><span class="o">().</span><span class="na">registerAction</span><span class="o">(</span><span class="n">action</span><span class="o">);</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">part</span><span class="o">.</span><span class="na">getSite</span><span class="o">().</span><span class="na">getKeyBindingService</span><span class="o">().</span><span class="na">registerAction</span><span class="o">(</span><span class="n">action</span><span class="o">);</span>
 </pre></div>
 </div>
 </li>
 <li><p class="first">During the creation of a view the context that are active must be defined as well. By default
 org.eclipse.ui.contexts.window context is active so if you keybinding is part of that context
 then you can skip this step.</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">site</span><span class="o">.</span><span class="na">getKeyBindingService</span><span class="o">().</span><span class="na">setScopes</span><span class="o">(</span><span class="k">new</span> <span class="n">String</span><span class="o">[]</span> <span class="o">{</span><span class="s">&quot;yourContextID&quot;</span><span class="o">});</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">site</span><span class="o">.</span><span class="na">getKeyBindingService</span><span class="o">().</span><span class="na">setScopes</span><span class="o">(</span><span class="k">new</span> <span class="n">String</span><span class="o">[]</span> <span class="o">{</span><span class="s">&quot;yourContextID&quot;</span><span class="o">});</span>
 </pre></div>
 </div>
 </li>
@@ -140,7 +140,7 @@ then you can skip this step.</p>
 delete, undo, redo, etc... The ToolManager can be obtained with the method ApplicationGIS.getToolManager().</p>
 </div>
 <p><strong>Example:</strong></p>
-<div class="highlight-xml"><div class="highlight"><pre><span class="c">&lt;!-- This is part of org.eclipse.ui plugin.xml --&gt;</span>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="c">&lt;!-- This is part of org.eclipse.ui plugin.xml --&gt;</span>
       <span class="nt">&lt;extension</span>
             <span class="na">point=</span><span class="s">&quot;org.eclipse.ui.contexts&quot;</span><span class="nt">&gt;</span>
          <span class="nt">&lt;context</span>

@@ -7,7 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Guide to MigLayout &mdash; uDig 1.4.0 Developers Guide</title>
+    <title>Guide to MigLayout &mdash; uDig 2.0.0.RC1 Developers Guide</title>
     
     <link rel="stylesheet" href="_static/udig.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '2.0.0-SNAPSHOT',
+        VERSION:     '2.0.0.RC1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  false
@@ -27,7 +27,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/theme_extras.js"></script>
     <link rel="shortcut icon" href="_static/udig.ico"/>
-    <link rel="top" title="uDig 1.4.0 Developers Guide" href="index.html" />
+    <link rel="top" title="uDig 2.0.0.RC1 Developers Guide" href="index.html" />
     <link rel="up" title="Reference" href="reference.html" />
     <link rel="next" title="IAdaptable" href="iadaptable.html" />
     <link rel="prev" title="Guide To EMF" href="guide_to_emf.html" /> 
@@ -85,7 +85,7 @@ the tab under each example to see the source code)</li>
 will be.</p>
 <img alt="_images/plan_grid-1.jpg" src="_images/plan_grid-1.jpg" />
 <p>And then turn it into code.</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">shell</span><span class="o">.</span><span class="na">setLayout</span><span class="o">(</span> <span class="k">new</span> <span class="n">MigLayout</span><span class="o">(</span><span class="s">&quot;&quot;</span><span class="o">,</span><span class="s">&quot;[right]10[left,grow][min!][min!]&quot;</span><span class="o">,</span><span class="s">&quot;30&quot;</span><span class="o">));</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">shell</span><span class="o">.</span><span class="na">setLayout</span><span class="o">(</span> <span class="k">new</span> <span class="n">MigLayout</span><span class="o">(</span><span class="s">&quot;&quot;</span><span class="o">,</span><span class="s">&quot;[right]10[left,grow][min!][min!]&quot;</span><span class="o">,</span><span class="s">&quot;30&quot;</span><span class="o">));</span>
 
 <span class="n">Label</span> <span class="n">label</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Label</span><span class="o">(</span><span class="n">shell</span><span class="o">,</span> <span class="n">SWT</span><span class="o">.</span><span class="na">SHADOW_IN</span><span class="o">);</span>
 <span class="n">label</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="s">&quot;Country:&quot;</span><span class="o">);</span>
