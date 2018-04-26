@@ -1,0 +1,988 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Feature Editor Tutorial &mdash; uDig 1.5.0 Developers Guide</title>
+    
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.5.0.RC1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.5.0 Developers Guide" href="index.html" />
+    <link rel="up" title="GIS Application Tutorials" href="gis_application_tutorials.html" />
+    <link rel="next" title="Disk to Screen Tutorials" href="disk_to_screen_tutorials.html" />
+    <link rel="prev" title="Map Decorator Tutorial" href="map_decorator_tutorial.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="map_decorator_tutorial.html">Map Decorator Tutorial</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="disk_to_screen_tutorials.html">Disk to Screen Tutorials</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="feature-editor-tutorial">
+<h1>Feature Editor Tutorial<a class="headerlink" href="#feature-editor-tutorial" title="Permalink to this headline">¶</a></h1>
+<p>This tutorial provides a step-by-step guide to create a custom Feature Editor.</p>
+<div class="section" id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+</ol>
+<ul class="simple">
+<li><a class="reference internal" href="#comparison-of-swt-and-awt">Comparison of SWT and AWT</a></li>
+<li><a class="reference internal" href="#comparison-of-jface-and-swing">Comparison of JFace and Swing</a></li>
+</ul>
+<ol class="arabic simple" start="2">
+<li><a class="reference internal" href="#creating-the-plug-in">Creating the Plug-In</a></li>
+<li><a class="reference internal" href="#customising-cell-editors">Customising Cell Editors</a></li>
+</ol>
+<ul class="simple">
+<li><a class="reference internal" href="#create-the-formcelleditorlistener">Create the FormCellEditorListener</a></li>
+<li><a class="reference internal" href="#implement-the-cell-editor-listener">Implement the Cell Editor Listener</a></li>
+<li><a class="reference internal" href="#create-the-mandatoryformtextcelleditorvalidator">Create the MandatoryFormTextCellEditorValidator</a></li>
+<li><a class="reference internal" href="#implement-the-cell-editor-validator">Implement the Cell Editor Validator</a></li>
+<li><a class="reference internal" href="#create-the-formtextcelleditor">Create the FormTextCellEditor</a></li>
+<li><a class="reference internal" href="#implement-the-cell-editor">Implement the Cell Editor</a></li>
+</ul>
+<ol class="arabic simple" start="4">
+<li><a class="reference internal" href="#creating-the-view-panel">Creating the View Panel</a></li>
+</ol>
+<ul class="simple">
+<li><a class="reference internal" href="#constants-and-variables">Constants and Variables</a></li>
+<li><a class="reference internal" href="#using-eclipse-forms">Using Eclipse Forms</a></li>
+<li><a class="reference internal" href="#using-cell-editors">Using Cell Editors</a></li>
+<li><a class="reference internal" href="#using-jface-viewers">Using JFace Viewers</a></li>
+<li><a class="reference internal" href="#create-action-buttons">Create Action Buttons</a></li>
+<li><a class="reference internal" href="#implement-listeners">Implement Listeners</a></li>
+<li><a class="reference internal" href="#integrating-commands">Integrating Commands</a></li>
+</ul>
+<ol class="arabic simple" start="5">
+<li><a class="reference internal" href="#defining-the-view">Defining the View</a></li>
+<li><a class="reference internal" href="#implementing-the-view">Implementing the View</a></li>
+</ol>
+<ul class="simple">
+<li><a class="reference internal" href="#integrating-the-view-panel">Integrating the View Panel</a></li>
+<li><a class="reference internal" href="#implementing-iudigview">Implementing IUDIGView</a></li>
+</ul>
+<ol class="arabic simple" start="7">
+<li><a class="reference internal" href="#trying-it-out">Trying it Out</a></li>
+</ol>
+<ul class="simple">
+<li><a class="reference internal" href="#run-udig">Run uDig</a></li>
+<li><a class="reference internal" href="#load-shapefile">Load Shapefile</a></li>
+<li><a class="reference internal" href="#open-the-view">Open the View</a></li>
+<li><a class="reference internal" href="#select-a-feature">Select a Feature</a></li>
+<li><a class="reference internal" href="#update-information">Update Information</a></li>
+</ul>
+<ol class="arabic simple" start="8">
+<li><a class="reference internal" href="#what-to-do-next">What to do Next</a></li>
+</ol>
+</div>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>When creating your own application, a common challenge is making a specific user interface for editing your data. Out of the box uDig provides several generic feature editors (the <em>Table</em> view and the <em>Default Feature</em> editor).</p>
+<p>In this work book we will make our own <em>feature editor</em>. Our editor will only function on the <strong>10m_admin_0_countries.shp</strong> file provided as part of the sample data set. Eclipse RCP concepts covered in this workbook:</p>
+<ul class="simple">
+<li>Creating a user interface using SWT widgets</li>
+<li>Integrating Cell Editors, JFace Viewers and Eclipse Forms</li>
+<li>Adding and implementing a View</li>
+</ul>
+<p>One thing to pay attention to is the use of Commands. Commands are created to interact with the uDig application from the user interface. Commands dispatched to the GISPlatform are executed with write access to the data model (of Maps, Layers and blackboards).</p>
+<p>The feature editor we are making in this tutorial will issue several edit commands modifying a feature that has been loaded onto the <em>Edit Blackboard</em>. This is the same feature being used by the edit tools.</p>
+<div class="section" id="comparison-of-swt-and-awt">
+<h3>Comparison of SWT and AWT<a class="headerlink" href="#comparison-of-swt-and-awt" title="Permalink to this headline">¶</a></h3>
+<p>Eclipse RCP applications make use of the Standard Widget Toolkit (SWT) when defining a user interface. SWT is similar in function to the built-in Java Abstract Window Toolkit. Both libraries use native widgets for display; they only differ in the approach taken at a technical level.</p>
+<ul class="simple">
+<li><strong>SWT</strong>: Uses a different swt.jar for each platform; the implementation makes direct operating system level calls to create widgets such as buttons and so forth. SWT implements in native code any &#8220;missing&#8221; widgets (e.g. swt for x85/Motif has contains a tree widget).</li>
+<li><strong>AWT</strong>: Uses an Abstract Factory (the <em>Toolkit</em> class) to construct widgets. Each JRE must provide an implementation of this class teaching Java how to make the widgets for that environment. Early implementations of AWT did not quite hide platform differences from developers (resulting in write once test  everywhere frustration).</li>
+</ul>
+<p>At a pragmatic level both libraries function in a similar manner, making use of an event thread, listeners, layouts and so on.</p>
+</div>
+<div class="section" id="comparison-of-jface-and-swing">
+<h3>Comparison of JFace and Swing<a class="headerlink" href="#comparison-of-jface-and-swing" title="Permalink to this headline">¶</a></h3>
+<p>Programming at a low level with widgets can be a bit of a pain, a common practice is to formally split responsibility into three parts:</p>
+<ul class="simple">
+<li><strong>Model</strong>: Objects in the domain of discourse, issues some kind of notification when changed</li>
+<li><strong>View</strong>: User interface showing the object state to the user, listens to events and updates the display when needed.</li>
+<li><strong>Controller</strong>: Accepts input from the user and changes the domain objects as needed.</li>
+</ul>
+<p>With this baseline in mind let&#8217;s look at how JFace and Swing compare:</p>
+<ul class="simple">
+<li><strong>Swing</strong>: Is a high level user interface providing a variation of <em>Model View Controller</em> on top of AWT. To get around  platform differences Swing makes use of an AWT Canvas and handles everything else itself. For Swing, the <em>View and Controller</em> have been combined and the construction delegated to a <em>look and feel</em> factory mirroring what is expected on a given platform.</li>
+<li><strong>JFace</strong>: Is a high level <em>Model View Controller</em> user interface built on top of SWT. It takes a different approach in that the <em>model</em> objects that make up your domain are left alone. You provide Adapters (sometimes called Providers) allowing the JFace viewers to talk to your existing domain model. This approach is amazing once you get the hang of it.</li>
+</ul>
+<p>The big advantage here for JFace is that you only need to implement as many adapters as you care about. All of the JFace viewers work with the same set of adapters so you can quickly see what your domain objects look like in a range of Viewers.</p>
+</div>
+</div>
+<div class="section" id="creating-the-plug-in">
+<h2>Creating the Plug-In<a class="headerlink" href="#creating-the-plug-in" title="Permalink to this headline">¶</a></h2>
+<p>Let us start off by creating a plug-in that will contain our feature editor.</p>
+<ol class="arabic simple">
+<li>Create plug-in named <strong>org.locationtech.udig.tutorials.featureeditor</strong>.</li>
+</ol>
+<div class="figure align-left" style="width: 100%">
+<img alt="_images/create_plugin.png" src="_images/create_plugin.png" />
+</div>
+<p>Fig. Create plugin dialog</p>
+<ol class="arabic simple" start="2">
+<li>In the <strong>MANIFTEST.MF</strong> editor switch to the <strong>Dependencies</strong> tab.</li>
+<li>Add the following plug-in dependency:</li>
+</ol>
+<ul class="simple">
+<li><strong>org.locationtech.udig.project.ui</strong></li>
+<li><strong>org.eclipse.ui.forms</strong></li>
+</ul>
+<div class="figure align-left" style="width: 100%">
+<img alt="_images/add_dependencies.png" src="_images/add_dependencies.png" />
+</div>
+<p>Fig. Add dependencies</p>
+<ol class="arabic simple" start="3">
+<li>Save the <strong>MANIFTEST.MF</strong> file.</li>
+</ol>
+</div>
+<div class="section" id="customising-cell-editors">
+<h2>Customising Cell Editors<a class="headerlink" href="#customising-cell-editors" title="Permalink to this headline">¶</a></h2>
+<p>JFace cell editors are wrapped widgets that are primarily used to allow editing values in table viewers. Here we try to re-use and customise cell editors to be usable in forms. So let us sub-class one of the most basic cell editors in <strong>TextCellEditor</strong> and hook up an <strong>ICellEditorListener</strong> and an <strong>ICellEditorValidator</strong>.</p>
+<div class="section" id="create-the-formcelleditorlistener">
+<h3>Create the FormCellEditorListener<a class="headerlink" href="#create-the-formcelleditorlistener" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Select <strong>File</strong> &gt; <strong>New</strong> &gt; <strong>Class</strong> from the menu bar to open the New Java Class wizard</li>
+<li>On the <strong>New Java Class</strong> dialog, set the following:</li>
+</ol>
+<ul class="simple">
+<li><strong>Source folder</strong>: org.locationtech.udig.tutorials.featureeditor/src</li>
+<li><strong>package</strong>: org.locationtech.udig.tutorials.featureeditor</li>
+<li><strong>Name</strong>: FormCellEditorListener</li>
+</ul>
+<ol class="arabic simple" start="3">
+<li>Add the interface:</li>
+</ol>
+<ul class="simple">
+<li><strong>org.eclipse.jface.viewers.ICellEditorListener</strong></li>
+</ul>
+<ol class="arabic simple" start="4">
+<li>The dialog should look like this when you are done:</li>
+</ol>
+<div class="figure align-left" style="width: 100%">
+<img alt="_images/create_cell_editor_listener.png" src="_images/create_cell_editor_listener.png" />
+</div>
+<p>Fig. Create cell editor listener dialog</p>
+<ol class="arabic simple" start="5">
+<li>Press <strong>Finish</strong> to create <strong>FormCellEditorListener.java</strong> class</li>
+</ol>
+</div>
+<div class="section" id="implement-the-cell-editor-listener">
+<h3>Implement the Cell Editor Listener<a class="headerlink" href="#implement-the-cell-editor-listener" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Create class variables.</li>
+</ol>
+<div class="highlight-python"><pre>private IMessageManager msgManager;
+private CellEditor cellEditor;</pre>
+</div>
+<ol class="arabic simple" start="2">
+<li>Implement the constructor.</li>
+</ol>
+<div class="highlight-python"><pre>public FormCellEditorListener( CellEditor cellEditor, IMessageManager msgManager ) {
+   this.cellEditor = cellEditor;
+   this.msgManager = msgManager;
+}</pre>
+</div>
+<ol class="arabic simple" start="3">
+<li>Implement the interface methods.</li>
+</ol>
+<div class="highlight-python"><pre>@Override
+public void applyEditorValue() {
+
+   final Control control = cellEditor.getControl();
+   msgManager.removeMessages(control);
+
+   final String errMsg = cellEditor.getErrorMessage();
+   if (errMsg != null) {
+       msgManager.addMessage(control, errMsg, null, IMessage.ERROR, control);
+   }
+
+}
+
+@Override
+public void cancelEditor() {
+   // Nothing
+}
+
+@Override
+public void editorValueChanged( boolean oldValidState, boolean newValidState ) {
+   // Nothing
+}</pre>
+</div>
+<ol class="arabic simple" start="4">
+<li>Use <strong>Control-Shift-O</strong> to fix up the imports as needed.</li>
+</ol>
+<p>Notes:</p>
+<ul class="simple">
+<li>Wondered where the error message that we are using gets set? Well, this is what our validator (next step) does.</li>
+<li>Notice that we are passing in a message manager, this facilitates showing the error message on the UI, don&#8217;t worry about where this one comes from, everything will come together when we integrate the pieces together in the view panel.</li>
+<li>The sequence of cell editor events (validation, value changed, apply change, etc.) vary from each cell editor implementation to another. In our case, <strong>applyEditorValue()</strong> is done on lose of focus and validation is done before this event is fired.</li>
+</ul>
+</div>
+<div class="section" id="create-the-mandatoryformtextcelleditorvalidator">
+<h3>Create the MandatoryFormTextCellEditorValidator<a class="headerlink" href="#create-the-mandatoryformtextcelleditorvalidator" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Select <strong>File</strong> &gt; <strong>New</strong> &gt; <strong>Class</strong> from the menu bar to open the New Java Class wizard</li>
+<li>On the <strong>New Java Class</strong> dialog, set the following:</li>
+</ol>
+<ul class="simple">
+<li><strong>Source folder</strong>: org.locationtech.udig.tutorials.featureeditor/src</li>
+<li><strong>package</strong>: org.locationtech.udig.tutorials.featureeditor</li>
+<li><strong>Name</strong>: MandatoryFormTextCellEditorValidator</li>
+</ul>
+<ol class="arabic simple" start="3">
+<li>Add the interface:</li>
+</ol>
+<ul class="simple">
+<li><strong>org.eclipse.jface.viewers.ICellEditorValidator</strong></li>
+</ul>
+<ol class="arabic simple" start="4">
+<li>The dialog should look like this when you are done:</li>
+</ol>
+<div class="figure align-left" style="width: 100%">
+<img alt="_images/create_cell_editor_validator.png" src="_images/create_cell_editor_validator.png" />
+</div>
+<p>Fig. Create cell editor validator dialog</p>
+<ol class="arabic simple" start="5">
+<li>Press Finish to create <strong>MandatoryFormTextCellEditorValidator.java</strong> class</li>
+</ol>
+</div>
+<div class="section" id="implement-the-cell-editor-validator">
+<h3>Implement the Cell Editor Validator<a class="headerlink" href="#implement-the-cell-editor-validator" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple" start="2">
+<li>Implement the interface method.</li>
+</ol>
+<div class="highlight-python"><pre>@Override
+public String isValid( Object value ) {
+   final String textValue = (String) value;
+   if ("".equals(textValue)) {
+      return "Field must not be blank.";
+   }
+   return null;
+}</pre>
+</div>
+<p>Notes:</p>
+<ul class="simple">
+<li>Our example simply checks if the cell editor&#8217;s value is blank or not. You may create a more complex logic as you like.</li>
+</ul>
+</div>
+<div class="section" id="create-the-formtextcelleditor">
+<h3>Create the FormTextCellEditor<a class="headerlink" href="#create-the-formtextcelleditor" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Select <strong>File</strong> &gt; <strong>New</strong> &gt; <strong>Class</strong> from the menu bar to open the New Java Class wizard</li>
+<li>On the <strong>New Java Class</strong> dialog, set the following:</li>
+</ol>
+<ul class="simple">
+<li><strong>Source folder</strong>: org.locationtech.udig.tutorials.featureeditor/src</li>
+<li><strong>package</strong>: org.locationtech.udig.tutorials.featureeditor</li>
+<li><strong>Name</strong>: FormTextCellEditor</li>
+</ul>
+<ol class="arabic simple" start="3">
+<li>Set the class below as superclass:</li>
+</ol>
+<ul class="simple">
+<li><strong>org.eclipse.jface.viewers.TextCellEditor</strong></li>
+</ul>
+<ol class="arabic simple" start="4">
+<li>The dialog should look like this when you are done:</li>
+</ol>
+<div class="figure align-left" style="width: 100%">
+<img alt="_images/create_cell_editor.png" src="_images/create_cell_editor.png" />
+</div>
+<p>Fig. Create cell editor dialog</p>
+<ol class="arabic simple" start="5">
+<li>Press Finish to create <strong>FormTextCellEditor.java</strong> class</li>
+</ol>
+</div>
+<div class="section" id="implement-the-cell-editor">
+<h3>Implement the Cell Editor<a class="headerlink" href="#implement-the-cell-editor" title="Permalink to this headline">¶</a></h3>
+<p>In this section, we implement our cell editor, then set a validator and add a listener to the editor. This allows integration of the editor, its validation and publishing the error message to the UI.</p>
+<ol class="arabic simple">
+<li>Implement the constructor.</li>
+</ol>
+<div class="highlight-python"><pre>public FormTextCellEditor(Composite composite, IMessageManager msgManager) {
+   super(composite, SWT.SHADOW_IN | SWT.BORDER);
+   setValidator(new MandatoryFormTextCellEditorValidator());
+   addListener(new FormCellEditorListener(this, msgManager));
+}</pre>
+</div>
+<ol class="arabic simple" start="2">
+<li>Override the methods that control cell editor&#8217;s enablement and visibility, which are used in table viewers, but is not really necessary in our implementation since we want the editors to be visible and enabled all the time.</li>
+</ol>
+<div class="highlight-python"><pre>@Override
+public void activate() {
+   // Do nothing
+}
+
+@Override
+public void activate( ColumnViewerEditorActivationEvent activationEvent ) {
+   // Do nothing
+}
+
+@Override
+public void deactivate() {
+   // Do nothing
+}
+
+@Override
+protected void deactivate( ColumnViewerEditorDeactivationEvent event ) {
+   // Do nothing
+}</pre>
+</div>
+<ol class="arabic simple" start="3">
+<li>Use <strong>Control-Shift-O</strong> to fix up the imports as needed.</li>
+</ol>
+</div>
+</div>
+<div class="section" id="creating-the-view-panel">
+<h2>Creating the View Panel<a class="headerlink" href="#creating-the-view-panel" title="Permalink to this headline">¶</a></h2>
+<p>In this section we will create <strong>CountryPanel</strong> that populates a <em>Composite</em> with widgets for editing a feature. It is worth noting what elements and layout techniques we use to create the panel.</p>
+<ol class="arabic simple">
+<li>Select <strong>File</strong> &gt; <strong>New</strong> &gt; <strong>Class</strong> from the menu bar to open the New Java Class wizard</li>
+<li>On the <strong>New Java Class</strong> dialog, set the following:</li>
+</ol>
+<ul class="simple">
+<li><strong>Source folder</strong>: org.locationtech.udig.tutorials.featureeditor/src</li>
+<li><strong>package</strong>: org.locationtech.udig.tutorials.featureeditor</li>
+<li><strong>Name</strong>: CountryPanel</li>
+</ul>
+<ol class="arabic simple" start="3">
+<li>Add the following interfaces:</li>
+</ol>
+<ul class="simple">
+<li><strong>org.eclipse.swt.events.KeyListener</strong> (<em>for text events</em>)</li>
+<li><strong>org.eclipse.jface.viewers.ISelectionChangedListener</strong> (<em>for Combo events</em>)</li>
+</ul>
+<ol class="arabic simple" start="4">
+<li>The dialog should look like this when you are done:</li>
+</ol>
+<div class="figure align-left" style="width: 100%">
+<img alt="_images/create_view_panel.png" src="_images/create_view_panel.png" />
+</div>
+<p>Fig. Create view panel dialog</p>
+<ol class="arabic simple" start="5">
+<li>Press <strong>Finish</strong> to create <strong>CountryPanel.java</strong> class</li>
+</ol>
+<div class="section" id="constants-and-variables">
+<h3>Constants and Variables<a class="headerlink" href="#constants-and-variables" title="Permalink to this headline">¶</a></h3>
+<p>Now let us set-up some constants and variables that we will be using later on hook up to the panel&#8217;s elements.</p>
+<ol class="arabic simple">
+<li>Add the following constants.</li>
+</ol>
+<p>These values represent names of attributes in countries.shp file:</p>
+<div class="highlight-python"><pre>// Name of NAME_FORMA attribute
+public final static String NAME_FORMA = "NAME_FORMA";
+
+// Name of NAME_SORT attribute
+public final static String NAME_SORT = "NAME_SORT";
+
+// Name of MAP_COLOR attribute
+public final static String MAP_COLOR = "MAP_COLOR";
+
+// Possible values of MAP_COLOR attribute
+public final static Double[] MAP_COLOR_OPTS;
+static {
+   MAP_COLOR_OPTS = new Double[13];
+   for( int i = 0; i &lt; MAP_COLOR_OPTS.length; i++ ) {
+      MAP_COLOR_OPTS[i] = Double.valueOf(Integer.toString(i + 1));
+   }
+}</pre>
+</div>
+<ol class="arabic simple" start="2">
+<li>Add the following class variables.</li>
+</ol>
+<div class="highlight-python"><pre>// Form elements
+private ScrolledForm form;
+
+// Input fields
+private Text nameFormal;
+private Text nameShort;
+private ComboViewer colorMap;
+
+// Action buttons
+private Action apply;
+private Action reset;
+
+// Feature containers
+private SimpleFeature editedFeature;
+private SimpleFeature baseFeature;
+
+// Used to send commands to the edit blackboard
+private IToolContext context;</pre>
+</div>
+<ol class="arabic simple" start="3">
+<li>We are now going provide a method that sets up the user interface (literally a control) for use. The method will take a Composite as its <em>parent</em> and our widgets be added as children of this composite.</li>
+</ol>
+<div class="highlight-python"><pre>public void createControl(Composite parent, FormToolkit toolkit) {
+   // Instantiate Eclipse Forms
+   // Create Cell Editors
+   // Create JFace Viewer
+   // Hook up providers
+   // Create buttons
+}</pre>
+</div>
+<ol class="arabic simple" start="4">
+<li>Create a method to specify which control will have focus when our panel opens.</li>
+</ol>
+<div class="highlight-python"><pre>public void setFocus() {
+   nameFormal.setFocus();
+}</pre>
+</div>
+<ol class="arabic simple" start="5">
+<li>Use <strong>Control-Shift-O</strong> to fix up the imports as needed.</li>
+</ol>
+</div>
+<div class="section" id="using-eclipse-forms">
+<h3>Using Eclipse Forms<a class="headerlink" href="#using-eclipse-forms" title="Permalink to this headline">¶</a></h3>
+<p>Eclipse Forms is a layer above SWT that provides us with a <em>web</em> looking user interface. This also gives us some other options in creating UI (eg. additional widgets) that helps us create a elegantly functional interface, which also gives us the simplicity of handling widgets the same way as we would if we create them separately.</p>
+<p>Using the <strong>FormToolkit</strong>, let us create the <em>form</em> element that will hold our widgets:</p>
+<div class="highlight-python"><pre>// Instantiate Eclipse Forms
+form = toolkit.createScrolledForm(parent);
+
+form.setText("Country Form");
+form.getBody().setLayout(new GridLayout());
+toolkit.decorateFormHeading(form.getForm());
+
+final Section section = toolkit.createSection(form.getBody(), Section.TWISTIE | Section.TITLE_BAR);
+section.setText("Country Details");
+section.setDescription("Update country details below.");
+section.setLayoutData(new GridData(GridData.FILL_BOTH));
+section.setExpanded(true);
+
+final Composite client = toolkit.createComposite(section, SWT.NONE);
+client.setLayoutData(new GridData(GridData.FILL_BOTH));
+client.setLayout(new MigLayout("wrap 2, fillx", "[20%!, right]10[left]", ""));
+section.setClient(client);</pre>
+</div>
+<p>Use <strong>Control-Shift-O</strong> to fix up the imports as needed.</p>
+<p>Notice that we are able to use both <strong>GridLayout</strong> and <strong>MigLayout</strong> into our containers.</p>
+</div>
+<div class="section" id="using-cell-editors">
+<h3>Using Cell Editors<a class="headerlink" href="#using-cell-editors" title="Permalink to this headline">¶</a></h3>
+<p>Now let us integrate the cell editors that we created earlier.</p>
+<ol class="arabic simple">
+<li>Create the <em>Name (formal)</em> field:</li>
+</ol>
+<div class="highlight-python"><pre>// Create Cell Editors
+Label label = new Label(client, SWT.SHADOW_IN);
+label.setText("Name (formal):");
+
+FormTextCellEditor nameFormalEditor = new FormTextCellEditor(client, form.getMessageManager());
+nameFormal = (Text) nameFormalEditor.getControl();
+nameFormal.setLayoutData("growx");
+nameFormal.addKeyListener(this);</pre>
+</div>
+<ol class="arabic simple" start="2">
+<li>Then the <em>Name (short)</em> field:</li>
+</ol>
+<div class="highlight-python"><pre>label = new Label(client, SWT.SHADOW_IN);
+label.setText("Name (short):");
+
+FormTextCellEditor nameShortEditor = new FormTextCellEditor(client, form.getMessageManager());
+nameShort = (Text) nameShortEditor.getControl();
+nameShort.setLayoutData("growx");
+nameShort.addKeyListener(this);</pre>
+</div>
+<p>Use <strong>Control-Shift-O</strong> to fix up the imports as needed.</p>
+<p>Notes:</p>
+<ul class="simple">
+<li>The form&#8217;s <em>IMessageManager</em> is passed to the cell editor. This will integrate the cell editor&#8217;s validation mechanism with our form to provide visual feedback.</li>
+<li>Using basic widgets (<em>Label</em>) along with wrapped widgets (<em>cell editor</em>) should not affect our panel.</li>
+<li>The widget&#8217;s <em>MigLayout</em> data strings (<em>&#8220;growx&#8221;</em>) are used to communicate to the layout manager how we want the widget to be arranged on screen.</li>
+<li><em>KeyListeners</em> are added to the input fields to keep track change in their values.</li>
+</ul>
+</div>
+<div class="section" id="using-jface-viewers">
+<h3>Using JFace Viewers<a class="headerlink" href="#using-jface-viewers" title="Permalink to this headline">¶</a></h3>
+<p>Now let us integrate JFace viewers into our form.</p>
+<ol class="arabic simple">
+<li>Create the <em>Color</em> field:</li>
+</ol>
+<p>These viewers are created the same way as the widgets. We need to provide them a parent to create the internal SWT widget on or provide the widget yourself. And each viewer provided a <em>getControl()</em> method allowing you to control the layout of the viewer&#8217;s managed SWT widget(s).</p>
+<div class="highlight-python"><pre>// Create JFace Viewer
+label = new Label(client, SWT.SHADOW_IN);
+label.setText("Color");
+
+CCombo colorCombo = new CCombo(client, SWT.READ_ONLY | SWT.BORDER);
+colorMap = new ComboViewer(colorCombo);
+colorMap.addSelectionChangedListener(this);
+colorMap.getControl().setLayoutData("span 3, wrap");</pre>
+</div>
+<ol class="arabic simple" start="2">
+<li>Then set up up a couple of providers to allow the viewer to <em>read</em> and interpret the data input.</li>
+</ol>
+<p>Set a <em>ContentProvider</em> to control how viewer data is derived from our data input.</p>
+<div class="highlight-python"><pre>// Hook up providers
+colorMap.setContentProvider(new IStructuredContentProvider(){
+   public Object[] getElements( Object inputElement ) {
+      if (inputElement instanceof Object[]) {
+         return (Object[]) inputElement;
+      }
+      return null;
+   }
+   public void inputChanged( Viewer viewer, Object oldInput, Object newInput ) {
+      // for dynamic content we would register listeners here
+   }
+   public void dispose() {
+      // dispose elements as necessary
+   }
+});</pre>
+</div>
+<p>Set a <em>LabelProvider</em> to control what and how data labels will we displayed in the viewer.</p>
+<div class="highlight-python"><pre>colorMap.setLabelProvider(new LabelProvider(){
+   public String getText( Object element ) {
+      return " " + element + " color";
+   }
+});</pre>
+</div>
+<p>Finally, let us set the constant we created earlier as the data input of our viewer.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">colorMap</span><span class="o">.</span><span class="n">setInput</span><span class="p">(</span><span class="n">MAP_COLOR_OPTS</span><span class="p">);</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li>Use <strong>Control-Shift-O</strong> to fix up the imports as needed.</li>
+</ol>
+<p>Notes:</p>
+<ul class="simple">
+<li>We set an array of objects as our data input and thus the providers will work with each element in the array.</li>
+<li>Since we passed in an array, the content provider simple returns the data input as our viewer&#8217;s elements.</li>
+<li>The label provider customises the label by appending a string to describe each element.</li>
+<li>The JFace viewer provides the selection as an Object compared to an SWT Combo widget which provides the label string.</li>
+</ul>
+</div>
+<div class="section" id="create-action-buttons">
+<h3>Create Action Buttons<a class="headerlink" href="#create-action-buttons" title="Permalink to this headline">¶</a></h3>
+<p>Now let us create some action button elements for applying and reseting changes on the form.</p>
+<div class="highlight-python"><pre>// Create buttons
+apply = new Action("Apply"){
+   @Override
+   public void run() {
+      applyChanges();
+   }
+};
+apply.setEnabled(false);
+form.getToolBarManager().add(apply);
+
+reset = new Action("Reset"){
+   @Override
+   public void run() {
+      resetChanges();
+   }
+};
+reset.setEnabled(false);
+form.getToolBarManager().add(reset);
+
+form.getToolBarManager().update(true);</pre>
+</div>
+<p>Notes:</p>
+<ul class="simple">
+<li>Instead of Button widgets we created JFace Action objects since we are adding these controls into the form&#8217;s toolbar.</li>
+<li>Expect compile errors at this point as the methods <em>applyChanges()</em> and <em>resetChanges()</em> will be implemented later to facilitate feature editing.</li>
+</ul>
+</div>
+<div class="section" id="implement-listeners">
+<h3>Implement Listeners<a class="headerlink" href="#implement-listeners" title="Permalink to this headline">¶</a></h3>
+<p>Now let us implement the interfaces that we added during creation of the panel.</p>
+<ol class="arabic simple">
+<li>Create a method that will control the enablement of both the <em>Apply</em> and <em>Reset</em> buttons.</li>
+</ol>
+<div class="highlight-python"><pre>private void setEnabled(boolean enabled) {
+   if (baseFeature == null &amp;&amp; enabled) {
+      return;
+   }
+   apply.setEnabled(enabled);
+   reset.setEnabled(enabled);
+}</pre>
+</div>
+<ol class="arabic simple" start="2">
+<li>Now lets fill in the two methods of the <em>KeyListener</em> interface that we hooked up to our text input fields.</li>
+</ol>
+<div class="highlight-python"><pre>public void keyPressed(KeyEvent e) {
+   // Do nothing
+}
+
+public void keyReleased(KeyEvent e) {
+   setEnabled(true);
+}</pre>
+</div>
+<ol class="arabic simple" start="19">
+<li>And also fill in the method of the <em>ISelectionChangedListener</em> interface that we hooked up to our combo viewer&#8217;s control.</li>
+</ol>
+<div class="highlight-python"><pre>public void selectionChanged(SelectionChangedEvent event) {
+   setEnabled(true);
+}</pre>
+</div>
+</div>
+<div class="section" id="integrating-commands">
+<h3>Integrating Commands<a class="headerlink" href="#integrating-commands" title="Permalink to this headline">¶</a></h3>
+<p>Now that we have created our UI elements and some hooks for action handling, let us get back to normal uDig development. Let us set up how the form handles editing a feature.</p>
+<p>We need to make a copy of the current feature. This allow the user to edit or revert to the unedited copy when we want to reset changes. We also need to send off the changes to the uDig application using a Command when the user hits <strong>Apply</strong>.</p>
+<ol class="arabic simple">
+<li>To start with, let us create a method that accepts the feature input:</li>
+</ol>
+<div class="highlight-python"><pre>public void setEditFeature(SimpleFeature newFeature, IToolContext newContext) {
+
+   this.context = newContext;
+   baseFeature = newFeature;
+
+   if (baseFeature != null) {
+      try {
+         editedFeature = SimpleFeatureBuilder.copy(newFeature);
+      } catch (IllegalAttributeException e) {
+         // shouldn't happen
+      }
+   } else {
+      editedFeature = null;
+   }
+
+   if (baseFeature == null) {
+      nameFormal.setText("");
+      nameShort.setText("");
+      colorMap.setSelection(new StructuredSelection());
+   } else {
+
+      String nameFormalVal = (String) baseFeature.getAttribute(NAME_FORMA);
+      if (nameFormalVal == null) nameFormalVal = "";
+      nameFormal.setText(nameFormalVal);
+
+      String nameSortStr = (String) baseFeature.getAttribute(NAME_SORT);
+      if (nameSortStr == null) nameSortStr = "";
+      nameShort.setText(nameSortStr);
+
+      Double colorText = (Double) baseFeature.getAttribute(MAP_COLOR);
+      if (colorText != null) {
+         colorMap.setSelection(new StructuredSelection(colorText));
+      } else {
+         colorMap.setSelection(new StructuredSelection());
+      }
+
+   }
+
+   setEnabled(false);
+
+}</pre>
+</div>
+<ol class="arabic simple" start="2">
+<li>Implement the <strong>applyChanges()</strong> method.</li>
+</ol>
+<p>This will update the <em>editedFeature</em> and then make use of a composite command to send the changes off to the uDig application.</p>
+<div class="highlight-python"><pre>private void applyChanges() {
+
+   // Set changes to feature
+   try {
+      editedFeature.setAttribute(NAME_FORMA, nameFormal.getText());
+      editedFeature.setAttribute(NAME_SORT, nameShort.getText());
+      StructuredSelection colorSelection = (StructuredSelection) colorMap.getSelection();
+      editedFeature.setAttribute(MAP_COLOR, colorSelection.getFirstElement());
+   } catch (IllegalAttributeException e) {
+      // shouldn't happen.
+   }
+
+   // Send command to write changes
+   CompositeCommand compComm = new CompositeCommand();
+   compComm.getCommands().add(context.getEditFactory().createSetEditFeatureCommand(editedFeature));
+   compComm.getCommands().add(context.getEditFactory().createWriteEditFeatureCommand());
+   context.sendASyncCommand(compComm);
+   setEnabled(false);
+
+}</pre>
+</div>
+<ol class="arabic simple" start="3">
+<li>Implement the <strong>resetChanges()</strong> method.</li>
+</ol>
+<p>This will reset the <em>editedFeature</em> to the un-touched <em>baseFeature</em>.</p>
+<div class="highlight-python"><pre>private void resetChanges() {
+   setEditFeature(baseFeature, context);
+   setEnabled(false);
+}</pre>
+</div>
+<ol class="arabic simple" start="4">
+<li>Use <strong>Control-Shift-O</strong> to fix up the imports as needed.</li>
+</ol>
+<p>Now we have made our own panel that can be used to edit a feature. In the next section we will hook this up to our view.</p>
+</div>
+</div>
+<div class="section" id="defining-the-view">
+<h2>Defining the View<a class="headerlink" href="#defining-the-view" title="Permalink to this headline">¶</a></h2>
+<p>A view is used to display or explore information. Views often allow direct manipulation of selected content.</p>
+<ol class="arabic simple">
+<li>Open the <strong>MANIFTEST.MF</strong> editor switch to the <strong>Extensions</strong> tab.</li>
+<li>Add the following extension:</li>
+</ol>
+<ul class="simple">
+<li><strong>org.eclipse.ui.views</strong></li>
+</ul>
+<ol class="arabic simple" start="3">
+<li>You can fill in the details for your view extension:</li>
+</ol>
+<ul class="simple">
+<li><strong>ID</strong>: org.locationtech.udig.tutorials.featureeditor.views</li>
+<li><strong>Name</strong>: Feature Editor Views</li>
+</ul>
+<p>This information is only used in error messages when something goes wrong which is very helpful when debugging! We are using the plural (<em>views</em>) because more than one view can be provided.</p>
+<ol class="arabic simple" start="4">
+<li>Right click on <strong>org.eclipse.ui.views</strong> and select <strong>New</strong> &gt; <strong>view</strong></li>
+<li>Select <strong>name (view)</strong> and configure the following:</li>
+</ol>
+<ul class="simple">
+<li><strong>id</strong>: org.locationtech.udig.tutorials.featureeditor.views.country</li>
+<li><strong>name</strong>: Country</li>
+<li><strong>class</strong>: org.locationtech.udig.tutorials.featureeditor.CountryView</li>
+</ul>
+<div class="figure align-left" style="width: 100%">
+<img alt="_images/add_extension_view.png" src="_images/add_extension_view.png" />
+</div>
+<p>Fig. Add view extension</p>
+<ol class="arabic simple" start="6">
+<li><strong>Save</strong> the <strong>MANIFTEST.MF</strong> file.</li>
+<li>Press the <strong>class</strong> link to open the <strong>New Java Class</strong> wizard.</li>
+<li>Add the following interfaces:</li>
+</ol>
+<ul class="simple">
+<li><strong>org.locationtech.udig.project.ui.IUDIGView</strong></li>
+</ul>
+<ol class="arabic simple" start="9">
+<li>The dialog should look like this when you are done:</li>
+</ol>
+<div class="figure align-left" style="width: 100%">
+<img alt="_images/create_view.png" src="_images/create_view.png" />
+</div>
+<p>Fig. Create view dialog</p>
+<ol class="arabic simple" start="10">
+<li>Click <strong>Finish</strong> to create the <strong>CountryView.class</strong> class</li>
+</ol>
+</div>
+<div class="section" id="implementing-the-view">
+<h2>Implementing the View<a class="headerlink" href="#implementing-the-view" title="Permalink to this headline">¶</a></h2>
+<p>Now let us implement that view that we have defined in the previous step.</p>
+<div class="section" id="integrating-the-view-panel">
+<h3>Integrating the View Panel<a class="headerlink" href="#integrating-the-view-panel" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Open <strong>CountryView</strong>.</li>
+<li>Create a view panel as a class variable.</li>
+</ol>
+<div class="highlight-python"><pre>private CountryPanel panel = new CountryPanel();</pre>
+</div>
+<ol class="arabic simple" start="3">
+<li>Override the <strong>createPartControl(Composite)</strong> method. We will use this to set up our panel to create the user interface.</li>
+</ol>
+<div class="highlight-python"><pre>@Override
+public void createPartControl(Composite parent) {
+   FormToolkit toolkit = new FormToolkit(parent.getDisplay());
+   panel.createControl(parent, toolkit);
+}</pre>
+</div>
+<ol class="arabic simple" start="4">
+<li>Override the <strong>setFocus()</strong> method. We will use this to set up our panel to set the focus.</li>
+</ol>
+<div class="highlight-python"><pre>@Override
+public void setFocus() {
+   panel.setFocus();
+}</pre>
+</div>
+<ol class="arabic simple" start="5">
+<li>And there is the <strong>dispose()</strong> method. In our case, the super class is going to take care of cleaning up our widgets, but you could override this method to take care of any resources you made use of (such as Icons or Colors).</li>
+<li>Use <strong>Control-Shift-O</strong> to fix up the imports as needed.</li>
+</ol>
+<p>We will continue to implement this class in the next section and get rid of those compile errors.</p>
+<p>Notes:</p>
+<ul class="simple">
+<li>It is very important that the constructor and init methods do not try and do much in the way of work - if they take too long they will be considered broken and the entire view turned off!</li>
+</ul>
+</div>
+<div class="section" id="implementing-iudigview">
+<h3>Implementing IUDIGView<a class="headerlink" href="#implementing-iudigview" title="Permalink to this headline">¶</a></h3>
+<p>The IUDIGView is used to feed a tool context into a normal Eclipse view allowing it to interact with the GISApplication. This interface also gives us a hook to the current edit feature which we are using to fill in our form.</p>
+<ol class="arabic simple">
+<li>Create a tool context as a class variable.</li>
+</ol>
+<div class="highlight-python"><pre>private IToolContext context;</pre>
+</div>
+<ol class="arabic simple" start="2">
+<li>Implement the getter and setter method for the tool context.</li>
+</ol>
+<div class="highlight-python"><pre>@Override
+public void setContext( IToolContext newContext ) {
+   context = newContext;
+}
+
+@Override
+public IToolContext getContext() {
+   return context;
+}</pre>
+</div>
+<ol class="arabic simple" start="3">
+<li>Implement the <em>editFeatureChanged(SimpleFeature)</em> method. This provides the view with the feature to be edited.</li>
+</ol>
+<div class="highlight-python"><pre>@Override
+public void editFeatureChanged( SimpleFeature feature ) {
+   panel.setEditFeature(feature, context);
+}</pre>
+</div>
+<ol class="arabic simple" start="4">
+<li>Use <strong>Control-Shift-O</strong> to fix up the imports as needed.</li>
+</ol>
+<p>Notes:</p>
+<ul class="simple">
+<li>The <em>editFeatureChanged(SimpleFeature)</em> method is triggered by a feature selection.</li>
+<li>At this point the view is now ready to use.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="trying-it-out">
+<h2>Trying it Out<a class="headerlink" href="#trying-it-out" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="run-udig">
+<h3>Run uDig<a class="headerlink" href="#run-udig" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Add the plugin to uDig&#8217;s run configurations.</li>
+<li>Run uDig.</li>
+</ol>
+</div>
+<div class="section" id="load-shapefile">
+<h3>Load Shapefile<a class="headerlink" href="#load-shapefile" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Add the sample data <strong>10m_admin_0_countries.shp</strong> file to a Map.</li>
+<li>Take a moment to set up a theme style based on the MAP_COLOR attribute.</li>
+</ol>
+</div>
+<div class="section" id="open-the-view">
+<h3>Open the View<a class="headerlink" href="#open-the-view" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Open our feature editor view. Go to <strong>Window</strong> &gt; <strong>Show View</strong> &gt; <strong>Other</strong></li>
+<li>A view selection dialog will pop up, select the <strong>Country</strong> view.</li>
+</ol>
+</div>
+<div class="section" id="select-a-feature">
+<h3>Select a Feature<a class="headerlink" href="#select-a-feature" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Open the tab for <strong>Selection</strong> tools.</li>
+<li>Select the <strong>Feature Selection</strong> tool.</li>
+<li>Select a country on the map.</li>
+<li>The view will display the country&#8217;s information.</li>
+</ol>
+<div class="figure align-left" style="width: 100%">
+<img alt="_images/try_out_select_feature.png" src="_images/try_out_select_feature.png" />
+</div>
+<p>Fig. Open view</p>
+</div>
+<div class="section" id="update-information">
+<h3>Update Information<a class="headerlink" href="#update-information" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Update country information as needed.</li>
+<li>Try leaving the name fields blank to see validation fire.</li>
+<li>Press <strong>Apply</strong> or <strong>Reset</strong> as needed.</li>
+</ol>
+</div>
+</div>
+<div class="section" id="what-to-do-next">
+<h2>What to do Next<a class="headerlink" href="#what-to-do-next" title="Permalink to this headline">¶</a></h2>
+<p>Okay, I am sure you can think of lots of things to try:</p>
+<ul class="simple">
+<li>Eclipse now includes WindowBuilder. Can you quickly draw up an alternate layout of this feature editor?</li>
+<li>The MiG Layout manager is a very nice trade-off between readability and risk of run time errors. For more information on the layout manager visit: <a class="reference external" href="http://www.miglayout.com">http://www.miglayout.com</a>. In particular the website documentation to get you started and a couple of JavaWebStart demo applications.</li>
+</ul>
+<div class="figure align-left" style="width: 100%">
+<img alt="_images/miglayout.png" src="_images/miglayout.png" />
+</div>
+<p>Fig. MigLayout samples</p>
+<ul>
+<li><p class="first">Can you re-do the layout of this view using the Eclipse FormLayout? This layout manager makes the opposite trade off you have real Java data structures to fill in for your layout data. Here is a small example to get you started:</p>
+<div class="highlight-python"><pre>parent.setLayout(new GridLayout(2, false));
+
+// SWT Widgets
+Label label = new Label(parent, SWT.SHADOW_IN);
+label.setLayoutData(new GridData(SWT.NONE, SWT.FILL));
+label.setText("Country:");</pre>
+</div>
+</li>
+<li><p class="first">MiGLayout has now added the use of java beans as a type safe options:</p>
+<div class="highlight-python"><pre>name = new Text(parent, SWT.SHADOW_IN | SWT.BORDER);
+CC cc = new CC();
+cc.spanX(3);
+cc.growX();
+cc.wrap();
+name.setLayoutData( cc );
+name.addKeyListener(this);</pre>
+</div>
+</li>
+<li><p class="first">You can use this technique to make custom forms for your own data using the full facilities of SWT and JFace (say stars for restaurant reviews).</p>
+</li>
+<li><p class="first">If this is your first time using SWT try experimenting with the different Layouts: GridLayout, TableLayout, and FormLayout.</p>
+</li>
+<li><p class="first">Try moving the functionality that controls enabling/disabling the Apply and Reset buttons to the cell editor listener.</p>
+</li>
+<li><p class="first">Try adding logic to disable the apply button when there is an error during validation.</p>
+</li>
+<li><p class="first"><strong>Advanced</strong>: You can make many Views - try making one that provides a summary of the Map. You should be able to list the number of layers, and listen to events to notice when layers are added and removed. (Hint: Look at EMF Notifier for very low level events beyond what the listeners provide)</p>
+</li>
+</ul>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="map_decorator_tutorial.html">Map Decorator Tutorial</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="disk_to_screen_tutorials.html">Disk to Screen Tutorials</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2015, Refractions Research and others.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

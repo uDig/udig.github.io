@@ -1,0 +1,146 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>GIS Application &mdash; uDig 1.5.0 Developers Guide</title>
+    
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.5.0.RC1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.5.0 Developers Guide" href="index.html" />
+    <link rel="up" title="Working with GIS Application" href="working_with_gis_application.html" />
+    <link rel="next" title="Project Map and Layer" href="project_map_and_layer.html" />
+    <link rel="prev" title="Working with GIS Application" href="working_with_gis_application.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="working_with_gis_application.html">Working with GIS Application</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="project_map_and_layer.html">Project Map and Layer</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="gis-application">
+<h1>GIS Application<a class="headerlink" href="#gis-application" title="Permalink to this headline">¶</a></h1>
+<p>The uDig GIS Application represents three things: the example download application, a tier of the
+uDig architecture where visualization occurs, and a utility class to access services of the uDig
+visualization services.</p>
+<div class="section" id="example-gis-application">
+<h2>Example GIS Application<a class="headerlink" href="#example-gis-application" title="Permalink to this headline">¶</a></h2>
+<p>The GIS Application, when executed is the barebones uDig application. It represents a simple and
+capable GIS application. This is, however, only the beginning.</p>
+<p>You can extend uDig in two ways:</p>
+<ul class="simple">
+<li>customize uDig for your needs through the addition of plug-ins</li>
+<li>defining a new application based on uDig</li>
+</ul>
+<p>The uDig Application is an extension point; defined by the org.locationtech.udig.ui plug-in. It
+publishes the UDIGApplicaiton class; this extension point is then referred to by the
+org.locationtech.udig plugin as it defines the udig.product.</p>
+</div>
+<div class="section" id="gis-application-tier">
+<h2>GIS Application Tier<a class="headerlink" href="#gis-application-tier" title="Permalink to this headline">¶</a></h2>
+<p>Both of these activities are made in reference to the GIS Application tier. While the GIS Platform
+provided programmatic access to spatial information there was nothing visual about it. The GIS
+Application refines these ideas into the concept of Projects, Maps, Layers on the data modeling
+side. On the user-interface side the GIS Application tier defines the MapEditors, the Layers view
+and many more ways of interacting with the central data model.</p>
+<p>The GIS Application data model was constructed using the Eclipse Modeling Framework, you do not need
+to know anything about EMF to use the GIS Application data model. We have provided the <em>usual</em>
+concepts of listeners and events</p>
+</div>
+<div class="section" id="applicationgis-utility-class">
+<h2>ApplicationGIS Utility Class<a class="headerlink" href="#applicationgis-utility-class" title="Permalink to this headline">¶</a></h2>
+<p>The GISApplication class has been defined to assist programmers in making use of the GIS Application
+tier visualization services.</p>
+</div>
+<div class="section" id="applicationgis-getactiveproject">
+<h2>ApplicationGIS.getActiveProject<a class="headerlink" href="#applicationgis-getactiveproject" title="Permalink to this headline">¶</a></h2>
+<p>Retrieve the current project; can be used to create new maps etc...</p>
+<div class="highlight-python"><pre>IProject project = ApplicationGIS.getActiveProject();
+project.sendASync( new CreateMapCommand( name, resources, project );</pre>
+</div>
+</div>
+<div class="section" id="applicationgis-getactivemap">
+<h2>ApplicationGIS.getActiveMap<a class="headerlink" href="#applicationgis-getactivemap" title="Permalink to this headline">¶</a></h2>
+<p>The getActiveMap() method is often used by eclipse menus or views to figure out which Map to send a
+command to; or switch modal tools etc.</p>
+<div class="highlight-python"><pre>IMap map = ApplicationGIS.getActiveMap();
+map.sendCommandAsync( new SetViewportCenterCommand( location ) );</pre>
+</div>
+</div>
+<div class="section" id="applicationgis-geteditmanager">
+<h2>ApplicationGIS.getEditManager()<a class="headerlink" href="#applicationgis-geteditmanager" title="Permalink to this headline">¶</a></h2>
+<p>The edit manager for a map track the selected layer and editing concerns such as the transaction and
+current feature being edited.</p>
+<div class="highlight-python"><pre>IEditManager editManager = ApplicationGIS.getEditManager();
+ILayer layer = editManager.getSelectedLayer();
+IStyleBlackboard styleBlackboard = layer.getStyleBlackboard();
+styleBlackboard().put(ProjectBlackboardConstants.LAYER__DATA_QUERY, filter);</pre>
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="working_with_gis_application.html">Working with GIS Application</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="project_map_and_layer.html">Project Map and Layer</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2015, Refractions Research and others.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,672 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Tools &mdash; uDig 1.5.0 Developers Guide</title>
+    
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.5.0.RC1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.5.0 Developers Guide" href="index.html" />
+    <link rel="up" title="Working with GIS Application" href="working_with_gis_application.html" />
+    <link rel="next" title="Edit Tools" href="edit_tools.html" />
+    <link rel="prev" title="Style" href="style.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="style.html">Style</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="edit_tools.html">Edit Tools</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="tools">
+<h1>Tools<a class="headerlink" href="#tools" title="Permalink to this headline">¶</a></h1>
+<p>Tools must extend the <strong>org.locationtech.udig.project.ui.tool</strong> extension point. The reference
+section provides a list of the extension points and technical documentation for the extension
+points.</p>
+</div>
+<div class="section" id="tool-extension-point-and-api">
+<h1>Tool Extension Point and API<a class="headerlink" href="#tool-extension-point-and-api" title="Permalink to this headline">¶</a></h1>
+<p>Tools are used to capture user interaction with the Map Editor. Tools have access to a range of
+information (via a ToolContext) and can issue commands to update the editor.</p>
+<div class="figure align-center">
+<img alt="" src="_images/tool.GIF" />
+</div>
+</div>
+<div class="section" id="background-tool-extension">
+<h1>Background Tool Extension<a class="headerlink" href="#background-tool-extension" title="Permalink to this headline">¶</a></h1>
+<p>A background tool is always active in the background watching what the user is doing. When used in
+this fashion a tool would be limited to providing user feedback.</p>
+<p>Example:</p>
+<ul class="simple">
+<li>Cursor position: Shows the current position of the mouse cursor transformed into world
+coordinates.</li>
+<li>Quick Zoom (Wheel Zoom): Zooms in and out of the map when the mouse wheel is turned or when</li>
+</ul>
+<p>Extension Point Example:</p>
+<div class="highlight-python"><pre>&lt;extension point="org.locationtech.udig.project.ui.tool"&gt;
+    &lt;backgroundTool
+        name="%cursorPosition.name"
+        class="org.locationtech.udig.tools.internal.CursorPosition"
+        id="org.locationtech.udig.tools.backgroundTool1"&gt;
+    &lt;/backgroundTool&gt;
+    ...
+&lt;/extension&gt;</pre>
+</div>
+</div>
+<div class="section" id="action-tool-extension">
+<h1>Action Tool Extension<a class="headerlink" href="#action-tool-extension" title="Permalink to this headline">¶</a></h1>
+<p>A single fire tool that has a run command that is executed when the tool is activated. An action
+tool does not change the mouse cursor because it is not modal. If a tool is needed that fires when
+clicked within the editor, a modal tool would be a better choice.</p>
+<p>Example:</p>
+<ul class="simple">
+<li>Zoom to Extent: A tools that makes the map editor adjust its zoom so that the entire map is
+framed in the editor.</li>
+</ul>
+<p>Extension Point example:</p>
+<div class="highlight-python"><pre>&lt;extension point="org.locationtech.udig.project.ui.tool"&gt;
+     &lt;extension
+         point="org.locationtech.udig.project.ui.tool"&gt;
+         &lt;actionTool
+               categoryId="org.locationtech.udig.tool.category.render"
+               class="org.locationtech.udig.tools.internal.RefreshTool"
+               commandIds="org.locationtech.udig.tools.refreshCommand"
+               icon="icons/etool16/refresh_co.gif"
+               id="org.locationtech.udig.tools.refresh"
+               menuPath="file/refresh"
+               name="%refresh.name"
+               onToolbar="true"
+               tooltip="%refresh.tooltip"&gt;
+         &lt;/actionTool&gt;
+    ...
+&lt;/extension&gt;</pre>
+</div>
+</div>
+<div class="section" id="modal-tool-extension">
+<h1>Modal Tool Extension<a class="headerlink" href="#modal-tool-extension" title="Permalink to this headline">¶</a></h1>
+<p>A tool that has both <strong>on</strong> and <strong>off</strong> mode. Within UDIG there can only be one active modal tool. A
+modal tool does not have a run method, instead is expected to listen to mouse events. The event
+methods that are currently available are provided in the <strong>AbstractTool</strong> class with empty
+implementations. When active, the cursor defined in extension definition is used as the mouse
+cursor.</p>
+<p>Example:</p>
+<ul class="simple">
+<li>Zoom: A tool that allows the zoom towards a location in the map so that the features appear
+larger.</li>
+<li>Pan: A tool that allows the user to adjust which part of the map they are viewing; the zoom stays
+the same.</li>
+</ul>
+<p>Extension point example:</p>
+<div class="highlight-python"><pre>&lt;extension point="org.locationtech.udig.project.ui.tool"&gt;
+         &lt;modalTool
+               categoryId="org.locationtech.udig.tool.category.zoom"
+               class="org.locationtech.udig.tools.internal.Zoom"
+               cursor="crosshair"
+               icon="icons/etool16/zoom_mode.gif"
+               id="org.locationtech.udig.tools.Zoom"
+               name="%zoom.tool.name"
+               onToolbar="true"
+               toolCursorId="zoomCursor"
+               tooltip="%zoom.tool.tooltip"&gt;
+         &lt;/modalTool&gt;
+    ...
+&lt;/extension&gt;</pre>
+</div>
+</div>
+<div class="section" id="preference-page-and-tool-options">
+<h1>Preference Page and Tool Options<a class="headerlink" href="#preference-page-and-tool-options" title="Permalink to this headline">¶</a></h1>
+<p>You can fill in a *<strong>preferencePageId</strong>* to associate with your Tool; this will be available
+when the user clicks on the tool icon in the tool option area of the map status line. The default
+functionality is to open the normal Tool Preference page.</p>
+<ol class="arabic simple">
+<li>Start out with a a normal Preference Page.</li>
+</ol>
+<div class="highlight-python"><pre>&lt;extension
+            point="org.eclipse.ui.preferencePages"&gt;
+         &lt;page
+               category="org.locationtech.udig.project.ui.preferences.tool"
+               class="org.locationtech.udig.tools.internal.NavigationToolPreferencePage"
+               id="org.locationtech.udig.tool.default.navPage"
+               name="%navPage.name"&gt;
+         &lt;/page&gt;
+      &lt;/extension&gt;</pre>
+</div>
+<p>With the details looking something like this (note we made a static final constant here):</p>
+<div class="highlight-python"><pre>public class NavigationToolPreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
+    public static final String SCALE = "scale"; //$NON-NLS-1$
+    public static final String TILED = "titled"; //$NON-NLS-1$
+
+    private BooleanFieldEditor scale;
+    private BooleanFieldEditor tiled;
+
+    public NavigationToolPreferencePage() {
+        super(GRID);
+        IPreferenceStore store = ToolsPlugin.getDefault().getPreferenceStore();
+        setPreferenceStore(store);
+        setTitle(Messages.Navigation_Title);
+        setDescription(Messages.Navigation_Description);
+    }
+    protected void createFieldEditors() {
+        scale = new BooleanFieldEditor(SCALE, Messages.Navigation_Scale, getFieldEditorParent());
+        addField(scale);
+        tiled = new BooleanFieldEditor(TILED, Messages.Navigation_Tiled, getFieldEditorParent());
+        addField(tiled);
+    }
+    public void init( IWorkbench workbench ) {
+    }
+}</pre>
+</div>
+<ol class="arabic simple" start="2">
+<li>Add defaults so the preference page can start out with some good values.</li>
+</ol>
+<div class="highlight-python"><pre>&lt;extension point="org.eclipse.equinox.preferences.preferences"&gt;
+  &lt;initializer class="org.locationtech.udig.tools.internal.NavigationPreferenceInitializer"&gt;
+  &lt;/initializer&gt;
+&lt;/extension&gt;</pre>
+</div>
+<p>With the class filling in a few default values:</p>
+<div class="highlight-python"><pre>public class NavigationPreferenceInitializer extends AbstractPreferenceInitializer {
+    public void initializeDefaultPreferences() {
+        Preferences node = DefaultScope.INSTANCE.getNode(ToolsPlugin.ID);
+        node.putBoolean(NavigationToolPreferencePage.SCALE,false);
+        node.putBoolean(NavigationToolPreferencePage.TILED,false);
+    }
+}</pre>
+</div>
+<ol class="arabic simple" start="3">
+<li>We can then link to that preference page from our ModalTool definition.</li>
+</ol>
+<div class="highlight-python"><pre>&lt;modalTool
+               categoryId="org.locationtech.udig.tool.category.pan"
+               class="org.locationtech.udig.tools.internal.PanTool"
+               commandHandler="org.locationtech.udig.tools.internal.PanHandler"
+               commandIds="org.locationtech.udig.tools.panRightCommand,org.locationtech.udig.tools.panLeftCommand,org.locationtech.udig.tools.panUpCommand,org.locationtech.udig.tools.panDownCommand"
+               icon="icons/etool16/pan_mode.gif"
+               id="org.locationtech.udig.tools.Pan"
+               name="%pan.tool.name"
+               onToolbar="true"
+               preferencePageId="org.locationtech.udig.tool.default.navPage"
+               toolCursorId="move"
+               tooltip="%pan.tool.tooltip"&gt;
+            &lt;toolOption
+                  class="org.locationtech.udig.tools.internal.OptionContribtionItem"
+                  id="panOptions"&gt;
+            &lt;/toolOption&gt;
+         &lt;/modalTool&gt;</pre>
+</div>
+<p>You can check the preference settings in your tool (be sure to listen for changes!):</p>
+<div class="highlight-python"><pre>IPropertyChangeListener prefListener = new IPropertyChangeListener(){
+        @Override
+        public void propertyChange( PropertyChangeEvent event ) {
+            String property = event.getProperty();
+            if( NavigationToolPreferencePage.SCALE.equals( property ) ||
+                    NavigationToolPreferencePage.TILED.equals( property ) ){
+                syncPreference();
+            }
+        }
+    };
+    public PanTool() {
+        super(MOUSE | MOTION);
+        IPreferenceStore preferenceStore = ToolsPlugin.getDefault().getPreferenceStore();
+        preferenceStore.addPropertyChangeListener(prefListener);
+        syncPreference();
+    }
+    public void syncPreference(){
+        IPreferenceStore preferenceStore = ToolsPlugin.getDefault().getPreferenceStore();
+        boolean scale = preferenceStore.getBoolean(NavigationToolPreferencePage.SCALE);
+        boolean tiled = preferenceStore.getBoolean(NavigationToolPreferencePage.TILED);
+        ...
+    }</pre>
+</div>
+<p>4. Finally we can a ContributionItem elements (or several!) to the tool option area by filling in
+the *<strong>toolOptionContribution</strong>*:</p>
+<div class="highlight-python"><pre>&lt;toolOption
+                  class="org.locationtech.udig.tools.internal.OptionContribtionItem"
+                  id="panOptions"&gt;
+            &lt;/toolOption&gt;</pre>
+</div>
+<p>We ask that the tool options act as a short cut to the settings available on the preference page (as
+the tool option area may not always be available when the Map is Displayed in a View).</p>
+<div class="highlight-python"><pre>public class OptionContribtionItem extends ToolOptionContributionItem {
+        public IPreferenceStore fillFields( Composite parent ) {
+            Button check = new Button(parent,  SWT.CHECK );
+            check.setText("Scale");
+            addField( NavigationToolPreferencePage.SCALE, check );
+
+            Button tiled = new Button(parent,  SWT.CHECK );
+            tiled.setText("Tiled");
+            addField( NavigationToolPreferencePage.TILED, tiled );
+
+            return ToolsPlugin.getDefault().getPreferenceStore();
+        }
+    };</pre>
+</div>
+<p>The base class *<strong>ToolOptionContributionItem</strong>* does a lot of work behind the scenes for any
+*<strong>Control</strong>* you call *<strong>addField</strong>* on. It will both listen to preference changes and
+fill in the values; and also listen to the control and set the preference as needed.</p>
+<p>You can take more control of this in your own classes:</p>
+<ul class="simple">
+<li>listen( boolean listen ) - used to add/remove listeners from a control; your listener should
+update the preferenceStore</li>
+<li>update( IPreferenceStore preferenceStore ) - used to update your control to match the
+preferenceStore</li>
+<li>dispose() - clean up after your own controls</li>
+</ul>
+</div>
+<div class="section" id="tool-categories-extension">
+<h1>Tool Categories Extension<a class="headerlink" href="#tool-categories-extension" title="Permalink to this headline">¶</a></h1>
+<p>A <strong>Category</strong> represents a collection of tools that are always available but are logically similar
+and are as a result grouped together.</p>
+<p>Each category can have a key assigned to it which has two functions:</p>
+<ul class="simple">
+<li>Active the current tool in the category, if not already active.</li>
+<li>If the category is active then the next tool in the category will become active.</li>
+</ul>
+<p>Tool extenders can also register a list of commands with the framework via the extension point
+definition. If this is done the Tool extender must also create a <strong>IHandler</strong> object (part of the
+eclipse command framework). An instance of the handler will be created for each command and each
+time a command occurs it will be passed to the handler to be handled.</p>
+<p>Extension point example:</p>
+<div class="highlight-python"><pre>&lt;extension point="org.locationtech.udig.project.ui.tool"&gt;
+      &lt;category
+            commandId="org.locationtech.udig.tools.infoCommand"
+            id="org.locationtech.udig.tool.category.info"
+            name="%info.tools.name"/&gt;
+    ...
+&lt;/extension&gt;</pre>
+</div>
+</div>
+<div class="section" id="selection-providers">
+<h1>Selection Providers<a class="headerlink" href="#selection-providers" title="Permalink to this headline">¶</a></h1>
+<p>A category can also have a SelectionProvider implementation associated with it; this selection
+provider is used as the Workbench selection whenever any of these tools are used on the Map.</p>
+<div class="highlight-python"><pre>&lt;category
+            id="com.company.project.tool.selection"
+            selectionProvider="com.company.project.tool.internal.MySelectionProvider"&gt;
+      &lt;/category&gt;</pre>
+</div>
+<p>This &#8220;default&#8221; SelectionProvider will be provided to tool implementations via a
+setIMapSelectionProviderMethod; any tool that is implementing its own getSelectionProvider method
+will be &#8220;overriding&#8221; the default SelectionProvider defined by the tool category.</p>
+<p>Selection Providers should return the kind of content the tool is operating on; and should also
+adapt to the IMap or ILayer if appropriate. Selection providers may wish to watch the Map; and the
+current layer (if you need an example look at FilterSelectionProvider):</p>
+<div class="highlight-python"><pre>package com.company.project.tool.internal;
+
+public class MySelectionProvider extends AbstractMapEditorSelectionProvider
+        implements IMapEditorSelectionProvider {
+
+    /* The current Map */
+    private IMap map;
+
+    /**
+     * Listen to the EditManager and watch the selected layer change.
+     */
+    private IEditManagerListener editManagerListener = new IEditManagerListener() {
+        public void changed(EditManagerEvent event) {
+            if (event.getSource().getMap() != map) {
+                event.getSource().removeListener(this);
+                return;
+            }
+            if (event.getType() == EditManagerEvent.SELECTED_LAYER) {
+                ILayer oldLayer = (ILayer) event.getOldValue();
+                ILayer selectedLayer = (ILayer) event.getNewValue();
+                if (selectedLayer != null) {
+                    updateSelectionBasedOnThisLayer(selectedLayer);
+                }
+            }
+        }
+    };
+
+    public void setActiveMap(IMap map, MapPart editor) {
+        this.map = map;
+        if (map == null || map.getMapLayers().size() == 0) {
+            updateSelectionBasedOnThisLayer(null);
+        } else {
+            ILayer selectedLayer = map.getEditManager().getSelectedLayer();
+            if (selectedLayer != null) {
+                updateSelectionBasedOnThisLayer(selectedLayer);
+            }
+        }
+
+        if (!map.getEditManager().containsListener(editManagerListener)){
+            map.getEditManager().addListener(editManagerListener);
+        }
+    }
+
+    public void updateSelectionBasedOnThisLayer( ILayer layer ){
+        if( layer == null ){
+            selection = new StructuredSelection();
+            notifyListeners();
+            return;
+        }
+        List&lt;String&gt; names =
+            (List&lt;String&gt;) layer.getBlackboard().get("names");
+
+        if( pointIds == null ){
+            selection = new StructuredSelection();
+            notifyListeners();
+            return;
+        }
+        SelectionList&lt;String&gt; list = new SelectionList&lt;String&gt;();
+        list.addAll( names );
+        list.addAdapter( layer );
+        list.addAdapter( layer.getMap() );
+
+        selection = new StructuredSelection( list );
+        notifyListeners();
+    }
+}</pre>
+</div>
+<p>Where SelectionList above is something along these lines:</p>
+<div class="highlight-python"><pre>public class SelectionList&lt;T&gt; extends ArrayList&lt;T&gt; implements IAdaptable {
+    private static final long serialVersionUID = 3521446731606642486L;
+
+    /**
+     * Set of adapters (ie other objects or interfaces) we
+     * are returning at the same time.
+     */
+    protected Set&lt;Object&gt; adapters = new CopyOnWriteArraySet&lt;Object&gt;();
+
+    /**
+     * Called by client code to return additional interfaces
+     * as part of this SelectionList.
+     * &lt;p&gt;
+     * Example: selectionList.add( currentLayer )
+     *
+     * @param adapter The adapter we are interested in communicating to others
+     */
+    public void addAdapter( Object adapter ) {
+        if( adapter==null ){
+            throw new NullPointerException("adapter cannont be null"); //$NON-NLS-1$
+        }
+        adapters.add(adapter);
+    }
+    @SuppressWarnings("unchecked")
+    public Object getAdapter( Class adapter ) {
+        if( adapter.isInstance(this)){
+            return adapter.cast(this);
+        }
+        for( Object obj : adapters ) {
+            if( adapter.isAssignableFrom(obj.getClass()) ){
+                return obj;
+            }
+        }
+        return null;
+    }
+}</pre>
+</div>
+</div>
+<div class="section" id="actionset-convention-for-tool-category">
+<h1>ActionSet convention for Tool Category<a class="headerlink" href="#actionset-convention-for-tool-category" title="Permalink to this headline">¶</a></h1>
+<p>We will check for an ActionSet with the same name as the ToolCategory - you can use this facility to
+turn off actions that don&#8217;t make sense for your perspective.</p>
+</div>
+<div class="section" id="tool-cursor-extension">
+<h1>Tool Cursor Extension<a class="headerlink" href="#tool-cursor-extension" title="Permalink to this headline">¶</a></h1>
+<p>Cursors can be defined independently from tools; allowing you to reuse the same cursor for several
+tools.</p>
+<p>Extension example:</p>
+<div class="highlight-python"><pre>&lt;extension point="org.locationtech.udig.project.ui.tool"&gt;
+    &lt;toolCursor
+        hotspotX="10"
+        hotspotY="10"
+        id="arrowCursor"
+        image="icons/pointers/edit_source.gif"/&gt;
+    ...
+&lt;/extension&gt;</pre>
+</div>
+<p>Where:</p>
+<ul class="simple">
+<li><em>id</em> is an unique ID of the cursor to be accessed from any place of UDIG platform to get cursor
+image.</li>
+<li><em>image</em> path to cursor image inside of plugin</li>
+<li><em>hotspotX, hotspotY</em> coordinates from top left corner of hot point for the cursor.</li>
+</ul>
+<p>Once the tool cursor is defined as an extension it is accessible as a default tool cursor by
+<strong>toolCursorId</strong> attribute of a modal tool element. For this to work the ID must be unqiue –
+allowing a cursor defined in one plug-in to used by the tool from another plug-in just by ID.</p>
+<div class="section" id="tool-implementation-and-framework">
+<h2>Tool Implementation and Framework<a class="headerlink" href="#tool-implementation-and-framework" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+<div class="section" id="toolmanager">
+<h1>ToolManager<a class="headerlink" href="#toolmanager" title="Permalink to this headline">¶</a></h1>
+<p>The <strong>ToolManager</strong> is the mediator responsible for handling everything to do with tools on behalf
+of a map editor or map view.</p>
+<p>With this in mind the ToolManager:</p>
+<ul class="simple">
+<li>Is responsible for the current &#8220;mode&#8221; of the Map; which it represents as the current ModalTool</li>
+<li>Processes the Tool Extension Point and allows &#8220;easy&#8221; access to find tools</li>
+<li>it has methods to add the tools to the tool bar (or menu bar)</li>
+<li>it provides a palette model listing all tools (for use by the palette view)</li>
+</ul>
+<p>To add tool buttons to custom views the ToolManager.createToolAction(ToolID, CategoryID) method will
+create an <strong>Action</strong> that can be added to the view.</p>
+<p>The tool implementations you provide are wrapped up in a <strong>ToolProxy</strong> (which contains their icon,
+name, description and so on). You can look this up at runtime:</p>
+<div class="highlight-python"><pre>ToolManager tools = ApplicationGIS.getToolManager();
+ToolProxy tool = tools.findToolProxy( id );</pre>
+</div>
+</div>
+<div class="section" id="toolcontext">
+<h1>ToolContext<a class="headerlink" href="#toolcontext" title="Permalink to this headline">¶</a></h1>
+<p>All Tools are provided with a ToolContext object by the framework. The tools can use the context to
+access the model and to create and send <a class="reference external" href="Commands.html">Commands</a> which modify the model. Contexts
+have a large number of methods to simplify the job of tool authors. Please let us know of methods
+that would be useful or should be part of the context objects.</p>
+<p><strong>IMPORTANT</strong>: It is critical that the tools do not make a new reference to the context object
+because it is set each time the editor is activated and may change without notification.</p>
+</div>
+<div class="section" id="tool-implementation">
+<h1>Tool Implementation<a class="headerlink" href="#tool-implementation" title="Permalink to this headline">¶</a></h1>
+<p>There are several abstract classes available for you to extend.</p>
+<div class="figure align-center">
+<img alt="" src="_images/toolframework.GIF" />
+</div>
+<p>There are several available subclasses to start you out:</p>
+<ul class="simple">
+<li>AbstractActionTool</li>
+<li>AbstractTool</li>
+<li>AbstractModelTool</li>
+<li>SimpleTool: an implementation of ModalTool with support for a right-click context menu, it serves
+as a great starting place for creating your own tool that involves &#8220;selecting a location&#8221; or
+&#8220;selecting content&#8221; on the map and making a range of actions available.</li>
+</ul>
+<p>Note when using <strong>AbstractTool</strong> you can use the constructor to define what sort of events you are
+interested in, the events come in already expressed in Map coordinates.</p>
+<div class="highlight-python"><pre>class ExampleTool AbstractTool(){
+    ExampleTool(){
+       super( MOUSE | WHEEL );
+    }
+    public void mouseReleased( MapMouseEvent e ) {
+       ...
+    }
+    public void mouseWheelMoved( MapMouseWheelEvent e ) {
+       ...
+    }
+}</pre>
+</div>
+</div>
+<div class="section" id="tool-lifecycle">
+<h1>Tool Lifecycle<a class="headerlink" href="#tool-lifecycle" title="Permalink to this headline">¶</a></h1>
+<p>Tools go through a fixed lifecycle:</p>
+<ul class="simple">
+<li>Extension XML definition processed, the result is held by a ToolProxy until actually needed</li>
+<li>Default &#8220;no argument&#8221; constructor is called</li>
+<li>AbstractTool.init(IConfigurationElement) is called allows the tool to configure itself based on
+the XML definition</li>
+<li>Tool.setContext called each time an Editor is activated</li>
+<li>Tool.addListener / removeListener called as needed</li>
+<li>Tool.setEnabled is called as needed</li>
+<li>ModalTool.setActive is called as needed</li>
+<li>Tool.dispose()</li>
+</ul>
+</div>
+<div class="section" id="tool-activation">
+<h1>Tool Activation<a class="headerlink" href="#tool-activation" title="Permalink to this headline">¶</a></h1>
+<p>Tool activation is a life cycle step reserved for ModalTools; when active a modal tool will control
+what the Map Editor is doing - the tools cursor will be displayed, its selection will be treated as
+the MapEditor selection as far as the work bench is concerned.</p>
+<div class="highlight-python"><pre>ModalTool.boolean isActive()
+ModalTool.setActive( boolean )
+ModalTool.getCursorID()
+ModalTool.setCursorID( String )
+ModalTool.getSelectionProvider()
+ModalTool.setSelectionProvider(IMapEditorSelectionProvider)</pre>
+</div>
+<p>Only one modal tool can be active. There is no other opportunity to activate another disabled tool
+through UI contributions. When the tool is disabled, its UI contributions are disabled.</p>
+<p>When the active tool is being disabled, its functionality is blocked but the tool is still active.
+The tool can be enabled by changing of context again. In that case only user manually can switch to
+any other enabled tool through UI contributions.</p>
+</div>
+<div class="section" id="tool-enablement">
+<h1>Tool Enablement<a class="headerlink" href="#tool-enablement" title="Permalink to this headline">¶</a></h1>
+<p>The tool interface has two methods to track isEnabled:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">Tool</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="n">Boolean</span><span class="p">)</span>
+<span class="n">Tool</span><span class="o">.</span><span class="n">isEnabled</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This lets to enable/disable a tools functionality at any time during tool life cycle. When the tool
+is disabled, the cursor for the MapEditor is changed initialized and the functionality is blocked by
+unregistering mouse listeners.</p>
+<p>There are several ways to perform tool enablement. First way is to let the system performs
+enablement on the base of current context (selecting different layers, etc.). The second wayis to
+manually calling <em>Tool.setEnabled(Boolean)</em> from any place of tool implementation to simply block
+its functionality.</p>
+</div>
+<div class="section" id="tool-lifecycle-listeners">
+<h1>Tool Lifecycle Listeners<a class="headerlink" href="#tool-lifecycle-listeners" title="Permalink to this headline">¶</a></h1>
+<p>I started tool lifecycle listeners: the initial three events are:</p>
+<ul class="simple">
+<li>tool activation (only one modal item can be active at any time).</li>
+<li>tool enablement (can be performed at any time)</li>
+<li>context changing (during changing of context the tool also can be enabled or disabled
+automatically)</li>
+</ul>
+<p>Tool lifecycle listeners are not used anywhere at the current moment, but it would be good to have
+such functionality to listen tools lifecycle events without overriding of Tool class methods.</p>
+</div>
+<div class="section" id="tool-cursor-implementation">
+<h1>Tool Cursor Implementation<a class="headerlink" href="#tool-cursor-implementation" title="Permalink to this headline">¶</a></h1>
+<p>Cursor is a disposable object and to implement lazy loading the proxy object is used in the same
+manner as <em>ToolProxy</em> object before:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">org</span><span class="o">.</span><span class="n">locationtech</span><span class="o">.</span><span class="n">udig</span><span class="o">.</span><span class="n">project</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">internal</span><span class="o">.</span><span class="n">tool</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">CursorProxy</span>
+</pre></div>
+</div>
+<p>ToolManager is responsible to create full list of cursor proxies and cache them by ID from extension
+point. Whenever the actual <em>org.eclipse.swt.graphics.Cursor</em> object is needed you must call the
+following method:</p>
+<div class="highlight-python"><pre>Cursor IToolManager.findToolCursor(String cursorID);</pre>
+</div>
+<p>In most cases the developer does not need the org.eclipse.swt.graphics.Cursor object while working
+with tools implementation. The Tools API is extended by the next methods to manage tool cursors:</p>
+<div class="highlight-python"><pre>ModalTool.setCursorID(String cursorID)
+String ModalTool.getCursorID()</pre>
+</div>
+<p>These methods are responsible for the cursors management. The set method performs actual updating of
+mouse cursor image if it is needed.</p>
+</div>
+<div class="section" id="using-default-system-cursors">
+<h1>Using Default System Cursors<a class="headerlink" href="#using-default-system-cursors" title="Permalink to this headline">¶</a></h1>
+<p>Systems cursors are listed using constants in SWT class. Constants are integer numbers. While
+current Tool Cursors Framework uses string IDs it is recommended to work with mapped constants from
+ModalTool interface. These constants are mapped to system cursors. If the system cursor
+<em>SWT.CURSOR_WAIT</em> is needed then call routine:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">ModalTool</span><span class="o">.</span><span class="n">setCursorID</span><span class="p">(</span><span class="n">ModalTool</span><span class="o">.</span><span class="n">WAIT_CURSOR</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>In this case the framework recognizes that the system cursor is requested and sets it for the tool.
+You can combine as custom cursors as system using the underlying mechanism transparently.</p>
+</div>
+<div class="section" id="finding-a-cursor-at-runtime">
+<h1>Finding a Cursor at Runtime<a class="headerlink" href="#finding-a-cursor-at-runtime" title="Permalink to this headline">¶</a></h1>
+<p>The developer can declaratively add cursor images through extension mechanism and use them by ID
+from any place in source code. If the SWT object is needed call:</p>
+<div class="highlight-python"><pre>IToolManager.findToolCursor(String cursorID).</pre>
+</div>
+<p>If you just want to set cursor for the tool just call</p>
+<div class="highlight-python"><pre>ModalTool.setCursorID(String cursorID).</pre>
+</div>
+<p>Updating of mouse cursor image is performed automatically by the framework depending on the current
+context, active tool, etc.</p>
+</div>
+<div class="section" id="compatibility">
+<h1>Compatibility<a class="headerlink" href="#compatibility" title="Permalink to this headline">¶</a></h1>
+<p>It is possible to support compatibility with cursor extension point under tool extension point as a
+default cursor for the tool.</p>
+<div class="section" id="future-direction">
+<h2>Future Direction<a class="headerlink" href="#future-direction" title="Permalink to this headline">¶</a></h2>
+<p>Currently all tools are active but in the future would be desirable to have a tool configuration
+extension point where udig extenders can define which tools are activated for their application. A
+system like the eclipse command framework for Eclipse 3.1 is likely.</p>
+<p>This work has been started already by making use of ActionSets and Tool Categories.</p>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="style.html">Style</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="edit_tools.html">Edit Tools</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2015, Refractions Research and others.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

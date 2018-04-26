@@ -1,0 +1,127 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Using Udigmenubuilder &mdash; uDig 1.5.0 Developers Guide</title>
+    
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.5.0.RC1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.5.0 Developers Guide" href="index.html" />
+    <link rel="up" title="Working with Eclipse RCP" href="working_with_eclipse_rcp.html" />
+    <link rel="next" title="Using Workbenchconfigurations" href="using_workbenchconfigurations.html" />
+    <link rel="prev" title="Using The Udigworkbenchadvisor" href="using_the_udigworkbenchadvisor.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="using_the_udigworkbenchadvisor.html">Using The Udigworkbenchadvisor</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="using_workbenchconfigurations.html">Using Workbenchconfigurations</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="using-udigmenubuilder">
+<h1>Using Udigmenubuilder<a class="headerlink" href="#using-udigmenubuilder" title="Permalink to this headline">¶</a></h1>
+<p>This is the first attempt at the &#8220;use the UDIGWorkBenchAdvisor but let me change some stuff story&#8221;.</p>
+<p>The use of this class is triggered by providing the <strong>org.locationtech.udig.ui.menuBuilders</strong>
+extention:</p>
+<div class="highlight-python"><pre>&lt;extension
+          point="org.locationtech.udig.ui.menuBuilders"&gt;
+       &lt;menuBuilder
+             class="org.locationtech.udig.ui.UDIGMenuBuilder"
+             id="org.locationtech.udig.ui.menuBuilder"&gt;
+       &lt;/menuBuilder&gt;
+    &lt;/extension&gt;</pre>
+</div>
+<p>There are a couple of reasons why you may wish to use this class.</p>
+<div class="section" id="override-udigworkbenchadvisor">
+<h2>Override UDIGWorkBenchAdvisor<a class="headerlink" href="#override-udigworkbenchadvisor" title="Permalink to this headline">¶</a></h2>
+<p>By implementing this extension point you can pretty mych override the default UDIGWorkBenchAdvisor.</p>
+<p>Why would you do this rather than make up your own WorkBenchAdvisor implementation? Well for uDig
+1.0 the default UDIGApplication performed some nice JAI and GDI checks; now that these have been
+made available as utility methods there is little reason for this class.</p>
+</div>
+<div class="section" id="mix-in-udig-contributions-to-an-existing-rcp-application">
+<h2>Mix in UDIG contributions to an existing RCP Application<a class="headerlink" href="#mix-in-udig-contributions-to-an-existing-rcp-application" title="Permalink to this headline">¶</a></h2>
+<p>If you have an existing RCP application you can use the UDIGMenuBuilder to &#8220;mix in&#8221; the expected
+UDIG Menus (such as Navigation and Layer).</p>
+<p>I have not figured out the best place to call UDIGMenuBuilder from an RCP application:</p>
+<ul class="simple">
+<li>extention org.eclipse.ui.startup: happens too late in the startup process, probably as a result
+of everything moving to OSGi</li>
+<li>extention org.locationtech.udig.ui.workbenchConfigurations: happens too early in the start up
+process (before org.eclipse.ui.menus has been processed) so positioning menus relative to
+expected ones does not work</li>
+<li>Only working advise is to call it from your <tt class="docutils literal"><span class="pre">ActionBarAdvisor</span></tt> implementation as used for your
+application. This does not accomplish the goal of making uDig plugins &#8220;drop in&#8221; to an existing
+RCP application</li>
+<li>Your suggestions are welcome on this one</li>
+</ul>
+<p>As we move towards the use of the <strong>org.eclipse.ui.menu</strong> extention point this use case for
+UDIGMenuBuilder will also vanish.</p>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="using_the_udigworkbenchadvisor.html">Using The Udigworkbenchadvisor</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="using_workbenchconfigurations.html">Using Workbenchconfigurations</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2015, Refractions Research and others.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,233 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Tool Plugin Tutorial &mdash; uDig 1.5.0 Developers Guide</title>
+    
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.5.0.RC1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.5.0 Developers Guide" href="index.html" />
+    <link rel="up" title="Getting Started" href="getting_started.html" />
+    <link rel="next" title="Custom Application Tutorial" href="custom_application_tutorial.html" />
+    <link rel="prev" title="What to Do Next" href="CustomApplication/WhattoDoNext.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="CustomApplication/WhattoDoNext.html">What to Do Next</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="custom_application_tutorial.html">Custom Application Tutorial</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="tool-plugin-tutorial">
+<h1>Tool Plugin Tutorial<a class="headerlink" href="#tool-plugin-tutorial" title="Permalink to this headline">¶</a></h1>
+<p>This tutorial shows how to create a new plug-in that adds a distance tool to the uDig application.</p>
+<a class="reference external image-reference" href="http://udig.refractions.net/files/tutorials/ToolPluginTutorial.pdf"><img alt="_images/ToolPluginWorkbook.png" src="_images/ToolPluginWorkbook.png" /></a>
+<p>This workbook is part of our public training materials:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://udig.refractions.net/files/tutorials/ToolPluginTutorial.pdf">ToolPluginTutorial.pdf</a></li>
+</ul>
+<p>Downloads:</p>
+<ul class="simple">
+<li><cite>distance_icons.zip</cite></li>
+</ul>
+<p>Source code:</p>
+<ul class="simple">
+<li>Available in your uDig SDK (import the <a class="reference internal" href="code_examples.html"><em>source code</em></a> from the plugins
+view)</li>
+<li>plugin:
+<a class="reference external" href="https://github.com/uDig/udig-platform/tree/master/plugins/org.locationtech.udig.tutorials.distancetool">org.locationtech.udig.tutorials.distancetool</a>
+(github)</li>
+</ul>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>The uDig application is built on the &#8220;Eclipse Rich Client Platform&#8221; that offers an alternative to
+traditional application framework design. The RCP Platform is customized through extensions that
+contribute to extensions points. The good news is that everything is consistent, everything from
+adding a tool to creating an application is done in the same manner.</p>
+<p>After completing this tutorial, you will have gained the skills to:</p>
+<ul class="simple">
+<li>Create a new Plugin</li>
+<li>Define a new Extension</li>
+<li>Implement a new Tool Extension</li>
+<li>Update the map from within a tool</li>
+</ul>
+<p>We are going to create a tool that returns the distance between the point the mouse is clicked and
+the point the mouse is released.</p>
+<div class="figure align-center">
+<img alt="" src="_images/DistanceTool.jpg" />
+</div>
+<p>This is a quick workbook often used as an introduction to Eclipse Rich Client Platform development.
+It is the only workbook we offer that provides detailed instructions on how to create a
+plugin.Subsequent workbooks will treat the topic as review and not go into as much detail.</p>
+<p>Plugin consists of:</p>
+<ul class="simple">
+<li>Normal Java Project</li>
+<li>MANIFEST.MF providing a <strong>name</strong>, <strong>version</strong> and dependencies (that is other plugins that are
+required)</li>
+<li>plugin.xml providing information to the <strong>Platform</strong> class telling it how to wire up the code</li>
+<li>plugin.properties - used for internationalisation of human readable strings</li>
+</ul>
+<p>The plugin you create is based on an <strong>extension point</strong> provided by the uDig project (the tools
+extension point).</p>
+<div class="figure align-center">
+<img alt="" src="_images/ToolExtensionPoint.jpg" />
+</div>
+<p>The fact that we are using this tools extension point is the only uDig specific part of the tutorial
+- so if you have a good Eclipse RCP book then this workbook should be considered review.</p>
+<p>Key Points:</p>
+<ul class="simple">
+<li>If you are new to Eclipse RCP please considered this as a quick introduction:<ul>
+<li>The Eclipse <strong>Platform</strong> class is responsible for wiring up your application; it reads the
+plugin.xml files to wire up <strong>extensions</strong> into <strong>extenstion points</strong></li>
+</ul>
+</li>
+<li>If you are comfortable with Eclipse RCP this workbook can be considered review and an
+introduction to uDig Tools</li>
+<li>Complete the <strong>What to do Next</strong> section for an in-depth understanding of this content</li>
+</ul>
+</div>
+<div class="section" id="what-to-do-next">
+<h2>What to do Next<a class="headerlink" href="#what-to-do-next" title="Permalink to this headline">¶</a></h2>
+<p>The step by step workbook is only part of the store - here are some additional challenges for you to
+try.</p>
+<div class="section" id="tool-categories">
+<h3>Tool Categories<a class="headerlink" href="#tool-categories" title="Permalink to this headline">¶</a></h3>
+<p>Tools are organized into &#8220;Categories&#8221; each with their own keyboard short-cut, the Distance Tool is
+in the category &#8220;Information&#8221;.</p>
+<p>Create your own Category.</p>
+</div>
+<div class="section" id="activator-plugin-lifecycle-callback-object">
+<h3>Activator - Plugin Lifecycle Callback Object<a class="headerlink" href="#activator-plugin-lifecycle-callback-object" title="Permalink to this headline">¶</a></h3>
+<p>Plug-ins have a life cycle (controlled by the Platform class). You can register a callback object
+called an <strong>Activator</strong> to be advised when your plugin starts and stops.</p>
+<p>The start method is used to provide your Activator with a BundleContext (used to access resources
+like Icons).</p>
+<p>The ID for your Plugin is used so often that it is worth making a constant in your <strong>Activator</strong> for
+others to refer to.</p>
+<div class="highlight-python"><pre>public static final String PLUGIN_ID = "org.locationtech.udig.tutorials.distancetool";</pre>
+</div>
+<p>This may already be done by the wizard.</p>
+</div>
+<div class="section" id="eclipse-rcp-logging-with-options-file">
+<h3>Eclipse RCP Logging with <strong>.options</strong> File<a class="headerlink" href="#eclipse-rcp-logging-with-options-file" title="Permalink to this headline">¶</a></h3>
+<p>Your activator can also be used to send log messages; and check debug options (from the TRACING
+page)</p>
+<p>To enable this, add a <strong>.options</strong> file to your plug-in next to plugin.xml. The presense of a
+&#8221;.options&#8221; file tells the system that you have trace options available.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">org</span><span class="o">.</span><span class="n">locationtech</span><span class="o">.</span><span class="n">udig</span><span class="o">.</span><span class="n">tutorials</span><span class="o">.</span><span class="n">distancetool</span><span class="o">/</span><span class="n">debug</span><span class="o">=</span><span class="n">true</span>
+<span class="n">org</span><span class="o">.</span><span class="n">locationtech</span><span class="o">.</span><span class="n">udig</span><span class="o">.</span><span class="n">tutorials</span><span class="o">.</span><span class="n">distancetool</span><span class="o">/</span><span class="n">debug</span><span class="o">/</span><span class="n">distance</span><span class="o">=</span><span class="n">true</span>
+</pre></div>
+</div>
+<p>At runtime use your Activator to check if tracing is turned on, put the following in the start
+method:</p>
+<div class="highlight-python"><pre>if( isDebugging() &amp;&amp;
+        "true".equalsIgnoreCase(Platform.getDebugOption(PLUGIN_ID + "/debug"))){
+    Status status = new Status(IStatus.INFO,PLUGIN_ID,"Distance Tool Started");
+    getLog().log(status);
+}</pre>
+</div>
+</div>
+<div class="section" id="log-distance">
+<h3>Log Distance<a class="headerlink" href="#log-distance" title="Permalink to this headline">¶</a></h3>
+<p>With the above example of how to use <strong>.option</strong> file in mind, output your distance results to the
+console log.</p>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">This information is currently being displayed in the status bar (eg. 3420 km)</p>
+</div>
+</div>
+<div class="section" id="tool-category-keyboard-shortcuts-advanced">
+<h3>Tool Category Keyboard Shortcuts (Advanced)<a class="headerlink" href="#tool-category-keyboard-shortcuts-advanced" title="Permalink to this headline">¶</a></h3>
+<p>You can select the &#8220;Information&#8221; category by pressing &#8220;i&#8221;; if you continue to press &#8220;i&#8221; it will
+cycle through all available &#8220;Information&#8221; tools.</p>
+<p>Try hooking up your tool category to a keyboard binding.</p>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">Study and existing example.</p>
+</div>
+</div>
+</div>
+<div class="section" id="tips-tricks-and-suggestions">
+<h2>Tips, Tricks and Suggestions<a class="headerlink" href="#tips-tricks-and-suggestions" title="Permalink to this headline">¶</a></h2>
+<p>The following tips, tricks and suggestions have been collected from the udig-devel email list. If
+you have any questions please drop by and introduce yourself.</p>
+<div class="section" id="use-the-source-luke">
+<h3>Use the Source Luke!<a class="headerlink" href="#use-the-source-luke" title="Permalink to this headline">¶</a></h3>
+<p>One of the key advantages in open source development; is having access to existing working source
+code to use as a good example.</p>
+<p>This is especially helpful for the keyboard short cuts; you can study how the <tt class="kbd docutils literal"><span class="pre">i</span></tt> key is assigned to
+the information tool category; and reproduce those steps for your new category.</p>
+</div>
+<div class="section" id="use-the-debugger">
+<h3>Use the debugger<a class="headerlink" href="#use-the-debugger" title="Permalink to this headline">¶</a></h3>
+<p>Putting break points into a line of code you are interested in - is a great way to learn how it
+works.</p>
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="CustomApplication/WhattoDoNext.html">What to Do Next</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="custom_application_tutorial.html">Custom Application Tutorial</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2015, Refractions Research and others.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

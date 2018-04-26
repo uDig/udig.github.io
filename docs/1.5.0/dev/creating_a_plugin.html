@@ -1,0 +1,252 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Creating a Plugin &mdash; uDig 1.5.0 Developers Guide</title>
+    
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.5.0.RC1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.5.0 Developers Guide" href="index.html" />
+    <link rel="up" title="Working with Eclipse RCP" href="working_with_eclipse_rcp.html" />
+    <link rel="next" title="Common Plugin Files" href="common_plugin_files.html" />
+    <link rel="prev" title="Working with Eclipse RCP" href="working_with_eclipse_rcp.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="working_with_eclipse_rcp.html">Working with Eclipse RCP</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="common_plugin_files.html">Common Plugin Files</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="creating-a-plugin">
+<h1>Creating a Plugin<a class="headerlink" href="#creating-a-plugin" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="start-the-new-project-wizard">
+<h2>Start the New Project Wizard<a class="headerlink" href="#start-the-new-project-wizard" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first"><em class="menuselection">File ‣ New ‣ Project</em></p>
+<p><img alt="image0" src="_images/NewProject.jpg" /></p>
+</li>
+<li><p class="first">Select &#8220;Plug-in Project&#8221;</p>
+</li>
+<li><p class="first">Next</p>
+</li>
+</ul>
+</div>
+<div class="section" id="plug-in-project">
+<h2>Plug-in Project<a class="headerlink" href="#plug-in-project" title="Permalink to this headline">¶</a></h2>
+<div class="figure align-center">
+<img alt="" src="_images/NewProject1.jpg" />
+</div>
+<ul>
+<li><p class="first">Set the project name:</p>
+<p>agrees with package structure, starts with org.locationtech.udig.*</p>
+</li>
+<li><p class="first">Project contents:</p>
+<p>use default</p>
+</li>
+<li><p class="first">Project Settings:</p>
+<p>Create a Java project</p>
+<p>default src and bin folders are fine</p>
+</li>
+<li><p class="first">Alternate Format:</p>
+<p>Apprently it is not worth using the the OSGi bundle manifest at this time (see panel below)</p>
+</li>
+<li><p class="first">Next</p>
+<p><strong>Plugin Name</strong></p>
+<p>What is in a name? Well a clue on what the plugin is for:</p>
+</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="30%" />
+<col width="35%" />
+<col width="35%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Project</th>
+<th class="head">Example</th>
+<th class="head">Naming Convention</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Plug-In</td>
+<td>org.locationtech.udig.render</td>
+<td>named in agreement with internal package structure</td>
+</tr>
+<tr class="row-odd"><td>JUnit Test Plug-In</td>
+<td>org.locationtech.udig.render-test</td>
+<td>Append &#8220;-test&#8221;</td>
+</tr>
+<tr class="row-even"><td>Plug-In Fragment</td>
+<td>org.locationtech.udig.german</td>
+<td>Provide &#8221;.<em>language</em>&#8221; file at the root udig</td>
+</tr>
+<tr class="row-odd"><td>Plug-In Fragment</td>
+<td>net.refractions.render-1</td>
+<td>Do anything except add a dot</td>
+</tr>
+<tr class="row-even"><td>Features</td>
+<td>org.locationtech.udig.render-feature</td>
+<td>Append &#8220;-feature&#8221; to associated root Plug-In</td>
+</tr>
+</tbody>
+</table>
+<p>The following was taken from the <a class="reference external" href="http://udig.refractions.net/confluence//display/UDIG/Repository+Structure">Repository Structure</a> page.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="100%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head"><strong>OSGi (from Rich Client Tutorial - Part 1)</strong></th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Eclipse 3.0 introduced a new run-time system based on OSGi standards that uses
+bundles and a new manifest file (MANIFEST.MF) to implement plug-ins. The use of
+MANIFEST.MF, in normal circumstances, is completely optional.
+You will notice that almost all of the 3.0 SDK plug-ins do NOT have one yet all
+are marked as 3.0 and many do not require the compatibility layer. The only reason
+you would want to have a MANIFEST.MF is if you need to use a particular OSGi
+capability that is not exposed through plugin.xml (for example, import-package).
+Otherwise it&#8217;s recommended at this time that you don&#8217;t have one.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="plug-in-content">
+<h2>Plug-In Content<a class="headerlink" href="#plug-in-content" title="Permalink to this headline">¶</a></h2>
+<div class="figure align-center">
+<img alt="" src="_images/NewProject2.jpg" />
+</div>
+<ul class="simple">
+<li>Plug-in Properties<ul>
+<li>Plug-in ID: Recommended that this is the same as the full package name (and project name)</li>
+<li>Plug-in Version: change to 0.1.0 (or whatever we are current working towards)<ul>
+<li>It is important to ensure that a version number has 3 digits, version numbers with only 2
+digits have been known to cause odd bugs when other plugins depend on them.</li>
+</ul>
+</li>
+<li>Plug-in Name: name as appropriate (recommended that you prepend &#8220;uDig &#8221;)</li>
+<li>Plug-in Proivider: often &#8220;Refractions Research, Inc.&#8221;</li>
+<li>Runtime Library: change to prevent conflict (recommended that you prepend &#8220;udig-&#8221;)</li>
+</ul>
+</li>
+<li>Plug-in Class (often not needed)<ul>
+<li>Generate: only check if neededConfluence - Home</li>
+<li>Class Name: name appropriately</li>
+<li>Check &#8220;This plug-in will make contributions to the UI&#8221; to access Templates</li>
+</ul>
+</li>
+<li>Next</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="100%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head"><strong>Plug-in Class (from Rich Client Tutorial - Part 1)</strong></th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>The generated plug-in class that you may be familiar with in previous releases
+is no longer required in Eclipse 3.0. You can still have one to hold global data if you like.
+In this case we would like to hold some global data, rather than use a singleton.
+This allows us to cleanup after the application (something that is hard with singletons).</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="templates">
+<h2>Templates<a class="headerlink" href="#templates" title="Permalink to this headline">¶</a></h2>
+<p>(Only available when making a UI Plug-in Class)</p>
+<div class="figure align-center">
+<img alt="" src="_images/NewProject3.jpg" />
+</div>
+<ul class="simple">
+<li>Finish or ...</li>
+<li>Check &#8220;Create a plug-in using one of the templates&#8221;<ul>
+<li>Choose a ui wizard (such as &#8220;Custom plug-in wizard&#8221;)</li>
+<li>Next (to start filling out the template)</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="template-selection">
+<h2>Template Selection<a class="headerlink" href="#template-selection" title="Permalink to this headline">¶</a></h2>
+<p>(Only available when using &#8220;Custom plug-in wizard&#8221;)</p>
+<p><strong>Template Selection</strong></p>
+<div class="figure align-center">
+<img alt="" src="_images/NewProject4.jpg" />
+</div>
+<ul class="simple">
+<li>Choose wizard components from the list according to the needs of your plug-in</li>
+<li>Next (to work with selected wizards)</li>
+</ul>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="working_with_eclipse_rcp.html">Working with Eclipse RCP</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="common_plugin_files.html">Common Plugin Files</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2015, Refractions Research and others.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

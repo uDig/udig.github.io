@@ -1,0 +1,271 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>User Interface Guidelines &mdash; uDig 1.5.0 Developers Guide</title>
+    
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.5.0.RC1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.5.0 Developers Guide" href="index.html" />
+    <link rel="up" title="Guidelines and Rules" href="guidelines_and_rules.html" />
+    <link rel="next" title="Naming Conventions" href="naming_conventions.html" />
+    <link rel="prev" title="Eclipse House Rules" href="eclipse_house_rules.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="eclipse_house_rules.html">Eclipse House Rules</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="naming_conventions.html">Naming Conventions</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="user-interface-guidelines">
+<h1>User Interface Guidelines<a class="headerlink" href="#user-interface-guidelines" title="Permalink to this headline">¶</a></h1>
+<p>The eclipse user interace guidelines include a
+<a class="reference external" href="http://www.eclipse.org/articles/Article-UI-Guidelines/Contents.html#Checklist%20For%20Developers">checklist</a>,
+we have linked to some of this content and provided our own summary.</p>
+<p>Real quick and easy - follow the eclipse user interface guidelines!</p>
+<ul class="simple">
+<li><a class="reference external" href="http://wiki.eclipse.org/User_Interface_Guidelines">http://wiki.eclipse.org/User_Interface_Guidelines</a></li>
+<li><a class="reference external" href="http://www.eclipse.org/articles/Article-UI-Guidelines/Index.html">http://www.eclipse.org/articles/Article-UI-Guidelines/Index.html</a></li>
+</ul>
+<div class="section" id="icons-and-imagery">
+<h2>Icons and Imagery<a class="headerlink" href="#icons-and-imagery" title="Permalink to this headline">¶</a></h2>
+<p>We use a consistent &#8220;visual language&#8221; to represent services, spatial concepts and abstract ideas.</p>
+<ul class="simple">
+<li><a class="reference internal" href="fonts_and_imagery.html"><em>Fonts and Imagery</em></a></li>
+<li><a class="reference internal" href="icons.html"><em>Icons</em></a> - covers expected directory structure</li>
+</ul>
+</div>
+<div class="section" id="eclipse-user-interface-guidelines">
+<h2>Eclipse User Interface Guidelines<a class="headerlink" href="#eclipse-user-interface-guidelines" title="Permalink to this headline">¶</a></h2>
+<p>Now that the eclipse user interface guidelines have moved to a wiki they are more up to date. In the
+past we have had to take some notes about our understanding of the user interface guidelines. These
+are our notes!</p>
+<p>General UI Guidelines:</p>
+<ul class="simple">
+<li>Do what eclipse does <img alt="image0" src="_images/smile.gif" /></li>
+<li>Use <strong>Headline style</strong> capitalization for menus, tooltip and all titles, including those used for
+windows, dialogs, tabs, column headings and push buttons. Capitalize the first and last words,
+and all nouns, pronouns, adjectives, verbs and adverbs. Do not include ending punctuation.</li>
+<li>Use <strong>Sentence style</strong> capitalization for all control labels in a dialog or window, including
+those for check boxes, radio buttons, group labels, and simple text fields. Capitalize the first
+letter of the first word, and any proper names such as the word Java.</li>
+<li>Create localized version of the resources within your plug-in.</li>
+</ul>
+<p>Visual Design Guidelines:</p>
+<ul class="simple">
+<li>Re-use the core visual concepts to maintain consistent representation and meaning across Eclipse
+plug-ins.</li>
+<li>Use the appropriate icon type in the location it is designed for within the user interface.</li>
+<li>Follow the specific size specifications for each type of icon.</li>
+<li>Cut the icons with the specific placement shown to ensure alignment in the user interface.</li>
+<li>Follow the positioning guidelines for the different types of icons for optimal alignment of these
+elements relative to one another.</li>
+<li>Follow the specific size specifications for wizard graphics.</li>
+<li>Follow the predefined directory structure and naming convention.</li>
+<li>Use the enabled, and disabled states provided.</li>
+</ul>
+<p>Visual concepts for udig are located on the Icons and Imagery page</p>
+<p>Component Development:</p>
+<ul class="simple">
+<li>Re-use the core visual concepts to maintain consistent representation and meaning across Eclipse
+plug-ins.</li>
+<li>Use the appropriate icon type in the location it is designed for within the user interface.</li>
+<li>Follow the specific size specifications for each type of icon.</li>
+<li>Cut the icons with the specific placement shown to ensure alignment in the user interface.</li>
+<li>Follow the positioning guidelines for the different types of icons for optimal alignment of these
+elements relative to one another.</li>
+<li>Follow the specific size specifications for wizard graphics.</li>
+<li>Follow the predefined directory structure and naming convention.</li>
+<li>Use the enabled, and disabled states provided.</li>
+</ul>
+<p>Visual concepts for udig are located on the Icons and Imagery page</p>
+<p>Commands Guidelines:</p>
+<ul class="simple">
+<li>require label, tool tip and icon</li>
+<li>tool tip describes result</li>
+<li>Follow workbench example of New, Delete and Add</li>
+<li>Enablement be darn quick, even if you need to cheat</li>
+</ul>
+<p>Dialogs Guidelines:</p>
+<ul class="simple">
+<li>When opened focus should be on the first control</li>
+<li>When using Twin Box for set member ship use &#8216;&gt;&#8217; &#8216;&lt;&#8217; &#8216;&gt;&gt;&#8217; &#8216;&lt;&lt;&#8217; buttons</li>
+</ul>
+<p>Wizards Guidelines:</p>
+<ul class="simple">
+<li>used for any task of many ordered steps</li>
+<li>required header, banner graphic</li>
+<li>&#8216;Back&#8217;, &#8216;Next&#8217;, &#8216;Finish&#8217;, &#8216;Canel&#8217; buttons</li>
+<li>Start with a prompt not an error message</li>
+<li>fill out as much information as you can for the user</li>
+<li>validate in order, prompt for more information, error for invalid information</li>
+<li>enabled Next, Finish when valid</li>
+<li>Use a &#8216;Browse&#8217; button where possible</li>
+<li>Open editor on the results of the wizard, at the very least select it, change perspective if you
+have to</li>
+<li>Use the most specific words possible, &#8220;WMS Layer&#8221; not &#8220;FeatureCollection&#8221;</li>
+</ul>
+<p>Editors Guidelines:</p>
+<ul class="simple">
+<li>used to edit or browse primary content</li>
+<li>open-save-close lifecycle, * indicates save is needed</li>
+<li>cannot open the same editor twice, within a perspective</li>
+<li>labeled with name of content</li>
+<li>drag out multiple tabs if you have to</li>
+<li>hook into any global commands you can: cut, copy, paste, delete etc ...</li>
+<li>toolbar contains the most common items from the view menu</li>
+<li>context menu is based on current selection</li>
+<li>contenxt menu contents set by selection type, enabled/distable by selection state</li>
+<li>support extention of context menu with MB_ADDITIONS and IActionFilter</li>
+<li>use outline view if contents will not fit on screen</li>
+<li>table cell editors should work with single click, and commited when user clicks away. Enter
+commit, Esc cancels</li>
+</ul>
+<p>Views Guidelines:</p>
+<ul class="simple">
+<li>use view to navigate information, open editor or display properties of an object</li>
+<li>direct manipulation workflow</li>
+<li>only one view per perspective, can be opened by several perspectives though</li>
+<li>only commonly used commands on the toolbar, command must also be in a menu</li>
+<li>view pulldown menu for presentation commands, in standard order</li>
+<li>conext menu is for selection actions, in standard order, registered with the platform</li>
+<li>context menu fixed set of commands by selection type, enabled/disabled based on selection state</li>
+<li>an object appearing in more then one view should have the same context menu in each</li>
+<li>support extention of context menu with MB_ADDITIONS and IActionFilter</li>
+<li>hook into global commands like cut, copy, paste, delete</li>
+<li>persist view state between sesssions</li>
+<li>navigation views should have a &#8220;link&#8221; button</li>
+</ul>
+<p>uDig will occasionally use an apply-canel workflow for a view. When used in this fashion the apply,
+cancel buttons are the last entries in the local toolbar. The view toolbar may also support a &#8220;link&#8221;
+button, allowing the option of direct manipulation (if the user can stand the delay). A view used in
+this fashion will apply any modifications when selection changes.</p>
+<p>Perspectives Guidelines:</p>
+<ul class="simple">
+<li>create perspectives for long lived tasks</li>
+<li>consider the workflow and view layout, menu bars, etc ...</li>
+<li>only open the perspective if the user agrees, this is a massive context switch for them</li>
+<li>limit the &#8220;shortcuts&#8221; in the New, Open Perspective and Show View menus to around 7</li>
+</ul>
+<p>Windows Guidelines</p>
+<ul class="simple">
+<li>contribute ActionSets to the menu first, and then to the toolbar for frequent use</li>
+<li>each ActionSet should have a specific task in mind, ie &#8220;zoom&#8221; vs &#8220;edit&#8221;</li>
+<li>Be small, be many - an Action Set allows sharing between views and editors, you can&#8217;t share if
+you have only one ActionSet for an entire plugin</li>
+<li>let user control visible ActionSets</li>
+<li>&#8220;Open&#8221; actions must appear in the Navigate pulldown menu of the window</li>
+<li>Use the global status bar</li>
+</ul>
+<p>Properties Guidelines</p>
+<ul class="simple">
+<li>Use Properties view for quick easy changes, switching between local objects</li>
+<li>Use Properties Dialog to edit a remote or complex object</li>
+<li>Properties Dialog contains superset of items from the Properties view</li>
+</ul>
+<p>Widgets Guidelines</p>
+<ul class="simple">
+<li>Tree and Table widgets should ne careful when working with a checkbox; changing selection should
+not accidently change the check state</li>
+</ul>
+</div>
+<div class="section" id="standard-components-guidelines">
+<h2>Standard Components Guidelines<a class="headerlink" href="#standard-components-guidelines" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>you can hack the standard components, if you subclass or copy be sure to keep the same
+characteristics</li>
+<li>We can&#8217;t use the Navigator View or Tasks View in a RCP application</li>
+</ul>
+<p>Preference Dialog</p>
+<ul class="simple">
+<li>is used for global options</li>
+<li>expose preferences for a view, editor or windows via a menu or toolbar</li>
+<li>start with a single preference page</li>
+<li>If needed a preference group should start with wide spread effects and specialize in sub pages</li>
+<li>try and slot into existing categories</li>
+</ul>
+<p>Flat Look Design</p>
+<ul class="simple">
+<li>Use the flat look design for extensive property and configuration editing</li>
+<li>Have the core selections on the overview page expanded, other pages provide a Home icon to return
+to the overview</li>
+<li>Have your tree in the outline corraspond to the tabs of your content editor</li>
+</ul>
+<p>Tao of Resource</p>
+<ul class="simple">
+<li>If your object is equivalent to a IGeoReference use an adapater to let others play</li>
+<li>A layer should behave and look the same everywhere (ie. catalog, seach, layer view)</li>
+</ul>
+<p>Accessibility Guidelines</p>
+<ul class="simple">
+<li>All of the features provided by a tool should be accessible using a mouse or the keyboard.</li>
+</ul>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="eclipse_house_rules.html">Eclipse House Rules</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="naming_conventions.html">Naming Conventions</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2015, Refractions Research and others.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,147 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Bundle a JAR up as a Plugin &mdash; uDig 1.5.0 Developers Guide</title>
+    
+    <link rel="stylesheet" href="_static/udig.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.5.0.RC1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/udig.ico"/>
+    <link rel="top" title="uDig 1.5.0 Developers Guide" href="index.html" />
+    <link rel="up" title="Working with Eclipse RCP" href="working_with_eclipse_rcp.html" />
+    <link rel="next" title="How to turn stuff off" href="how_to_turn_stuff_off.html" />
+    <link rel="prev" title="Testing Plugins" href="testing_plugins.html" /> 
+  </head>
+  <body>
+      <div class="header">
+        <div class="wrap">
+            <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
+            <ul id="top-nav">
+                <li class="first">
+                  <a href="http://udig.refractions.net">uDig Home</a>
+                </li>
+                <li>
+                   <a href="http://udig.refractions.net/download">Downloads</a>
+                </li>
+                <li>
+                   <a href="http://udig-news.blogspot.com">Blog</a>
+                </li>
+            </ul>
+       </div>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="testing_plugins.html">Testing Plugins</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="how_to_turn_stuff_off.html">How to turn stuff off</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="bundle-a-jar-up-as-a-plugin">
+<h1>Bundle a JAR up as a Plugin<a class="headerlink" href="#bundle-a-jar-up-as-a-plugin" title="Permalink to this headline">¶</a></h1>
+<p>To bundle up an existing jar (say a jdbc driver or some java utility class you want to use):</p>
+<ol class="arabic">
+<li><p class="first">Choose File &gt; New &gt; Other from the menu bar to open the New Wizard</p>
+</li>
+<li><p class="first">Choose Plug-in Development &gt; Plug-in from existing JAR archive. And then press Next.</p>
+</li>
+<li><p class="first">Press Add External button and locate your jar. And then press Next.</p>
+</li>
+<li><p class="first">Fill in some description details about this new plugin:</p>
+<ul class="simple">
+<li>name: make up a name based on the project; this usually matches the package structure of the
+project (which is based on the reverse of the domain name).</li>
+<li>version: fill in the correct version; you will end up changing this version as new copies of
+your jar are made available; having the version information in your plugin manifest will allow
+OSGi to make sure you have the version you expect</li>
+<li>Unzip the JAR archives into the project: I always uncheck this one (and leave the raw jar file
+in there); if you want you can let eclipse unzip your jar but I have not tried it yet</li>
+</ul>
+</li>
+<li><dl class="first docutils">
+<dt>Press Finish; this will create the new plug-in and open the MANIFEST.MF editor</dt>
+<dd><p class="first last"><img alt="image0" src="_images/jar.png" /></p>
+</dd>
+</dl>
+</li>
+</ol>
+<p>The MANIFEST.MF runtime tab (shown above for the javacvs.jar) has three sections:</p>
+<ul class="simple">
+<li>Exported Packages: these are based on the packages available in your jar (you can choose which
+ones others are allowed to see). You cannot really fill this in until your .classpath (ie the
+java build environment) is set up correctly</li>
+<li>Classpath: this lists the jars that are exported out in the .classpath. As you change this list
+your .classpath is recreated (and eclipse will compile for a bit). When it is set up correctly
+you can choose which packages to export.</li>
+</ul>
+<p>There are a couple PDE wizards available to manage this stuff (if you right click on your project)</p>
+<ul class="simple">
+<li>update classpath: uses all the MANIFEST.MF stuff to generate a new .classpath (use this if you
+have compile errors or java build path problems)</li>
+<li>organize manifest: will automatically update the list of exported packages; use this if you
+cannot &#8220;see&#8221; a class you expect to be able to see</li>
+</ul>
+<div class="section" id="conflicting-with-other-plugin-systems">
+<h2>Conflicting with Other Plugin Systems<a class="headerlink" href="#conflicting-with-other-plugin-systems" title="Permalink to this headline">¶</a></h2>
+<p>The OSGi plugin system is based around the concept of bundles and is pretty strict. When making use
+of other Java projects you may need to go jump through some hoops to get them to work.</p>
+<ul class="simple">
+<li>Java projects using the Service Provider Interface(SPI) plugin system (like the geotools project)
+depend on the ability to see the manifest/services folder; something the OSGi classloader does
+not let them do (since it is not in the list of exported packages!). As such you may need to
+unpack these jars; or place them all into a single folder</li>
+<li>Spring projects using the Spring Plugin System depend on you setting up a context that wires up
+all the Java Beans being used. Many of the traditional tricks that ask Spring to look for
+implementations of a specific interface on the classpath are going to fail in an OSGi managed
+environment - the good news is you can still do it by hand; and that the Spring project is
+looking at OSGi integration in the future</li>
+</ul>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="testing_plugins.html">Testing Plugins</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="how_to_turn_stuff_off.html">How to turn stuff off</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2015, Refractions Research and others.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
