@@ -7,7 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Operation Examples &mdash; uDig 1.5.0 Developers Guide</title>
+    <title>Operation Examples &mdash; uDig 2.0.0.RC1 Developers Guide</title>
     
     <link rel="stylesheet" href="_static/udig.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '1.5.0.RC1',
+        VERSION:     '2.0.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  false
@@ -27,7 +27,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/theme_extras.js"></script>
     <link rel="shortcut icon" href="_static/udig.ico"/>
-    <link rel="top" title="uDig 1.5.0 Developers Guide" href="index.html" />
+    <link rel="top" title="uDig 2.0.0.RC1 Developers Guide" href="index.html" />
     <link rel="up" title="Working with GIS Application" href="working_with_gis_application.html" />
     <link rel="next" title="Renderers" href="renderers.html" />
     <link rel="prev" title="Edit Tools" href="edit_tools.html" /> 
@@ -141,7 +141,7 @@ Snippets for an example.</p>
 <p><strong>Example where target is a single IMap</strong></p>
 <p>The follow example declares an operation that is enabled when the selection is a <em>single</em> IMap
 object. This operation would be enabled in the MapEditor and the Project Explorer.</p>
-<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;operation</span> <span class="na">categoryId=</span><span class="s">&quot;org.locationtech.udig.project.ui.informationOperations&quot;</span>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="nt">&lt;operation</span> <span class="na">categoryId=</span><span class="s">&quot;org.locationtech.udig.project.ui.informationOperations&quot;</span>
     <span class="na">class=</span><span class="s">&quot;org.locationtech.udig.project.ui.operations.example.FeaturesInView&quot;</span>
     <span class="na">enablesFor=</span><span class="s">&quot;1&quot;</span>
     <span class="na">id=</span><span class="s">&quot;org.locationtech.udig.project.ui.featuresInView&quot;</span>
@@ -150,7 +150,7 @@ object. This operation would be enabled in the MapEditor and the Project Explore
 </pre></div>
 </div>
 <p><strong>FeaturesInView.java</strong></p>
-<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kt">void</span> <span class="nf">op</span><span class="o">(</span> <span class="kd">final</span> <span class="n">Display</span> <span class="n">display</span><span class="o">,</span> <span class="n">Object</span> <span class="n">target</span><span class="o">,</span> <span class="n">IProgressMonitor</span> <span class="n">monitor</span> <span class="o">)</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kt">void</span> <span class="nf">op</span><span class="o">(</span> <span class="kd">final</span> <span class="n">Display</span> <span class="n">display</span><span class="o">,</span> <span class="n">Object</span> <span class="n">target</span><span class="o">,</span> <span class="n">IProgressMonitor</span> <span class="n">monitor</span> <span class="o">)</span>
             <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
     <span class="n">IMap</span> <span class="n">map</span> <span class="o">=</span> <span class="o">(</span><span class="n">IMap</span><span class="o">)</span> <span class="n">target</span><span class="o">;</span>
 
@@ -162,7 +162,7 @@ object. This operation would be enabled in the MapEditor and the Project Explore
 <p>The following example would be enabled when exactly 2 ILayers are selected. No more and no less.
 The standard views where this operation could be enabled in are the Layers View and Project
 Explorer.</p>
-<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;operation</span>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="nt">&lt;operation</span>
             <span class="na">class=</span><span class="s">&quot;org.locationtech.udig.tool.edit.DifferenceOp&quot;</span>
             <span class="na">enablesFor=</span><span class="s">&quot;2&quot;</span>
             <span class="na">id=</span><span class="s">&quot;org.locationtech.udig.tool.edit.difference&quot;</span>
@@ -171,7 +171,7 @@ Explorer.</p>
 </pre></div>
 </div>
 <p><strong>DifferenceOp.java</strong></p>
-<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kt">void</span> <span class="nf">op</span><span class="o">(</span> <span class="kd">final</span> <span class="n">Display</span> <span class="n">display</span><span class="o">,</span> <span class="n">Object</span> <span class="n">target</span><span class="o">,</span> <span class="n">IProgressMonitor</span> <span class="n">monitor</span> <span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kt">void</span> <span class="nf">op</span><span class="o">(</span> <span class="kd">final</span> <span class="n">Display</span> <span class="n">display</span><span class="o">,</span> <span class="n">Object</span> <span class="n">target</span><span class="o">,</span> <span class="n">IProgressMonitor</span> <span class="n">monitor</span> <span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
         <span class="kd">final</span> <span class="n">ILayer</span><span class="o">[]</span> <span class="n">layers</span><span class="o">=(</span><span class="n">ILayer</span><span class="o">[])</span> <span class="n">target</span><span class="o">;</span>
 <span class="c1">// ... some work</span>
 <span class="o">}</span>
@@ -183,7 +183,7 @@ consists of a single IService that can adapt (resolve in the case of IService) t
 object. The difference between this example and simply having the target as a DataStore is that the
 object that is passed in is a IService and not a DataStore. Obviously the functionality of IService
 is required and not the functionality of a DataStore.</p>
-<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;operation</span>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="nt">&lt;operation</span>
      <span class="na">categoryId=</span><span class="s">&quot;org.locationtech.udig.ui.edit&quot;</span>
           <span class="na">class=</span><span class="s">&quot;org.locationtech.udig.catalog.internal.ui.ops.NewFeatureTypeOp&quot;</span>
            <span class="na">enablesFor=</span><span class="s">&quot;1&quot;</span>
@@ -200,7 +200,7 @@ is required and not the functionality of a DataStore.</p>
 DataStore, it is known because the operation is not enabled if the service cannot resolve to a
 DataStore.</p>
 <p><strong>NewFeatureTypeOp.java</strong></p>
-<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kt">void</span> <span class="nf">op</span><span class="o">(</span> <span class="kd">final</span> <span class="n">Display</span> <span class="n">display</span><span class="o">,</span> <span class="kd">final</span> <span class="n">Object</span> <span class="n">target</span><span class="o">,</span> <span class="kd">final</span> <span class="n">IProgressMonitor</span> <span class="n">monitor</span> <span class="o">)</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kt">void</span> <span class="nf">op</span><span class="o">(</span> <span class="kd">final</span> <span class="n">Display</span> <span class="n">display</span><span class="o">,</span> <span class="kd">final</span> <span class="n">Object</span> <span class="n">target</span><span class="o">,</span> <span class="kd">final</span> <span class="n">IProgressMonitor</span> <span class="n">monitor</span> <span class="o">)</span>
             <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
         <span class="n">IService</span> <span class="n">service</span> <span class="o">=</span> <span class="o">(</span><span class="n">IService</span><span class="o">)</span> <span class="n">target</span><span class="o">;</span>
         <span class="n">DataStore</span> <span class="n">ds</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="na">resolve</span><span class="o">(</span><span class="n">DataStore</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">monitor</span><span class="o">);</span>
@@ -213,7 +213,7 @@ DataStore.</p>
 <h2>Layer Summary Operation<a class="headerlink" href="#layer-summary-operation" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="plugin-xml-extension-declaration">
 <h3>Plugin.xml extension declaration<a class="headerlink" href="#plugin-xml-extension-declaration" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;extension</span>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="nt">&lt;extension</span>
    <span class="na">point=</span><span class="s">&quot;org.locationtech.udig.ui.operation&quot;</span><span class="nt">&gt;</span>
    <span class="nt">&lt;operation</span>
       <span class="na">targetClass=</span><span class="s">&quot;org.locationtech.udig.project.ILayer&quot;</span>
@@ -238,7 +238,7 @@ in the category the category will appear in all the Operations menus.</p>
 <div class="section" id="layer-summary-class">
 <h3>Layer Summary Class<a class="headerlink" href="#layer-summary-class" title="Permalink to this headline">¶</a></h3>
 <p><strong>LayerSummary.java</strong></p>
-<div class="highlight-java"><div class="highlight"><pre><span class="cm">/**</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * Displays a summary of the layer in a dialog.</span>
 <span class="cm"> *</span>
 <span class="cm"> * @author jeichar</span>
@@ -297,7 +297,7 @@ operation to provide feedback to the UI on how much of the operation has been co
       </div>
 
     <div class="footer">
-        &copy; Copyright 2015, Refractions Research and others.
+        &copy; Copyright 2013, Refractions Research and others.
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
     </div>
   </body>

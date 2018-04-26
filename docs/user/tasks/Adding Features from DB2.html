@@ -7,7 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Adding Features from DB2 &mdash; uDig 1.5.0 User Guide</title>
+    <title>Adding Features from DB2 &mdash; uDig 2.0.0.RC1 User Guide</title>
     
     <link rel="stylesheet" href="../_static/udig.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '1.5.0.RC1',
+        VERSION:     '2.0.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  false
@@ -27,7 +27,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/theme_extras.js"></script>
     <link rel="shortcut icon" href="../_static/udig.ico"/>
-    <link rel="top" title="uDig 1.5.0 User Guide" href="../index.html" />
+    <link rel="top" title="uDig 2.0.0.RC1 User Guide" href="../index.html" />
     <link rel="up" title="Using the Catalog" href="Using the Catalog.html" />
     <link rel="next" title="Adding features from Oracle" href="Adding features from Oracle.html" />
     <link rel="prev" title="Adding features from ArcSDE" href="Adding features from ArcSDE.html" /> 
@@ -65,64 +65,25 @@
         
   <div class="section" id="adding-features-from-db2">
 <h1>Adding Features from DB2<a class="headerlink" href="#adding-features-from-db2" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="adding-features-from-a-db2">
-<h2>Adding Features from a DB2<a class="headerlink" href="#adding-features-from-a-db2" title="Permalink to this headline">¶</a></h2>
-<p>There are a number of options for adding a layer to your map.</p>
-<div class="section" id="toolbar">
-<h3>Toolbar<a class="headerlink" href="#toolbar" title="Permalink to this headline">¶</a></h3>
+<p>There are a number of options for adding a DB2 layer to your map.</p>
 <ol class="arabic simple">
-<li>Press the <strong>New</strong> button on the toolbar to show the Add Layer Wizard</li>
-<li>Select the <strong>Add</strong> item from the <strong>Layer</strong> menu to show the Add Layer Wizard.</li>
-<li>Use the <strong>Add Layer</strong> wizard to select a service providing data</li>
-<li>Select the resource you wish to display</li>
-<li>A style will be automatically created for you and the layer added to your map</li>
+<li>Open the Add Data dialog with one of the following:</li>
 </ol>
-</div>
-<div class="section" id="menu">
-<h3>Menu<a class="headerlink" href="#menu" title="Permalink to this headline">¶</a></h3>
-<p>Using <strong>Layer</strong> menu:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Press the <strong>New</strong> button on the toolbar</li>
+<li>Select <strong>Add</strong> item from the <strong>Layer</strong> menu</li>
+<li>Select <em class="menuselection">New ‣ Layer</em> from the <strong>File</strong> menu</li>
+</ul>
+</div></blockquote>
 <ol class="arabic simple">
-<li>Select the <strong>Add</strong> item from the <strong>Layer</strong> menu to show the Add Layer Wizard.</li>
-<li>Use the <strong>Add Layer</strong> wizard to select a service providing data</li>
-<li>Select the resource you wish to display</li>
-<li>A style will be automatically created for you and the layer added to your map</li>
-</ol>
-<p>Using <strong>File</strong> menu:</p>
-<ol class="arabic simple">
-<li>Select the <em class="menuselection">File ‣ New ‣ Layer</em> from the file menu</li>
-<li>Use the <strong>Add Layer</strong> wizard to select a service providing data</li>
-<li>Select the resource you wish to display</li>
-<li>A style will be automatically created for you and the layer added to your map</li>
-</ol>
-</div>
-<div class="section" id="using-filesystem">
-<h3>Using Filesystem<a class="headerlink" href="#using-filesystem" title="Permalink to this headline">¶</a></h3>
-<p>From filesystem to <strong>Layer View</strong>:</p>
-<ol class="arabic simple">
-<li>You can directly drag a file (such as an image or shapefile) into the <strong>Layer view</strong></li>
-<li>You can specify exactly where in the Layer view you wish the add the Layer</li>
-<li>The layer will be created with a default style and added to your Map</li>
-</ol>
-<p>From filesystem to <strong>Map editor</strong>:</p>
-<ol class="arabic simple">
-<li>You can directly drag a file (such as an image or shapefile) onto an open map</li>
-<li>The layer will be created with a default style and added to your Map</li>
-</ol>
-</div>
-<div class="section" id="using-a-browser">
-<h3>Using a Browser<a class="headerlink" href="#using-a-browser" title="Permalink to this headline">¶</a></h3>
-<p>You can quickly add a layer from a web browser (or the embedded <strong>Web view</strong>):</p>
-<ol class="arabic simple">
-<li>Drag the URL of a WMS or WFS into the <strong>Layer view</strong></li>
-<li>You can specify exactly where in the Layer view you wish to add the Layer</li>
-<li>The resource selection page will open up to allow you to choose which layers to add</li>
-<li>The layer(s) will be created (with a default style) and added to your map</li>
 <li>If you have not set your DB2 preference (<em class="menuselection">Window ‣ Preferences...</em>) then
 you will have the chance to do so now. See <a class="reference internal" href="../reference/Catalog Preferences.html#preferences-page-catalog-db2"><em>DB2 Preferences</em></a> for instructions on how to do this</li>
 <li>Select DB2 from the Wizard and press <strong>Next</strong></li>
 <li>Fill in the DB2 page<ul>
-<li>Enter your DB2 host and authentication parameters</li>
-<li>Select the database connect and optionally a schema</li>
+<li>Enter your DB2 host, authentication parameters and database name</li>
+<li>Press the <strong>Get schemas</strong> button to populate the schema drop-down list</li>
+<li>Select a schema from the drop-down list</li>
 </ul>
 </li>
 <li>Press <strong>Next</strong></li>
@@ -131,12 +92,10 @@ will compose the new map</li>
 <li>Press <strong>Finish</strong></li>
 </ol>
 <p>The selected DB2 tables will be added to the Catalog and a new map containing selected Layers will
-show up.</p>
+be displayed.</p>
 <p><strong>Related reference</strong></p>
 <p><a class="reference internal" href="../reference/DB2 page.html"><em>DB2 page</em></a></p>
 <p><a class="reference internal" href="../reference/Catalog Preferences.html#preferences-page-catalog-db2"><em>DB2 Preferences</em></a></p>
-</div>
-</div>
 </div>
 
 
@@ -154,7 +113,7 @@ show up.</p>
       </div>
 
     <div class="footer">
-        &copy; Copyright 2015, Refractions Research and others.
+        &copy; Copyright 2013, Refractions Research and others.
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
     </div>
   </body>

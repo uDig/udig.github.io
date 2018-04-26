@@ -7,7 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Menus using Actions and ActionSets &mdash; uDig 1.5.0 Developers Guide</title>
+    <title>Menus using Actions and ActionSets &mdash; uDig 2.0.0.RC1 Developers Guide</title>
     
     <link rel="stylesheet" href="_static/udig.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '1.5.0.RC1',
+        VERSION:     '2.0.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  false
@@ -27,7 +27,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/theme_extras.js"></script>
     <link rel="shortcut icon" href="_static/udig.ico"/>
-    <link rel="top" title="uDig 1.5.0 Developers Guide" href="index.html" />
+    <link rel="top" title="uDig 2.0.0.RC1 Developers Guide" href="index.html" />
     <link rel="up" title="Working with Eclipse RCP" href="working_with_eclipse_rcp.html" />
     <link rel="next" title="Menus using Commands and Handlers" href="menus_using_commands_and_handlers.html" />
     <link rel="prev" title="Using UDIGApplication" href="using_udigapplication.html" /> 
@@ -157,7 +157,7 @@ usual IWorkbenchActionConstants.</p>
 </div>
 <div class="section" id="adding-an-iaction-using-an-actionbaradvisor">
 <h2>Adding an IAction using an ActionBarAdvisor<a class="headerlink" href="#adding-an-iaction-using-an-actionbaradvisor" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">IMenuManager</span> <span class="n">fileMenu</span> <span class="o">=</span> <span class="n">menuBar</span><span class="o">.</span><span class="na">findMenuUsingPath</span><span class="o">(</span><span class="n">IWorkbenchActionConstants</span><span class="o">.</span><span class="na">M_FILE</span><span class="o">);</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">IMenuManager</span> <span class="n">fileMenu</span> <span class="o">=</span> <span class="n">menuBar</span><span class="o">.</span><span class="na">findMenuUsingPath</span><span class="o">(</span><span class="n">IWorkbenchActionConstants</span><span class="o">.</span><span class="na">M_FILE</span><span class="o">);</span>
 
 <span class="n">IAction</span> <span class="n">exit</span> <span class="o">=</span> <span class="n">ActionFactory</span><span class="o">.</span><span class="na">QUIT</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">window</span><span class="o">);</span>
 <span class="n">fileMenu</span><span class="o">.</span><span class="na">insertAfter</span><span class="o">(</span><span class="n">Constants</span><span class="o">.</span><span class="na">FILE_END</span><span class="o">,</span> <span class="n">exit</span><span class="o">);</span>
@@ -247,7 +247,7 @@ perspectives.</p>
 <p>Additions comes from the <strong>UDIGWorkbenchAdvisor</strong>, or similar class provided by your Custom
 application.</p>
 <p>Here is an example from UDIGWorkbenchAdvisor:</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="kd">private</span> <span class="kt">void</span> <span class="nf">fillMenuBar</span><span class="o">(</span> <span class="n">IWorkbenchWindow</span> <span class="n">window</span><span class="o">,</span> <span class="n">IActionBarConfigurer</span> <span class="n">configurer</span> <span class="o">)</span> <span class="o">{</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="kd">private</span> <span class="kt">void</span> <span class="nf">fillMenuBar</span><span class="o">(</span> <span class="n">IWorkbenchWindow</span> <span class="n">window</span><span class="o">,</span> <span class="n">IActionBarConfigurer</span> <span class="n">configurer</span> <span class="o">)</span> <span class="o">{</span>
         <span class="n">IMenuManager</span> <span class="n">menuBar</span> <span class="o">=</span> <span class="n">configurer</span><span class="o">.</span><span class="na">getMenuManager</span><span class="o">();</span>
         <span class="n">menuBar</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">createFileMenu</span><span class="o">(</span><span class="n">window</span><span class="o">));</span>
         <span class="n">menuBar</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">createEditMenu</span><span class="o">(</span><span class="n">window</span><span class="o">));</span>
@@ -264,7 +264,7 @@ application.</p>
 <p>You can see that IWorkbenchActionConstants.MB_ADDITIONS is placed between the Tool menu and the
 Window menu.</p>
 <p>The same strategy can be used to find out where the group markers are in other menus:</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="kd">private</span> <span class="n">MenuManager</span> <span class="nf">createLayerMenu</span><span class="o">()</span> <span class="o">{</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="kd">private</span> <span class="n">MenuManager</span> <span class="nf">createLayerMenu</span><span class="o">()</span> <span class="o">{</span>
         <span class="n">MenuManager</span> <span class="n">menu</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MenuManager</span><span class="o">(</span><span class="n">Policy</span><span class="o">.</span><span class="na">bind</span><span class="o">(</span><span class="s">&quot;UDIGWorkbenchAdvisor.layerMenu&quot;</span><span class="o">),</span> <span class="s">&quot;layer&quot;</span><span class="o">);</span>
         <span class="n">menu</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">GroupMarker</span><span class="o">(</span><span class="s">&quot;add.ext&quot;</span><span class="o">));</span> <span class="c1">//$NON-NLS-1$</span>
         <span class="n">menu</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Separator</span><span class="o">());</span>
@@ -303,7 +303,7 @@ or before <strong>Exit</strong> in the file menu, or at the end of the menu most
       </div>
 
     <div class="footer">
-        &copy; Copyright 2015, Refractions Research and others.
+        &copy; Copyright 2013, Refractions Research and others.
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
     </div>
   </body>

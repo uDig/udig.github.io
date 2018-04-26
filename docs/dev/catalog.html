@@ -7,7 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Catalog &mdash; uDig 1.5.0 Developers Guide</title>
+    <title>Catalog &mdash; uDig 2.0.0.RC1 Developers Guide</title>
     
     <link rel="stylesheet" href="_static/udig.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '1.5.0.RC1',
+        VERSION:     '2.0.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  false
@@ -27,7 +27,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/theme_extras.js"></script>
     <link rel="shortcut icon" href="_static/udig.ico"/>
-    <link rel="top" title="uDig 1.5.0 Developers Guide" href="index.html" />
+    <link rel="top" title="uDig 2.0.0.RC1 Developers Guide" href="index.html" />
     <link rel="up" title="Working with the GIS Platform" href="working_with_the_gis_platform.html" />
     <link rel="next" title="Catalog Notifications" href="catalog_notifications.html" />
     <link rel="prev" title="GIS Platform" href="gis_platform.html" /> 
@@ -89,27 +89,27 @@ content.</p>
 <img alt="" src="_images/CatalogPlugin.PNG" />
 </div>
 <p>You can retrieve the single instance of CatalogPlugin using getDefault():</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">CatalogPlugin</span> <span class="n">activator</span> <span class="o">=</span> <span class="n">CatalogPlugin</span><span class="o">.</span><span class="na">getDefault</span><span class="o">();</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">CatalogPlugin</span> <span class="n">activator</span> <span class="o">=</span> <span class="n">CatalogPlugin</span><span class="o">.</span><span class="na">getDefault</span><span class="o">();</span>
 </pre></div>
 </div>
 <p>You can add a listener to watch for catalog events:</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">CatalogPlugin</span><span class="o">.</span><span class="na">getDefault</span><span class="o">().</span><span class="na">addListener</span><span class="o">(</span> <span class="n">listener</span> <span class="o">);</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">CatalogPlugin</span><span class="o">.</span><span class="na">getDefault</span><span class="o">().</span><span class="na">addListener</span><span class="o">(</span> <span class="n">listener</span> <span class="o">);</span>
 <span class="n">CatalogPlugin</span><span class="o">.</span><span class="na">getDefault</span><span class="o">().</span><span class="na">removeListener</span><span class="o">(</span> <span class="n">listener</span> <span class="o">);</span>
 </pre></div>
 </div>
 <p>For more information please check out the next section on <a class="reference internal" href="catalog_notifications.html"><em>Catalog Notifications</em></a>.</p>
 <p>The CatalogPlugin keeps a list of known catalogs, including the local catalog and remote web
 catalogs.</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">CatalogPlugin</span><span class="o">.</span><span class="na">getDefault</span><span class="o">().</span><span class="na">getCatalogs</span><span class="o">();</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">CatalogPlugin</span><span class="o">.</span><span class="na">getDefault</span><span class="o">().</span><span class="na">getCatalogs</span><span class="o">();</span>
 </pre></div>
 </div>
 <p>Most of the time you will spend interacting with the LocalCatalog manage live connections to
 services:</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">IRepository</span> <span class="n">local</span> <span class="o">=</span> <span class="n">CatalogPlugin</span><span class="o">.</span><span class="na">getDefault</span><span class="o">().</span><span class="na">getLocal</span><span class="o">();</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">IRepository</span> <span class="n">local</span> <span class="o">=</span> <span class="n">CatalogPlugin</span><span class="o">.</span><span class="na">getDefault</span><span class="o">().</span><span class="na">getLocal</span><span class="o">();</span>
 </pre></div>
 </div>
 <p>There is also a service factory used to create services to add to the local catalog:</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">IServiceFactory</span> <span class="n">serviceFactory</span> <span class="o">=</span> <span class="n">CatalogPlugin</span><span class="o">.</span><span class="na">getDefault</span><span class="o">().</span><span class="na">getServiceFactory</span><span class="o">();</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">IServiceFactory</span> <span class="n">serviceFactory</span> <span class="o">=</span> <span class="n">CatalogPlugin</span><span class="o">.</span><span class="na">getDefault</span><span class="o">().</span><span class="na">getServiceFactory</span><span class="o">();</span>
 <span class="n">List</span><span class="o">&lt;</span><span class="n">IService</span><span class="o">&gt;</span> <span class="n">created</span> <span class="o">=</span> <span class="n">serviceFactory</span><span class="o">.</span><span class="na">createService</span><span class="o">(</span> <span class="n">file</span><span class="o">.</span><span class="na">toURL</span><span class="o">()</span> <span class="o">);</span>
 </pre></div>
 </div>
@@ -123,11 +123,11 @@ such it extends AbstractUIPlugin for the following.</p>
 </ul>
 <p>By convention all Plugins contain a static ID field used to identify the plug-in OSGi bundle, or
 Platform methods.</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">Bundle</span> <span class="n">bundle</span> <span class="o">=</span> <span class="n">Platform</span><span class="o">.</span><span class="na">getBundle</span><span class="o">(</span> <span class="n">CatalogPlugin</span><span class="o">.</span><span class="na">ID</span> <span class="o">);</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">Bundle</span> <span class="n">bundle</span> <span class="o">=</span> <span class="n">Platform</span><span class="o">.</span><span class="na">getBundle</span><span class="o">(</span> <span class="n">CatalogPlugin</span><span class="o">.</span><span class="na">ID</span> <span class="o">);</span>
 </pre></div>
 </div>
 <p>The ID is also useful when reporting problems:</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">IStatus</span> <span class="n">status</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Status</span><span class="o">(</span><span class="n">IStatus</span><span class="o">.</span><span class="na">ERROR</span><span class="o">,</span> <span class="n">CatalogPlugin</span><span class="o">.</span><span class="na">ID</span><span class="o">,</span> <span class="s">&quot;error message&quot;</span><span class="o">);</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">IStatus</span> <span class="n">status</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Status</span><span class="o">(</span><span class="n">IStatus</span><span class="o">.</span><span class="na">ERROR</span><span class="o">,</span> <span class="n">CatalogPlugin</span><span class="o">.</span><span class="na">ID</span><span class="o">,</span> <span class="s">&quot;error message&quot;</span><span class="o">);</span>
 <span class="n">CatalogPlugin</span><span class="o">.</span><span class="na">getDefault</span><span class="o">().</span><span class="na">getLog</span><span class="o">().</span><span class="na">log</span><span class="o">(</span> <span class="n">status</span> <span class="o">);</span>
 </pre></div>
 </div>
@@ -149,7 +149,7 @@ may be available from a number of sources. Having a range of alternatives availa
 world where external servers are sometimes down for maintenance.</p>
 <p>The CatalogPlugin keeps track of all the catalogs (local and remote) that can be used to find
 spatial content.</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">List</span><span class="o">&lt;</span><span class="n">IResolve</span><span class="o">&gt;</span> <span class="n">found</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">IResolve</span><span class="o">&gt;();</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">List</span><span class="o">&lt;</span><span class="n">IResolve</span><span class="o">&gt;</span> <span class="n">found</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">IResolve</span><span class="o">&gt;();</span>
 <span class="k">for</span><span class="o">(</span> <span class="n">ISearch</span> <span class="n">search</span> <span class="o">:</span> <span class="n">CatalogPlugin</span><span class="o">.</span><span class="na">getDefault</span><span class="o">().</span><span class="na">getCatalogs</span><span class="o">()</span> <span class="o">){</span>
     <span class="k">try</span> <span class="o">{</span>
        <span class="n">found</span><span class="o">.</span><span class="na">addAll</span><span class="o">(</span> <span class="n">search</span><span class="o">.</span><span class="na">search</span><span class="o">(</span> <span class="n">pattern</span><span class="o">,</span> <span class="n">bbox</span><span class="o">,</span> <span class="n">process</span> <span class="o">)</span> <span class="o">);</span>
@@ -210,19 +210,19 @@ your databases, external services and local files. The local catalog is used to 
 data connections; even if you find information in a remote catalog, it will be added to the local
 catalog as you start to use it.</p>
 <p>To find an existing service in the catalog:</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">IRepository</span> <span class="n">local</span> <span class="o">=</span> <span class="n">CatalogPlugin</span><span class="o">.</span><span class="na">getDefault</span><span class="o">().</span><span class="na">getLocalCatalog</span><span class="o">();</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">IRepository</span> <span class="n">local</span> <span class="o">=</span> <span class="n">CatalogPlugin</span><span class="o">.</span><span class="na">getDefault</span><span class="o">().</span><span class="na">getLocalCatalog</span><span class="o">();</span>
 <span class="n">IService</span> <span class="n">shapefile</span> <span class="o">=</span> <span class="n">local</span><span class="o">.</span><span class="na">getById</span><span class="o">(</span> <span class="n">IService</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">url</span><span class="o">,</span> <span class="n">progressmonitor</span> <span class="o">);</span>
 </pre></div>
 </div>
 <p>To find an existing georesource in the catalog:</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">ICatalog</span> <span class="n">local</span> <span class="o">=</span> <span class="n">CatalogPlugin</span><span class="o">.</span><span class="na">getDefault</span><span class="o">().</span><span class="na">getLocalCatalog</span><span class="o">();</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">ICatalog</span> <span class="n">local</span> <span class="o">=</span> <span class="n">CatalogPlugin</span><span class="o">.</span><span class="na">getDefault</span><span class="o">().</span><span class="na">getLocalCatalog</span><span class="o">();</span>
 <span class="n">IGeoResource</span> <span class="n">shapefile</span> <span class="o">=</span> <span class="n">local</span><span class="o">.</span><span class="na">getById</span><span class="o">(</span> <span class="n">IGeoResource</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">url</span><span class="o">,</span> <span class="n">progressmonitor</span> <span class="o">);</span>
 </pre></div>
 </div>
 <p>To add a service to the catalog we need to use the ServiceFactory to create the IService; and then
 ICatalog.add( service ) to place each service into the catalog.</p>
 <p>To use ServiceFactory to connect to a service based on a simple URL.</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">File</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span> <span class="s">&quot;C:\data\cities.shp&quot;</span> <span class="o">);</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span> <span class="s">&quot;C:\data\cities.shp&quot;</span> <span class="o">);</span>
 <span class="n">URL</span> <span class="n">url</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="na">toURL</span><span class="o">();</span>
 
 <span class="n">IServiceFactory</span> <span class="n">serviceFactory</span> <span class="o">=</span> <span class="n">CatalogPlugin</span><span class="o">.</span><span class="na">getDefault</span><span class="o">().</span><span class="na">getServiceFactory</span><span class="o">();</span>
@@ -241,7 +241,7 @@ ICatalog.add( service ) to place each service into the catalog.</p>
 </div>
 <p>You can be a little more efficient using the <strong>acquire</strong> method (the acquire method checks using
 getById and only creates the service if needed):</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">File</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span> <span class="s">&quot;C:\data\cities.shp&quot;</span> <span class="o">);</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span> <span class="s">&quot;C:\data\cities.shp&quot;</span> <span class="o">);</span>
 <span class="n">URL</span> <span class="n">url</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="na">toURL</span><span class="o">();</span>
 
 <span class="n">IRepository</span> <span class="n">local</span> <span class="o">=</span> <span class="n">CatalogPlugin</span><span class="o">.</span><span class="na">getDefault</span><span class="o">().</span><span class="na">getLocal</span><span class="o">();</span>
@@ -249,7 +249,7 @@ getById and only creates the service if needed):</p>
 </pre></div>
 </div>
 <p>You can also use connection parameters to be a bit more specific about servic:</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Serializable</span><span class="o">&gt;</span> <span class="n">params</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Serializable</span><span class="o">&gt;();</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Serializable</span><span class="o">&gt;</span> <span class="n">params</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Serializable</span><span class="o">&gt;();</span>
 <span class="n">params</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;ur&quot;</span><span class="o">,</span> <span class="n">url</span> <span class="o">);</span>
 <span class="n">params</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;create spatial index&quot;</span><span class="o">,</span> <span class="n">Boolean</span><span class="o">.</span><span class="na">true</span> <span class="o">);</span>
 
@@ -265,7 +265,7 @@ getById and only creates the service if needed):</p>
 </pre></div>
 </div>
 <p>To to connect to a more interesting service such as PostGIS.</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Serializable</span><span class="o">&gt;</span> <span class="n">params</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Serializable</span><span class="o">&gt;();</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Serializable</span><span class="o">&gt;</span> <span class="n">params</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Serializable</span><span class="o">&gt;();</span>
 <span class="n">params</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;dbtype&quot;</span><span class="o">,</span> <span class="s">&quot;postgis&quot;</span><span class="o">);</span>           <span class="c1">// must be &quot;postgis&quot;</span>
 <span class="n">params</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;host&quot;</span><span class="o">,</span> <span class="s">&quot;www.refractions.net&quot;</span><span class="o">);</span> <span class="c1">// the name or ip address of the machine running PostGIS</span>
 <span class="n">params</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;port&quot;</span><span class="o">,</span> <span class="k">new</span> <span class="n">Integer</span><span class="o">(</span><span class="mi">5432</span><span class="o">));</span>     <span class="c1">// the port that PostGIS is running on (generally 5432)</span>
@@ -278,7 +278,7 @@ getById and only creates the service if needed):</p>
 </pre></div>
 </div>
 <p>Or a Web Feature Server:</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">URL</span> <span class="n">url</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">&quot;http://www2.dmsolutions.ca/cgi-bin/mswfs_gmap?Version=1.0.0&amp;Request=GetCapabilities&amp;Service=wfs&quot;</span><span class="o">);</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">URL</span> <span class="n">url</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">&quot;http://www2.dmsolutions.ca/cgi-bin/mswfs_gmap?Version=1.0.0&amp;Request=GetCapabilities&amp;Service=wfs&quot;</span><span class="o">);</span>
 
 <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Serializable</span><span class="o">&gt;</span> <span class="n">params</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Serializable</span><span class="o">&gt;();</span>
 <span class="n">params</span><span class="o">.</span><span class="na">put</span><span class="o">(</span> <span class="n">WFSDataStoreFactory</span><span class="o">.</span><span class="na">URL</span><span class="o">.</span><span class="na">key</span><span class="o">,</span> <span class="n">url</span> <span class="o">);</span>
@@ -310,7 +310,7 @@ Guide</a>.</p>
 <li>An &#8220;internal&#8221; service such as the MapGraphics included with uDig</li>
 </ul>
 <p>The identifier of a service is available - so you can find the service again at another time.</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="c1">// recommended!</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="c1">// recommended!</span>
 <span class="n">ID</span> <span class="n">id</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="na">getID</span><span class="o">();</span>
 
 <span class="c1">// slow!</span>
@@ -319,28 +319,28 @@ Guide</a>.</p>
 </div>
 <p>The id is like a quick version of URL (not subject to the usual delays during hashcode and equals).</p>
 <p>You can grab a copy of the service title:</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">String</span> <span class="n">title</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="na">getTitle</span><span class="o">()</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">String</span> <span class="n">title</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="na">getTitle</span><span class="o">()</span>
 </pre></div>
 </div>
 <p>This is useful when listing the service in a user interface (as it will make use of a cached copy of
 the service title and not have to connect).</p>
 <p>The connection parameters are available; you can store these parameters if you would like to connect
 to the service again at a later time.</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Serializable</span><span class="o">&gt;</span> <span class="n">params</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="na">getConnectionParams</span><span class="o">()</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Serializable</span><span class="o">&gt;</span> <span class="n">params</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="na">getConnectionParams</span><span class="o">()</span>
 </pre></div>
 </div>
 <p>For a Map the connection parameters are stored (so as a Map loads we will ensure each required
 service is available in the local catalog). The catalog will also store these connection parameters
 between runs so it can connect to the service again.</p>
 <p>You can figure out which catalog the service belongs to:</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">ICatalog</span> <span class="n">catalog</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="na">parent</span><span class="o">(</span> <span class="k">new</span> <span class="n">NullProgressMonitor</span><span class="o">()</span> <span class="o">);</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">ICatalog</span> <span class="n">catalog</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="na">parent</span><span class="o">(</span> <span class="k">new</span> <span class="n">NullProgressMonitor</span><span class="o">()</span> <span class="o">);</span>
 </pre></div>
 </div>
 <p>This method actually needs to connect to the service so a ProgressMonitor is used (allowing the user
 to cancel).</p>
 <p>To retrieve information about a service including its title, description and icon you can ask for
 the ServiceInfo object:</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">IServiceInfo</span> <span class="n">info</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="na">getInfo</span><span class="o">(</span> <span class="k">new</span> <span class="n">NullProgressMonitor</span><span class="o">());</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">IServiceInfo</span> <span class="n">info</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="na">getInfo</span><span class="o">(</span> <span class="k">new</span> <span class="n">NullProgressMonitor</span><span class="o">());</span>
 
 <span class="n">String</span> <span class="n">title</span> <span class="o">=</span> <span class="n">info</span><span class="o">.</span><span class="na">getTitle</span><span class="o">();</span>
 <span class="n">String</span> <span class="n">description</span> <span class="o">=</span> <span class="n">info</span><span class="o">.</span><span class="na">getDescription</span><span class="o">();</span>
@@ -352,11 +352,11 @@ the <strong>IService.getMetric()</strong> provides a good measurement of how wel
 indicate if the service has all the information it needs to function smoothly. If some information
 is missing, such as a coordinate reference system or index, some prep may be required.</p>
 <p>You can check if a service is connected:</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">Status</span> <span class="n">status</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="na">getStatus</span><span class="o">();</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">Status</span> <span class="n">status</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="na">getStatus</span><span class="o">();</span>
 </pre></div>
 </div>
 <p>A service contains children.</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="k">for</span><span class="o">(</span> <span class="n">IResolve</span> <span class="n">child</span> <span class="o">:</span> <span class="n">service</span><span class="o">.</span><span class="na">members</span><span class="o">(</span><span class="k">new</span> <span class="n">NullProgressMonitor</span><span class="o">())){</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="k">for</span><span class="o">(</span> <span class="n">IResolve</span> <span class="n">child</span> <span class="o">:</span> <span class="n">service</span><span class="o">.</span><span class="na">members</span><span class="o">(</span><span class="k">new</span> <span class="n">NullProgressMonitor</span><span class="o">())){</span>
     <span class="c1">//work with child</span>
 <span class="o">}</span>
 </pre></div>
@@ -365,7 +365,7 @@ is missing, such as a coordinate reference system or index, some prep may be req
 processes depending on the service.</p>
 <p>If you are only interested in spatial data there is a specific method that will list only the
 GeoResources with useful data.</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="k">for</span><span class="o">(</span> <span class="n">IGeoResource</span> <span class="n">georesource</span> <span class="o">:</span> <span class="n">service</span><span class="o">.</span><span class="na">resources</span><span class="o">(</span><span class="k">new</span> <span class="n">NullProgressMonitor</span><span class="o">())</span> <span class="o">){</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="k">for</span><span class="o">(</span> <span class="n">IGeoResource</span> <span class="n">georesource</span> <span class="o">:</span> <span class="n">service</span><span class="o">.</span><span class="na">resources</span><span class="o">(</span><span class="k">new</span> <span class="n">NullProgressMonitor</span><span class="o">())</span> <span class="o">){</span>
     <span class="c1">// work with resource</span>
 <span class="o">}</span>
 </pre></div>
@@ -373,27 +373,27 @@ GeoResources with useful data.</p>
 <div class="section" id="service-specific-examples">
 <h4>Service Specific Examples<a class="headerlink" href="#service-specific-examples" title="Permalink to this headline">¶</a></h4>
 <p>To access a shapefile:</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="k">if</span><span class="o">(</span> <span class="n">service</span><span class="o">.</span><span class="na">canResolve</span><span class="o">(</span> <span class="n">ShapefileDataStore</span><span class="o">.</span><span class="na">class</span> <span class="o">)){</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="k">if</span><span class="o">(</span> <span class="n">service</span><span class="o">.</span><span class="na">canResolve</span><span class="o">(</span> <span class="n">ShapefileDataStore</span><span class="o">.</span><span class="na">class</span> <span class="o">)){</span>
      <span class="n">ShapefileDataStore</span> <span class="n">shapefile</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="na">resolve</span><span class="o">(</span> <span class="n">ShapefileDataStore</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="k">new</span> <span class="n">NullProgressMonitor</span><span class="o">()</span> <span class="o">);</span>
 <span class="o">}</span>
 </pre></div>
 </div>
 <p>To access a WebMapServer:</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="k">if</span><span class="o">(</span> <span class="n">service</span><span class="o">.</span><span class="na">canResolve</span><span class="o">(</span> <span class="n">WebMapServer</span><span class="o">.</span><span class="na">class</span> <span class="o">)){</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="k">if</span><span class="o">(</span> <span class="n">service</span><span class="o">.</span><span class="na">canResolve</span><span class="o">(</span> <span class="n">WebMapServer</span><span class="o">.</span><span class="na">class</span> <span class="o">)){</span>
     <span class="n">WebMapServer</span> <span class="n">wms</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="na">resolve</span><span class="o">(</span> <span class="n">WebMapServer</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="k">new</span> <span class="n">NullProgressMonitor</span><span class="o">()</span> <span class="o">);</span>
     <span class="o">...</span>
 <span class="o">}</span>
 </pre></div>
 </div>
 <p>To access PostGIS data store:</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="k">if</span><span class="o">(</span> <span class="n">service</span><span class="o">.</span><span class="na">canResolve</span><span class="o">(</span> <span class="n">PostgisDataStore</span><span class="o">.</span><span class="na">class</span> <span class="o">)){</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="k">if</span><span class="o">(</span> <span class="n">service</span><span class="o">.</span><span class="na">canResolve</span><span class="o">(</span> <span class="n">PostgisDataStore</span><span class="o">.</span><span class="na">class</span> <span class="o">)){</span>
      <span class="n">PostgisDataStore</span> <span class="n">database</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="na">resolve</span><span class="o">(</span> <span class="n">PostgisDataStore</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="k">new</span> <span class="n">NullProgressMonitor</span><span class="o">()</span> <span class="o">);</span>
      <span class="o">...</span>
 <span class="o">}</span>
 </pre></div>
 </div>
 <p>To work with PostGIS jdbc connection:</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="k">if</span><span class="o">(</span> <span class="n">service</span><span class="o">.</span><span class="na">canResolve</span><span class="o">(</span> <span class="n">Connection</span><span class="o">.</span><span class="na">class</span> <span class="o">)){</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="k">if</span><span class="o">(</span> <span class="n">service</span><span class="o">.</span><span class="na">canResolve</span><span class="o">(</span> <span class="n">Connection</span><span class="o">.</span><span class="na">class</span> <span class="o">)){</span>
      <span class="n">Connection</span> <span class="n">connection</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="na">resolve</span><span class="o">(</span> <span class="n">Connection</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="k">new</span> <span class="n">NullProgressMonitor</span><span class="o">()</span> <span class="o">);</span>
      <span class="k">try</span> <span class="o">{</span>
         <span class="o">...</span> <span class="n">issue</span> <span class="n">jdbc</span> <span class="n">commands</span><span class="o">...</span>
@@ -406,7 +406,7 @@ GeoResources with useful data.</p>
 </pre></div>
 </div>
 <p>To access a WebMapServer:</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="k">if</span><span class="o">(</span> <span class="n">service</span><span class="o">.</span><span class="na">canResolve</span><span class="o">(</span> <span class="n">WebMapServer</span><span class="o">.</span><span class="na">class</span> <span class="o">)){</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="k">if</span><span class="o">(</span> <span class="n">service</span><span class="o">.</span><span class="na">canResolve</span><span class="o">(</span> <span class="n">WebMapServer</span><span class="o">.</span><span class="na">class</span> <span class="o">)){</span>
     <span class="n">WebMapServer</span> <span class="n">wms</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="na">resolve</span><span class="o">(</span> <span class="n">WebMapServer</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="k">new</span> <span class="n">NullProgressMonitor</span><span class="o">()</span> <span class="o">);</span>
     <span class="o">...</span>
 <span class="o">}</span>
@@ -500,7 +500,7 @@ event of a problem. This allows for both feedback during the operation, and stro
 calling code that blocking input/output will occur.</p>
 <p>Let&#8217;s quickly work with an example (to make this real)</p>
 <p>Use of canResolve and resolve methods</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="n">count</span> <span class="nf">shapes</span><span class="o">(</span> <span class="n">File</span> <span class="n">shapefile</span> <span class="o">){</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="n">count</span> <span class="nf">shapes</span><span class="o">(</span> <span class="n">File</span> <span class="n">shapefile</span> <span class="o">){</span>
     <span class="n">CatalogPlugin</span> <span class="n">catalog</span> <span class="o">=</span> <span class="n">CatalogPlugin</span><span class="o">.</span><span class="na">getDefault</span><span class="o">();</span>
     <span class="n">IServiceFactory</span> <span class="n">factory</span> <span class="o">=</span> <span class="n">catalog</span><span class="o">.</span><span class="na">getServiceFactory</span><span class="o">();</span>
     <span class="k">for</span><span class="o">(</span> <span class="n">IResolve</span> <span class="n">resolve</span> <span class="o">:</span> <span class="n">factory</span><span class="o">.</span><span class="na">acquire</span><span class="o">(</span> <span class="n">shapefile</span><span class="o">.</span><span class="na">toUrl</span><span class="o">()</span> <span class="o">)</span> <span class="o">){</span>
@@ -595,7 +595,7 @@ class that responds to isAdaptable( IResource.class ).</p>
       </div>
 
     <div class="footer">
-        &copy; Copyright 2015, Refractions Research and others.
+        &copy; Copyright 2013, Refractions Research and others.
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
     </div>
   </body>

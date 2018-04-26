@@ -7,7 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Constraint Query Language &mdash; uDig 1.5.0 User Guide</title>
+    <title>Constraint Query Language &mdash; uDig 2.0.0.RC1 User Guide</title>
     
     <link rel="stylesheet" href="../_static/udig.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '1.5.0.RC1',
+        VERSION:     '2.0.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  false
@@ -27,7 +27,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/theme_extras.js"></script>
     <link rel="shortcut icon" href="../_static/udig.ico"/>
-    <link rel="top" title="uDig 1.5.0 User Guide" href="../index.html" />
+    <link rel="top" title="uDig 2.0.0.RC1 User Guide" href="../index.html" />
     <link rel="up" title="Geospatial" href="Geospatial.html" />
     <link rel="next" title="Coordinate Reference System" href="Coordinate Reference System.html" />
     <link rel="prev" title="Geospatial" href="Geospatial.html" /> 
@@ -77,13 +77,13 @@ specification).</p>
 used to define the selected Features in a uDig layer.</p>
 <div class="section" id="comparisons">
 <h3>Comparisons<a class="headerlink" href="#comparisons" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">CITY</span> <span class="o">=</span> <span class="s">&#39;Nelson&#39;</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">CITY</span> <span class="o">=</span> <span class="s1">&#39;Nelson&#39;</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">ATTR1</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="p">((</span><span class="mi">2</span> <span class="o">/</span> <span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="mi">4</span><span class="p">))</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">ATTR1</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="p">((</span><span class="mi">2</span> <span class="o">/</span> <span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="mi">4</span><span class="p">))</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">ATTR1</span> <span class="o">&lt;</span> <span class="nb">abs</span><span class="p">(</span><span class="n">ATTR2</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">ATTR1</span> <span class="o">&lt;</span> <span class="nb">abs</span><span class="p">(</span><span class="n">ATTR2</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="highlight-python"><pre>ATTR1 &lt; 10 AND ATTR2 &lt; 2 OR ATTR3 &gt; 10</pre>
@@ -123,12 +123,12 @@ used to define the selected Features in a uDig layer.</p>
 </div>
 <div class="highlight-python"><pre>INTERSECT(ATTR1, GEOMETRYCOLLECTION (POINT (10 10),POINT (30 30),LINESTRING (15 15, 20 20)) )</pre>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">BBOX</span><span class="p">(</span><span class="n">ATTR1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">40</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">BBOX</span><span class="p">(</span><span class="n">ATTR1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">40</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="highlight-python"><pre>DWITHIN(ATTR1, POINT(1 2), 10, kilometers)</pre>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">BBOX</span><span class="p">(</span><span class="n">ATTR1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">40</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">BBOX</span><span class="p">(</span><span class="n">ATTR1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">40</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -175,13 +175,13 @@ are <strong>very</strong> similar to a filter.</p>
 </div>
 <div class="section" id="literals">
 <h3>Literals<a class="headerlink" href="#literals" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python"><div class="highlight"><pre><span class="mi">1</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="mi">1</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="mf">3.14159</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="mf">3.14159</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="s">&#39;abc&#39;</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="s1">&#39;abc&#39;</span>
 </pre></div>
 </div>
 <div class="highlight-python"><pre>2006-11-30T01:30:00Z</pre>
@@ -198,7 +198,7 @@ are <strong>very</strong> similar to a filter.</p>
 </div>
 <div class="section" id="attribute">
 <h3>Attribute<a class="headerlink" href="#attribute" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">NAME</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">NAME</span>
 </pre></div>
 </div>
 <div class="highlight-python"><pre>prefix:name</pre>
@@ -206,32 +206,32 @@ are <strong>very</strong> similar to a filter.</p>
 </div>
 <div class="section" id="math">
 <h3>Math<a class="headerlink" href="#math" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python"><div class="highlight"><pre><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">3</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">3</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="mi">3</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="mi">3</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="section" id="functions">
 <h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">sin</span><span class="p">(</span> <span class="n">pi</span><span class="p">()</span> <span class="o">/</span> <span class="mi">4</span> <span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">sin</span><span class="p">(</span> <span class="n">pi</span><span class="p">()</span> <span class="o">/</span> <span class="mi">4</span> <span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">sin</span><span class="p">(</span> <span class="n">toRadians</span><span class="p">(</span> <span class="n">ANGLE</span> <span class="p">)</span> <span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">sin</span><span class="p">(</span> <span class="n">toRadians</span><span class="p">(</span> <span class="n">ANGLE</span> <span class="p">)</span> <span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">getX</span><span class="p">(</span> <span class="n">pointN</span><span class="p">(</span> <span class="n">THE_GEOM</span><span class="p">,</span> <span class="mi">0</span> <span class="p">)</span> <span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">getX</span><span class="p">(</span> <span class="n">pointN</span><span class="p">(</span> <span class="n">THE_GEOM</span><span class="p">,</span> <span class="mi">0</span> <span class="p">)</span> <span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">area</span><span class="p">(</span> <span class="n">THE_GEOM</span> <span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">area</span><span class="p">(</span> <span class="n">THE_GEOM</span> <span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">ID</span><span class="p">()</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">ID</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>Function List:</p>
@@ -363,11 +363,11 @@ applications).</p>
 <div class="section" id="feature-id">
 <h3>Feature ID<a class="headerlink" href="#feature-id" title="Permalink to this headline">¶</a></h3>
 <p>You can select against a feature identifier using:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">IN</span> <span class="p">(</span><span class="s">&#39;river.1&#39;</span><span class="p">,</span> <span class="s">&#39;river.2&#39;</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">IN</span> <span class="p">(</span><span class="s1">&#39;river.1&#39;</span><span class="p">,</span> <span class="s1">&#39;river.2&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Or if you have an integer type as feature id:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">IN</span> <span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="mi">301</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">IN</span> <span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="mi">301</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><strong>Related tasks</strong></p>
@@ -394,7 +394,7 @@ applications).</p>
       </div>
 
     <div class="footer">
-        &copy; Copyright 2015, Refractions Research and others.
+        &copy; Copyright 2013, Refractions Research and others.
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
     </div>
   </body>

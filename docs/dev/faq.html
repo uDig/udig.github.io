@@ -7,7 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>FAQ &mdash; uDig 1.5.0 Developers Guide</title>
+    <title>FAQ &mdash; uDig 2.0.0.RC1 Developers Guide</title>
     
     <link rel="stylesheet" href="_static/udig.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '1.5.0.RC1',
+        VERSION:     '2.0.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  false
@@ -27,7 +27,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/theme_extras.js"></script>
     <link rel="shortcut icon" href="_static/udig.ico"/>
-    <link rel="top" title="uDig 1.5.0 Developers Guide" href="index.html" />
+    <link rel="top" title="uDig 2.0.0.RC1 Developers Guide" href="index.html" />
     <link rel="next" title="Reference" href="reference.html" />
     <link rel="prev" title="Documents" href="documents.html" /> 
   </head>
@@ -204,7 +204,7 @@ depending on the view the user is working in.</p>
 <p>The solution lies in the parent composite (rather than the control).</p>
 <p>If the composite is using a layout manager to control the size of the controls you can call the
 layout() method:</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">Composite</span> <span class="n">parent</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Composite</span><span class="o">(</span><span class="n">grandParent</span><span class="o">,</span> <span class="n">SWT</span><span class="o">.</span><span class="na">NONE</span><span class="o">);</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">Composite</span> <span class="n">parent</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Composite</span><span class="o">(</span><span class="n">grandParent</span><span class="o">,</span> <span class="n">SWT</span><span class="o">.</span><span class="na">NONE</span><span class="o">);</span>
 <span class="o">...</span>
 <span class="o">(</span><span class="n">create</span> <span class="n">controls</span><span class="o">)</span>
 <span class="o">...</span>
@@ -219,12 +219,12 @@ layout() method:</p>
 <p>Q: How should I use a Progress Monitor</p>
 <p>A few tips on using Progress Monitors:</p>
 <p>Always start the progress monitor and do at least 1 bit of work. For example:</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">monitor</span><span class="o">.</span><span class="na">beginTask</span><span class="o">(</span><span class="s">&quot;Working&quot;</span><span class="o">,</span> <span class="mi">4</span><span class="o">);</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">monitor</span><span class="o">.</span><span class="na">beginTask</span><span class="o">(</span><span class="s">&quot;Working&quot;</span><span class="o">,</span> <span class="mi">4</span><span class="o">);</span>
 <span class="n">monitor</span><span class="o">.</span><span class="na">work</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
 </pre></div>
 </div>
 <p>Always finish started job.</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="k">try</span><span class="o">{</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="k">try</span><span class="o">{</span>
   <span class="n">monitor</span><span class="o">.</span><span class="na">beginTask</span><span class="o">(</span><span class="s">&quot;Working&quot;</span><span class="o">,</span> <span class="mi">4</span><span class="o">);</span>
   <span class="n">monitor</span><span class="o">.</span><span class="na">work</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
   <span class="c1">// some work</span>
@@ -234,7 +234,7 @@ layout() method:</p>
 </pre></div>
 </div>
 <p>Make use of SubProgressMonitor if sending the monitor to another method:</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="k">try</span><span class="o">{</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="k">try</span><span class="o">{</span>
   <span class="n">monitor</span><span class="o">.</span><span class="na">beginTask</span><span class="o">(</span><span class="s">&quot;Working&quot;</span><span class="o">,</span> <span class="mi">8</span><span class="o">);</span>
   <span class="n">monitor</span><span class="o">.</span><span class="na">work</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
 
@@ -264,7 +264,7 @@ interface</p>
 the display thread.
 Only when there are no more jobs waiting(readAndDispatch returns false when no more jobs are
 waiting) then let the thread sleep.</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="k">while</span><span class="o">(</span> <span class="n">condition</span> <span class="o">)</span> <span class="o">{</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="k">while</span><span class="o">(</span> <span class="n">condition</span> <span class="o">)</span> <span class="o">{</span>
     <span class="c1">//run a display event continue if there is more work todo.</span>
     <span class="k">if</span> <span class="o">(</span> <span class="n">display</span><span class="o">.</span><span class="na">readAndDispatch</span><span class="o">()</span> <span class="o">){</span>
         <span class="k">continue</span><span class="o">;</span>
@@ -310,12 +310,12 @@ the uDig instance.</p>
 <p>Given a project all the contained elements can be searched via the <strong>getElements()</strong> method. If a
 single type of elements is desired such as maps the <strong>getElements( Class&lt;T&gt; )</strong> method can be used.</p>
 <p>To access the first Map in the first project:</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">ApplicationGIS</span><span class="o">.</span><span class="na">openMap</span><span class="o">(</span><span class="n">ApplicationGIS</span><span class="o">.</span><span class="na">getProjects</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="na">getElements</span><span class="o">(</span><span class="n">IMap</span><span class="o">.</span><span class="na">class</span><span class="o">).</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">));</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">ApplicationGIS</span><span class="o">.</span><span class="na">openMap</span><span class="o">(</span><span class="n">ApplicationGIS</span><span class="o">.</span><span class="na">getProjects</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="na">getElements</span><span class="o">(</span><span class="n">IMap</span><span class="o">.</span><span class="na">class</span><span class="o">).</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">));</span>
 </pre></div>
 </div>
 <p>Q: How can I programmatically commit changes</p>
 <p>There is a Commit Command that can be sent to the map to commit:</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">MapCommand</span> <span class="n">commitCommand</span><span class="o">=</span><span class="n">EditCommandFactory</span><span class="o">.</span><span class="na">getInstance</span><span class="o">().</span><span class="na">createCommitCommand</span><span class="o">();</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">MapCommand</span> <span class="n">commitCommand</span><span class="o">=</span><span class="n">EditCommandFactory</span><span class="o">.</span><span class="na">getInstance</span><span class="o">().</span><span class="na">createCommitCommand</span><span class="o">();</span>
 <span class="n">map</span><span class="o">.</span><span class="na">sendCommandSync</span><span class="o">(</span><span class="n">commitCommand</span><span class="o">);</span>
 </pre></div>
 </div>
@@ -326,17 +326,17 @@ splash screen information.</p>
 in the org.locationtech.udig.ui plugin.</p>
 <p>Q: How do I add a layer programmatically</p>
 <p>The <strong>ApplicationGIS</strong> class has a utility method for you:</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">ApplicationGIS</span><span class="o">.</span><span class="na">addLayersToMap</span><span class="o">(</span><span class="n">map</span><span class="o">,</span> <span class="n">layers</span><span class="o">,</span> <span class="n">startposition</span><span class="o">,</span> <span class="n">project</span><span class="o">);</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">ApplicationGIS</span><span class="o">.</span><span class="na">addLayersToMap</span><span class="o">(</span><span class="n">map</span><span class="o">,</span> <span class="n">layers</span><span class="o">,</span> <span class="n">startposition</span><span class="o">,</span> <span class="n">project</span><span class="o">);</span>
 </pre></div>
 </div>
 <p>You can also send the command directly yourself:</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">IMap</span> <span class="n">map</span><span class="o">;</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">IMap</span> <span class="n">map</span><span class="o">;</span>
 <span class="n">map</span><span class="o">.</span><span class="na">sendCommandASync</span><span class="o">(</span><span class="k">new</span> <span class="n">AddLayerCommand</span><span class="o">(</span><span class="n">layer</span><span class="o">)</span> <span class="o">);</span>
 </pre></div>
 </div>
 <p>Q: How do I add default key bindings to my IWorkbenchPart</p>
 <p>Simply add this line to the createPartControl() method of your workbench part.</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">ApplicationGIS</span><span class="o">.</span><span class="na">getToolManager</span><span class="o">().</span><span class="na">registerActionsWithPart</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">ApplicationGIS</span><span class="o">.</span><span class="na">getToolManager</span><span class="o">().</span><span class="na">registerActionsWithPart</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
 </pre></div>
 </div>
 <dl class="docutils">
@@ -345,7 +345,7 @@ in the org.locationtech.udig.ui plugin.</p>
 </dl>
 <p>Q: How do I create a map programmatically</p>
 <p>There is a command to create a map, which you can send to the project:</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">CreateMapCommand</span> <span class="n">command</span><span class="o">=</span><span class="k">new</span> <span class="n">CreateMapCommand</span><span class="o">(</span><span class="s">&quot;MapName&quot;</span><span class="o">,</span> <span class="n">listofGeoResources</span><span class="o">,</span> <span class="n">project</span><span class="o">);</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">CreateMapCommand</span> <span class="n">command</span><span class="o">=</span><span class="k">new</span> <span class="n">CreateMapCommand</span><span class="o">(</span><span class="s">&quot;MapName&quot;</span><span class="o">,</span> <span class="n">listofGeoResources</span><span class="o">,</span> <span class="n">project</span><span class="o">);</span>
 <span class="n">project</span><span class="o">.</span><span class="na">sendSync</span><span class="o">(</span><span class="n">command</span><span class="o">);</span>
 <span class="n">IMap</span> <span class="n">map</span><span class="o">=</span><span class="n">command</span><span class="o">.</span><span class="na">getCreatedMap</span><span class="o">();</span>
 </pre></div>
@@ -412,15 +412,15 @@ adding/removing/modifying features.</p>
 <p>The next obvious question is: If I am in uDig how do I get a FeatureSource? Here are some common
 scenarios that occur in uDig.</p>
 <p>FeatureSource access from a layer:</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">layer</span><span class="o">.</span><span class="na">getResource</span><span class="o">(</span> <span class="n">FeatureSource</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">monitor</span> <span class="o">);</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">layer</span><span class="o">.</span><span class="na">getResource</span><span class="o">(</span> <span class="n">FeatureSource</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">monitor</span> <span class="o">);</span>
 </pre></div>
 </div>
 <p>This is a blocking call you can do a non-blocking check to see if the layer has a FeatureSource by:</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">layer</span><span class="o">.</span><span class="na">hasResource</span><span class="o">(</span> <span class="n">FeatureSource</span><span class="o">.</span><span class="na">class</span> <span class="o">);</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">layer</span><span class="o">.</span><span class="na">hasResource</span><span class="o">(</span> <span class="n">FeatureSource</span><span class="o">.</span><span class="na">class</span> <span class="o">);</span>
 </pre></div>
 </div>
 <p>FeatureSource access from an IGeoResource:</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="k">if</span><span class="o">(</span> <span class="n">resource</span><span class="o">.</span><span class="na">canResolve</span><span class="o">(</span> <span class="n">FeatureSource</span><span class="o">.</span><span class="na">class</span> <span class="o">)</span> <span class="o">)</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="k">if</span><span class="o">(</span> <span class="n">resource</span><span class="o">.</span><span class="na">canResolve</span><span class="o">(</span> <span class="n">FeatureSource</span><span class="o">.</span><span class="na">class</span> <span class="o">)</span> <span class="o">)</span>
     <span class="k">return</span> <span class="n">resource</span><span class="o">.</span><span class="na">resolve</span><span class="o">(</span> <span class="n">FeatureSource</span><span class="o">.</span><span class="na">class</span> <span class="o">);</span>
 </pre></div>
 </div>
@@ -429,11 +429,11 @@ manages transactions for the user (and developer). FeatureSources by default use
 transactions where the FeatureSource obtained from a layer uses a transaction.</p>
 <p>Q: How to get geometries from layer</p>
 <p>To get geometries from a layer you need to ask for a FeatureSource object from the layer:</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">FeatureSource</span> <span class="n">source</span><span class="o">=</span><span class="n">layer</span><span class="o">.</span><span class="na">getResource</span><span class="o">(</span> <span class="n">FeatureSource</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">progressMonitor</span><span class="o">);</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">FeatureSource</span> <span class="n">source</span><span class="o">=</span><span class="n">layer</span><span class="o">.</span><span class="na">getResource</span><span class="o">(</span> <span class="n">FeatureSource</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">progressMonitor</span><span class="o">);</span>
 </pre></div>
 </div>
 <p>Once you have a feature source you can get all the features from the source by:</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">FeatureCollection</span> <span class="n">collection</span><span class="o">=</span><span class="n">source</span><span class="o">.</span><span class="na">getFeatures</span><span class="o">();</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">FeatureCollection</span> <span class="n">collection</span><span class="o">=</span><span class="n">source</span><span class="o">.</span><span class="na">getFeatures</span><span class="o">();</span>
 </pre></div>
 </div>
 <p>Q: How to tell when something changes</p>
@@ -441,7 +441,7 @@ transactions where the FeatureSource obtained from a layer uses a transaction.</
 very easy to morph uDig to meet your needs.</p>
 <ul>
 <li><p class="first">Adaptor: Generic EMF notifications are provided through use of an &#8220;Adaptor&#8221;</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">layer</span><span class="o">.</span><span class="na">eAdapters</span><span class="o">().</span><span class="na">add</span><span class="o">(</span> <span class="k">new</span> <span class="n">AdapterImpl</span><span class="o">(){</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">layer</span><span class="o">.</span><span class="na">eAdapters</span><span class="o">().</span><span class="na">add</span><span class="o">(</span> <span class="k">new</span> <span class="n">AdapterImpl</span><span class="o">(){</span>
    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">notifyChanged</span><span class="o">(</span> <span class="n">Notificaiton</span> <span class="n">msg</span> <span class="o">)</span> <span class="o">{</span>
        <span class="k">if</span><span class="o">(</span> <span class="n">msg</span><span class="o">.</span><span class="na">getNotifier</span><span class="o">()</span> <span class="n">instnaceof</span> <span class="n">Layer</span> <span class="o">){</span>
            <span class="n">Layer</span> <span class="n">layer</span> <span class="o">=</span> <span class="o">(</span><span class="n">Layer</span><span class="o">)</span> <span class="n">msg</span><span class="o">.</span><span class="na">getNotifier</span><span class="o">();</span>
@@ -465,7 +465,7 @@ very easy to morph uDig to meet your needs.</p>
 </li>
 <li><p class="first">Listener: the project sets add/remove listener methods as they are requested on the udig-devel
 email list:</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">layer</span><span class="o">.</span><span class="na">addListener</span><span class="o">(</span> <span class="k">new</span> <span class="n">ILayerListener</span><span class="o">(){</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">layer</span><span class="o">.</span><span class="na">addListener</span><span class="o">(</span> <span class="k">new</span> <span class="n">ILayerListener</span><span class="o">(){</span>
    <span class="kd">public</span> <span class="nf">refresh</span><span class="o">(</span> <span class="n">LayerEvent</span> <span class="n">event</span> <span class="o">){</span>
        <span class="k">if</span><span class="o">(</span> <span class="n">event</span><span class="o">.</span><span class="na">getType</span><span class="o">()</span> <span class="o">==</span> <span class="n">LayerEvent</span><span class="o">.</span><span class="na">EventType</span><span class="o">.</span><span class="na">STYLE</span> <span class="o">){</span>
            <span class="n">ILayer</span> <span class="n">layer</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="na">getSource</span><span class="o">();</span>
@@ -490,7 +490,7 @@ of change notification - basically change notification with interface change). T
 you can &#8220;force&#8221; EMF models (and thus uDig) into about anything.</p>
 <p>So the above example is &#8220;an adapter&#8221;, and we are only paying attention to the changes.</p>
 <p>Example: Here is how you can watch the &#8220;Viewport Model&#8221; (ie. Zoom, Pan, CRS):</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">map</span><span class="o">.</span><span class="na">getViewportModel</span><span class="o">().</span><span class="na">addViewportModelListener</span><span class="o">(</span><span class="k">new</span> <span class="n">IViewportModelListener</span><span class="o">()){</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">map</span><span class="o">.</span><span class="na">getViewportModel</span><span class="o">().</span><span class="na">addViewportModelListener</span><span class="o">(</span><span class="k">new</span> <span class="n">IViewportModelListener</span><span class="o">()){</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">changed</span><span class="o">(</span><span class="n">ViewportModel</span> <span class="n">event</span><span class="o">){</span>
     <span class="k">if</span><span class="o">(</span> <span class="n">event</span><span class="o">.</span><span class="na">getType</span><span class="o">()==</span><span class="n">EventType</span><span class="o">.</span><span class="na">CRS</span> <span class="o">}</span>
       <span class="c1">// crs has changed do something</span>
@@ -506,7 +506,7 @@ you can &#8220;force&#8221; EMF models (and thus uDig) into about anything.</p>
 <li><p class="first">IMapCompositionListener* tells you when layers were added to the map, were deleted from the map
 or when the layer list order has changed. For more information take a look at
 <strong>MapCompositionEvent.EventType</strong>:</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">ApplicationGIS</span><span class="o">.</span><span class="na">getActiveMap</span><span class="o">().</span><span class="na">addMapCompositionListener</span><span class="o">(</span><span class="k">new</span> <span class="n">IMapCompositionListener</span><span class="o">(){</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">ApplicationGIS</span><span class="o">.</span><span class="na">getActiveMap</span><span class="o">().</span><span class="na">addMapCompositionListener</span><span class="o">(</span><span class="k">new</span> <span class="n">IMapCompositionListener</span><span class="o">(){</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">changed</span><span class="o">(</span> <span class="n">MapCompositionEvent</span> <span class="n">event</span> <span class="o">)</span> <span class="o">{</span>
         <span class="k">if</span> <span class="o">(</span><span class="n">event</span><span class="o">.</span><span class="na">getType</span><span class="o">()</span> <span class="o">==</span> <span class="n">EventType</span><span class="o">.</span><span class="na">ADDED</span><span class="o">)</span> <span class="o">{</span>
             <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Layer added&quot;</span><span class="o">);</span>
@@ -523,7 +523,7 @@ or when the layer list order has changed. For more information take a look at
 <p>Example: Map opens/created/closes If you have to do something when a map opens, was created or is
 about to close, use the extension point <em>org.locationtech.udig.project.mapInterceptor</em> in your
 <strong>plugin.xml</strong>:</p>
-<div class="highlight-xml"><div class="highlight"><pre>[..]
+<div class="highlight-xml"><div class="highlight"><pre><span></span>[..]
   <span class="nt">&lt;extension</span>
         <span class="na">point=</span><span class="s">&quot;org.locationtech.udig.project.mapInterceptor&quot;</span><span class="nt">&gt;</span>
         <span class="nt">&lt;mapOpening</span>
@@ -535,7 +535,7 @@ about to close, use the extension point <em>org.locationtech.udig.project.mapInt
 </pre></div>
 </div>
 <p>And create a new class:</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">org.locationtech.udig.project.interceptor.MapInterceptor</span><span class="o">;</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">org.locationtech.udig.project.interceptor.MapInterceptor</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.locationtech.udig.project.internal.Map</span><span class="o">;</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">OpenMapListener</span> <span class="kd">implements</span> <span class="n">MapInterceptor</span><span class="o">{</span>
@@ -548,7 +548,7 @@ about to close, use the extension point <em>org.locationtech.udig.project.mapInt
 </div>
 <p>Example: MapEditor and other ViewParts get activated/opened/closed. If you just want to track
 changes of the MapEditor, take a look at <strong>LayersView.MapEditorListener</strong>.</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">getSite</span><span class="o">().</span><span class="na">getWorkbenchWindow</span><span class="o">().</span><span class="na">getPartService</span><span class="o">().</span><span class="na">addPartListener</span><span class="o">(</span><span class="k">new</span>  <span class="n">IPartListener</span><span class="o">()</span> <span class="o">{</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">getSite</span><span class="o">().</span><span class="na">getWorkbenchWindow</span><span class="o">().</span><span class="na">getPartService</span><span class="o">().</span><span class="na">addPartListener</span><span class="o">(</span><span class="k">new</span>  <span class="n">IPartListener</span><span class="o">()</span> <span class="o">{</span>
 
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">partActivated</span><span class="o">(</span><span class="n">IWorkbenchPart</span> <span class="n">part</span><span class="o">)</span> <span class="o">{</span>
         <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;partActivated: &quot;</span> <span class="o">+</span> <span class="n">part</span><span class="o">.</span><span class="na">getTitle</span><span class="o">());</span>
@@ -579,7 +579,7 @@ changes of the MapEditor, take a look at <strong>LayersView.MapEditorListener</s
 <li>having a workbench listener and watching the editors change; and remembering the Map from the
 last MapEditor used.</li>
 </ul>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">IMap</span> <span class="n">map</span><span class="o">;</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">IMap</span> <span class="n">map</span><span class="o">;</span>
 
 <span class="n">IMap</span> <span class="nf">getMap</span><span class="o">(){</span>
     <span class="k">return</span> <span class="n">map</span><span class="o">;</span>
@@ -595,11 +595,11 @@ An example of this being used is to &#8220;flash&#8221; a feature when it is sel
 the examples you see for using a DrawShapeCommand will be for using a ToolContext when a tool
 wants to provide visual feedback. A Context object is just a helper class - when you are working
 on a View you will need to do the work yourself.</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">DrawShapeCommand</span> <span class="n">command</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DrawShapeCommand</span><span class="o">(</span><span class="n">shape</span><span class="o">,</span> <span class="n">paint</span><span class="o">,</span> <span class="n">lineStyle</span><span class="o">,</span> <span class="n">lineWidth</span><span class="o">);</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">DrawShapeCommand</span> <span class="n">command</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DrawShapeCommand</span><span class="o">(</span><span class="n">shape</span><span class="o">,</span> <span class="n">paint</span><span class="o">,</span> <span class="n">lineStyle</span><span class="o">,</span> <span class="n">lineWidth</span><span class="o">);</span>
 </pre></div>
 </div>
 <p>Here is the kind of work a tool context normally does for you:</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">command</span><span class="o">.</span><span class="na">setMap</span><span class="o">(</span> <span class="n">map</span> <span class="o">);</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">command</span><span class="o">.</span><span class="na">setMap</span><span class="o">(</span> <span class="n">map</span> <span class="o">);</span>
 <span class="n">ViewportPane</span> <span class="n">viewportPane</span> <span class="o">=</span> <span class="n">map</span><span class="o">.</span><span class="na">getRenderManager</span><span class="o">().</span><span class="na">getMapDisplay</span><span class="o">();</span>
 <span class="n">viewportPane</span><span class="o">.</span><span class="na">addDrawCommand</span><span class="o">(</span><span class="n">command</span><span class="o">);</span>
 <span class="n">Rectangle</span> <span class="n">validArea</span><span class="o">;</span>
@@ -616,7 +616,7 @@ on a View you will need to do the work yourself.</p>
 </div>
 <p>A review of how draw commands work - they stay on the map until they are invalid. So at some
 point &#8220;later&#8221; you can take the command off the screen by:</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">command</span><span class="o">.</span><span class="na">setValid</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">command</span><span class="o">.</span><span class="na">setValid</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
 </pre></div>
 </div>
 </li>
@@ -650,7 +650,7 @@ if (points == null) {
 points.add( new Coordinate(lat,lon) ); // ie DefaultGeographicCRS.WGS84</pre>
 </div>
 <p>You can draw these onto the screen in your mapgraphic render method</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kt">void</span> <span class="nf">draw</span><span class="o">(</span> <span class="n">MapGraphicContext</span> <span class="n">context</span> <span class="o">)</span> <span class="o">{</span>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kt">void</span> <span class="nf">draw</span><span class="o">(</span> <span class="n">MapGraphicContext</span> <span class="n">context</span> <span class="o">)</span> <span class="o">{</span>
 
     <span class="c1">//initialize the graphics handle</span>
      <span class="n">ViewportGraphics</span> <span class="n">g</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="na">getGraphics</span><span class="o">();</span>
@@ -703,7 +703,7 @@ points.add( new Coordinate(lat,lon) ); // ie DefaultGeographicCRS.WGS84</pre>
       </div>
 
     <div class="footer">
-        &copy; Copyright 2015, Refractions Research and others.
+        &copy; Copyright 2013, Refractions Research and others.
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
     </div>
   </body>
