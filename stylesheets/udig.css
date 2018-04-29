@@ -44,12 +44,13 @@ Structural
 -----------------------------------------------------------------------------
 */
 #container {
- width:977px;
+ /* width:977px; */
  min-height:400px;
- margin:20px auto;
- border:1px solid #000000;
+ /* margin:20px auto; */
+ /* border:1px solid #000000; */
  text-align:left;
- background-color: #FFFFFF;
+ /* background-color: #FFFFFF; */
+ background-color: rgba(255,255,255,.75);
 }
 #content {
  line-height: 1.5em;
@@ -65,7 +66,7 @@ Structural
 }
 #three_main {
  width:500;
- padding:5px 0 20px 40px;
+ /* padding:5px 0 20px 40px; */
  /*float:left;*/
 }
 #three_right {
@@ -491,7 +492,6 @@ scription {
  .description a {
  color:black;
 }
-
 /*
 --------------------------------------------------------------------------------
 Utility classes for floats and text alignment
@@ -504,18 +504,24 @@ p.right {
  text-align:right;
 }
 h3.download {
- text-align:right;
  padding-right:4px;
 }
 div.download {
- margin:4px;
- padding:5px;
+ /* margin:4px; */
+ padding-left:15px;
  float:left;
  width:120px;
  height:130px;
 }
+.release {
+    width: 20%;
+    float:left;
+}
+.downloads {
+    margin-left: 25%;
+}
 div.c2 {
- padding:5px 8px 5px 8px;
+ /* padding:5px 8px 5px 8px; */
  border-color:#d3d3d3;
  border-style:solid;
  border-width:0 1px 0 1px;
