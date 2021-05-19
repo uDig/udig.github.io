@@ -2,37 +2,26 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>What is new for uDig 1.1 &mdash; uDig 2.0.0.RC1 User Guide</title>
-    
+    <title>What is new for uDig 1.1 &#8212; uDig 2.3.0.RC1 User Guide</title>
     <link rel="stylesheet" href="../_static/udig.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/print.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '2.0.0-SNAPSHOT',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  false
-      };
-    </script>
+    <link rel="stylesheet" type="text/css" href="../_static/print.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
     <script type="text/javascript" src="../_static/theme_extras.js"></script>
     <link rel="shortcut icon" href="../_static/udig.ico"/>
-    <link rel="top" title="uDig 2.0.0.RC1 User Guide" href="../index.html" />
-    <link rel="up" title="What is new" href="index.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Tips and Tricks" href="../Tips and Tricks.html" />
     <link rel="prev" title="What is new for uDig 1.2" href="What is new 1.2.html" /> 
-  </head>
-  <body>
+  </head><body>
       <div class="header">
         <div class="wrap">
             <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
@@ -122,15 +111,15 @@ created. Please visit the community section for instructions on downloading <em>
 which feature a selection of advanced editing tools.</p>
 <div class="section" id="scratch-layers">
 <h3>Scratch Layers<a class="headerlink" href="#scratch-layers" title="Permalink to this headline">¶</a></h3>
-<p>You can define and create a new layer by selecting the <em class="menuselection">Layer ‣ Create</em> menu item. How ever it is
-&#8220;In-Memory&#8221; and is not saved. You can export the layer to a shapefile if you wish to save your work.</p>
+<p>You can define and create a new layer by selecting the <span class="menuselection">Layer ‣ Create</span> menu item. How ever it is
+“In-Memory” and is not saved. You can export the layer to a shapefile if you wish to save your work.</p>
 </div>
 <div class="section" id="create-new-feature-types">
 <h3>Create New Feature Types<a class="headerlink" href="#create-new-feature-types" title="Permalink to this headline">¶</a></h3>
-<p>Once you have a Service imported into the catalog you can select the service and select <em class="menuselection">Operations
-‣ Edit ‣ Create Feature Type</em> to define a new feature type in that service. For example: Import a
-Shapefile. select the service in the catalog. Select <em class="menuselection">Operations ‣ Edit ‣ Create Feature Type</em> and
-define the feature type. When you select &#8220;OK&#8221; a new Shapefile will be created that you can open and
+<p>Once you have a Service imported into the catalog you can select the service and select <span class="menuselection">Operations
+‣ Edit ‣ Create Feature Type</span> to define a new feature type in that service. For example: Import a
+Shapefile. select the service in the catalog. Select <span class="menuselection">Operations ‣ Edit ‣ Create Feature Type</span> and
+define the feature type. When you select “OK” a new Shapefile will be created that you can open and
 paste features into from other layers or define new features using the edit tools.</p>
 </div>
 <div class="section" id="thematic-styling">
@@ -141,13 +130,13 @@ layer based on attribute values.</p>
 <img alt="" src="../_images/themed_pop_density1.gif" />
 </div>
 <p>UDig includes a great set of ready-made palettes for creating thematic styling - thanks to the Penn
-State&#8217;s ColorBrewer research project! These palettes have been tested and can account for a range of
+State’s ColorBrewer research project! These palettes have been tested and can account for a range of
 conditions from a map displayed on a projector; to a colour-blind audience.</p>
 </div>
 <div class="section" id="mylar">
 <h3>Mylar<a class="headerlink" href="#mylar" title="Permalink to this headline">¶</a></h3>
 <p>The traditional use of Mylar in a concept familar to the GIS community, uDig will feature the
-ability to &#8220;fade out&#8221; information to reveal the layer being worked with.</p>
+ability to “fade out” information to reveal the layer being worked with.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="50%" />
@@ -176,7 +165,7 @@ copied or pasted.</p>
 <div class="section" id="new-map-preferences">
 <h3>New Map Preferences<a class="headerlink" href="#new-map-preferences" title="Permalink to this headline">¶</a></h3>
 <p>Some new preferences have been added for default map creation. For preferences choose the menu item:
-<em class="menuselection">Window ‣ Preferences</em>. Some of the new preferences are:</p>
+<span class="menuselection">Window ‣ Preferences</span>. Some of the new preferences are:</p>
 <ul class="simple">
 <li>Map Background color</li>
 <li>Render transparencies (on is slower but more attractive)</li>
@@ -191,7 +180,7 @@ copied or pasted.</p>
 <h3>Reshape Operation<a class="headerlink" href="#reshape-operation" title="Permalink to this headline">¶</a></h3>
 <p>The reshape operation can be used to manipulate your data in an ad-hoc manner. The reshape operation
 allows you to list the attributes of the output you desire; defining each attribute using a short
-<a class="reference internal" href="../concepts/Constraint Query Language.html"><em>Constraint Query Language</em></a> expression.</p>
+<a class="reference internal" href="../concepts/Constraint Query Language.html"><span class="doc">Constraint Query Language</span></a> expression.</p>
 <ul class="simple">
 <li>To include a column of data; list the attribute name - with the same attribute name as the
 expression
@@ -203,7 +192,7 @@ NOTE=DESCRIPTION</li>
 VERSION=1.0</li>
 <li>To calculate a column of data; create an attribute with an expression
 DENSITY=POPULATION/area(THE_GEOM)</li>
-<li>To remove a column of data; simply don&#8217;t include it in your output</li>
+<li>To remove a column of data; simply don’t include it in your output</li>
 </ul>
 <p>The Reshape operation can be performed on any vector data.</p>
 </div>
@@ -232,7 +221,7 @@ dropping the link will load the linked layers in the current map or open a new m
 </div>
 <div class="section" id="location-view">
 <h3>Location View<a class="headerlink" href="#location-view" title="Permalink to this headline">¶</a></h3>
-<p>A &#8220;location&#8221; view has been added. The view allows an address to be entered and will show a list of
+<p>A “location” view has been added. The view allows an address to be entered and will show a list of
 matches. Clicking on a match will center the map on that address and flash a point at that location.</p>
 </div>
 <div class="section" id="export">
@@ -278,9 +267,9 @@ drop on to empty or non-empty maps and onto the Layers View for the same effect.
 
       </div>
 
-    <div class="footer">
-        &copy; Copyright 2013, Refractions Research and others.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Refractions Research and others.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
     </div>
   </body>
 </html>

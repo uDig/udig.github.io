@@ -2,37 +2,26 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>World Plus Image &mdash; uDig 2.0.0.RC1 User Guide</title>
-    
+    <title>World Plus Image &#8212; uDig 2.3.0.RC1 User Guide</title>
     <link rel="stylesheet" href="../_static/udig.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/print.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '2.0.0-SNAPSHOT',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  false
-      };
-    </script>
+    <link rel="stylesheet" type="text/css" href="../_static/print.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
     <script type="text/javascript" src="../_static/theme_extras.js"></script>
     <link rel="shortcut icon" href="../_static/udig.ico"/>
-    <link rel="top" title="uDig 2.0.0.RC1 User Guide" href="../index.html" />
-    <link rel="up" title="File Formats" href="File Formats.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Geospatial" href="Geospatial.html" />
     <link rel="prev" title="Shapefile" href="Shapefile.html" /> 
-  </head>
-  <body>
+  </head><body>
       <div class="header">
         <div class="wrap">
             <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
@@ -67,12 +56,12 @@
 <h1>World Plus Image<a class="headerlink" href="#world-plus-image" title="Permalink to this headline">¶</a></h1>
 <p>To add a normal image, for example a jpg or a gif, you will need to provide a <strong>world</strong> file, a
 small text file that says where the corners of the image is.</p>
-<p>This page specifically covers the combination of a normal image format with a &#8220;world&#8221; file. A few
-image formats have well known ways of encoding location information in the image &#8220;metadata&#8221; fields.
-As an example a TIFF file with spatial metadata is known as a <a class="reference internal" href="GeoTIFF.html"><em>GeoTIFF</em></a>.</p>
+<p>This page specifically covers the combination of a normal image format with a “world” file. A few
+image formats have well known ways of encoding location information in the image “metadata” fields.
+As an example a TIFF file with spatial metadata is known as a <a class="reference internal" href="GeoTIFF.html"><span class="doc">GeoTIFF</span></a>.</p>
 <div class="section" id="image-files">
 <h2>Image Files<a class="headerlink" href="#image-files" title="Permalink to this headline">¶</a></h2>
-<p>An image file is recognized as being in the &#8220;World plus Image&#8221; format if it is part of a file set
+<p>An image file is recognized as being in the “World plus Image” format if it is part of a file set
 consisting of the following:</p>
 <table border="1" class="docutils">
 <colgroup>
@@ -81,7 +70,7 @@ consisting of the following:</p>
 <col width="57%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td>&nbsp;</td>
+<tr class="row-odd"><td>&#160;</td>
 <td><strong>Example</strong></td>
 <td><strong>Description</strong></td>
 </tr>
@@ -91,13 +80,13 @@ consisting of the following:</p>
 </tr>
 <tr class="row-odd"><td>World File</td>
 <td>filename.jgw</td>
-<td>contains the &#8220;world file&#8221; information letting us
+<td>contains the “world file” information letting us
 know where to draw the raster on the map</td>
 </tr>
 <tr class="row-even"><td>PRJ File</td>
 <td>filename.prj</td>
 <td>Optional file that defines the coordinates used
-in the &#8220;world file&#8221; above</td>
+in the “world file” above</td>
 </tr>
 </tbody>
 </table>
@@ -154,12 +143,12 @@ rasters count down from the upper left corner</td>
 </tr>
 <tr class="row-even"><td>5</td>
 <td>-179.9820349282</td>
-<td>Translation, usually &#8220;easting&#8221; location of the
+<td>Translation, usually “easting” location of the
 upper left pixel (ie column 0)</td>
 </tr>
 <tr class="row-odd"><td>6</td>
 <td>89.9820359281</td>
-<td>Translation, usually &#8220;northing&#8221; location of the
+<td>Translation, usually “northing” location of the
 upper left pixel (ie row 0)</td>
 </tr>
 </tbody>
@@ -177,7 +166,7 @@ with the WKT definition of the coordinate system that should be used.</li>
 <p>If your image is <strong>world.jpg</strong> then you need a <strong>world.jgw</strong> file and optionally a <strong>world.prj</strong>
 file.</p>
 <p>An example world.jgw</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="mf">0.0359281435</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">0.0359281435</span>
 <span class="mf">0.0000000000</span>
 <span class="mf">0.0000000000</span>
 <span class="o">-</span><span class="mf">0.0359281437</span>
@@ -188,7 +177,7 @@ file.</p>
 <p>An example world.prj is:</p>
 <dl class="docutils">
 <dt>::</dt>
-<dd>GEOGCS[&#8220;GCS_WGS_1984&#8221;, DATUM[&#8220;WGS_1984&#8221;, SPHEROID[&#8220;WGS_1984&#8221;,6378137,298.257223563]], PRIMEM[&#8220;Greenwich&#8221;,0], UNIT[&#8220;Degree&#8221;,0.017453292519943295]]</dd>
+<dd>GEOGCS[“GCS_WGS_1984”, DATUM[“WGS_1984”, SPHEROID[“WGS_1984”,6378137,298.257223563]], PRIMEM[“Greenwich”,0], UNIT[“Degree”,0.017453292519943295]]</dd>
 </dl>
 <p><strong>Related reference</strong></p>
 <ul class="simple">
@@ -212,9 +201,9 @@ file.</p>
 
       </div>
 
-    <div class="footer">
-        &copy; Copyright 2013, Refractions Research and others.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Refractions Research and others.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
     </div>
   </body>
 </html>

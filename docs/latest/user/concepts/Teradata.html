@@ -2,37 +2,26 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Teradata &mdash; uDig 2.0.0.RC1 User Guide</title>
-    
+    <title>Teradata &#8212; uDig 2.3.0.RC1 User Guide</title>
     <link rel="stylesheet" href="../_static/udig.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/print.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '2.0.0-SNAPSHOT',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  false
-      };
-    </script>
+    <link rel="stylesheet" type="text/css" href="../_static/print.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
     <script type="text/javascript" src="../_static/theme_extras.js"></script>
     <link rel="shortcut icon" href="../_static/udig.ico"/>
-    <link rel="top" title="uDig 2.0.0.RC1 User Guide" href="../index.html" />
-    <link rel="up" title="Service" href="Service.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Tileset" href="Tileset.html" />
     <link rel="prev" title="PostGIS" href="PostGIS.html" /> 
-  </head>
-  <body>
+  </head><body>
       <div class="header">
         <div class="wrap">
             <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
@@ -84,7 +73,7 @@ geospatial extension to be installed.</p>
 performance issues with large data sets and a potential application freeze when editing features.
 There is a patch to address these issues, which can be installed in the following way:</p>
 <ul class="simple">
-<li>Follow the instructions to <a class="reference internal" href="../tasks/Finding new plugins.html"><em>install a new plugin</em></a>.</li>
+<li>Follow the instructions to <a class="reference internal" href="../tasks/Finding new plugins.html"><span class="doc">install a new plugin</span></a>.</li>
 <li>When asked for the site location (step 5) enter <a class="reference external" href="http://udig.refractions.net/files/update-teradata/">http://udig.refractions.net/files/update-teradata/</a></li>
 <li>After completing the wizard, restart uDig.</li>
 </ul>
@@ -117,21 +106,22 @@ logging.</p>
 <li>Name of application (i.e. uDig)</li>
 <li>Authenticated username (if set up)</li>
 <li>Hostname (if available)</li>
-<li>Type of statement (i.e. &#8220;SELECT&#8221;, &#8220;INSERT&#8221;, &#8220;DELETE&#8221;)</li>
+<li>Type of statement (i.e. “SELECT”, “INSERT”, “DELETE”)</li>
 </ul>
 <p>The only details that can be modified from within uDig is the Name of application and the Connection
-Mode .&nbsp; See the <a class="reference internal" href="../reference/Teradata page.html"><em>Teradata page</em></a> for more details.</p>
+Mode .&nbsp; See the <a class="reference internal" href="../reference/Teradata page.html"><span class="doc">Teradata page</span></a> for more details.</p>
 </div>
 <div class="section" id="spatial-indexes">
 <h2>Spatial indexes<a class="headerlink" href="#spatial-indexes" title="Permalink to this headline">¶</a></h2>
 <p>uDig will read from a spatial index if its exists. The convention for a spatial index table name is:</p>
-<div class="highlight-python"><pre>[TABLENAME]_[GEOMETRYCOLUMN]_idx</pre>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">TABLENAME</span><span class="p">]</span><span class="n">_</span><span class="p">[</span><span class="n">GEOMETRYCOLUMN</span><span class="p">]</span><span class="n">_idx</span>
+</pre></div>
 </div>
-<p>So for a layer called &#8220;STATES&#8221; with a geometry column called &#8220;GEOM&#8221;, the index table should be
+<p>So for a layer called “STATES” with a geometry column called “GEOM”, the index table should be
 called <strong>STATES_GEOM_idx</strong>.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">Make sure to match the case of all tables and columns. If the geometry column is called &#8220;GEOM&#8221;
+<p class="last">Make sure to match the case of all tables and columns. If the geometry column is called “GEOM”
 (upper case) and the index created is called STATES_geom_idx (lower case), the index will not be
 properly linked to the table.</p>
 </div>
@@ -145,13 +135,13 @@ properly linked to the table.</p>
 <div class="section" id="geometry-column">
 <h2>Geometry column<a class="headerlink" href="#geometry-column" title="Permalink to this headline">¶</a></h2>
 <p>As per the SQL/MM standard, in order to make a Teradata table spatially enabled, an entry needs to
-be created for that table in the <tt class="docutils literal"><span class="pre">geometry_columns</span></tt> table. This table is stored, like all other
+be created for that table in the <code class="docutils literal notranslate"><span class="pre">geometry_columns</span></code> table. This table is stored, like all other
 spatially-related tables, in the SYSSPATIAL database.</p>
 </div>
 <div class="section" id="tessellation">
 <h2>Tessellation<a class="headerlink" href="#tessellation" title="Permalink to this headline">¶</a></h2>
-<p>Tessellation is the name of Teradata&#8217;s spatial index. In order to activate tessellation for a given
-layer, an entry (row) needs to be placed in the <tt class="docutils literal"><span class="pre">SYSSPATIAL.tessellation</span></tt> table. This table should
+<p>Tessellation is the name of Teradata’s spatial index. In order to activate tessellation for a given
+layer, an entry (row) needs to be placed in the <code class="docutils literal notranslate"><span class="pre">SYSSPATIAL.tessellation</span></code> table. This table should
 have the following schema:</p>
 <table border="1" class="docutils">
 <colgroup>
@@ -229,7 +219,7 @@ downloaded prior to use.</p>
 <a class="reference external" href="http://downloads.teradata.com/download/connectivity/jdbc-driver">http://downloads.teradata.com/download/connectivity/jdbc-driver</a></p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">You will need to log in to Teradata&#8217;s site in order to download this artifact.</p>
+<p class="last">You will need to log in to Teradata’s site in order to download this artifact.</p>
 </div>
 <p>Extract the contents of the archive to any convenient directory. There should be two files in this
 archive:</p>
@@ -237,7 +227,7 @@ archive:</p>
 <li>terajdbc4.jar</li>
 <li>tdgssconfig.jar</li>
 </ul>
-<p>Then navigate to <em class="menuselection">Layer ‣ Add... ‣ Teradata</em>. You will be shown a dialog (see below). Insert the
+<p>Then navigate to <span class="menuselection">Layer ‣ Add… ‣ Teradata</span>. You will be shown a dialog (see below). Insert the
 locations of the two files extracted above into the dialog box and then click <strong>Restart</strong>.</p>
 <div class="figure align-center">
 <img alt="" src="../_images/td_drivers.png" />
@@ -248,9 +238,9 @@ restart uDig, and try again.</p>
 <div class="figure align-center">
 <img alt="" src="../_images/td_drivers_admin.png" />
 </div>
-<p>After uDig restarts, navigate back to <em class="menuselection">Layer ‣ Add... ‣ Teradata</em>. If everything was installed
+<p>After uDig restarts, navigate back to <span class="menuselection">Layer ‣ Add… ‣ Teradata</span>. If everything was installed
 correctly, you will now be shown a dialog box for <strong>Teradata Connection Settings.</strong> Please continue
-on to the <a class="reference internal" href="../reference/Teradata page.html"><em>Teradata connection page</em></a> for details.</p>
+on to the <a class="reference internal" href="../reference/Teradata page.html"><span class="doc">Teradata connection page</span></a> for details.</p>
 </div>
 </div>
 
@@ -268,9 +258,9 @@ on to the <a class="reference internal" href="../reference/Teradata page.html"><
 
       </div>
 
-    <div class="footer">
-        &copy; Copyright 2013, Refractions Research and others.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Refractions Research and others.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
     </div>
   </body>
 </html>

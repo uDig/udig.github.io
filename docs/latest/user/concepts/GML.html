@@ -2,37 +2,26 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>GML &mdash; uDig 2.0.0.RC1 User Guide</title>
-    
+    <title>GML &#8212; uDig 2.3.0.RC1 User Guide</title>
     <link rel="stylesheet" href="../_static/udig.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/print.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '2.0.0-SNAPSHOT',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  false
-      };
-    </script>
+    <link rel="stylesheet" type="text/css" href="../_static/print.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
     <script type="text/javascript" src="../_static/theme_extras.js"></script>
     <link rel="shortcut icon" href="../_static/udig.ico"/>
-    <link rel="top" title="uDig 2.0.0.RC1 User Guide" href="../index.html" />
-    <link rel="up" title="File Formats" href="File Formats.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Shapefile" href="Shapefile.html" />
     <link rel="prev" title="GeoTIFF" href="GeoTIFF.html" /> 
-  </head>
-  <body>
+  </head><body>
       <div class="header">
         <div class="wrap">
             <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
@@ -66,14 +55,14 @@
   <div class="section" id="gml">
 <h1>GML<a class="headerlink" href="#gml" title="Permalink to this headline">¶</a></h1>
 <p>An XML document containing spatial data. Often these documents are captured on disk as a file with
-the extension &#8221;.gml&#8221;.</p>
-<p>Please be aware that a &#8220;gml&#8221; file is actually a normal XML document; it just happens to be a
-document is based on the &#8220;abstract&#8221; Geographic Markup Language specifications.</p>
+the extension “.gml”.</p>
+<p>Please be aware that a “gml” file is actually a normal XML document; it just happens to be a
+document is based on the “abstract” Geographic Markup Language specifications.</p>
 <div class="section" id="gml-files">
 <h2>GML Files<a class="headerlink" href="#gml-files" title="Permalink to this headline">¶</a></h2>
 <p>GML files in udig can currently only be supported if they meet two very strict restrictions:</p>
 <ul class="simple">
-<li>filename.xsd - an xml schema document defining the &#8220;data product&#8221; being loaded</li>
+<li>filename.xsd - an xml schema document defining the “data product” being loaded</li>
 <li>filename.gml - an xml document defined against the schema provided above</li>
 </ul>
 <p>We only support GML2 based schemas with simple content at this time. There is improved GML support
@@ -82,11 +71,11 @@ for WFS 1.1 access; this has not been packaged for offline use at this time.</p>
 <div class="section" id="geography-markup-language">
 <h2>Geography Markup Language<a class="headerlink" href="#geography-markup-language" title="Permalink to this headline">¶</a></h2>
 <p>Most markup language specifications are published with the idea of defining a document format that
-applications can use to share information. I am afraid that &#8220;GML&#8221; handles things a little bit
+applications can use to share information. I am afraid that “GML” handles things a little bit
 differently - it provides an XML Schema that can be used as a starting point when an organization
 defines a data product.</p>
-<p>As such we really do need access to the description of the data product in order to open up a &#8220;gml
-document&#8221;.</p>
+<p>As such we really do need access to the description of the data product in order to open up a “gml
+document”.</p>
 <p><strong>Related reference</strong></p>
 <p><a class="reference external" href="http://www.opengeospatial.org/standards/gml">Geography Markup Language</a> (we support GML 2.1.2 at
 this time)</p>
@@ -107,9 +96,9 @@ this time)</p>
 
       </div>
 
-    <div class="footer">
-        &copy; Copyright 2013, Refractions Research and others.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Refractions Research and others.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
     </div>
   </body>
 </html>

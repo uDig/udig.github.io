@@ -2,37 +2,26 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Constraint Query Language &mdash; uDig 2.0.0.RC1 User Guide</title>
-    
+    <title>Constraint Query Language &#8212; uDig 2.3.0.RC1 User Guide</title>
     <link rel="stylesheet" href="../_static/udig.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/print.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '2.0.0-SNAPSHOT',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  false
-      };
-    </script>
+    <link rel="stylesheet" type="text/css" href="../_static/print.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
     <script type="text/javascript" src="../_static/theme_extras.js"></script>
     <link rel="shortcut icon" href="../_static/udig.ico"/>
-    <link rel="top" title="uDig 2.0.0.RC1 User Guide" href="../index.html" />
-    <link rel="up" title="Geospatial" href="Geospatial.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Coordinate Reference System" href="Coordinate Reference System.html" />
     <link rel="prev" title="Geospatial" href="Geospatial.html" /> 
-  </head>
-  <body>
+  </head><body>
       <div class="header">
         <div class="wrap">
             <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
@@ -77,87 +66,107 @@ specification).</p>
 used to define the selected Features in a uDig layer.</p>
 <div class="section" id="comparisons">
 <h3>Comparisons<a class="headerlink" href="#comparisons" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">CITY</span> <span class="o">=</span> <span class="s1">&#39;Nelson&#39;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CITY</span> <span class="o">=</span> <span class="s1">&#39;Nelson&#39;</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">ATTR1</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="p">((</span><span class="mi">2</span> <span class="o">/</span> <span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="mi">4</span><span class="p">))</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ATTR1</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="p">((</span><span class="mi">2</span> <span class="o">/</span> <span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="mi">4</span><span class="p">))</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">ATTR1</span> <span class="o">&lt;</span> <span class="nb">abs</span><span class="p">(</span><span class="n">ATTR2</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ATTR1</span> <span class="o">&lt;</span> <span class="nb">abs</span><span class="p">(</span><span class="n">ATTR2</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><pre>ATTR1 &lt; 10 AND ATTR2 &lt; 2 OR ATTR3 &gt; 10</pre>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ATTR1</span> <span class="o">&lt;</span> <span class="mi">10</span> <span class="n">AND</span> <span class="n">ATTR2</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="n">OR</span> <span class="n">ATTR3</span> <span class="o">&gt;</span> <span class="mi">10</span>
+</pre></div>
 </div>
 </div>
 <div class="section" id="text">
 <h3>Text<a class="headerlink" href="#text" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python"><pre>ATTR1 LIKE 'abc%'</pre>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ATTR1</span> <span class="n">LIKE</span> <span class="s1">&#39;abc%&#39;</span>
+</pre></div>
 </div>
-<div class="highlight-python"><pre>ATTR1 NOT LIKE 'abc%'</pre>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ATTR1</span> <span class="n">NOT</span> <span class="n">LIKE</span> <span class="s1">&#39;abc%&#39;</span>
+</pre></div>
 </div>
 </div>
 <div class="section" id="null">
 <h3>Null<a class="headerlink" href="#null" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python"><pre>ATTR1 IS NULL</pre>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ATTR1</span> <span class="n">IS</span> <span class="n">NULL</span>
+</pre></div>
 </div>
-<div class="highlight-python"><pre>ATTR1 IS NOT NULL</pre>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ATTR1</span> <span class="n">IS</span> <span class="n">NOT</span> <span class="n">NULL</span>
+</pre></div>
 </div>
 </div>
 <div class="section" id="exists">
 <h3>Exists<a class="headerlink" href="#exists" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python"><pre>ATTR1 EXISTS</pre>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ATTR1</span> <span class="n">EXISTS</span>
+</pre></div>
 </div>
-<div class="highlight-python"><pre>ATTR1 DOES-NOT-EXIST</pre>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ATTR1</span> <span class="n">DOES</span><span class="o">-</span><span class="n">NOT</span><span class="o">-</span><span class="n">EXIST</span>
+</pre></div>
 </div>
 </div>
 <div class="section" id="between">
 <h3>Between<a class="headerlink" href="#between" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python"><pre>ATTR1 BETWEEN 10 AND 20</pre>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ATTR1</span> <span class="n">BETWEEN</span> <span class="mi">10</span> <span class="n">AND</span> <span class="mi">20</span>
+</pre></div>
 </div>
 </div>
 <div class="section" id="spatial-relationships">
 <h3>Spatial Relationships<a class="headerlink" href="#spatial-relationships" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python"><pre>CONTAINS(ATTR1, POINT(1 2))</pre>
-</div>
-<div class="highlight-python"><pre>CROSS(ATTR1, LINESTRING(1 2, 10 15))</pre>
-</div>
-<div class="highlight-python"><pre>INTERSECT(ATTR1, GEOMETRYCOLLECTION (POINT (10 10),POINT (30 30),LINESTRING (15 15, 20 20)) )</pre>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">BBOX</span><span class="p">(</span><span class="n">ATTR1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">40</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CONTAINS</span><span class="p">(</span><span class="n">ATTR1</span><span class="p">,</span> <span class="n">POINT</span><span class="p">(</span><span class="mi">1</span> <span class="mi">2</span><span class="p">))</span>
 </pre></div>
 </div>
-<div class="highlight-python"><pre>DWITHIN(ATTR1, POINT(1 2), 10, kilometers)</pre>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CROSS</span><span class="p">(</span><span class="n">ATTR1</span><span class="p">,</span> <span class="n">LINESTRING</span><span class="p">(</span><span class="mi">1</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span> <span class="mi">15</span><span class="p">))</span>
+</pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">BBOX</span><span class="p">(</span><span class="n">ATTR1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">40</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">INTERSECT</span><span class="p">(</span><span class="n">ATTR1</span><span class="p">,</span> <span class="n">GEOMETRYCOLLECTION</span> <span class="p">(</span><span class="n">POINT</span> <span class="p">(</span><span class="mi">10</span> <span class="mi">10</span><span class="p">),</span><span class="n">POINT</span> <span class="p">(</span><span class="mi">30</span> <span class="mi">30</span><span class="p">),</span><span class="n">LINESTRING</span> <span class="p">(</span><span class="mi">15</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span> <span class="mi">20</span><span class="p">))</span> <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">BBOX</span><span class="p">(</span><span class="n">ATTR1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">40</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">DWITHIN</span><span class="p">(</span><span class="n">ATTR1</span><span class="p">,</span> <span class="n">POINT</span><span class="p">(</span><span class="mi">1</span> <span class="mi">2</span><span class="p">),</span> <span class="mi">10</span><span class="p">,</span> <span class="n">kilometers</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">BBOX</span><span class="p">(</span><span class="n">ATTR1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">40</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="time">
 <h3>Time<a class="headerlink" href="#time" title="Permalink to this headline">¶</a></h3>
 <p>Before a date.</p>
-<div class="highlight-python"><pre>ATTR1 BEFORE 2006-11-30T01:30:00Z</pre>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ATTR1</span> <span class="n">BEFORE</span> <span class="mi">2006</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">30</span><span class="n">T01</span><span class="p">:</span><span class="mi">30</span><span class="p">:</span><span class="mi">00</span><span class="n">Z</span>
+</pre></div>
 </div>
 <p>Before a period</p>
-<div class="highlight-python"><pre>ATTR1 BEFORE 2006-11-30T01:30:00Z/2006-12-31T01:30:00Z</pre>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ATTR1</span> <span class="n">BEFORE</span> <span class="mi">2006</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">30</span><span class="n">T01</span><span class="p">:</span><span class="mi">30</span><span class="p">:</span><span class="mi">00</span><span class="n">Z</span><span class="o">/</span><span class="mi">2006</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">31</span><span class="n">T01</span><span class="p">:</span><span class="mi">30</span><span class="p">:</span><span class="mi">00</span><span class="n">Z</span>
+</pre></div>
 </div>
 <p>After a date.</p>
-<div class="highlight-python"><pre>ATTR1 AFTER 2006-11-30T01:30:00Z</pre>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ATTR1</span> <span class="n">AFTER</span> <span class="mi">2006</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">30</span><span class="n">T01</span><span class="p">:</span><span class="mi">30</span><span class="p">:</span><span class="mi">00</span><span class="n">Z</span>
+</pre></div>
 </div>
 <p>After a period</p>
-<div class="highlight-python"><pre>ATTR1 AFTER 2006-11-30T01:30:00Z/2006-12-31T01:30:00Z</pre>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ATTR1</span> <span class="n">AFTER</span> <span class="mi">2006</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">30</span><span class="n">T01</span><span class="p">:</span><span class="mi">30</span><span class="p">:</span><span class="mi">00</span><span class="n">Z</span><span class="o">/</span><span class="mi">2006</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">31</span><span class="n">T01</span><span class="p">:</span><span class="mi">30</span><span class="p">:</span><span class="mi">00</span><span class="n">Z</span>
+</pre></div>
 </div>
 <p>Temporal predicate with dutation (ten day after 2006-11-30T01:30:00Z )</p>
-<div class="highlight-python"><pre>ATTR1 AFTER 2006-11-30T01:30:00Z/P10D</pre>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ATTR1</span> <span class="n">AFTER</span> <span class="mi">2006</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">30</span><span class="n">T01</span><span class="p">:</span><span class="mi">30</span><span class="p">:</span><span class="mi">00</span><span class="n">Z</span><span class="o">/</span><span class="n">P10D</span>
+</pre></div>
 </div>
-<div class="highlight-python"><pre>ATTR1 AFTER 2006-11-30T01:30:00Z/T10H</pre>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ATTR1</span> <span class="n">AFTER</span> <span class="mi">2006</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">30</span><span class="n">T01</span><span class="p">:</span><span class="mi">30</span><span class="p">:</span><span class="mi">00</span><span class="n">Z</span><span class="o">/</span><span class="n">T10H</span>
+</pre></div>
 </div>
 <p>During predicate</p>
-<div class="highlight-python"><pre>ATTR1 DURING 2006-11-30T01:30:00Z/2006-12-31T01:30:00Z</pre>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ATTR1</span> <span class="n">DURING</span> <span class="mi">2006</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">30</span><span class="n">T01</span><span class="p">:</span><span class="mi">30</span><span class="p">:</span><span class="mi">00</span><span class="n">Z</span><span class="o">/</span><span class="mi">2006</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">31</span><span class="n">T01</span><span class="p">:</span><span class="mi">30</span><span class="p">:</span><span class="mi">00</span><span class="n">Z</span>
+</pre></div>
 </div>
 </div>
 <div class="section" id="compound-attributes">
 <h3>Compound Attributes<a class="headerlink" href="#compound-attributes" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python"><pre>gmd:MD_Metadata.gmd:identificationInfo.gmd:MD_DataIdentification.gmd:abstract LIKE  'abc%'</pre>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gmd</span><span class="p">:</span><span class="n">MD_Metadata</span><span class="o">.</span><span class="n">gmd</span><span class="p">:</span><span class="n">identificationInfo</span><span class="o">.</span><span class="n">gmd</span><span class="p">:</span><span class="n">MD_DataIdentification</span><span class="o">.</span><span class="n">gmd</span><span class="p">:</span><span class="n">abstract</span> <span class="n">LIKE</span>  <span class="s1">&#39;abc%&#39;</span>
+</pre></div>
 </div>
 <div class="section" id="expressions">
 <h4>Expressions<a class="headerlink" href="#expressions" title="Permalink to this headline">¶</a></h4>
@@ -166,7 +175,7 @@ expressions are strictly untyped; the following produces the same result:</p>
 <ul class="simple">
 <li>sin( 0 )</li>
 <li>sin( 0.0 )</li>
-<li>sin( &#8216;0&#8217; )</li>
+<li>sin( ‘0’ )</li>
 </ul>
 <p>In many cases you will see several functions defined with similar names; differing only in how they
 interpret the provided argument expressions. The functions functions that produce a boolean value
@@ -175,184 +184,189 @@ are <strong>very</strong> similar to a filter.</p>
 </div>
 <div class="section" id="literals">
 <h3>Literals<a class="headerlink" href="#literals" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="mi">1</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="mf">3.14159</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">3.14159</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="s1">&#39;abc&#39;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;abc&#39;</span>
 </pre></div>
 </div>
-<div class="highlight-python"><pre>2006-11-30T01:30:00Z</pre>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">2006</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">30</span><span class="n">T01</span><span class="p">:</span><span class="mi">30</span><span class="p">:</span><span class="mi">00</span><span class="n">Z</span>
+</pre></div>
 </div>
 </div>
 <div class="section" id="geometry">
 <h3>Geometry<a class="headerlink" href="#geometry" title="Permalink to this headline">¶</a></h3>
 <p>Geometry literals are provided in Well Known Text format:</p>
-<div class="highlight-python"><pre>POINT(1 2)</pre>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">POINT</span><span class="p">(</span><span class="mi">1</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
 </div>
-<div class="highlight-python"><pre>LINESTRING (15 15, 20 20)</pre>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">LINESTRING</span> <span class="p">(</span><span class="mi">15</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span> <span class="mi">20</span><span class="p">)</span>
+</pre></div>
 </div>
-<p>This is the same format used by <a class="reference internal" href="PostGIS.html"><em>PostGIS</em></a> and other applications.</p>
+<p>This is the same format used by <a class="reference internal" href="PostGIS.html"><span class="doc">PostGIS</span></a> and other applications.</p>
 </div>
 <div class="section" id="attribute">
 <h3>Attribute<a class="headerlink" href="#attribute" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">NAME</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">NAME</span>
 </pre></div>
 </div>
-<div class="highlight-python"><pre>prefix:name</pre>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">prefix</span><span class="p">:</span><span class="n">name</span>
+</pre></div>
 </div>
 </div>
 <div class="section" id="math">
 <h3>Math<a class="headerlink" href="#math" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">3</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">3</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="mi">3</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="mi">3</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="section" id="functions">
 <h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">sin</span><span class="p">(</span> <span class="n">pi</span><span class="p">()</span> <span class="o">/</span> <span class="mi">4</span> <span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sin</span><span class="p">(</span> <span class="n">pi</span><span class="p">()</span> <span class="o">/</span> <span class="mi">4</span> <span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">sin</span><span class="p">(</span> <span class="n">toRadians</span><span class="p">(</span> <span class="n">ANGLE</span> <span class="p">)</span> <span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sin</span><span class="p">(</span> <span class="n">toRadians</span><span class="p">(</span> <span class="n">ANGLE</span> <span class="p">)</span> <span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">getX</span><span class="p">(</span> <span class="n">pointN</span><span class="p">(</span> <span class="n">THE_GEOM</span><span class="p">,</span> <span class="mi">0</span> <span class="p">)</span> <span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">getX</span><span class="p">(</span> <span class="n">pointN</span><span class="p">(</span> <span class="n">THE_GEOM</span><span class="p">,</span> <span class="mi">0</span> <span class="p">)</span> <span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">area</span><span class="p">(</span> <span class="n">THE_GEOM</span> <span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">area</span><span class="p">(</span> <span class="n">THE_GEOM</span> <span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">ID</span><span class="p">()</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ID</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>Function List:</p>
-<div class="highlight-python"><pre>double Area(Geometry)   // alternate implementation
-double area(Geometry)
-long abs( number )      // number treated as long
-double abs_2( number )  // number treated as double
-float abs_3( number )   // number treated as float
-int abs_4( number )    // number treated as int
-double acos( cos )
-double asin( sin )
-double atan( tan )
-double atan2( x, y )    // convert x, y to theta
-boolean between( value, min, max )
-boundary(Geometry)
-boundaryDimension(Geometry)
-buffer(Geometry, double)
-bufferWithSegments(Geometry, double, int)
-double ceil( number )
-centroid(Geometry)
-contains(Geometry, Geometry)
-convexHull(Geometry)
-double cos( radians )
-crosses(Geometry, Geometry)
-difference(Geometry, Geometry)
-dimension(Geometry)
-disjoint(Geometry, Geometry)
-distance(Geometry, Geometry)
-double2bool(double)
-endPoint(Geometry)
-envelope(Geometry)
-equalsExact(Geometry, Geometry)
-equalsExactTolerance(Geometry, Geometry, double)
-equalTo(Object, Object)
-double exp( number )
-exteriorRing(Geometry)
-double floor( number )
-String geometryType(Geometry)
-Geometry geomFromWKT(String)
-double geomLength(Geometry)
-Geometry getGeometryN(Geometry, int)
-double getX( Point )
-double getY( Point )
-boolean greaterEqualThan(Object, Object)
-boolean greaterThan(Object, Object)
-double IEEEremainder( dividend, divisor )
-value if_then_else(boolean, value, value )
-in2(value, Object, Object) // tests to is if value is equal to one of the listed objects
-in3(value, Object, Object, Object)
-in4(value, Object, Object, Object, Object)
-in5(value, Object, Object, Object, Object, Object)
-in6(value, Object, Object, Object, Object, Object, Object)
-in7(value, Object, Object, Object, Object, Object, Object, Object)
-in8(value, Object, Object, Object, Object, Object, Object, Object, Object)
-in9(value, Object, Object, Object, Object, Object, Object, Object, Object, Object)
-in10(value, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object)
-boolean int2bbool(int)
-double int2ddouble(int)
-Point interiorPoint(Geometry)
-LinearRing interiorRingN(Geometry, int)
-Geometry intersection(Geometry, Geometry)
-boolean intersects(Geometry, Geometry)
-boolean isClosed(Geometry)
-boolean isEmpty(Geometry)
-isLike(String, String)
-isNull(Object)
-isRing(Geometry)
-isSimple(Geometry)
-isValid(Geometry)
-isWithinDistance(Geometry, Geometry, double)
-lessEqualThan(Object, Object)
-lessThan(Object, Object)
-double log( number )
-double max( number, number )
-float max_2( number, number )
-int max_3( number, number )
-long max_4( number, number )
-double min( number, number )
-float min_2( number, number )
-int min_3( number, number )
-long min_4( number, number )
-not(boolean)
-notEqualTo(Object, Object)
-numGeometries(Geometry)
-numInteriorRing(Geometry)
-numPoints(Geometry)
-overlaps(Geometry, Geometry)
-parseBoolean(String)
-parseDouble(String)
-parseInt(String)
-pointN(Geometry, int)
-double pow( base, exponent )
-double random()
-String relate(Geometry, Geometry)
-boolean relatePattern(Geometry, Geometry, String)
-double rint( number ) // closest integer
-int round( number )
-long round_2( number )
-int roundDouble( number ) // number is treated as a double
-double sin( radians )
-double sqrt( number )
-startPoint(Geometry)
-strConcat(String, String)
-strEndsWith(String, String)
-strEqualsIgnoreCase(String, String)
-strIndexOf(String, String)
-strLastIndexOf(String, String)
-strLength(String)
-strMatches(String, String)
-strStartsWith(String, String)
-strSubstring(String, int, int)
-strSubstringStart(String, int)
-strTrim(String)
-symDifference(Geometry, Geometry)
-double tan( radians )
-touches(Geometry, Geometry)
-double toDegrees( radians )
-double toRadians( degrees )
-String toWKT(Geometry)
-union(Geometry, Geometry)
-within(Geometry, Geometry)</pre>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">double</span> <span class="n">Area</span><span class="p">(</span><span class="n">Geometry</span><span class="p">)</span>   <span class="o">//</span> <span class="n">alternate</span> <span class="n">implementation</span>
+<span class="n">double</span> <span class="n">area</span><span class="p">(</span><span class="n">Geometry</span><span class="p">)</span>
+<span class="n">long</span> <span class="nb">abs</span><span class="p">(</span> <span class="n">number</span> <span class="p">)</span>      <span class="o">//</span> <span class="n">number</span> <span class="n">treated</span> <span class="k">as</span> <span class="n">long</span>
+<span class="n">double</span> <span class="n">abs_2</span><span class="p">(</span> <span class="n">number</span> <span class="p">)</span>  <span class="o">//</span> <span class="n">number</span> <span class="n">treated</span> <span class="k">as</span> <span class="n">double</span>
+<span class="nb">float</span> <span class="n">abs_3</span><span class="p">(</span> <span class="n">number</span> <span class="p">)</span>   <span class="o">//</span> <span class="n">number</span> <span class="n">treated</span> <span class="k">as</span> <span class="nb">float</span>
+<span class="nb">int</span> <span class="n">abs_4</span><span class="p">(</span> <span class="n">number</span> <span class="p">)</span>    <span class="o">//</span> <span class="n">number</span> <span class="n">treated</span> <span class="k">as</span> <span class="nb">int</span>
+<span class="n">double</span> <span class="n">acos</span><span class="p">(</span> <span class="n">cos</span> <span class="p">)</span>
+<span class="n">double</span> <span class="n">asin</span><span class="p">(</span> <span class="n">sin</span> <span class="p">)</span>
+<span class="n">double</span> <span class="n">atan</span><span class="p">(</span> <span class="n">tan</span> <span class="p">)</span>
+<span class="n">double</span> <span class="n">atan2</span><span class="p">(</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="p">)</span>    <span class="o">//</span> <span class="n">convert</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="n">to</span> <span class="n">theta</span>
+<span class="n">boolean</span> <span class="n">between</span><span class="p">(</span> <span class="n">value</span><span class="p">,</span> <span class="nb">min</span><span class="p">,</span> <span class="nb">max</span> <span class="p">)</span>
+<span class="n">boundary</span><span class="p">(</span><span class="n">Geometry</span><span class="p">)</span>
+<span class="n">boundaryDimension</span><span class="p">(</span><span class="n">Geometry</span><span class="p">)</span>
+<span class="n">buffer</span><span class="p">(</span><span class="n">Geometry</span><span class="p">,</span> <span class="n">double</span><span class="p">)</span>
+<span class="n">bufferWithSegments</span><span class="p">(</span><span class="n">Geometry</span><span class="p">,</span> <span class="n">double</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
+<span class="n">double</span> <span class="n">ceil</span><span class="p">(</span> <span class="n">number</span> <span class="p">)</span>
+<span class="n">centroid</span><span class="p">(</span><span class="n">Geometry</span><span class="p">)</span>
+<span class="n">contains</span><span class="p">(</span><span class="n">Geometry</span><span class="p">,</span> <span class="n">Geometry</span><span class="p">)</span>
+<span class="n">convexHull</span><span class="p">(</span><span class="n">Geometry</span><span class="p">)</span>
+<span class="n">double</span> <span class="n">cos</span><span class="p">(</span> <span class="n">radians</span> <span class="p">)</span>
+<span class="n">crosses</span><span class="p">(</span><span class="n">Geometry</span><span class="p">,</span> <span class="n">Geometry</span><span class="p">)</span>
+<span class="n">difference</span><span class="p">(</span><span class="n">Geometry</span><span class="p">,</span> <span class="n">Geometry</span><span class="p">)</span>
+<span class="n">dimension</span><span class="p">(</span><span class="n">Geometry</span><span class="p">)</span>
+<span class="n">disjoint</span><span class="p">(</span><span class="n">Geometry</span><span class="p">,</span> <span class="n">Geometry</span><span class="p">)</span>
+<span class="n">distance</span><span class="p">(</span><span class="n">Geometry</span><span class="p">,</span> <span class="n">Geometry</span><span class="p">)</span>
+<span class="n">double2bool</span><span class="p">(</span><span class="n">double</span><span class="p">)</span>
+<span class="n">endPoint</span><span class="p">(</span><span class="n">Geometry</span><span class="p">)</span>
+<span class="n">envelope</span><span class="p">(</span><span class="n">Geometry</span><span class="p">)</span>
+<span class="n">equalsExact</span><span class="p">(</span><span class="n">Geometry</span><span class="p">,</span> <span class="n">Geometry</span><span class="p">)</span>
+<span class="n">equalsExactTolerance</span><span class="p">(</span><span class="n">Geometry</span><span class="p">,</span> <span class="n">Geometry</span><span class="p">,</span> <span class="n">double</span><span class="p">)</span>
+<span class="n">equalTo</span><span class="p">(</span><span class="n">Object</span><span class="p">,</span> <span class="n">Object</span><span class="p">)</span>
+<span class="n">double</span> <span class="n">exp</span><span class="p">(</span> <span class="n">number</span> <span class="p">)</span>
+<span class="n">exteriorRing</span><span class="p">(</span><span class="n">Geometry</span><span class="p">)</span>
+<span class="n">double</span> <span class="n">floor</span><span class="p">(</span> <span class="n">number</span> <span class="p">)</span>
+<span class="n">String</span> <span class="n">geometryType</span><span class="p">(</span><span class="n">Geometry</span><span class="p">)</span>
+<span class="n">Geometry</span> <span class="n">geomFromWKT</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
+<span class="n">double</span> <span class="n">geomLength</span><span class="p">(</span><span class="n">Geometry</span><span class="p">)</span>
+<span class="n">Geometry</span> <span class="n">getGeometryN</span><span class="p">(</span><span class="n">Geometry</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
+<span class="n">double</span> <span class="n">getX</span><span class="p">(</span> <span class="n">Point</span> <span class="p">)</span>
+<span class="n">double</span> <span class="n">getY</span><span class="p">(</span> <span class="n">Point</span> <span class="p">)</span>
+<span class="n">boolean</span> <span class="n">greaterEqualThan</span><span class="p">(</span><span class="n">Object</span><span class="p">,</span> <span class="n">Object</span><span class="p">)</span>
+<span class="n">boolean</span> <span class="n">greaterThan</span><span class="p">(</span><span class="n">Object</span><span class="p">,</span> <span class="n">Object</span><span class="p">)</span>
+<span class="n">double</span> <span class="n">IEEEremainder</span><span class="p">(</span> <span class="n">dividend</span><span class="p">,</span> <span class="n">divisor</span> <span class="p">)</span>
+<span class="n">value</span> <span class="n">if_then_else</span><span class="p">(</span><span class="n">boolean</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">value</span> <span class="p">)</span>
+<span class="n">in2</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">Object</span><span class="p">,</span> <span class="n">Object</span><span class="p">)</span> <span class="o">//</span> <span class="n">tests</span> <span class="n">to</span> <span class="ow">is</span> <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="n">equal</span> <span class="n">to</span> <span class="n">one</span> <span class="n">of</span> <span class="n">the</span> <span class="n">listed</span> <span class="n">objects</span>
+<span class="n">in3</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">Object</span><span class="p">,</span> <span class="n">Object</span><span class="p">,</span> <span class="n">Object</span><span class="p">)</span>
+<span class="n">in4</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">Object</span><span class="p">,</span> <span class="n">Object</span><span class="p">,</span> <span class="n">Object</span><span class="p">,</span> <span class="n">Object</span><span class="p">)</span>
+<span class="n">in5</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">Object</span><span class="p">,</span> <span class="n">Object</span><span class="p">,</span> <span class="n">Object</span><span class="p">,</span> <span class="n">Object</span><span class="p">,</span> <span class="n">Object</span><span class="p">)</span>
+<span class="n">in6</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">Object</span><span class="p">,</span> <span class="n">Object</span><span class="p">,</span> <span class="n">Object</span><span class="p">,</span> <span class="n">Object</span><span class="p">,</span> <span class="n">Object</span><span class="p">,</span> <span class="n">Object</span><span class="p">)</span>
+<span class="n">in7</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">Object</span><span class="p">,</span> <span class="n">Object</span><span class="p">,</span> <span class="n">Object</span><span class="p">,</span> <span class="n">Object</span><span class="p">,</span> <span class="n">Object</span><span class="p">,</span> <span class="n">Object</span><span class="p">,</span> <span class="n">Object</span><span class="p">)</span>
+<span class="n">in8</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">Object</span><span class="p">,</span> <span class="n">Object</span><span class="p">,</span> <span class="n">Object</span><span class="p">,</span> <span class="n">Object</span><span class="p">,</span> <span class="n">Object</span><span class="p">,</span> <span class="n">Object</span><span class="p">,</span> <span class="n">Object</span><span class="p">,</span> <span class="n">Object</span><span class="p">)</span>
+<span class="n">in9</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">Object</span><span class="p">,</span> <span class="n">Object</span><span class="p">,</span> <span class="n">Object</span><span class="p">,</span> <span class="n">Object</span><span class="p">,</span> <span class="n">Object</span><span class="p">,</span> <span class="n">Object</span><span class="p">,</span> <span class="n">Object</span><span class="p">,</span> <span class="n">Object</span><span class="p">,</span> <span class="n">Object</span><span class="p">)</span>
+<span class="n">in10</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">Object</span><span class="p">,</span> <span class="n">Object</span><span class="p">,</span> <span class="n">Object</span><span class="p">,</span> <span class="n">Object</span><span class="p">,</span> <span class="n">Object</span><span class="p">,</span> <span class="n">Object</span><span class="p">,</span> <span class="n">Object</span><span class="p">,</span> <span class="n">Object</span><span class="p">,</span> <span class="n">Object</span><span class="p">,</span> <span class="n">Object</span><span class="p">)</span>
+<span class="n">boolean</span> <span class="n">int2bbool</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">double</span> <span class="n">int2ddouble</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">Point</span> <span class="n">interiorPoint</span><span class="p">(</span><span class="n">Geometry</span><span class="p">)</span>
+<span class="n">LinearRing</span> <span class="n">interiorRingN</span><span class="p">(</span><span class="n">Geometry</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
+<span class="n">Geometry</span> <span class="n">intersection</span><span class="p">(</span><span class="n">Geometry</span><span class="p">,</span> <span class="n">Geometry</span><span class="p">)</span>
+<span class="n">boolean</span> <span class="n">intersects</span><span class="p">(</span><span class="n">Geometry</span><span class="p">,</span> <span class="n">Geometry</span><span class="p">)</span>
+<span class="n">boolean</span> <span class="n">isClosed</span><span class="p">(</span><span class="n">Geometry</span><span class="p">)</span>
+<span class="n">boolean</span> <span class="n">isEmpty</span><span class="p">(</span><span class="n">Geometry</span><span class="p">)</span>
+<span class="n">isLike</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="n">String</span><span class="p">)</span>
+<span class="n">isNull</span><span class="p">(</span><span class="n">Object</span><span class="p">)</span>
+<span class="n">isRing</span><span class="p">(</span><span class="n">Geometry</span><span class="p">)</span>
+<span class="n">isSimple</span><span class="p">(</span><span class="n">Geometry</span><span class="p">)</span>
+<span class="n">isValid</span><span class="p">(</span><span class="n">Geometry</span><span class="p">)</span>
+<span class="n">isWithinDistance</span><span class="p">(</span><span class="n">Geometry</span><span class="p">,</span> <span class="n">Geometry</span><span class="p">,</span> <span class="n">double</span><span class="p">)</span>
+<span class="n">lessEqualThan</span><span class="p">(</span><span class="n">Object</span><span class="p">,</span> <span class="n">Object</span><span class="p">)</span>
+<span class="n">lessThan</span><span class="p">(</span><span class="n">Object</span><span class="p">,</span> <span class="n">Object</span><span class="p">)</span>
+<span class="n">double</span> <span class="n">log</span><span class="p">(</span> <span class="n">number</span> <span class="p">)</span>
+<span class="n">double</span> <span class="nb">max</span><span class="p">(</span> <span class="n">number</span><span class="p">,</span> <span class="n">number</span> <span class="p">)</span>
+<span class="nb">float</span> <span class="n">max_2</span><span class="p">(</span> <span class="n">number</span><span class="p">,</span> <span class="n">number</span> <span class="p">)</span>
+<span class="nb">int</span> <span class="n">max_3</span><span class="p">(</span> <span class="n">number</span><span class="p">,</span> <span class="n">number</span> <span class="p">)</span>
+<span class="n">long</span> <span class="n">max_4</span><span class="p">(</span> <span class="n">number</span><span class="p">,</span> <span class="n">number</span> <span class="p">)</span>
+<span class="n">double</span> <span class="nb">min</span><span class="p">(</span> <span class="n">number</span><span class="p">,</span> <span class="n">number</span> <span class="p">)</span>
+<span class="nb">float</span> <span class="n">min_2</span><span class="p">(</span> <span class="n">number</span><span class="p">,</span> <span class="n">number</span> <span class="p">)</span>
+<span class="nb">int</span> <span class="n">min_3</span><span class="p">(</span> <span class="n">number</span><span class="p">,</span> <span class="n">number</span> <span class="p">)</span>
+<span class="n">long</span> <span class="n">min_4</span><span class="p">(</span> <span class="n">number</span><span class="p">,</span> <span class="n">number</span> <span class="p">)</span>
+<span class="ow">not</span><span class="p">(</span><span class="n">boolean</span><span class="p">)</span>
+<span class="n">notEqualTo</span><span class="p">(</span><span class="n">Object</span><span class="p">,</span> <span class="n">Object</span><span class="p">)</span>
+<span class="n">numGeometries</span><span class="p">(</span><span class="n">Geometry</span><span class="p">)</span>
+<span class="n">numInteriorRing</span><span class="p">(</span><span class="n">Geometry</span><span class="p">)</span>
+<span class="n">numPoints</span><span class="p">(</span><span class="n">Geometry</span><span class="p">)</span>
+<span class="n">overlaps</span><span class="p">(</span><span class="n">Geometry</span><span class="p">,</span> <span class="n">Geometry</span><span class="p">)</span>
+<span class="n">parseBoolean</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
+<span class="n">parseDouble</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
+<span class="n">parseInt</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
+<span class="n">pointN</span><span class="p">(</span><span class="n">Geometry</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
+<span class="n">double</span> <span class="nb">pow</span><span class="p">(</span> <span class="n">base</span><span class="p">,</span> <span class="n">exponent</span> <span class="p">)</span>
+<span class="n">double</span> <span class="n">random</span><span class="p">()</span>
+<span class="n">String</span> <span class="n">relate</span><span class="p">(</span><span class="n">Geometry</span><span class="p">,</span> <span class="n">Geometry</span><span class="p">)</span>
+<span class="n">boolean</span> <span class="n">relatePattern</span><span class="p">(</span><span class="n">Geometry</span><span class="p">,</span> <span class="n">Geometry</span><span class="p">,</span> <span class="n">String</span><span class="p">)</span>
+<span class="n">double</span> <span class="n">rint</span><span class="p">(</span> <span class="n">number</span> <span class="p">)</span> <span class="o">//</span> <span class="n">closest</span> <span class="n">integer</span>
+<span class="nb">int</span> <span class="nb">round</span><span class="p">(</span> <span class="n">number</span> <span class="p">)</span>
+<span class="n">long</span> <span class="n">round_2</span><span class="p">(</span> <span class="n">number</span> <span class="p">)</span>
+<span class="nb">int</span> <span class="n">roundDouble</span><span class="p">(</span> <span class="n">number</span> <span class="p">)</span> <span class="o">//</span> <span class="n">number</span> <span class="ow">is</span> <span class="n">treated</span> <span class="k">as</span> <span class="n">a</span> <span class="n">double</span>
+<span class="n">double</span> <span class="n">sin</span><span class="p">(</span> <span class="n">radians</span> <span class="p">)</span>
+<span class="n">double</span> <span class="n">sqrt</span><span class="p">(</span> <span class="n">number</span> <span class="p">)</span>
+<span class="n">startPoint</span><span class="p">(</span><span class="n">Geometry</span><span class="p">)</span>
+<span class="n">strConcat</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="n">String</span><span class="p">)</span>
+<span class="n">strEndsWith</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="n">String</span><span class="p">)</span>
+<span class="n">strEqualsIgnoreCase</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="n">String</span><span class="p">)</span>
+<span class="n">strIndexOf</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="n">String</span><span class="p">)</span>
+<span class="n">strLastIndexOf</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="n">String</span><span class="p">)</span>
+<span class="n">strLength</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
+<span class="n">strMatches</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="n">String</span><span class="p">)</span>
+<span class="n">strStartsWith</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="n">String</span><span class="p">)</span>
+<span class="n">strSubstring</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
+<span class="n">strSubstringStart</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
+<span class="n">strTrim</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
+<span class="n">symDifference</span><span class="p">(</span><span class="n">Geometry</span><span class="p">,</span> <span class="n">Geometry</span><span class="p">)</span>
+<span class="n">double</span> <span class="n">tan</span><span class="p">(</span> <span class="n">radians</span> <span class="p">)</span>
+<span class="n">touches</span><span class="p">(</span><span class="n">Geometry</span><span class="p">,</span> <span class="n">Geometry</span><span class="p">)</span>
+<span class="n">double</span> <span class="n">toDegrees</span><span class="p">(</span> <span class="n">radians</span> <span class="p">)</span>
+<span class="n">double</span> <span class="n">toRadians</span><span class="p">(</span> <span class="n">degrees</span> <span class="p">)</span>
+<span class="n">String</span> <span class="n">toWKT</span><span class="p">(</span><span class="n">Geometry</span><span class="p">)</span>
+<span class="n">union</span><span class="p">(</span><span class="n">Geometry</span><span class="p">,</span> <span class="n">Geometry</span><span class="p">)</span>
+<span class="n">within</span><span class="p">(</span><span class="n">Geometry</span><span class="p">,</span> <span class="n">Geometry</span><span class="p">)</span>
+</pre></div>
 </div>
 </div>
 <div class="section" id="extended-cql">
@@ -363,17 +377,17 @@ applications).</p>
 <div class="section" id="feature-id">
 <h3>Feature ID<a class="headerlink" href="#feature-id" title="Permalink to this headline">¶</a></h3>
 <p>You can select against a feature identifier using:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">IN</span> <span class="p">(</span><span class="s1">&#39;river.1&#39;</span><span class="p">,</span> <span class="s1">&#39;river.2&#39;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">IN</span> <span class="p">(</span><span class="s1">&#39;river.1&#39;</span><span class="p">,</span> <span class="s1">&#39;river.2&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Or if you have an integer type as feature id:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">IN</span> <span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="mi">301</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">IN</span> <span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="mi">301</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><strong>Related tasks</strong></p>
-<p><a class="reference internal" href="../tasks/Selection using CQL.html"><em>Selection using CQL</em></a></p>
+<p><a class="reference internal" href="../tasks/Selection using CQL.html"><span class="doc">Selection using CQL</span></a></p>
 <p><strong>Related reference</strong></p>
-<p><a class="reference internal" href="../reference/Table view.html"><em>Table view</em></a></p>
+<p><a class="reference internal" href="../reference/Table view.html"><span class="doc">Table view</span></a></p>
 <p><a class="reference external" href="http://www.opengeospatial.org/standards/cat">OGC Catalog Specification</a></p>
 </div>
 </div>
@@ -393,9 +407,9 @@ applications).</p>
 
       </div>
 
-    <div class="footer">
-        &copy; Copyright 2013, Refractions Research and others.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Refractions Research and others.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
     </div>
   </body>
 </html>

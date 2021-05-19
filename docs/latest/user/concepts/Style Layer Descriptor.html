@@ -2,37 +2,26 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Style Layer Descriptor &mdash; uDig 2.0.0.RC1 User Guide</title>
-    
+    <title>Style Layer Descriptor &#8212; uDig 2.3.0.RC1 User Guide</title>
     <link rel="stylesheet" href="../_static/udig.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/print.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '2.0.0-SNAPSHOT',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  false
-      };
-    </script>
+    <link rel="stylesheet" type="text/css" href="../_static/print.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
     <script type="text/javascript" src="../_static/theme_extras.js"></script>
     <link rel="shortcut icon" href="../_static/udig.ico"/>
-    <link rel="top" title="uDig 2.0.0.RC1 User Guide" href="../index.html" />
-    <link rel="up" title="Style" href="Style.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Symbology" href="Symbology.html" />
     <link rel="prev" title="Style" href="Style.html" /> 
-  </head>
-  <body>
+  </head><body>
       <div class="header">
         <div class="wrap">
             <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
@@ -69,14 +58,14 @@
 Consortium. Style Layer Descriptor documents defines how Features are rendered on to the screen.</p>
 <p>You can use your own Style Layer Descriptor documents in several ways:</p>
 <ul class="simple">
-<li>Select the <strong>XML</strong> page of the <a class="reference internal" href="../reference/Style Editor dialog.html"><em>Style Editor dialog</em></a> and directly
+<li>Select the <strong>XML</strong> page of the <a class="reference internal" href="../reference/Style Editor dialog.html"><span class="doc">Style Editor dialog</span></a> and directly
 modify what is being used directly</li>
 <li>Any sld file associated with a shapefile will be picked up and used</li>
-<li>You can import and export SLD files from the <a class="reference internal" href="../reference/Style Editor dialog.html"><em>Style Editor dialog</em></a></li>
+<li>You can import and export SLD files from the <a class="reference internal" href="../reference/Style Editor dialog.html"><span class="doc">Style Editor dialog</span></a></li>
 <li>you can drop an SLD file directly onto a Layer</li>
 </ul>
 <p><strong>Related reference</strong></p>
-<p><a class="reference internal" href="../reference/Style Editor dialog.html"><em>Style Editor dialog</em></a></p>
+<p><a class="reference internal" href="../reference/Style Editor dialog.html"><span class="doc">Style Editor dialog</span></a></p>
 <p><a class="reference external" href="http://www.opengeospatial.org/standards/sld">Styled Layer Descriptor</a> (OGC Specification)</p>
 <p><a class="reference external" href="http://www.opengeospatial.org/standards/symbol">Symbology Encoding</a> (OGC Specification)</p>
 <p><a class="reference external" href="http://docs.geoserver.org/stable/en/user/styling/sld-introduction.html">SLD Intro Tutorial (from GeoServer)</a></p>
@@ -85,13 +74,13 @@ modify what is being used directly</li>
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <p>You can use a function to choose a color, the following example can be used with the countries.shp
 file.</p>
-<div class="highlight-python"><pre>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;sld:StyledLayerDescriptor
-   xmlns="http://www.opengis.net/sld"
-   xmlns:sld="http://www.opengis.net/sld"
-   xmlns:ogc="http://www.opengis.net/ogc"
-   xmlns:gml="http://www.opengis.net/gml"
-   version="1.0.0"&gt;
+   xmlns=&quot;http://www.opengis.net/sld&quot;
+   xmlns:sld=&quot;http://www.opengis.net/sld&quot;
+   xmlns:ogc=&quot;http://www.opengis.net/ogc&quot;
+   xmlns:gml=&quot;http://www.opengis.net/gml&quot;
+   version=&quot;1.0.0&quot;&gt;
     &lt;sld:UserLayer&gt;
         &lt;sld:LayerFeatureConstraints&gt;
             &lt;sld:FeatureTypeConstraint/&gt;
@@ -108,9 +97,9 @@ file.</p>
                 &lt;sld:Rule&gt;
                     &lt;sld:PolygonSymbolizer&gt;
                         &lt;sld:Fill&gt;
-                            &lt;sld:CssParameter name="fill"&gt;
-                                &lt;ogc:Function name="if_then_else"&gt;
-                                    &lt;ogc:Function name="equalTo"&gt;
+                            &lt;sld:CssParameter name=&quot;fill&quot;&gt;
+                                &lt;ogc:Function name=&quot;if_then_else&quot;&gt;
+                                    &lt;ogc:Function name=&quot;equalTo&quot;&gt;
                                         &lt;ogc:PropertyName&gt;LANDLOCKED&lt;/ogc:PropertyName&gt;
                                         &lt;ogc:Literal&gt;Y&lt;/ogc:Literal&gt;
                                     &lt;/ogc:Function&gt;
@@ -118,14 +107,15 @@ file.</p>
                                     &lt;ogc:Literal&gt;#0000FF&lt;/ogc:Literal&gt;
                                 &lt;/ogc:Function&gt;
                             &lt;/sld:CssParameter&gt;
-                            &lt;sld:CssParameter name="fill-opacity"&gt;0.5&lt;/sld:CssParameter&gt;
+                            &lt;sld:CssParameter name=&quot;fill-opacity&quot;&gt;0.5&lt;/sld:CssParameter&gt;
                         &lt;/sld:Fill&gt;
                     &lt;/sld:PolygonSymbolizer&gt;
                 &lt;/sld:Rule&gt;
             &lt;/sld:FeatureTypeStyle&gt;
         &lt;/sld:UserStyle&gt;
     &lt;/sld:UserLayer&gt;
-&lt;/sld:StyledLayerDescriptor&gt;</pre>
+&lt;/sld:StyledLayerDescriptor&gt;
+</pre></div>
 </div>
 </div>
 </div>
@@ -144,9 +134,9 @@ file.</p>
 
       </div>
 
-    <div class="footer">
-        &copy; Copyright 2013, Refractions Research and others.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Refractions Research and others.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
     </div>
   </body>
 </html>

@@ -2,37 +2,26 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Hole Cut Operation &mdash; uDig 2.0.0.RC1 User Guide</title>
-    
+    <title>Hole Cut Operation &#8212; uDig 2.3.0.RC1 User Guide</title>
     <link rel="stylesheet" href="../_static/udig.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/print.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '2.0.0-SNAPSHOT',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  false
-      };
-    </script>
+    <link rel="stylesheet" type="text/css" href="../_static/print.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
     <script type="text/javascript" src="../_static/theme_extras.js"></script>
     <link rel="shortcut icon" href="../_static/udig.ico"/>
-    <link rel="top" title="uDig 2.0.0.RC1 User Guide" href="../index.html" />
-    <link rel="up" title="Spatial Operations" href="Spatial Operations.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Intersect Operation" href="Intersect Operation.html" />
     <link rel="prev" title="Fill Operation" href="Fill Operation.html" /> 
-  </head>
-  <body>
+  </head><body>
       <div class="header">
         <div class="wrap">
             <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
@@ -75,15 +64,15 @@ previously used source layer.</p>
 <h2>Sample Usage<a class="headerlink" href="#sample-usage" title="Permalink to this headline">¶</a></h2>
 <p>On this example we are going to do a fill operation with the polygon layer edificios.shp and the
 lineString layer carre1.shp.</p>
-<div class="figure">
+<div class="figure" id="id1">
 <img alt="../_images/hole-before.png" src="../_images/hole-before.png" />
-<p class="caption"><strong>Figure 1. Before operation.</strong></p>
+<p class="caption"><span class="caption-text"><strong>Figure 1. Before operation.</strong></span></p>
 </div>
 <dl class="docutils">
 <dt>Go to the <em>Spatial Operations</em> View, and select <em>Hole</em> from the <em>Operations list</em> .</dt>
-<dd>The <em>Hole Operation</em>&#8216;s specific input options will show up.</dd>
+<dd>The <em>Hole Operation</em>’s specific input options will show up.</dd>
 </dl>
-<p>Now it&#8217;s time to indicate the operation&#8217;s inputs, as shown in <em>Figure 2</em>:</p>
+<p>Now it’s time to indicate the operation’s inputs, as shown in <em>Figure 2</em>:</p>
 <ul class="simple">
 <li><strong>Select the Source</strong>
 Select the desired Polygon or MultiPolygon layer to use.</li>
@@ -94,9 +83,9 @@ At the <em>Result Layer</em> drop down, a tentative Layer name will be proposed 
 by the operation. You can change the name or select an existing Layer where to store the results.
 This combo will only load existent Polygon or MultiPolygon layer.</li>
 </ul>
-<div class="figure">
+<div class="figure" id="id2">
 <img alt="../_images/hole-ui.png" src="../_images/hole-ui.png" />
-<p class="caption"><strong>Figure 2. Define input and target layers.</strong></p>
+<p class="caption"><span class="caption-text"><strong>Figure 2. Define input and target layers.</strong></span></p>
 </div>
 <ul class="simple">
 <li><strong>Perform the operation</strong>
@@ -105,15 +94,15 @@ Operations</em> View tool bar. The operation will begin processing and its progr
 on a progress dialog, as shown in <em>Figure 3</em>. The operation may take a while to complete,
 depending on the amount and complexity of the input geometries.</li>
 </ul>
-<div class="figure">
+<div class="figure" id="id3">
 <img alt="../_images/hole-progress.png" src="../_images/hole-progress.png" />
-<p class="caption"><strong>Figure 3. Progress dialog.</strong></p>
+<p class="caption"><span class="caption-text"><strong>Figure 3. Progress dialog.</strong></span></p>
 </div>
 <p>Shows the newly created Layer (Hole_1) added to the map, with the Features resulting of applying
 the Hole operation between the <em>Hole layer</em> and the <em>Using layer</em>.</p>
-<div class="figure">
+<div class="figure" id="id4">
 <img alt="../_images/hole-after.png" src="../_images/hole-after.png" />
-<p class="caption"><strong>Figure 4. Result Layer.</strong></p>
+<p class="caption"><span class="caption-text"><strong>Figure 4. Result Layer.</strong></span></p>
 </div>
 </div>
 </div>
@@ -132,9 +121,9 @@ the Hole operation between the <em>Hole layer</em> and the <em>Using layer</em>.
 
       </div>
 
-    <div class="footer">
-        &copy; Copyright 2013, Refractions Research and others.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Refractions Research and others.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
     </div>
   </body>
 </html>

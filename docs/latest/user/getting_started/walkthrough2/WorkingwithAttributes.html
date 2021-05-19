@@ -2,37 +2,26 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Working with Attributes &mdash; uDig 2.0.0.RC1 User Guide</title>
-    
+    <title>Working with Attributes &#8212; uDig 2.3.0.RC1 User Guide</title>
     <link rel="stylesheet" href="../../_static/udig.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/print.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../../',
-        VERSION:     '2.0.0-SNAPSHOT',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  false
-      };
-    </script>
+    <link rel="stylesheet" type="text/css" href="../../_static/print.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
     <script type="text/javascript" src="../../_static/theme_extras.js"></script>
     <link rel="shortcut icon" href="../../_static/udig.ico"/>
-    <link rel="top" title="uDig 2.0.0.RC1 User Guide" href="../../index.html" />
-    <link rel="up" title="uDig Walkthrough 2" href="index.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Exporting to Shape file" href="ExportingtoShapefile.html" />
     <link rel="prev" title="Editing Geometry with WFS" href="EditingGeometrywithWFS.html" /> 
-  </head>
-  <body>
+  </head><body>
       <div class="header">
         <div class="wrap">
             <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
@@ -68,28 +57,28 @@
 <p>In this section you will learn how to edit an Attribute, along the way we will explore the use of styling.</p>
 <p>To start out with lets figure out the name of that city:</p>
 <ul>
-<li><p class="first">Select <em class="menuselection">Navigation ‣ Zoom to All</em> from the menu bar.</p>
+<li><p class="first">Select <span class="menuselection">Navigation ‣ Zoom to All</span> from the menu bar.</p>
 </li>
 <li><p class="first">Select the Tasmanian cities in the Layers View.</p>
-<img alt="../../_images/TasmanianCitiesInlayersView.png" src="../../_images/TasmanianCitiesInlayersView.png" style="width: 4.701cm; height: 2.649cm;" />
+<a class="reference internal image-reference" href="../../_images/TasmanianCitiesInlayersView.png"><img alt="../../_images/TasmanianCitiesInlayersView.png" src="../../_images/TasmanianCitiesInlayersView.png" style="width: 4.701cm; height: 2.649cm;" /></a>
 </li>
-<li><p class="first">Select the <em class="menuselection">Edit ‣ Delete</em> command from the menu bar</p>
+<li><p class="first">Select the <span class="menuselection">Edit ‣ Delete</span> command from the menu bar</p>
 </li>
 <li><p class="first">In the Catalog view expand the GeoServer Web Feature Service (WFS 1.0.0) entry and select <strong>Tasmania cities</strong>.</p>
-<img alt="../../_images/AddTasmaniaCitiesFromGeoServer.png" src="../../_images/AddTasmaniaCitiesFromGeoServer.png" style="width: 13.91cm; height: 4.33cm;" />
+<a class="reference internal image-reference" href="../../_images/AddTasmaniaCitiesFromGeoServer.png"><img alt="../../_images/AddTasmaniaCitiesFromGeoServer.png" src="../../_images/AddTasmaniaCitiesFromGeoServer.png" style="width: 13.91cm; height: 4.33cm;" /></a>
 </li>
-<li><p class="first">Right Click and select <em class="guilabel">Add to Current Map</em>.</p>
+<li><p class="first">Right Click and select <span class="guilabel">Add to Current Map</span>.</p>
 </li>
-<li><p class="first">Right click on <strong>Tasmania cities</strong> in the Layers view, and click on <em class="guilabel">Change Style</em>.</p>
-<img alt="../../_images/ChangeStyleForTasmaniaCitiesLayer.png" src="../../_images/ChangeStyleForTasmaniaCitiesLayer.png" style="width: 6.331cm; height: 5.41cm;" />
+<li><p class="first">Right click on <strong>Tasmania cities</strong> in the Layers view, and click on <span class="guilabel">Change Style</span>.</p>
+<a class="reference internal image-reference" href="../../_images/ChangeStyleForTasmaniaCitiesLayer.png"><img alt="../../_images/ChangeStyleForTasmaniaCitiesLayer.png" src="../../_images/ChangeStyleForTasmaniaCitiesLayer.png" style="width: 6.331cm; height: 5.41cm;" /></a>
 <p>This opens the Style Editor dialog.</p>
 </li>
 <li><p class="first">Define the point shape using style as follow:</p>
 </li>
 <li><p class="first">Select the Points page from the list on the left hand side of the Style Editor.</p>
 </li>
-<li><p class="first">Choose <em class="guilabel">Simple Style</em> to access the the built in shapes.</p>
-<img alt="../../_images/10000000000003CD000002D6317F97A2.png" src="../../_images/10000000000003CD000002D6317F97A2.png" style="width: 14.12cm; height: 10.539cm;" />
+<li><p class="first">Choose <span class="guilabel">Simple Style</span> to access the the built in shapes.</p>
+<a class="reference internal image-reference" href="../../_images/10000000000003CD000002D6317F97A2.png"><img alt="../../_images/10000000000003CD000002D6317F97A2.png" src="../../_images/10000000000003CD000002D6317F97A2.png" style="width: 14.12cm; height: 10.539cm;" /></a>
 <p>Choose circle from the list of built in shapes.</p>
 </li>
 <li><p class="first">Configure the style properties for labeling:</p>
@@ -102,10 +91,10 @@
 <li><p class="first">Check the enable/disable labeling</p>
 </li>
 <li><p class="first">Choose CITY_NAME for the label property.</p>
-<img alt="../../_images/1000000000000181000002148DF89435.png" src="../../_images/1000000000000181000002148DF89435.png" style="width: 5.59cm; height: 7.721cm;" />
+<a class="reference internal image-reference" href="../../_images/1000000000000181000002148DF89435.png"><img alt="../../_images/1000000000000181000002148DF89435.png" src="../../_images/1000000000000181000002148DF89435.png" style="width: 5.59cm; height: 7.721cm;" /></a>
 </li>
-<li><p class="first">After making changes, hit the  <em class="guilabel">Apply</em> button to update the map, you can experiment with the settings and press
-<em class="guilabel">OK</em> when you are finished.</p>
+<li><p class="first">After making changes, hit the  <span class="guilabel">Apply</span> button to update the map, you can experiment with the settings and press
+<span class="guilabel">OK</span> when you are finished.</p>
 </li>
 </ul>
 </div></blockquote>
@@ -113,19 +102,19 @@
 <li><p class="first">Ensure that <strong>Tasmania cities</strong> is still selected in the layers view, and select the Table view.</p>
 </li>
 <li><p class="first">The first time you use table view you will need to accept a warning that all the features will be loaded into memory.</p>
-<img alt="../../_images/1000000000000214000000D8E5C9CDB2.png" src="../../_images/1000000000000214000000D8E5C9CDB2.png" style="width: 9.85cm; height: 3.96cm;" />
+<a class="reference internal image-reference" href="../../_images/1000000000000214000000D8E5C9CDB2.png"><img alt="../../_images/1000000000000214000000D8E5C9CDB2.png" src="../../_images/1000000000000214000000D8E5C9CDB2.png" style="width: 9.85cm; height: 3.96cm;" /></a>
 </li>
 <li><p class="first">The Table view shows all the features for the current layer.</p>
-<img alt="../../_images/10000000000002EE0000010E41AFEB49.png" src="../../_images/10000000000002EE0000010E41AFEB49.png" style="width: 10.88cm; height: 3.919cm;" />
+<a class="reference internal image-reference" href="../../_images/10000000000002EE0000010E41AFEB49.png"><img alt="../../_images/10000000000002EE0000010E41AFEB49.png" src="../../_images/10000000000002EE0000010E41AFEB49.png" style="width: 10.88cm; height: 3.919cm;" /></a>
 </li>
 <li><p class="first">Go ahead and rename the city after yourself. Change the CITY_NAME attribute and you can watch the map update.</p>
-<img alt="../../_images/10000000000002EB0000028E8B0BDDA9.png" src="../../_images/10000000000002EB0000028E8B0BDDA9.png" style="width: 10.841cm; height: 9.49cm;" />
+<a class="reference internal image-reference" href="../../_images/10000000000002EB0000028E8B0BDDA9.png"><img alt="../../_images/10000000000002EB0000028E8B0BDDA9.png" src="../../_images/10000000000002EB0000028E8B0BDDA9.png" style="width: 10.841cm; height: 9.49cm;" /></a>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Not all aspects of a feature are editable. - bounds are derived from the geometry, and ID is dictated the WFS.</p>
 </div>
 </li>
-<li><p class="first">Press the <em class="guilabel">Commit Changes</em> button, in the tool bar, to send your changes off to the Web Feature Server.</p>
+<li><p class="first">Press the <span class="guilabel">Commit Changes</span> button, in the tool bar, to send your changes off to the Web Feature Server.</p>
 </li>
 </ul>
 </div>
@@ -144,9 +133,9 @@
 
       </div>
 
-    <div class="footer">
-        &copy; Copyright 2013, Refractions Research and others.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Refractions Research and others.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
     </div>
   </body>
 </html>

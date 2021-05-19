@@ -2,37 +2,26 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>GeoScript Introduction &mdash; uDig 2.0.0.RC1 User Guide</title>
-    
+    <title>GeoScript Introduction &#8212; uDig 2.3.0.RC1 User Guide</title>
     <link rel="stylesheet" href="../_static/udig.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/print.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '2.0.0-SNAPSHOT',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  false
-      };
-    </script>
+    <link rel="stylesheet" type="text/css" href="../_static/print.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
     <script type="text/javascript" src="../_static/theme_extras.js"></script>
     <link rel="shortcut icon" href="../_static/udig.ico"/>
-    <link rel="top" title="uDig 2.0.0.RC1 User Guide" href="../index.html" />
-    <link rel="up" title="Getting Started" href="index.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Concepts" href="../concepts/index.html" />
     <link rel="prev" title="Introduction to the Spatial Toolbox" href="Introduction to the Spatial Toolbox.html" /> 
-  </head>
-  <body>
+  </head><body>
       <div class="header">
         <div class="wrap">
             <h1 id="logo"><a href="http://udig.refractions.net">uDig</a></h1>
@@ -71,7 +60,7 @@ to automate common tasks.</p>
 from within uDig to do geo-scripting.</p>
 <p><strong>Related reference</strong></p>
 <ul class="simple">
-<li><a class="reference internal" href="../reference/GeoScript editor.html"><em>GeoScript editor</em></a></li>
+<li><a class="reference internal" href="../reference/GeoScript editor.html"><span class="doc">GeoScript editor</span></a></li>
 <li><a class="reference external" href="http://geoscript.org/">geoscript</a></li>
 </ul>
 <p><strong>Limitations</strong></p>
@@ -85,10 +74,10 @@ from within uDig to do geo-scripting.</p>
 and one to open an existing script.</p>
 <img alt="../_images/01_open_editor.png" src="../_images/01_open_editor.png" />
 </li>
-<li><p class="first">Let&#8217;s create a new one. The you will be prompted to save the new script to
+<li><p class="first">Let’s create a new one. The you will be prompted to save the new script to
 file and an empty editor is opened.</p>
 <div class="figure">
-<img alt="../_images/02_empty_editor.png" src="../_images/02_empty_editor.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="../_images/02_empty_editor.png"><img alt="../_images/02_empty_editor.png" src="../_images/02_empty_editor.png" style="width: 80%;" /></a>
 </div>
 </li>
 <li><p class="first">There are a few tool inside the editor, needed to start and stop scripts, or set the heap memory
@@ -103,26 +92,28 @@ as described below.</p>
 <ol class="arabic">
 <li><p class="first">Inside the editor command completion is available for common geoscript objects.</p>
 <p>Type the following into your editor:</p>
-<div class="highlight-python"><pre>import geoscript.geom.*
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geoscript.geom.</span><span class="o">*</span>
 
-Geo</pre>
+<span class="n">Geo</span>
+</pre></div>
 </div>
 </li>
-<li><p class="first">Select <strong>Geometry</strong> from the list of suggestions and press <tt class="kbd docutils literal"><span class="pre">Enter</span></tt> to activate command completion.</p>
+<li><p class="first">Select <strong>Geometry</strong> from the list of suggestions and press <kbd class="kbd docutils literal notranslate">Enter</kbd> to activate command completion.</p>
 <div class="figure">
-<img alt="../_images/03_complete_class.png" src="../_images/03_complete_class.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="../_images/03_complete_class.png"><img alt="../_images/03_complete_class.png" src="../_images/03_complete_class.png" style="width: 80%;" /></a>
 </div>
 </li>
 <li><p class="first">Command completion is also available for methods.</p>
 <p>Continue to type the following into your editor:</p>
-<div class="highlight-python"><pre>import geoscript.geom.*
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geoscript.geom.</span><span class="o">*</span>
 
-Geometry.fr</pre>
+<span class="n">Geometry</span><span class="o">.</span><span class="n">fr</span>
+</pre></div>
 </div>
 </li>
-<li><p class="first">Select the <strong>from WKT</strong> method from the list of selection and press <tt class="kbd docutils literal"><span class="pre">Enter</span></tt>.</p>
+<li><p class="first">Select the <strong>from WKT</strong> method from the list of selection and press <kbd class="kbd docutils literal notranslate">Enter</kbd>.</p>
 <div class="figure">
-<img alt="../_images/04_complete_method.png" src="../_images/04_complete_method.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="../_images/04_complete_method.png"><img alt="../_images/04_complete_method.png" src="../_images/04_complete_method.png" style="width: 80%;" /></a>
 </div>
 </li>
 <li><p class="first">When using command completion:</p>
@@ -133,13 +124,14 @@ Geometry.fr</pre>
 </li>
 <li><p class="first">While using the editor Syntax coloring is used to highlight keywords and improve readability.</p>
 <p>Complete your script with the following:</p>
-<div class="highlight-python"><pre>import geoscript.geom.*
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geoscript.geom.</span><span class="o">*</span>
 
-poly4 = Geometry.fromWKT("POLYGON ((0 0, 8 0, 8 8, 0 8, 0 0))")
-poly5 = Geometry.fromWKT("POLYGON ((5 5, 13 5, 13 13, 5 13, 5 5))")
-poly6 = poly4.intersection(poly5)
+<span class="n">poly4</span> <span class="o">=</span> <span class="n">Geometry</span><span class="o">.</span><span class="n">fromWKT</span><span class="p">(</span><span class="s2">&quot;POLYGON ((0 0, 8 0, 8 8, 0 8, 0 0))&quot;</span><span class="p">)</span>
+<span class="n">poly5</span> <span class="o">=</span> <span class="n">Geometry</span><span class="o">.</span><span class="n">fromWKT</span><span class="p">(</span><span class="s2">&quot;POLYGON ((5 5, 13 5, 13 13, 5 13, 5 5))&quot;</span><span class="p">)</span>
+<span class="n">poly6</span> <span class="o">=</span> <span class="n">poly4</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">poly5</span><span class="p">)</span>
 
-println "Intersection: " + poly 6</pre>
+<span class="n">println</span> <span class="s2">&quot;Intersection: &quot;</span> <span class="o">+</span> <span class="n">poly</span> <span class="mi">6</span>
+</pre></div>
 </div>
 <p>You can use Syntax coloring as visual feedback while typing to double check your script
 for typos.</p>
@@ -149,13 +141,13 @@ for typos.</p>
 <div class="section" id="run-your-script">
 <h2>Run your script<a class="headerlink" href="#run-your-script" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic">
-<li><p class="first">Once you have completed your script, push the <em class="guilabel">Start</em> button.</p>
+<li><p class="first">Once you have completed your script, push the <span class="guilabel">Start</span> button.</p>
 <p>The script will be run through the Spatial Toolbox engine and the output displayed
 in the <strong>Console view</strong>.</p>
 </li>
 <li><p class="first">The script creates two polygons, and generates their intersection.</p>
 <div class="figure">
-<img alt="../_images/05_first_script_run.png" src="../_images/05_first_script_run.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="../_images/05_first_script_run.png"><img alt="../_images/05_first_script_run.png" src="../_images/05_first_script_run.png" style="width: 80%;" /></a>
 </div>
 </li>
 </ol>
@@ -167,21 +159,22 @@ script through the import directive, which is usually placed at
 the top of the script.</p>
 <ol class="arabic">
 <li><p class="first">Try and plot the result by adding the following to your script:</p>
-<div class="highlight-python"><pre>import geoscript.geom.*
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geoscript.geom.</span><span class="o">*</span>
 
-poly4 = Geometry.fromWKT("POLYGON ((0 0, 8 0, 8 8, 0 8, 0 0))")
-poly5 = Geometry.fromWKT("POLYGON ((5 5, 13 5, 13 13, 5 13, 5 5))")
-poly6 = poly4.intersection(poly5)
+<span class="n">poly4</span> <span class="o">=</span> <span class="n">Geometry</span><span class="o">.</span><span class="n">fromWKT</span><span class="p">(</span><span class="s2">&quot;POLYGON ((0 0, 8 0, 8 8, 0 8, 0 0))&quot;</span><span class="p">)</span>
+<span class="n">poly5</span> <span class="o">=</span> <span class="n">Geometry</span><span class="o">.</span><span class="n">fromWKT</span><span class="p">(</span><span class="s2">&quot;POLYGON ((5 5, 13 5, 13 13, 5 13, 5 5))&quot;</span><span class="p">)</span>
+<span class="n">poly6</span> <span class="o">=</span> <span class="n">poly4</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">poly5</span><span class="p">)</span>
 
-println "Intersection: " + poly 6
+<span class="n">println</span> <span class="s2">&quot;Intersection: &quot;</span> <span class="o">+</span> <span class="n">poly</span> <span class="mi">6</span>
 
-Plot.plot([poly6,poly5,poly4])</pre>
+<span class="n">Plot</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">poly6</span><span class="p">,</span><span class="n">poly5</span><span class="p">,</span><span class="n">poly4</span><span class="p">])</span>
+</pre></div>
 </div>
 </li>
 <li><p class="first">Press <strong>Start</strong> to try out this change.</p>
 <p>It will fail, because the plot module was not imported:</p>
 <div class="figure">
-<img alt="../_images/06_missing_imports.png" src="../_images/06_missing_imports.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="../_images/06_missing_imports.png"><img alt="../_images/06_missing_imports.png" src="../_images/06_missing_imports.png" style="width: 80%;" /></a>
 </div>
 </li>
 <li><p class="first">The editor supplies a quick way to import the most common modules, which
@@ -195,7 +188,7 @@ imports are added to the top of your script.</p>
 </ol>
 <blockquote>
 <div><div class="figure align-center">
-<img alt="" src="../_images/07_plot.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="../_images/07_plot.png"><img alt="" src="../_images/07_plot.png" style="width: 80%;" /></a>
 </div>
 </div></blockquote>
 </div>
@@ -208,7 +201,7 @@ from the web site tutorial page:</p>
 </ul>
 <p>Just to add one more complex example, lets see a script that can render a map, properly styled, to an image:</p>
 <div class="figure">
-<img alt="../_images/08_render.png" src="../_images/08_render.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="../_images/08_render.png"><img alt="../_images/08_render.png" src="../_images/08_render.png" style="width: 80%;" /></a>
 </div>
 </div>
 </div>
@@ -227,9 +220,9 @@ from the web site tutorial page:</p>
 
       </div>
 
-    <div class="footer">
-        &copy; Copyright 2013, Refractions Research and others.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Refractions Research and others.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
     </div>
   </body>
 </html>
